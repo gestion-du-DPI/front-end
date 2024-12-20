@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 * {
-<<<<<<< HEAD
-    font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
-}
-
-=======
   font-family: "Poppins", sans-serif;
 }
 
@@ -22,4 +17,3 @@
   align-items: center;
   justify-content: center;
 }
->>>>>>> origin/Amel
