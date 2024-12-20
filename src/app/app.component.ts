@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { WorkersTableComponent } from './components/workers-table/workers-table.component';
 import { WorkersComponent } from './workers/workers.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [LoginComponent, WorkersComponent],
+  imports: [WorkersComponent, LoginComponent],
   template: '<app-workers></app-workers>',
 })
 export class AppComponent {

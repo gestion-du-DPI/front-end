@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
+import { ConfirmDeletePopupComponent } from '../popups/confirm-delete-popup/confirm-delete-popup.component';
+import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-form.component";
 
 @Component({
   selector: 'app-workers-table',
-  imports: [CommonModule],
+  imports: [CommonModule, ConfirmDeletePopupComponent, EditWorkerFormComponent],
   template: `
     <table class="border-collapse justify-self-center">
       <thead>
@@ -21,10 +23,17 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
         <tr *ngFor="let worker of workers">
           <td class="flex flex-row gap-4 items-center">
-            <img src="admin.jpg" class=" w-10 h-10 rounded-full" alt="" />
+            <img
+              [src]="worker.profilePicture"
+              class=" w-10 h-10 rounded-full cursor-pointer"
+              alt="Profile Picture"
+              (click)="onProfilePictureClick(worker.name)"
+            />
             <div class="flex flex-col">
               <span class=" font-bold text-sm">{{ worker.name }}</span>
-              <span class=" text-sm font-normal text-[#667085]">{{ worker.tag }}</span>
+              <span class=" text-sm font-normal text-[#667085]">{{
+                worker.tag
+              }}</span>
             </div>
           </td>
           <td>{{ worker.role }}</td>
@@ -33,34 +42,59 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
           <td>{{ worker.socialNumber }}</td>
           <td>{{ worker.address }}</td>
           <td>{{ worker.dateOfHire }}</td>
-          <td>{{ worker.consultations }}</td>
-          <td><img src="edit-icon.svg" alt="edit"></td>
-          <td><img src="delete-icon.svg" alt="edit"></td>
+          <td class="conslt">{{ worker.consultations }}</td>
+          <td class="cursor-pointer px-0" (click)="onEdit(worker)">
+            <img src="edit-icon.svg" class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"  alt="edit" />
+          </td>
+          <td class="cursor-pointer px-0">
+            <img src="delete-icon.svg" class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9" (click)="onDeleteWorker()" alt="delete" />
+          </td>
         </tr>
       </tbody>
     </table>
+    <div class="popup" *ngIf="showConfirmDeletePopup">
+      <app-confirm-delete-popup
+        (confirm)="onConfirmDelete()"
+        (cancel)="onCancelDelete()"
+      ></app-confirm-delete-popup>
+    </div>
+    <div class="popup" *ngIf="showEditWorkersPopup">
+      <app-edit-worker-form
+        [workerData]="selectedWorker"
+        (cancel)="onCancelEdit()"
+      ></app-edit-worker-form>
+    </div>
   `,
   styles: [
     `
-      table {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-      }
       td {
         padding: 10px 15px;
         text-align: left;
-        font-size:14px;
+        font-size: 14px;
         font-weight: 600;
+        font-family: 'Plus Jakarta Sans', sans-serif;
       }
       th {
         padding: 10px 0px;
         font-weight: 500;
-        font-size:12px;
+        font-size: 12px;
         color: #667085;
+      }
+      span {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .conslt{
+        text-align:center;
       }
     `,
   ],
 })
 export class WorkersTableComponent {
+  showConfirmDeletePopup = false;
+  showEditWorkersPopup = false;
+
+  selectedWorker: any = null; // Stores the worker data to pass to the edit form
+
   workers = [
     {
       name: 'Alice Johnson',
@@ -72,6 +106,7 @@ export class WorkersTableComponent {
       dateOfHire: '2020-01-15',
       consultations: 10,
       tag: '@manager',
+      profilePicture: 'admin.jpg',
     },
     {
       name: 'Bob Smith',
@@ -83,6 +118,7 @@ export class WorkersTableComponent {
       dateOfHire: '2021-03-22',
       consultations: 5,
       tag: '@developer',
+      profilePicture: 'admin.jpg',
     },
     {
       name: 'Charlie Brown',
@@ -94,83 +130,38 @@ export class WorkersTableComponent {
       dateOfHire: '2019-07-10',
       consultations: 8,
       tag: '@designer',
-    },
-    {
-      name: 'Diana Prince',
-      role: 'HR',
-      email: 'diana@example.com',
-      phone: '456-789-0123',
-      socialNumber: '456-78-9012',
-      address: '321 Pine St, City',
-      dateOfHire: '2018-11-05',
-      consultations: 12,
-      tag: '@hr',
-    },
-    {
-      name: 'Evan Wright',
-      role: 'Support',
-      email: 'evan@example.com',
-      phone: '567-890-1234',
-      socialNumber: '567-89-0123',
-      address: '654 Cedar St, City',
-      dateOfHire: '2022-02-20',
-      consultations: 7,
-      tag: '@support',
-    },
-    {
-      name: 'Fiona Black',
-      role: 'Manager',
-      email: 'fiona@example.com',
-      phone: '678-901-2345',
-      socialNumber: '678-90-1234',
-      address: '987 Birch St, City',
-      dateOfHire: '2017-06-30',
-      consultations: 9,
-      tag: '@manager',
-    },
-    {
-      name: 'George Green',
-      role: 'Technician',
-      email: 'george@example.com',
-      phone: '789-012-3456',
-      socialNumber: '789-01-2345',
-      address: '123 Willow St, City',
-      dateOfHire: '2016-09-12',
-      consultations: 11,
-      tag: '@technician',
-    },
-    {
-      name: 'Helen Gray',
-      role: 'Accountant',
-      email: 'helen@example.com',
-      phone: '890-123-4567',
-      socialNumber: '890-12-3456',
-      address: '456 Maple St, City',
-      dateOfHire: '2023-01-03',
-      consultations: 3,
-      tag: '@accountant',
-    },
-    {
-      name: 'Ian White',
-      role: 'Trainer',
-      email: 'ian@example.com',
-      phone: '901-234-5678',
-      socialNumber: '901-23-4567',
-      address: '789 Fir St, City',
-      dateOfHire: '2021-05-18',
-      consultations: 6,
-      tag: '@trainer',
-    },
-    {
-      name: 'Julia Blue',
-      role: 'Consultant',
-      email: 'julia@example.com',
-      phone: '012-345-6789',
-      socialNumber: '012-34-5678',
-      address: '321 Ash St, City',
-      dateOfHire: '2019-10-25',
-      consultations: 15,
-      tag: '@consultant',
+      profilePicture: 'admin.jpg',
     },
   ];
+
+  onEdit(worker: any): void {
+    this.selectedWorker = worker; // Pass the worker data to the popup
+    this.showEditWorkersPopup = true;
+  }
+
+  onDelete(name: string): void {
+    console.log(`Delete clicked for ${name}`);
+  }
+
+  onProfilePictureClick(name: string): void {
+    console.log(`Profile picture clicked for ${name}`);
+  }
+
+  onDeleteWorker() {
+    this.showConfirmDeletePopup = true;
+  }
+
+  onCancelEdit() {
+    this.showEditWorkersPopup = false;
+    this.selectedWorker = null; // Clear the selected worker
+  }
+
+  onConfirmDelete() {
+    this.showConfirmDeletePopup = false;
+    console.log('Worker deleted');
+  }
+
+  onCancelDelete() {
+    this.showConfirmDeletePopup = false;
+  }
 }
