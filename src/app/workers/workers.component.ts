@@ -14,8 +14,8 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
     CommonModule,
   ],
   template: `
-    <div class="flex flex-col gap-5 my-5">
-      <div class="flex flex-col gap-4 lg:mx-16 mx-3">
+    <div class="flex flex-col gap-5 my-5 lg:mx-10">
+      <div class="flex flex-col gap-4  mx-3">
         <div class="flex flex-row items-center gap-12">
           <h1 class=" font-semibold text-main text-4xl">Medical Staff</h1>
           <span

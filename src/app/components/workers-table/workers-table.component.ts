@@ -7,7 +7,7 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
   selector: 'app-workers-table',
   imports: [CommonModule, ConfirmDeletePopupComponent, EditWorkerFormComponent],
   template: `
-    <table class="border-collapse justify-self-center">
+    <table class="border-collapse justify-self-center w-full">
       <thead>
         <tr>
           <th>Name</th>
@@ -21,7 +21,7 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
         </tr>
       </thead>
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
-        <tr *ngFor="let worker of workers">
+        <tr *ngFor="let worker of workers" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
               [src]="worker.profilePicture"
@@ -30,8 +30,8 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
               (click)="onProfilePictureClick(worker.name)"
             />
             <div class="flex flex-col">
-              <span class=" font-bold text-sm">{{ worker.name }}</span>
-              <span class=" text-sm font-normal text-[#667085]">{{
+              <span class=" font-bold text-sm text-left">{{ worker.name }}</span>
+              <span class=" text-sm text-left font-normal text-[#667085]">{{
                 worker.tag
               }}</span>
             </div>
@@ -43,10 +43,10 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
           <td>{{ worker.address }}</td>
           <td>{{ worker.dateOfHire }}</td>
           <td class="conslt">{{ worker.consultations }}</td>
-          <td class="cursor-pointer px-0" (click)="onEdit(worker)">
+          <td class="icon cursor-pointer px-0" (click)="onEdit(worker)">
             <img src="edit-icon.svg" class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"  alt="edit" />
           </td>
-          <td class="cursor-pointer px-0">
+          <td class=" icon cursor-pointer px-0">
             <img src="delete-icon.svg" class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9" (click)="onDeleteWorker()" alt="delete" />
           </td>
         </tr>
@@ -69,7 +69,7 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
     `
       td {
         padding: 10px 15px;
-        text-align: left;
+        text-align: center;
         font-size: 14px;
         font-weight: 600;
         font-family: 'Plus Jakarta Sans', sans-serif;
@@ -85,6 +85,9 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
       }
       .conslt{
         text-align:center;
+      }
+      .icon{
+        padding: 10px 3px;
       }
     `,
   ],

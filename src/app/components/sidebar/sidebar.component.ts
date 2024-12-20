@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
           (click)="$event.stopPropagation()"
         >
           <img src="sidebar-home.svg" class="h-5" />
-          <span *ngIf="showText" class="mt-1 font-bold align-text-bottom">Home</span>
+          <span *ngIf="showText" class="mt-[1px] font-bold align-text-bottom">Home</span>
         </li>
         <li
           class="flex gap-4 cursor-pointer"
@@ -38,7 +38,7 @@ import { CommonModule } from '@angular/common';
           (click)="$event.stopPropagation()"
         >
           <img src="sidebar-doctor.svg" class="h-6" />
-          <span *ngIf="showText" class="mt-1 font-bold">Workers</span>
+          <span *ngIf="showText" class="mt-1 font-bold">Staff</span>
         </li>
       </ul>
 

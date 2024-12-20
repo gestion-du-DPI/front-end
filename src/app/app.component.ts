@@ -10,7 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   selector: 'app-root',
   imports: [WorkersComponent, LoginComponent, SidebarComponent],
   template: ` <app-sidebar></app-sidebar>
-    <app-workers></app-workers>`,
+    <div class="ml-24"><app-workers></app-workers></div>`,
 })
 export class AppComponent {
   title = 'projet-igl';
