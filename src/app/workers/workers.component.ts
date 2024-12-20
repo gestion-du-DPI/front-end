@@ -3,6 +3,7 @@ import { WorkersTableComponent } from '../components/workers-table/workers-table
 import { HeaderComponent } from '../components/header/header.component';
 import { NewWorkerFormComponent } from '../components/forms/new-worker-form/new-worker-form.component';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from '../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-workers',
