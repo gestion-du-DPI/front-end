@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
   selector: 'app-login',
   imports: [],
   template: `
-    <div class="flex items-center justify-center align-middle min-h-screen">
+    <div
+      class="flex items-center justify-center align-middle min-h-screen bg-white"
+    >
       <div class="flex flex-row mx-20 gap-20">
         <img src="admin.jpg" class="flex h-[500px] self-center" alt="" />
         <div class="flex flex-col gap-5">
