@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-confirm-delete-popup',
+  selector: 'app-confirm-delete-worker-popup',
   template: `
     <div
       class="bg-white rounded-xl w-[400px] p-6 flex flex-col items-center gap-5"
@@ -45,7 +45,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
     `,
   ],
 })
-export class ConfirmDeletePopupComponent {
+export class ConfirmDeleteWorkerPopupComponent {
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 

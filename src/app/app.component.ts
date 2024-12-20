@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { WorkersTableComponent } from './components/workers-table/workers-table.component';
-import { WorkersComponent } from './workers/workers.component';
-import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [WorkersComponent, LoginComponent, SidebarComponent],
-  template: ` <app-sidebar></app-sidebar>
-    <div class="ml-24"><app-workers></app-workers></div>`,
+  standalone: true,
+  imports: [SidebarComponent, RouterOutlet],
+  template: `
+    <app-sidebar></app-sidebar>
+    <div class="sm:ml-24">
+      <router-outlet></router-outlet>
+    </div>
+  `,
 })
 export class AppComponent {
   title = 'projet-igl';

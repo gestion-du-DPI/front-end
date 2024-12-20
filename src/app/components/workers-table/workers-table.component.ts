@@ -1,23 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmDeletePopupComponent } from '../popups/confirm-delete-popup/confirm-delete-popup.component';
-import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-form.component";
+import { ConfirmDeleteWorkerPopupComponent } from '../popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
+import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-form.component';
 
 @Component({
   selector: 'app-workers-table',
-  imports: [CommonModule, ConfirmDeletePopupComponent, EditWorkerFormComponent],
+  imports: [
+    CommonModule,
+    ConfirmDeleteWorkerPopupComponent,
+    EditWorkerFormComponent,
+  ],
   template: `
-    <table class="border-collapse justify-self-center w-full">
+    <table class="border-collapse justify-self-center table-auto w-full">
       <thead>
         <tr>
           <th>Name</th>
           <th>Role</th>
-          <th>Email Address</th>
+          <th class="hidden md:table-cell">Email Address</th>
           <th>Phone Number</th>
-          <th>Social Number</th>
-          <th>Address</th>
-          <th>Date of Hire</th>
-          <th>Consultations</th>
+          <th class="hidden lg:table-cell">Social Number</th>
+          <th class="hidden lg:table-cell">Address</th>
+          <th class="hidden lg:table-cell">Date of Hire</th>
+          <th class="hidden lg:table-cell">Consultations</th>
         </tr>
       </thead>
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
@@ -30,33 +34,46 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
               (click)="onProfilePictureClick(worker.name)"
             />
             <div class="flex flex-col">
-              <span class=" font-bold text-sm text-left">{{ worker.name }}</span>
+              <span class=" font-bold text-sm text-left">{{
+                worker.name
+              }}</span>
               <span class=" text-sm text-left font-normal text-[#667085]">{{
                 worker.tag
               }}</span>
             </div>
           </td>
           <td>{{ worker.role }}</td>
-          <td>{{ worker.email }}</td>
+          <td class="hidden md:table-cell">{{ worker.email }}</td>
           <td>{{ worker.phone }}</td>
-          <td>{{ worker.socialNumber }}</td>
-          <td>{{ worker.address }}</td>
-          <td>{{ worker.dateOfHire }}</td>
-          <td class="conslt">{{ worker.consultations }}</td>
+          <td class="hidden lg:table-cell">{{ worker.socialNumber }}</td>
+          <td class="hidden lg:table-cell">{{ worker.address }}</td>
+          <td class="hidden lg:table-cell">{{ worker.dateOfHire }}</td>
+          <td class="conslt hidden lg:table-cell">
+            {{ worker.consultations }}
+          </td>
           <td class="icon cursor-pointer px-0" (click)="onEdit(worker)">
-            <img src="edit-icon.svg" class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"  alt="edit" />
+            <img
+              src="edit-icon.svg"
+              class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              alt="edit"
+            />
           </td>
           <td class=" icon cursor-pointer px-0">
-            <img src="delete-icon.svg" class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9" (click)="onDeleteWorker()" alt="delete" />
+            <img
+              src="delete-icon.svg"
+              class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              (click)="onDeleteWorker()"
+              alt="delete"
+            />
           </td>
         </tr>
       </tbody>
     </table>
     <div class="popup" *ngIf="showConfirmDeletePopup">
-      <app-confirm-delete-popup
+      <app-confirm-delete-worker-popup
         (confirm)="onConfirmDelete()"
         (cancel)="onCancelDelete()"
-      ></app-confirm-delete-popup>
+      ></app-confirm-delete-worker-popup>
     </div>
     <div class="popup" *ngIf="showEditWorkersPopup">
       <app-edit-worker-form
@@ -83,59 +100,22 @@ import { EditWorkerFormComponent } from "../forms/edit-worker-form/edit-worker-f
       span {
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
-      .conslt{
-        text-align:center;
+      .conslt {
+        text-align: center;
       }
-      .icon{
+      .icon {
         padding: 10px 3px;
       }
     `,
   ],
 })
 export class WorkersTableComponent {
+  @Input() workers: any[] = []; // Accept filtered workers list as input
+  
   showConfirmDeletePopup = false;
   showEditWorkersPopup = false;
 
   selectedWorker: any = null; // Stores the worker data to pass to the edit form
-
-  workers = [
-    {
-      name: 'Alice Johnson',
-      role: 'Manager',
-      email: 'alice@example.com',
-      phone: '123-456-7890',
-      socialNumber: '123-45-6789',
-      address: '123 Main St, City',
-      dateOfHire: '2020-01-15',
-      consultations: 10,
-      tag: '@manager',
-      profilePicture: 'admin.jpg',
-    },
-    {
-      name: 'Bob Smith',
-      role: 'Developer',
-      email: 'bob@example.com',
-      phone: '234-567-8901',
-      socialNumber: '234-56-7890',
-      address: '456 Elm St, City',
-      dateOfHire: '2021-03-22',
-      consultations: 5,
-      tag: '@developer',
-      profilePicture: 'admin.jpg',
-    },
-    {
-      name: 'Charlie Brown',
-      role: 'Designer',
-      email: 'charlie@example.com',
-      phone: '345-678-9012',
-      socialNumber: '345-67-8901',
-      address: '789 Oak St, City',
-      dateOfHire: '2019-07-10',
-      consultations: 8,
-      tag: '@designer',
-      profilePicture: 'admin.jpg',
-    },
-  ];
 
   onEdit(worker: any): void {
     this.selectedWorker = worker; // Pass the worker data to the popup
