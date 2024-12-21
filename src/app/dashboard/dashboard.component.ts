@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../components/header/header.component';
+import { StatisticsGraphComponent } from '../components/statistics-graph/statistics-graph.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, StatisticsGraphComponent],
   template: `
     <div class="flex flex-col">
       <div class="flex flex-col gap-4 lg:mx-16 mx-3">
@@ -126,11 +127,14 @@ import { HeaderComponent } from '../components/header/header.component';
             class="bg-white w-[900px] h-[338px] border-2 border-[#F4F2F2] rounded-[16px] pt-6 pl-6 pb-6 pr-12 m-0"
             style="margin-bottom: 30px;"
           >
-            <div class="flex justify-between items-center pr-4">
-              <p class="text-main" style="font-weight: 600; font-size:20px">
+            <div class="flex justify-between items-center pr-4 pb-4">
+              <p class="text-main" style="font-weight: 600; font-size:20px ">
                 Statistics
               </p>
               <img src="dashboard-stat.svg" alt="" />
+            </div>
+            <div>
+            <app-statistics-graph></app-statistics-graph>
             </div>
           </div>
           <!-- RECENT PATIENTS -->
