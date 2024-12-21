@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* General font settings */
 * {
   font-family: "Poppins", sans-serif;
 }
 
+/* Font styles for Plus Jakarta */
+.font-plus-jakarta {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Popup styles */
 .popup {
   position: fixed;
   top: 0;
@@ -16,4 +23,48 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Grid font inheritance for Plus Jakarta */
+.grid.font-plus-jakarta > div {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Table Header styles */
+.table-header {
+  font-size: 12px;
+  font-weight: 700; /* Bold */
+  color: #667085; /* Gray */
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+}
+
+/* Table Body styles */
+.table-body {
+  font-size: 14px;
+  font-weight: 600; /* Semi-bold */
+  color: black; /* Black */
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+}
+
+/* Grid column adjustments */
+.grid {
+  grid-template-columns: 1fr 1fr 1fr 2fr 2fr 1fr 1fr 1fr; /* Adjust column widths */
+  gap: 16px; /* Add spacing between items */
+}
+
+/* Table container for scrolling if needed */
+.table-container {
+  overflow-x: auto; /* Enable horizontal scroll */
+  display: block;
+}
+
+/* Image styles for QR codes */
+.grid img {
+  width: 24px; /* Set fixed size for QR code images */
+  height: 24px;
+  object-fit: cover; /* Ensure proper scaling */
 }
