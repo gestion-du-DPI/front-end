@@ -1,54 +1,22 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../components/header/header.component';
 
 @Component({
   selector: 'app-dashboard',
+  imports: [CommonModule, HeaderComponent],
   template: `
-    <div class="flex-1 flex flex-col">
-      <!-- Top Section -->
-      <div
-        class="flex justify-between items-center p-4 bg-white w-[1,310px] h-[98px]"
-        style="margin-left: 50px; margin-right: 50px;"
-      >
-        <!-- Welcome Section -->
-        <div>
-          <h1 class="text-xl " style="color: black; font-weight:400">
-            Welcome in
-            <span class="text-main" style="font-weight:400"
-              >Hope Springs Healing</span
-            >
-          </h1>
-          <h2 class="text-2xl font-semibold text-main ">Dr. MOSTEFAI mounir</h2>
-        </div>
-
-        <!-- Actions Section -->
-        <div class="flex items-center" style="gap: 80px; ">
-          <!-- New Patient Button -->
-          <button
-            class="bg-main flex items-center justify-center text-white font-medium rounded-lg transition duration-300 space-x-2"
-            style=" width: 235px; height: 62px;"
-          >
-            <img
-              src="add-icon-white.svg"
-              alt="Add Icon"
-              class="w-5 h-5"
-              style="margin-right: 5px;"
-            />
-            <span style="font-weight: 700; font-size:16px;">New Patient</span>
-          </button>
-
-          <!-- Doctor Info Button -->
-          <div
-            class="flex items-center space-x-2 cursor-pointer  w-[161px] h-[38px]"
-          >
-            <img
-              src="admin-pfp.jpg"
-              alt="Doctor Avatar"
-              class="w-10 h-10 rounded-full"
-            />
-            <span class="text-black" style="font-weight:600 ; font-size:14px ; "
-              >Dr. Mostefai</span
-            >
+    <div class="flex flex-col">
+      <div class="flex flex-col gap-4 lg:mx-16 mx-3">
+        <div class="flex justify-between  items-center gap-12">
+          <div class="p-4">
+            <h1 class="text-xl " style="color: black; font-weight:400">
+              Welcome in
+              <span class="text-main font-semibold">Hope Springs Healing</span>
+            </h1>
+            <h2 class="text-2xl font-semibold text-main ">{{ name }}</h2>
           </div>
+          <app-header></app-header>
         </div>
       </div>
 
@@ -62,8 +30,8 @@ import { Component } from '@angular/core';
 
       <!-- DASHBOARD OVERVIEW -->
       <div
-        class=" flex justify-start pt-4 gap-7"
-        style="margin-left: 75px; margin-right: 50px;"
+        class=" flex justify-start pt-4 gap-9"
+        style="margin-left: 95px; margin-right: 50px;"
       >
         <!-- Dashboard Card 1 -->
         <div
@@ -76,7 +44,7 @@ import { Component } from '@angular/core';
             <img src="dashboard-patient.svg" alt="patientImage" />
           </div>
           <div class="flex justify-between items-center">
-            <p class="text-3xl font-bold font-plus-jakarta">911</p>
+            <p class="text-3xl font-bold font-plus-jakarta   ">911</p>
             <p class="text-sm font-light opacity-60 font-plus-jakarta">+25%</p>
           </div>
         </div>
@@ -147,12 +115,15 @@ import { Component } from '@angular/core';
       </div>
 
       <!-- DASHBORAD CONTENT -->
-      <div class="flex justify-between items-center pt-8">
+      <div class="flex justify-between items-center pt-8 w-[1310px] gap-9">
         <!-- STATISTICS AND RECENT PATIENTS -->
-        <div class="w-[900px] h-[704px] gap-7" style="margin-left: 50px;">
+        <div
+          class="w-[900px] h-[704px] gap-7"
+          style="margin-left: 50px;margin-right:0px; padding-right:0px; "
+        >
           <!-- STATISTICS -->
           <div
-            class="bg-white w-[900px] h-[338px] border-2 border-[#F4F2F2] rounded-[16px] pt-6 pl-6 pb-6 pr-12"
+            class="bg-white w-[900px] h-[338px] border-2 border-[#F4F2F2] rounded-[16px] pt-6 pl-6 pb-6 pr-12 m-0"
             style="margin-bottom: 30px;"
           >
             <div class="flex justify-between items-center pr-4">
@@ -166,133 +137,241 @@ import { Component } from '@angular/core';
           <div
             class="bg-white w-[900px] h-[338px] border-2 border-[#F4F2F2] rounded-[16px] pt-6 pl-6 pb-6 pr-12"
           >
-            <div class="flex justify-between items-center pr-4">
+            <div class="flex justify-between items-center pr-7">
               <p class="text-main" style="font-weight: 600; font-size:20px">
                 Recent Patients
               </p>
-              <div
-                class="w-[162.8px] h-[18px] flex justify-between items-center  gap-[14px] "
-              >
-                <p
-                  class="font-plus-jakarta font-bold text-[11px] text-[#667085]"
+              <div class="mt-4 text-right flex  gap-5">
+                <a
+                  href="#"
+                  class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
+                  style="letter-spacing: 1px; "
+                  >SEE ALL PATIENTS</a
                 >
-                  SEE ALL PATIENTS
-                </p>
                 <img src="dashboard-seeall.svg" alt="" />
               </div>
             </div>
+            <!---- RECENT PATIENTS TABLE -->
+            <div class="overflow-x-auto h-full">
+              <table class="min-w-full table-auto mt-6">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Phone Number</th>
+                    <th>Social Number</th>
+                    <th>Address</th>
+                    <th>E^Contact</th>
+                    <th>E^Phone</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody
+                  class=" bg-white rounded-lg overflow-hidden h-[calc(100%-40px)]"
+                >
+                  <tr
+                    *ngFor="let patient of recentPatients"
+                    class="hover:bg-slate-50"
+                  >
+                    <td class="flex flex-row gap-4 items-center">
+                      <img
+                        [src]="patient.profilePicture"
+                        class="w-8 h-8 rounded-full cursor-pointer"
+                        alt="Profile Picture"
+                      />
+                      <div class="flex flex-col">
+                        <span
+                          class="font-semibold text-[12px] w-[8] text-left"
+                          >{{ patient.name }}</span
+                        >
+                      </div>
+                    </td>
+                    <td>{{ patient.email }}</td>
+                    <td>{{ patient.phone }}</td>
+                    <td>{{ patient.socialNumber }}</td>
+                    <td>{{ patient.address }}</td>
+                    <td>{{ patient.emergencyContact }}</td>
+                    <td>{{ patient.emergencyPhone }}</td>
+                    <td>
+                      <img
+                        [src]="patient.qrCode"
+                        alt="QR Code"
+                        class="w-10 h-10 pl-4"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-            <!-- Patients Section -->
-            <div
-              class="w-full h-auto pt-6 px-6 pb-2 overflow-x-auto table-container"
-            >
-              <div class="grid grid-cols-8 gap-y-4 font-plus-jakarta">
-                <!-- Table Headers -->
-                <div class="table-header">Name</div>
-                <div class="table-header">Social Number</div>
-                <div class="table-header">Phone</div>
-                <div class="table-header">Email address</div>
-                <div class="table-header">Address</div>
-                <div class="table-header">E Contact</div>
-                <div class="table-header">E Phone</div>
-                <div class="table-header flex justify-center items-center">
-                  QR Code
-                </div>
+        <!-- Top Medical Staff -->
+        <div
+          class="w-full h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col"
+        >
+          <h3 class="text-[20px] font-semibold text-main mb-4">
+            Top Medical Staff
+          </h3>
 
-                <!-- Patient 1 -->
-                <div class="flex items-center space-x-2">
-                  <img
-                    src="patient-avatar.svg"
-                    alt="Profile Picture"
-                    class="w-8 h-8 rounded-full"
-                  />
-                  <div>
-                    <div class="table-body">Phoenix Baker</div>
-                    <div class="table-body">02/02/2022</div>
-                  </div>
-                </div>
-                <div class="table-body">123456789</div>
-                <div class="table-body">+123 456 789</div>
-                <div class="table-body">john.doe&#64;example.com</div>
-                <div class="table-body">123 Main St, Cityville</div>
-                <div class="table-body">Jane Doe</div>
-                <div class="table-body">+123 987 654</div>
-                <div class="flex justify-center items-center">
-                  <img src="QR.svg" alt="QR Code" class="w-4 h-4" />
-                </div>
-
-                <!-- Patient 2 -->
-                <div class="flex items-center space-x-2">
-                  <img
-                    src="patient-avatar.svg"
-                    alt="Profile Picture"
-                    class="w-8 h-8 rounded-full"
-                  />
-                  <div>
-                    <div class="table-body">Phoenix Baker</div>
-                    <div class="table-body">02/02/2022</div>
-                  </div>
-                </div>
-                <div class="table-body">987654321</div>
-                <div class="table-body">+234 567 890</div>
-                <div class="table-body">mary.smith&#64;example.com</div>
-                <div class="table-body">456 Elm St, Townsville</div>
-                <div class="table-body">Mark Smith</div>
-                <div class="table-body">+234 890 123</div>
-                <div class="flex justify-center items-center">
-                  <img src="QR.svg" alt="QR Code" class="w-4 h-4" />
-                </div>
-
-                <!-- Patient 3 -->
-                <div class="flex items-center space-x-2">
-                  <img
-                    src="patient-avatar.svg"
-                    alt="Profile Picture"
-                    class="w-8 h-8 rounded-full"
-                  />
-                  <div>
-                    <div class="table-body">Phoenix Baker</div>
-                    <div class="table-body">02/02/2022</div>
-                  </div>
-                </div>
-                <div class="table-body">456789123</div>
-                <div class="table-body">+345 678 901</div>
-                <div class="table-body">james.brown&#64;example.com</div>
-                <div class="table-body">789 Pine St, Village</div>
-                <div class="table-body">Lucy Brown</div>
-                <div class="table-body">+345 901 234</div>
-                <div class="flex justify-center items-center">
-                  <img src="QR.svg" alt="QR Code" class="w-4 h-4" />
-                </div>
-
-                <!-- Patient 4 -->
-                <div class="flex items-center patient-avatar.svg">
-                  <img
-                    src="patient-avatar.svg"
-                    alt="Profile Picture"
-                    class="w-8 h-8 rounded-full"
-                  />
-                  <div>
-                    <div class="table-body">Phoenix Baker</div>
-                    <div class="table-body">02/02/2022</div>
-                  </div>
-                </div>
-                <div class="table-body">321654987</div>
-                <div class="table-body">+456 789 012</div>
-                <div class="table-body">susan.lee&#64;example.com</div>
-                <div class="table-body">101 Maple St, Hamlet</div>
-                <div class="table-body">David Lee</div>
-                <div class="table-body">+456 012 345</div>
-                <div class="flex justify-center items-center">
-                  <img src="QR.svg" alt="QR Code" class="w-4 h-4" />
+          <ul class="space-y-6 overflow-y-auto max-h-[1000px] flex-grow">
+            <!-- Loop through the top medical staff data -->
+            <li *ngFor="let staff of topMedicalStaff" class="flex flex-col ">
+              <div class="w-[210px] h-[47px] flex justify-between ">
+                <img
+                  [src]="staff.profilePicture"
+                  alt="Doctor Avatar"
+                  class="w-10 h-10 rounded-full "
+                />
+                <div class="w-[210px] h-[47px] pl-4">
+                  <p class="font-bold text-black text-[13px] text-left">
+                    {{ staff.name }}
+                  </p>
+                  <p class="font-normal	text-[#667085] text-[13px] text-left">
+                    {{ staff.role }}
+                  </p>
                 </div>
               </div>
-            </div>
+            </li>
+          </ul>
+          <div class="mt-4 text-left flex   gap-5">
+            <a
+              href="#"
+              class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
+              style="letter-spacing: 1px; "
+              >SEE ALL WORKERS</a
+            >
+            <img src="dashboard-seeall.svg" alt="" />
           </div>
         </div>
       </div>
     </div>
   `,
-  styles: [],
+  styles: [
+    `
+      td {
+        width: 80px;
+
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      th {
+        width: 80px;
+        padding: 10px 0px;
+        font-weight: 500;
+        font-size: 12px;
+        color: #667085;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      span {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .icon {
+        padding: 10px 3px;
+      }
+    `,
+  ],
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  name: string = 'Dr. Sadoun';
+  recentPatients = [
+    {
+      name: 'Phoenix Baker',
+      phone: '0661805577',
+      socialNumber: '0001823838',
+      email: 'a.denai@esi.dz',
+      address: 'Bechar, Algeria',
+      emergencyContact: 'Father',
+      emergencyPhone: '0661805577',
+      profilePicture: 'patient-avatar.svg',
+      qrCode: 'QR.svg',
+      date: '2024-12-01',
+    },
+    {
+      name: 'Phoenix Baker',
+      phone: '0661805577',
+      socialNumber: '0001823838',
+      email: 'a.denai@esi.dz',
+      address: 'Bechar, Algeria',
+      emergencyContact: 'Father',
+      emergencyPhone: '0661805577',
+      profilePicture: 'patient-avatar.svg',
+      qrCode: 'QR.svg',
+      date: '2024-12-02',
+    },
+    {
+      name: 'Phoenix Baker',
+      phone: '0661805577',
+      socialNumber: '0001823838',
+      email: 'a.denai@esi.dz',
+      address: 'Bechar, Algeria',
+      emergencyContact: 'Father',
+      emergencyPhone: '0661805577',
+      profilePicture: 'patient-avatar.svg',
+      qrCode: 'QR.svg',
+      date: '2024-12-03',
+    },
+    {
+      name: 'Phoenix Baker',
+      phone: '0661805577',
+      socialNumber: '0001823838',
+      email: 'a.denai@esi.dz',
+      address: 'Bechar, Algeria',
+      emergencyContact: 'Father',
+      emergencyPhone: '0661805577',
+      profilePicture: 'patient-avatar.svg',
+      qrCode: 'QR.svg',
+      date: '2024-12-04',
+    },
+  ];
+
+  topMedicalStaff = [
+    {
+      name: 'Jenny Wilson',
+      role: 'Doctor@Generalist',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jenny Wilson',
+      role: 'Doctor@Cardiologist',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jenny Wilson',
+      role: 'Radiologist@X-ray',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jenny Wilson',
+      role: 'Radiologist@X-ray',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jenny Wilson',
+      role: 'Radiologist@X-ray',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jenny Wilson',
+      role: 'Radiologist@X-ray',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jenny Wilson',
+      role: 'Radiologist@X-ray',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Devon Lane',
+      role: 'Doctor@generalist',
+      profilePicture: 'doctor-avatar.svg',
+    },
+    {
+      name: 'Jane Cooper',
+      role: 'Doctor@generalist',
+      profilePicture: 'doctor-avatar.svg',
+    },
+  ];
+}
