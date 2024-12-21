@@ -99,7 +99,7 @@ import { CardComponent } from '../components/dashboard-card/dashboard-card.compo
             </p>
             <img src="dashboard-stat.svg" alt="" />
           </div>
-          <div>
+          <div class="graph-container">
             <app-statistics-graph></app-statistics-graph>
           </div>
         </div>

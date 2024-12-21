@@ -15,7 +15,7 @@ import { LoginComponent } from './login/login.component';
     </div>
 
     <div *ngIf="currentPage !== 'login'" class="flex">
-      <app-sidebar></app-sidebar>
+      <app-sidebar class="sidebar"></app-sidebar>
       <div [ngClass]="sidebarCollapsed ? 'ml-24' : 'ml-48'" class="flex-1 ">
         <app-dashboard *ngIf="currentPage === 'dashboard'"></app-dashboard>
         <app-workers *ngIf="currentPage === 'workers'"></app-workers>
