@@ -78,8 +78,6 @@ export class PatientsComponent {
   patientsNumber = 100;
   showNewPatientForm = false;
 
-  // New state variables
-  searchByName = true; // Tracks if the search is by name
   searchQuery = ''; // Tracks the input query
   patients = [
     {
@@ -118,11 +116,6 @@ export class PatientsComponent {
   ];
 
   filteredPatients = [...this.patients]; // Tracks the filtered patients
-
-  toggleSearchFilter(): void {
-    this.searchByName = !this.searchByName; // Toggle between name and role
-    this.onSearch(); // Apply the filter with the current query
-  }
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();

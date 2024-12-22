@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-admin-info-popup',
   template: `
-    <div class="bg-white flex-col flex justify-center p-3 rounded-xl lg:w-[600px] mx-5">
+    <div class="bg-white flex-col flex justify-center p-4 rounded-xl lg:w-[630px] mx-5">
       <img
         class="ml-auto cursor-pointer w-5"
         src="cancel-icon.svg"
