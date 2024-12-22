@@ -7,12 +7,15 @@ module.exports = {
     extend: {
       colors: {
         'main': '#373C9E',
-        'second' : '#90E5EE',
+        'second': '#90E5EE',
         'off-white': '#FBFBFB',
         'warning-red': '#E2211C',
+      },
+      fontFamily: {
+        'poppins': ['"Poppins"', 'sans-serif'],
+        'plus-jakarta': ['"Plus Jakarta Sans"', 'sans-serif'],
       },
     },
   },
   plugins: [],
 }
-
