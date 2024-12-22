@@ -21,10 +21,10 @@ import { FormsModule } from '@angular/forms';
   <form (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
     <!-- Patient Info -->
     <div>
-      <h3 class="text-lg font-semibold text-gray-700 mb-2">Patient Info</h3>
+      <h3 class="text-lg font-semibold text-off-black mb-2">Patient Info</h3>
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Full Name *</label>
+          <label class="text-sm font-medium text-gray-600">Full Name <span style="color: #FF0909;">*</span></label>
           <input
             type="text"
             [(ngModel)]="formData.name"
@@ -35,7 +35,7 @@ import { FormsModule } from '@angular/forms';
           />
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Gender *</label>
+          <label class="text-sm font-medium text-gray-600">Gender <span style="color: #FF0909;">*</span></label>
           <select
             [(ngModel)]="formData.gender"
             name="gender"
@@ -48,7 +48,7 @@ import { FormsModule } from '@angular/forms';
           </select>
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Date of Birth *</label>
+          <label class="text-sm font-medium text-gray-600">Date of Birth <span style="color: #FF0909;">*</span></label>
           <input
             type="date"
             [(ngModel)]="formData.dob"
@@ -58,7 +58,7 @@ import { FormsModule } from '@angular/forms';
           />
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Place of Birth *</label>
+          <label class="text-sm font-medium text-gray-600">Place of Birth <span style="color: #FF0909;">*</span></label>
           <input
             type="text"
             [(ngModel)]="formData.placeOfBirth"
@@ -69,7 +69,7 @@ import { FormsModule } from '@angular/forms';
           />
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Address *</label>
+          <label class="text-sm font-medium text-gray-600">Address <span style="color: #FF0909;">*</span></label>
           <input
             type="text"
             [(ngModel)]="formData.address"
@@ -80,7 +80,7 @@ import { FormsModule } from '@angular/forms';
           />
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Social Number *</label>
+          <label class="text-sm font-medium text-gray-600">Social Number <span style="color: #FF0909;">*</span></label>
           <input
             type="text"
             [(ngModel)]="formData.socialNumber"
@@ -98,7 +98,7 @@ import { FormsModule } from '@angular/forms';
       <h3 class="text-lg font-semibold text-gray-700 mb-2">Contact</h3>
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Phone Number *</label>
+          <label class="text-sm font-medium text-gray-600">Phone Number <span style="color: #FF0909;">*</span></label>
           <input
             type="tel"
             [(ngModel)]="formData.phone"
@@ -109,7 +109,7 @@ import { FormsModule } from '@angular/forms';
           />
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Email *</label>
+          <label class="text-sm font-medium text-gray-600">Email <span style="color: #FF0909;">*</span></label>
           <input
             type="email"
             [(ngModel)]="formData.email"
@@ -127,7 +127,7 @@ import { FormsModule } from '@angular/forms';
       <h3 class="text-lg font-semibold text-gray-700 mb-2">Emergency Contact</h3>
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Person To Contact *</label>
+          <label class="text-sm font-medium text-gray-600">Person To Contact <span style="color: #FF0909;">*</span></label>
           <input
             type="text"
             [(ngModel)]="formData.emergencyContactName"
@@ -138,7 +138,7 @@ import { FormsModule } from '@angular/forms';
           />
         </div>
         <div class="flex flex-col">
-          <label class="text-sm font-medium text-gray-600">Phone Number *</label>
+          <label class="text-sm font-medium text-gray-600">Phone Number <span style="color: #FF0909;">*</span></label>
           <input
             type="tel"
             [(ngModel)]="formData.emergencyContactPhone"
@@ -157,8 +157,8 @@ import { FormsModule } from '@angular/forms';
       <textarea
         [(ngModel)]="formData.medicalConditions"
         name="medicalConditions"
-        placeholder="eg. Hypertension (diagnosed in 2018), ..."
-        class="border border-gray-300 rounded-lg p-2 text-sm w-full"
+        placeholder="eg. Hypertension (diagnosed in 2018)"
+        class="border border-gray-300 rounded-lg p-2 text-sm w-full h-[135px]"
       ></textarea>
     </div>
 
@@ -166,14 +166,14 @@ import { FormsModule } from '@angular/forms';
     <div class="flex justify-end gap-4">
       <button
         type="button"
-        class="p-2 border-2 border-gray-300 text-gray-600 rounded-lg font-medium"
+        class="p-2 border-[1px] border-main text-main rounded-lg font-semibold w-[132px] h-[40px]"
         (click)="closePopup.emit()"
       >
         Cancel
       </button>
       <button
         type="submit"
-        class="p-2 bg-main text-white rounded-lg font-medium"
+        class="p-2 bg-main text-white rounded-lg font-semibold w-[132px] h-[40px]"
       >
         Save
       </button>
@@ -203,6 +203,5 @@ export class AddNewPatientPopupComponent {
 
   onSubmit() {
     console.log('Form submitted', this.formData);
-    // Add your form submission logic here
   }
 }

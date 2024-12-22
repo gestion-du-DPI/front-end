@@ -10,6 +10,7 @@ module.exports = {
         'second': '#90E5EE',
         'off-white': '#FBFBFB',
         'warning-red': '#E2211C',
+        'off-black' : '#18181B', 
       },
       fontFamily: {
         'poppins': ['"Poppins"', 'sans-serif'],
