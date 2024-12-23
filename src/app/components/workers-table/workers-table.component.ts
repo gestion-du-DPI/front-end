@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDeleteWorkerPopupComponent } from '../popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
 import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-form.component';
-
 @Component({
   selector: 'app-workers-table',
   imports: [
@@ -28,18 +27,22 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
         <tr *ngFor="let worker of workers" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
-              [src]="worker.profilePicture"
-              class=" w-10 h-10 rounded-full cursor-pointer"
+              [src]="worker.profilePicture || 'default-profile.png'"
+              class="w-10 h-10 rounded-full cursor-pointer"
               alt="Profile Picture"
-              (click)="onProfilePictureClick(worker.name)"
+              (click)="onProfilePictureClick(fileInput)"
+            />
+            <input
+              type="file"
+              #fileInput
+              class="hidden"
+              (change)="onImageUpload($event, worker)"
             />
             <div class="flex flex-col">
-              <span class=" font-bold text-sm text-left">{{
-                worker.name
-              }}</span>
-              <span class=" text-sm text-left font-normal text-[#667085]">{{
-                worker.tag
-              }}</span>
+              <span class="font-bold text-sm text-left">{{ worker.name }}</span>
+              <span class="text-sm text-left font-normal text-[#667085]">
+                {{ worker.tag }}
+              </span>
             </div>
           </td>
           <td>{{ worker.role }}</td>
@@ -54,14 +57,14 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
           <td class="icon cursor-pointer px-0" (click)="onEdit(worker)">
             <img
               src="edit-icon.svg"
-              class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
               alt="edit"
             />
           </td>
-          <td class=" icon cursor-pointer px-0">
+          <td class="icon cursor-pointer px-0">
             <img
               src="delete-icon.svg"
-              class=" hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
               (click)="onDeleteWorker()"
               alt="delete"
             />
@@ -111,7 +114,7 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
 })
 export class WorkersTableComponent {
   @Input() workers: any[] = []; // Accept filtered workers list as input
-  
+
   showConfirmDeletePopup = false;
   showEditWorkersPopup = false;
 
@@ -124,10 +127,6 @@ export class WorkersTableComponent {
 
   onDelete(name: string): void {
     console.log(`Delete clicked for ${name}`);
-  }
-
-  onProfilePictureClick(name: string): void {
-    console.log(`Profile picture clicked for ${name}`);
   }
 
   onDeleteWorker() {
@@ -146,5 +145,20 @@ export class WorkersTableComponent {
 
   onCancelDelete() {
     this.showConfirmDeletePopup = false;
+  }
+
+  onProfilePictureClick(fileInput: HTMLInputElement): void {
+    fileInput.click(); // Trigger the file input's click programmatically
+  }
+
+  onImageUpload(event: Event, worker: any): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        worker.profilePicture = e.target.result; // Update the worker's profile picture
+      };
+      reader.readAsDataURL(input.files[0]); // Read the selected image file
+    }
   }
 }

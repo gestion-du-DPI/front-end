@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ConfirmLogoutPopupComponent } from '../popups/confirm-logout-popup/confirm-logout-popup.component';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ConfirmLogoutPopupComponent],
   template: `
     <div
-      class="bg-main top-0 sm:rounded-none sm:m-0 text-white transition-all duration-300 sm:h-full flex flex-col justify-between fixed"
+      class="bg-main top-0 z-40 sm:rounded-none sm:m-0 text-white transition-all duration-300 sm:h-full flex flex-col justify-between fixed"
       [class.md:w-24]="isSidebarCollapsed"
       [class.w-48]="!isSidebarCollapsed"
       [class.h-full]="!isSidebarCollapsed"
       [class.w-48]="!isSidebarCollapsed"
       [class.rounded-br-xl]="isSidebarCollapsed"
-      (mouseenter)="showSidebar()"
-      (mouseleave)="hideSideBar()"
+      (click)="toggleSidebar()"
     >
       <!-- Logo Section -->
       <div class="flex items-center justify-center h-16 gap-2">
@@ -62,23 +62,30 @@ import { RouterLink } from '@angular/router';
 
       <!-- Footer Buttons -->
       <div
-        class="sm:flex flex-col items-start self-center gap-10 mb-4"
+        class="sm:flex flex-col items-start self-center gap-3 mb-4"
         [class.hidden]="isSidebarCollapsed"
       >
         <div
-          class="flex gap-4 cursor-pointer"
+          class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"
           (click)="$event.stopPropagation()"
+          routerLink="/editprofile"
         >
           <img src="sidebar-edit.svg" class="h-6" />
           <span *ngIf="showText" class="font-bold">Edit Profile</span>
         </div>
         <div
-          class="flex gap-4 cursor-pointer"
-          (click)="$event.stopPropagation()"
+          class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"
+          (click)="onLogout(); $event.stopPropagation()"
         >
           <img src="sidebar-logout.svg" class="h-6" />
           <span *ngIf="showText" class="font-bold">Log out</span>
         </div>
+      </div>
+
+      <div class="popup" *ngIf="showLogoutPopup">
+        <app-confirm-logout-popup
+          (cancel)="onCancelLogout()"
+        ></app-confirm-logout-popup>
       </div>
     </div>
   `,
@@ -87,12 +94,28 @@ import { RouterLink } from '@angular/router';
 export class SidebarComponent {
   isSidebarCollapsed = true;
   showText = false;
+  showLogoutPopup = false;
+
+  onLogout() {
+    console.log('Add new patient');
+    this.showLogoutPopup = true;
+    this.hideSideBar();
+  }
+
+  onCancelLogout() {
+    this.showLogoutPopup = false;
+    this.hideSideBar();
+  }
+
+  toggleSidebar() {
+    this.isSidebarCollapsed ? this.showSidebar() : this.hideSideBar(); // Toggle sidebar visibility and show text accordingly
+  }
 
   showSidebar() {
     this.isSidebarCollapsed = false; // Expand sidebar
     setTimeout(() => {
       this.showText = true; // Show text after delay
-    }, 100); // Delay for 300ms
+    }, 200); // Delay for 300ms
   }
 
   hideSideBar() {
