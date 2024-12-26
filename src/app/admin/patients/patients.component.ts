@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientsTableComponent } from '../components/patients-table/patients-table.component';
-import { HeaderComponent } from '../components/header/header.component';
-import { NewPatientFormComponent } from '../components/forms/new-patient-form/new-patient-form.component';
+
 import { CommonModule } from '@angular/common';
-import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
-import { Patient } from '../models/patient';
-import { PatientService } from '../services/patient/patient.service';
+import { PatientsTableComponent } from '../../components/patients-table/patients-table.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { NewPatientFormComponent } from '../../components/forms/new-patient-form/new-patient-form.component';
+import { Patient } from '../../models/patient';
+import { PatientService } from '../../services/patient/patient.service';
+
 
 @Component({
   selector: 'app-patients',

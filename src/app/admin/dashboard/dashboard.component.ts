@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../components/header/header.component';
-import { StatisticsGraphComponent } from '../components/statistics-graph/statistics-graph.component';
-import { CardComponent } from '../components/dashboard-card/dashboard-card.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { StatisticsGraphComponent } from '../../components/statistics-graph/statistics-graph.component';
+import { CardComponent } from '../../components/dashboard-card/dashboard-card.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

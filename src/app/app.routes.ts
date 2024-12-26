@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { WorkersComponent } from './workers/workers.component';
-import { PatientsComponent } from './patients/patients.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { PatientsComponent } from './admin/patients/patients.component';
+import { WorkersComponent } from './admin/workers/workers.component';
+import { EditProfileComponent } from './admin/edit-profile/edit-profile.component';
+
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default route
