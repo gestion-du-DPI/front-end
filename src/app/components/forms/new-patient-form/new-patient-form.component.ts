@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Patient } from '../../../models/patient';
+import { PatientService } from '../../../services/patient/patient.service';
 
 @Component({
   selector: 'app-new-patient-form',
@@ -48,7 +50,7 @@ import { FormsModule } from '@angular/forms';
             <input
               type="date"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.birthday"
+              [(ngModel)]="formData.dateOfBirth"
               name="birthday"
             />
           </div>
@@ -197,13 +199,16 @@ import { FormsModule } from '@angular/forms';
     `,
   ],
 })
+
+
 export class NewPatientFormComponent {
   @Output() cancel = new EventEmitter<void>();
 
-  formData = {
+  formData: Patient = {
+    id: '',
     name: '',
     gender: '',
-    birthday: '',
+    dateOfBirth: '',
     placeOfBirth: '',
     address: '',
     socialNumber: '',
@@ -212,10 +217,27 @@ export class NewPatientFormComponent {
     emergencyContact: '',
     emergencyPhone: '',
     consultations: 0,
+    profilePicture: '',
   };
+
+  // Injecting PatientsService into the constructor
+  constructor(private patientsService: PatientService) {}
 
   submitForm() {
     console.log('Form Data:', this.formData);
+
+    // Calling the PatientsService to submit the form data
+    this.patientsService.addPatient(this.formData).subscribe({
+      next: (response) => {
+        console.log('Patient added successfully:', response);
+        // You can handle any success action here, like closing the form
+        this.onCancel();
+      },
+      error: (error) => {
+        console.error('Error adding patient:', error);
+        // Handle error, possibly showing an error message to the user
+      },
+    });
   }
 
   onCancel() {

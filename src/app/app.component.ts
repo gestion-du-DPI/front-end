@@ -5,6 +5,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WorkersComponent } from './workers/workers.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     <router-outlet></router-outlet></div>
     </div>
   `,
+
 })
 export class AppComponent {
   title = 'projet-igl';

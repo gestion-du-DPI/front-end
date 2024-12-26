@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PatientsTableComponent } from '../components/patients-table/patients-table.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { NewPatientFormComponent } from '../components/forms/new-patient-form/new-patient-form.component';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
+import { Patient } from '../models/patient';
+import { PatientService } from '../services/patient/patient.service';
 
 @Component({
   selector: 'app-patients',
@@ -74,48 +76,28 @@ import { FormsModule } from '@angular/forms';
   }
   `,
 })
-export class PatientsComponent {
-  patientsNumber = 100;
+
+export class PatientsComponent implements OnInit {
+  patientsNumber = 0; // Dynamically update based on the number of patients
   showNewPatientForm = false;
-
   searchQuery = ''; // Tracks the input query
-  patients = [
-    {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '123-456-7890',
-      socialNumber: '123-45-6789',
-      address: '123 Elm St, City',
-      emergencyContact: 'Jane Doe',
-      emergencyPhone: '987-654-3210',
-      consultations: 5,
-      profilePicture: 'admin.jpg',
-    },
-    {
-      name: 'Mary Smith',
-      email: 'mary.smith@example.com',
-      phone: '234-567-8901',
-      socialNumber: '234-56-7890',
-      address: '456 Oak St, City',
-      emergencyContact: 'David Smith',
-      emergencyPhone: '876-543-2109',
-      consultations: 3,
-      profilePicture: 'admin.jpg',
-    },
-    {
-      name: 'Alice Johnson',
-      email: 'alice.johnson@example.com',
-      phone: '345-678-9012',
-      socialNumber: '345-67-8901',
-      address: '789 Pine St, City',
-      emergencyContact: 'Bob Johnson',
-      emergencyPhone: '765-432-1098',
-      consultations: 8,
-      profilePicture: 'admin.jpg',
-    },
-  ];
 
-  filteredPatients = [...this.patients]; // Tracks the filtered patients
+  patients: Patient[] = [];
+  filteredPatients: Patient[] = []; // Tracks the filtered patients
+
+  constructor(private patientService: PatientService) {}
+
+  ngOnInit(): void {
+    this.loadPatients();
+  }
+
+  loadPatients(): void {
+    this.patientService.getPatients().subscribe((data) => {
+      this.patients = data;
+      this.filteredPatients = data; // Update filteredPatients here
+      this.patientsNumber = data.length; // Update the patients count
+    });
+  }
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
@@ -124,12 +106,12 @@ export class PatientsComponent {
     );
   }
 
-  onAddPatient() {
+  onAddPatient(): void {
     console.log('Add new patient');
     this.showNewPatientForm = true;
   }
 
-  onCancelPatientForm() {
+  onCancelPatientForm(): void {
     this.showNewPatientForm = false;
   }
 }

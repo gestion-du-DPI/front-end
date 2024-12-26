@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WorkersTableComponent } from '../components/workers-table/workers-table.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { NewWorkerFormComponent } from '../components/forms/new-worker-form/new-worker-form.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Worker } from '../models/worker';
+import { WorkerService } from '../services/worker/worker.service';
 
 @Component({
   selector: 'app-workers',
@@ -12,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     NewWorkerFormComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
@@ -23,7 +25,7 @@ import { FormsModule } from '@angular/forms';
           <h1 class="font-semibold text-main text-4xl">Medical Staff</h1>
           <span
             class="rounded-full bg-[#DBE4FF] font-medium text-xs text-[#3D6DFE] py-1 px-3"
-            >{{workersNumber}} workers</span
+            >{{ workersNumber }} workers</span
           >
           <div class="md:ml-auto">
             <app-header></app-header>
@@ -33,27 +35,26 @@ import { FormsModule } from '@angular/forms';
           <div
             class="flex flex-row overflow-hidden items-center bg-white rounded-lg border-[1.5px] p-2 w-96 gap-3"
           >
-            <img src="search-icon.svg" alt="" />
+            <img src="search-icon.svg" alt="Search icon" />
             <input
               type="text"
               [placeholder]="searchByName ? 'Search Worker by Name...' : 'Search Worker by Role...'"
               class="bg-transparent border-0 focus:outline-none flex-1"
               [(ngModel)]="searchQuery"
               (input)="onSearch()"
-
             />
           </div>
           <button
             class="bg-white hover:bg-slate-100 border-[1.5px] w-10 flex justify-center items-center rounded-lg"
             (click)="toggleSearchFilter()"
           >
-            <img src="filter-icon.svg" alt="" />
+            <img src="filter-icon.svg" alt="Filter icon" />
           </button>
           <button
             class="ml-auto px-5 border-[1.5px] border-main flex flex-row justify-center items-center gap-2 rounded-md sm:mr-5 md:mr-10"
             (click)="onAddWorker()"
           >
-            <img src="add-icon.svg" alt="" />
+            <img src="add-icon.svg" alt="Add icon" />
             <span
               class="text-main hidden sm:block text-sm font-semibold"
               >New staff member</span
@@ -76,56 +77,32 @@ import { FormsModule } from '@angular/forms';
     }
   `,
 })
-export class WorkersComponent {
-  workersNumber = 100;
-  showNewWorkerForm = false;
+export class WorkersComponent implements OnInit {
+  workers: Worker[] = []; // Holds all workers
+  filteredWorkers: Worker[] = []; // Holds filtered workers
+  workersNumber = 0; // Total number of workers
+  showNewWorkerForm = false; // Controls visibility of the "new worker" form
 
-  // New state variables
-  searchByName = true; // Tracks if the search is by name
-  searchQuery=''; // Tracks the input query
-  workers = [
-    {
-      name: 'Alice Johnson',
-      role: 'Manager',
-      email: 'alice@example.com',
-      phone: '123-456-7890',
-      socialNumber: '123-45-6789',
-      address: '123 Main St, City',
-      dateOfHire: '2020-01-15',
-      consultations: 10,
-      tag: '@manager',
-      profilePicture: 'admin.jpg',
-    },
-    {
-      name: 'Bob Smith',
-      role: 'Developer',
-      email: 'bob@example.com',
-      phone: '234-567-8901',
-      socialNumber: '234-56-7890',
-      address: '456 Elm St, City',
-      dateOfHire: '2021-03-22',
-      consultations: 5,
-      tag: '@developer',
-      profilePicture: 'admin.jpg',
-    },
-    {
-      name: 'Charlie Brown',
-      role: 'Designer',
-      email: 'charlie@example.com',
-      phone: '345-678-9012',
-      socialNumber: '345-67-8901',
-      address: '789 Oak St, City',
-      dateOfHire: '2019-07-10',
-      consultations: 8,
-      tag: '@designer',
-      profilePicture: 'admin.jpg',
-    },
-  ];
-  filteredWorkers = [...this.workers]; // Tracks the filtered workers
+  searchByName = true; // Toggles search filter between name and role
+  searchQuery = ''; // Tracks the search query
+
+  constructor(private workerService: WorkerService) {}
+
+  ngOnInit(): void {
+    this.loadWorkers();
+  }
+
+  loadWorkers(): void {
+    this.workerService.getWorkers().subscribe((data) => {
+      this.workers = data;
+      this.filteredWorkers = data; // Initialize filteredWorkers with all workers
+      this.workersNumber = data.length; // Update the worker count
+    });
+  }
 
   toggleSearchFilter(): void {
-    this.searchByName = !this.searchByName; // Toggle between name and role
-    this.onSearch(); // Apply the filter with the current query
+    this.searchByName = !this.searchByName; // Toggle between name and role search
+    this.onSearch(); // Apply the current query to the new filter
   }
 
   onSearch(): void {
@@ -145,5 +122,4 @@ export class WorkersComponent {
   onCancelWorkerForm(): void {
     this.showNewWorkerForm = false;
   }
-
 }
