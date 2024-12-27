@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -64,7 +64,6 @@ export class LoginComponent {
         : console.log('Not logged in');
       return;
     } else {
-      // Call the auth service to log in
       this.authService.login(this.username, this.password, this.rememberMe);
     }
   }
