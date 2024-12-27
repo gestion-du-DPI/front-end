@@ -6,51 +6,70 @@ import { WorkersComponent } from './admin/workers/workers.component';
 import { EditProfileComponent } from './admin/edit-profile/edit-profile.component';
 
 import { RoleGuard } from './services/auth/role.guard';
-
-// Main pages : Admin, Doctor, nurse, radiologist, labTechnician, patient
-import { DoctorComponent } from './doctor/doctor.component';
-import { NurseComponent } from './nurse/nurse.component';
-import { RadiologistComponent } from './radiologist/radiologist.component';
-import { LabTechnicianComponent } from './lab-technician/lab-technician.component';
-import { PatientComponent } from './patient/patient.component';
+import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 import { UserRole } from './models/user-role';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route
+  {
+    // Inside this guard we will check his role and redirect him to the correct page and if not auth nb3thou ll login page
+    path: '',
+    component: LoginComponent,
+    canActivate: [FirstLoadingGuard],
+  },
   {
     path: 'admin',
     component: DashboardComponent,
     canActivate: [RoleGuard],
     data: { role: UserRole.Admin },
+    // This comment is from the documentation
+    // children: [
+    //   {
+    //     path: 'child-a', // child route path
+    //     component: ChildAComponent, // child route component that the router renders
+    //   },
+    //   {
+    //     path: 'child-b',
+    //     component: ChildBComponent, // another child route component that the router renders
+    //   },
+    // ],
   },
   {
     path: 'doctor',
-    component: DoctorComponent,
+    loadComponent: () =>
+      import('./doctor/doctor.component').then((m) => m.DoctorComponent),
     canActivate: [RoleGuard],
     data: { role: UserRole.Doctor },
   },
   {
     path: 'nurse',
-    component: NurseComponent,
+    loadComponent: () =>
+      import('./nurse/nurse.component').then((m) => m.NurseComponent),
     canActivate: [RoleGuard],
     data: { role: UserRole.Nurse },
   },
   {
     path: 'radiologist',
-    component: RadiologistComponent,
+    loadComponent: () =>
+      import('./radiologist/radiologist.component').then(
+        (m) => m.RadiologistComponent
+      ),
     canActivate: [RoleGuard],
     data: { role: UserRole.Radiologist },
   },
   {
     path: 'labTechnician',
-    component: LabTechnicianComponent,
+    loadComponent: () =>
+      import('./lab-technician/lab-technician.component').then(
+        (m) => m.LabTechnicianComponent
+      ),
     canActivate: [RoleGuard],
     data: { role: UserRole.LabTechnician },
   },
   {
     path: 'patient',
-    component: PatientComponent,
+    loadComponent: () =>
+      import('./patient/patient.component').then((m) => m.PatientComponent),
     canActivate: [RoleGuard],
     data: { role: UserRole.Patient },
   },
