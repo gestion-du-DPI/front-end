@@ -59,10 +59,13 @@ export class LoginComponent {
   signIn() {
     if (!this.username || !this.password) {
       window.alert('Please fill in both username and password.');
+      this.authService.isAuthenticated()
+        ? console.log('Logged in')
+        : console.log('Not logged in');
       return;
     } else {
       // Call the auth service to log in
-      this.authService.login(this.username, this.password);
+      this.authService.login(this.username, this.password, this.rememberMe);
     }
   }
 }

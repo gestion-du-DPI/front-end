@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   // Login method
-  login(email: string, password: string) {
+  login(email: string, password: string, rememberMe: boolean) {
     const loginData = {
       email: email,
       password: password,
@@ -23,7 +23,9 @@ export class AuthService {
       .subscribe((response) => {
         console.log(response);
         const token = response.token;
-        localStorage.setItem(this.tokenKey, JSON.stringify({ token })); // Store token as JSON
+        rememberMe
+          ? localStorage.setItem(this.tokenKey, token) // Store token in localStorage
+          : sessionStorage.setItem(this.tokenKey, token); // Store token in sessionStorage
         this.router.navigate(['/']); // Navigate to home or dashboard
       });
   }
@@ -48,7 +50,11 @@ export class AuthService {
 
   // Retrieve the JWT from localStorage
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    let token = localStorage.getItem(this.tokenKey); // Try localStorage first
+    if (!token) {
+      token = sessionStorage.getItem(this.tokenKey); // Fall back to sessionStorage
+    }
+    return token;
   }
 
   // Check if the user is authenticated
@@ -59,6 +65,8 @@ export class AuthService {
   // Logout the user
   logout() {
     localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.tokenKey);
+    console.log('Logged out');
     this.router.navigate(['/login']);
   }
 }

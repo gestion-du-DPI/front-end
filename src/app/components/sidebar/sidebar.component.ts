@@ -111,15 +111,9 @@ export class SidebarComponent {
   }
 
   onConfirmLogout() {
-    this.authService.isAuthenticated()
-      ? console.log('User is still logged in')
-      : console.log('User is logged out');
     this.authService.logout();
     this.showLogoutPopup = false;
     this.hideSideBar();
-    this.authService.isAuthenticated()
-      ? console.log('User is still logged in')
-      : console.log('User is logged out');
   }
 
   toggleSidebar() {
