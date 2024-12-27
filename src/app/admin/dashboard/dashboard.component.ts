@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { StatisticsGraphComponent } from '../../components/statistics-graph/statistics-graph.component';
 import { CardComponent } from '../../components/dashboard-card/dashboard-card.component';
 import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -361,6 +362,24 @@ export class DashboardComponent {
   previousNurses: number = 140;
   previousRadiologists: number = 25;
   previousConsultations: number = 4800;
+
+  // I want to test the protected endpoint the endpoint is http://localhost:8000/protected
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.testProtectedEndpoint();
+  }
+
+  testProtectedEndpoint() {
+    this.http.get('http://localhost:8000/protected').subscribe(
+      response => {
+        console.log('Protected endpoint response:', response);
+      },
+      error => {
+        console.error('Error accessing protected endpoint:', error);
+      }
+    );
+  }
 
   // Function to calculate percentage change
   calculatePercentage(current: number, previous: number): string {
