@@ -8,7 +8,8 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
   template: `
     <canvasjs-chart
       [options]="chartOptions"
-      [styles]="{ width: '800px', height: '250px' }">
+      [styles]="{ width: '100%', height: '250px' }"
+    >
     </canvasjs-chart>
   `,
 })
@@ -16,7 +17,7 @@ export class StatisticsGraphComponent {
   chartOptions = {
     animationEnabled: true,
     theme: 'light2',
-    
+
     axisX: {
       valueFormatString: 'MMM',
       title: 'Months',
@@ -30,7 +31,10 @@ export class StatisticsGraphComponent {
     legend: {
       cursor: 'pointer',
       itemclick: function (e: any) {
-        if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
+        if (
+          typeof e.dataSeries.visible === 'undefined' ||
+          e.dataSeries.visible
+        ) {
           e.dataSeries.visible = false;
         } else {
           e.dataSeries.visible = true;

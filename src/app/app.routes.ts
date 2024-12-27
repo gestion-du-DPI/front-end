@@ -5,7 +5,6 @@ import { PatientsComponent } from './admin/patients/patients.component';
 import { WorkersComponent } from './admin/workers/workers.component';
 import { EditProfileComponent } from './admin/edit-profile/edit-profile.component';
 
-
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default route
   { path: 'home', component: DashboardComponent },

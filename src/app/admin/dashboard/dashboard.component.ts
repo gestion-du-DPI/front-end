@@ -12,18 +12,20 @@ import { RouterLink } from '@angular/router';
     HeaderComponent,
     StatisticsGraphComponent,
     CardComponent,
-    RouterLink
+    RouterLink,
   ],
   template: `
     <div class="flex flex-col">
       <div class="flex flex-col gap-4 lg:mx-12 mx-3">
-        <div class="flex justify-between  items-center gap-12">
+        <div
+          class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12"
+        >
           <div class="p-4">
-            <h1 class="text-xl " style="color: black; font-weight:400">
+            <h1 class="text-xl" style="color: black; font-weight:400">
               Welcome in
               <span class="text-main font-semibold">Hope Springs Healing</span>
             </h1>
-            <h2 class="text-2xl font-semibold text-main ">{{ name }}</h2>
+            <h2 class="text-2xl font-semibold text-main">{{ name }}</h2>
           </div>
           <app-header></app-header>
         </div>
@@ -31,17 +33,14 @@ import { RouterLink } from '@angular/router';
 
       <!-- Gray Separator Line -->
       <div class="border-b" style="color: #F0F0F0;"></div>
-      <div class="pl-16 pt-4">
-        <h2 class="text-xl" style="font-weight:600; color: #373C9E; ">
+      <div class="pl-4 lg:pl-16 pt-4">
+        <h2 class="text-xl" style="font-weight:600; color: #373C9E;">
           DASHBOARD OVERVIEW
         </h2>
       </div>
 
       <!-- DASHBOARD OVERVIEW -->
-      <div
-        class=" flex justify-start pt-4 gap-7"
-        style="margin-left: 55px; margin-right: 50px;"
-      >
+      <div class="flex flex-wrap justify-between  pt-4 mx-3 lg:mx-12">
         <app-card
           [title]="'Total Patients'"
           [count]="totalPatients"
@@ -87,48 +86,46 @@ import { RouterLink } from '@angular/router';
         ></app-card>
       </div>
 
-      <!-- DASHBORAD CONTENT -->
-      <div class="flex justify-between items-center pt-8 w-[1310px] gap-9">
+      <!-- DASHBOARD CONTENT -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-4 mx-3 lg:mx-12">
         <!-- STATISTICS AND RECENT PATIENTS -->
         <div
-          class="w-[900px] h-[704px] gap-7"
-          style="margin-left: 30px;margin-right:0px; padding-right:0px; "
+          class="w-full lg:col-span-2 h-auto lg:h-[704px] flex flex-col justify-between"
         >
           <!-- STATISTICS -->
           <div
-            class="bg-white w-[900px] h-[338px] border-2 border-[#F4F2F2] rounded-[16px] pt-6 pl-6 pb-6 pr-12 m-0"
-            style="margin-bottom: 30px;"
+            class="bg-white w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] p-6 mb-4 lg:mb-0"
           >
-            <div class="flex justify-between items-center pr-4 pb-4">
-              <p class="text-main" style="font-weight: 600; font-size:20px ">
+            <div class="flex justify-between items-center pb-4">
+              <p class="text-main" style="font-weight: 600; font-size:20px;">
                 Statistics
               </p>
               <img src="dashboard-stat.svg" alt="" />
             </div>
-            <div class="graph-container">
+            <div class="graph-container w-full">
               <app-statistics-graph></app-statistics-graph>
             </div>
           </div>
           <!-- RECENT PATIENTS -->
           <div
-            class="bg-white w-[900px] h-[338px] border-2 border-[#F4F2F2] rounded-[16px] pt-6 pl-6 pb-6 pr-12"
+            class="bg-white w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] p-6"
           >
-            <div class="flex justify-between items-center pr-7">
-              <p class="text-main" style="font-weight: 600; font-size:20px">
+            <div class="flex justify-between items-center">
+              <p class="text-main" style="font-weight: 600; font-size:20px;">
                 Recent Patients
               </p>
-              <div class="mt-4 text-right flex  gap-5">
+              <div class="mt-4 text-right flex gap-5">
                 <a
                   href="#"
                   class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
-                  style="letter-spacing: 1px; "
+                  style="letter-spacing: 1px;"
                   routerLink="/patients"
                   >SEE ALL PATIENTS</a
                 >
                 <img src="dashboard-seeall.svg" alt="" />
               </div>
             </div>
-            <!---- RECENT PATIENTS TABLE -->
+            <!-- RECENT PATIENTS TABLE -->
             <div class="overflow-x-auto h-full">
               <table class="min-w-full table-auto mt-6">
                 <thead>
@@ -144,7 +141,7 @@ import { RouterLink } from '@angular/router';
                   </tr>
                 </thead>
                 <tbody
-                  class=" bg-white rounded-lg overflow-hidden h-[calc(100%-40px)]"
+                  class="bg-white rounded-lg overflow-hidden h-[calc(100%-40px)]"
                 >
                   <tr
                     *ngFor="let patient of recentPatients"
@@ -157,10 +154,9 @@ import { RouterLink } from '@angular/router';
                         alt="Profile Picture"
                       />
                       <div class="flex flex-col">
-                        <span
-                          class="font-semibold text-[12px] w-[8] text-left"
-                          >{{ patient.name }}</span
-                        >
+                        <span class="font-semibold text-[12px] w-[8] text-left">
+                          {{ patient.name }}
+                        </span>
                       </div>
                     </td>
                     <td>{{ patient.email }}</td>
@@ -185,7 +181,7 @@ import { RouterLink } from '@angular/router';
 
         <!-- Top Medical Staff -->
         <div
-          class="w-full h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col"
+          class="w-full h-auto lg:h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col"
         >
           <h3 class="text-[20px] font-semibold text-main mb-4">
             Top Medical Staff
@@ -193,29 +189,29 @@ import { RouterLink } from '@angular/router';
 
           <ul class="space-y-6 overflow-y-auto max-h-[1000px] flex-grow">
             <!-- Loop through the top medical staff data -->
-            <li *ngFor="let staff of topMedicalStaff" class="flex flex-col ">
-              <div class="w-[210px] h-[47px] flex justify-between ">
+            <li *ngFor="let staff of topMedicalStaff" class="flex flex-col">
+              <div class="w-full lg:min-w-[210px] h-[47px] flex gap-x-6">
                 <img
                   [src]="staff.profilePicture"
                   alt="Doctor Avatar"
-                  class="w-10 h-10 rounded-full "
+                  class="w-10 h-10 rounded-full"
                 />
-                <div class="w-[210px] h-[47px] pl-4">
+                <div class="pl-4">
                   <p class="font-bold text-black text-[13px] text-left">
                     {{ staff.name }}
                   </p>
-                  <p class="font-normal	text-[#667085] text-[13px] text-left">
+                  <p class="font-normal text-[#667085] text-[13px] text-left">
                     {{ staff.role }}
                   </p>
                 </div>
               </div>
             </li>
           </ul>
-          <div class="mt-4 text-left flex   gap-5">
+          <div class="mt-4 text-left flex gap-5">
             <a
               href="#"
               class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
-              style="letter-spacing: 1px; "
+              style="letter-spacing: 1px;"
               routerLink="/staff"
               >SEE ALL WORKERS</a
             >
@@ -229,7 +225,6 @@ import { RouterLink } from '@angular/router';
     `
       td {
         width: 80px;
-
         text-align: center;
         font-size: 12px;
         font-weight: 600;
