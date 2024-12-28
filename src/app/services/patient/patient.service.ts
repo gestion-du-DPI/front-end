@@ -14,7 +14,6 @@ export class PatientService {
   constructor(private http: HttpClient) {}
 
   getPatients(): Observable<Patient[]> {
-    console.log(this.apiUrl);
     return this.http.get<Patient[]>(this.apiUrl).pipe(
       catchError((error) => {
         console.error('Error fetching patients:', error);
