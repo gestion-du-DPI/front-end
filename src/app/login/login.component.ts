@@ -20,21 +20,18 @@ import { AuthService } from '../services/auth/auth.service';
             <input
               [(ngModel)]="username"
               placeholder="Username"
-              class="border-[1px] border-black border-opacity-20 rounded-md w-96 h-12"
+              class="border-[1px] p-2 border-black border-opacity-20 rounded-md w-96 h-12"
               type="text"
             />
             <input
               [(ngModel)]="password"
               placeholder="Password"
-              class="border-[1px] border-black border-opacity-20 rounded-md w-96 h-12"
+              class="border-[1px] p-2 border-black border-opacity-20 rounded-md w-96 h-12"
               type="password"
             />
             <div class="flex flex-row items-center">
               <input type="checkbox" [(ngModel)]="rememberMe" />
               <span class="ml-2">Remember me</span>
-              <a href="" class="ml-auto underline text-[#717171]"
-                >Forgot password?</a
-              >
             </div>
             <button
               (click)="signIn()"

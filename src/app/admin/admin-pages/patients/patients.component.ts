@@ -8,7 +8,6 @@ import { NewPatientFormComponent } from '../../admin-components/forms/new-patien
 import { Patient } from '../../../models/patient';
 import { PatientService } from '../../../services/patient/patient.service';
 
-
 @Component({
   selector: 'app-patients',
   imports: [
@@ -16,7 +15,7 @@ import { PatientService } from '../../../services/patient/patient.service';
     HeaderComponent,
     NewPatientFormComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
@@ -42,7 +41,7 @@ import { PatientService } from '../../../services/patient/patient.service';
               type="text"
               placeholder="Search Patient by Name here ..."
               class="bg-transparent border-0 focus:outline-none flex-1"
-               [(ngModel)]="searchQuery"
+              [(ngModel)]="searchQuery"
               (input)="onSearch()"
             />
           </div>
@@ -62,11 +61,15 @@ import { PatientService } from '../../../services/patient/patient.service';
           </button>
         </div>
       </div>
-      <app-patients-table [patients]="filteredPatients"/>
+      <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
+      <div *ngIf="!loading">
+        <app-patients-table [patients]="filteredPatients" />
+      </div>
 
       <div class="popup" *ngIf="showNewPatientForm">
         <app-new-patient-form
           (cancel)="onCancelPatientForm()"
+          (save)="reloadPatients()"
         ></app-new-patient-form>
       </div>
     </div>
@@ -77,11 +80,11 @@ import { PatientService } from '../../../services/patient/patient.service';
   }
   `,
 })
-
 export class PatientsComponent implements OnInit {
   patientsNumber = 0; // Dynamically update based on the number of patients
   showNewPatientForm = false;
   searchQuery = ''; // Tracks the input query
+  loading: boolean = false;
 
   patients: Patient[] = [];
   filteredPatients: Patient[] = []; // Tracks the filtered patients
@@ -93,10 +96,30 @@ export class PatientsComponent implements OnInit {
   }
 
   loadPatients(): void {
+    this.loading = true; // Show loading spinner
     this.patientService.getPatients().subscribe((data) => {
+      console.log(data); // Log the data to check if the patients are fetched
       this.patients = data;
       this.filteredPatients = data; // Update filteredPatients here
       this.patientsNumber = data.length; // Update the patients count
+      this.loading = false; // Hide loading spinner
+    });
+  }
+
+  reloadPatients(): void {
+    this.showNewPatientForm = false;
+    this.loading = true; // Show loading spinner
+    this.patientService.getPatients().subscribe({
+      next: (patients) => {
+        this.patients = patients;
+        this.filteredPatients = patients; // Ensure filteredPatients is also updated
+        this.patientsNumber = patients.length; // Update the patient count
+        this.loading = false; // Hide loading spinner
+      },
+      error: (err) => {
+        console.error('Error fetching patients:', err);
+        this.loading = false; // Hide loading spinner
+      },
     });
   }
 

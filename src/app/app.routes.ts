@@ -1,43 +1,51 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
 import { RoleGuard } from './services/auth/role.guard';
 import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 import { UserRole } from './models/user-role';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import * as Admin from '../app/admin/admin.component';
-import * as Radiologist from '../app/radiologist/radiologist.component';
-import * as LabTechnician from '../app/lab-technician/lab-technician.component'
 
 export const appRoutes: Routes = [
   {
-    // Inside this guard we will check his role and redirect him to the correct page and if not auth nb3thou ll login page
     path: '',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./login/login.component').then((m) => m.LoginComponent),
     canActivate: [FirstLoadingGuard],
   },
   {
     path: 'admin',
-    component: Admin.Main,
+    loadComponent: () =>
+      import('./admin/admin.component').then((m) => m.Main),
     canActivate: [RoleGuard],
     data: { role: UserRole.Admin },
-    // This comment is from the documentation
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
-        path: 'staff', // child route path
-        component: Admin.WorkersComponent, // child route component that the router renders
+        path: 'staff',
+        loadComponent: () =>
+          import('./admin/admin-pages/workers/workers.component').then(
+            (m) => m.WorkersComponent
+          ),
       },
       {
-        path: 'home', // child route path
-        component: Admin.DashboardComponent, // child route component that the router renders
+        path: 'home',
+        loadComponent: () =>
+          import('./admin/admin-pages/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
       },
       {
         path: 'patients',
-        component: Admin.PatientsComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./admin/admin-pages/patients/patients.component').then(
+            (m) => m.PatientsComponent
+          ),
       },
       {
         path: 'edit-profile',
-        component: Admin.EditProfileComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./admin/admin-pages/edit-profile/edit-profile.component').then(
+            (m) => m.EditProfileComponent
+          ),
       },
     ],
   },
@@ -57,55 +65,79 @@ export const appRoutes: Routes = [
   },
   {
     path: 'radiologist',
-    component: Radiologist.Main,
+    loadComponent: () =>
+      import('./radiologist/radiologist.component').then((m) => m.Main),
     canActivate: [RoleGuard],
     data: { role: UserRole.Radiologist },
-    // This comment is from the documentation
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
-        path: 'home', // child route path
-        component: Radiologist.WorkspaceComponent,
+        path: 'home',
+        loadComponent: () =>
+          import('./radiologist/radiologist-pages/workspace/workspace.component').then(
+            (m) => m.WorkspaceComponent
+          ),
       },
       {
         path: 'patients',
-        component: Radiologist.PatientsComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./radiologist/radiologist-pages/patients/patients.component').then(
+            (m) => m.PatientsComponent
+          ),
       },
       {
         path: 'tickets-history',
-        component: Radiologist.TicketsHistoryComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./radiologist/radiologist-pages/tickets-history/tickets-history.component').then(
+            (m) => m.TicketsHistoryComponent
+          ),
       },
-      
       {
         path: 'edit-profile',
-        component: Radiologist.EditProfileComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./radiologist/radiologist-pages/edit-profile/edit-profile.component').then(
+            (m) => m.EditProfileComponent
+          ),
       },
     ],
   },
   {
     path: 'lab-technician',
-    component: LabTechnician.Main,
+    loadComponent: () =>
+      import('./lab-technician/lab-technician.component').then(
+        (m) => m.Main
+      ),
     canActivate: [RoleGuard],
     data: { role: UserRole.LabTechnician },
-    // This comment is from the documentation
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
-        path: 'home', // child route path
-        component: LabTechnician.WorkspaceComponent,
+        path: 'home',
+        loadComponent: () =>
+          import('./lab-technician/lab-technician-pages/workspace/workspace.component').then(
+            (m) => m.WorkspaceComponent
+          ),
       },
       {
         path: 'patients',
-        component: LabTechnician.PatientsComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./lab-technician/lab-technician-pages/patients/patients.component').then(
+            (m) => m.PatientsComponent
+          ),
       },
       {
         path: 'tickets-history',
-        component: LabTechnician.TicketsHistoryComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./lab-technician/lab-technician-pages/tickets-history/tickets-history.component').then(
+            (m) => m.TicketsHistoryComponent
+          ),
       },
-      
       {
         path: 'edit-profile',
-        component: LabTechnician.EditProfileComponent, // another child route component that the router renders
+        loadComponent: () =>
+          import('./lab-technician/lab-technician-pages/edit-profile/edit-profile.component').then(
+            (m) => m.EditProfileComponent
+          ),
       },
     ],
   },
@@ -116,7 +148,16 @@ export const appRoutes: Routes = [
     canActivate: [RoleGuard],
     data: { role: UserRole.Patient },
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'unauthorized',
+    loadComponent: () =>
+      import('./components/unauthorized/unauthorized.component').then(
+        (m) => m.UnauthorizedComponent
+      ),
+  },
 ];

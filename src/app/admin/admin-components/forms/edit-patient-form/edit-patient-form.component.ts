@@ -48,7 +48,7 @@ import { FormsModule } from '@angular/forms';
             <input
               type="date"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.birthday"
+              [(ngModel)]="formData.dateOfBirth"
               name="birthday"
             />
           </div>
@@ -191,7 +191,7 @@ export class EditPatientFormComponent {
   formData = {
     name: '',
     gender: '',
-    birthday: '',
+    dateOfBirth: '',
     placeOfBirth: '',
     address: '',
     socialNumber: '',

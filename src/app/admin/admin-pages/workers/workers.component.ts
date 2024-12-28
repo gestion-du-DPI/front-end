@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkersTableComponent } from '../../../components/workers-table/workers-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
 import { NewWorkerFormComponent } from '../../admin-components/forms/new-worker-form/new-worker-form.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Worker } from '../../../models/worker';
 import { WorkerService } from '../../../services/worker/worker.service';
+import { WorkersTableComponent } from '../../admin-components/workers-table/workers-table.component';
 
 @Component({
   selector: 'app-workers',
