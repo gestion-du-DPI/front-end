@@ -5,6 +5,8 @@ import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 import { UserRole } from './models/user-role';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import * as Admin from '../app/admin/admin.component';
+import * as Radiologist from '../app/radiologist/radiologist.component';
+
 export const appRoutes: Routes = [
   {
     // Inside this guard we will check his role and redirect him to the correct page and if not auth nb3thou ll login page
@@ -54,12 +56,30 @@ export const appRoutes: Routes = [
   },
   {
     path: 'radiologist',
-    loadComponent: () =>
-      import('./radiologist/radiologist.component').then(
-        (m) => m.RadiologistComponent
-      ),
+    component: Radiologist.Main,
     canActivate: [RoleGuard],
     data: { role: UserRole.Radiologist },
+    // This comment is from the documentation
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
+      {
+        path: 'home', // child route path
+        component: Radiologist.WorkspaceComponent,
+      },
+      {
+        path: 'patients',
+        component: Radiologist.PatientsComponent, // another child route component that the router renders
+      },
+      {
+        path: 'tickets-history',
+        component: Radiologist.TicketsHistoryComponent, // another child route component that the router renders
+      },
+      
+      {
+        path: 'edit-profile',
+        component: Radiologist.EditProfileComponent, // another child route component that the router renders
+      },
+    ],
   },
   {
     path: 'labTechnician',

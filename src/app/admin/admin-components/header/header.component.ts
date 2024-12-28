@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { AdminBadgeComponent } from '../admin-badge/admin-badge.component';
 import { CommonModule } from '@angular/common';
 import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-form.component';
+import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-header',
-  imports: [AdminBadgeComponent, NewPatientFormComponent, CommonModule],
+  imports: [UserBadgeComponent, NewPatientFormComponent, CommonModule],
   template: `
     <div class="flex flex-row items-center gap-5">
       <button
@@ -17,7 +17,7 @@ import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-f
           >New Patient</span
         >
       </button>
-      <app-admin-badge></app-admin-badge>
+      <app-user-badge></app-user-badge>
     </div>
 
     <div class="popup" *ngIf="showNewPatientForm">

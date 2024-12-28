@@ -17,7 +17,6 @@ import { AdminSidebarComponent } from './admin-components/admin-sidebar/admin-si
   `,
 })
 export class Main {
-  title = 'projet-igl';
 }
 
 //gathered up the expprts all in one place so the routing can be cleaner
