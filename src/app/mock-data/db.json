@@ -5,13 +5,13 @@
       "name": "mo",
       "gender": "Male",
       "dateOfBirth": "2024-12-09",
-      "placeOfBirth": "City",
+      "placeOfBirth": "k",
       "address": "123 Main St, City",
-      "socialNumber": "987-65-4321",
+      "socialNumber": "123456789",
       "phone": "0553881217",
       "email": "ma_sadoun@esi.dz",
       "emergencyContact": "Jane Doe",
-      "emergencyPhone": "876-543-2109",
+      "emergencyPhone": "1234567891",
       "consultations": 2
     },
     {

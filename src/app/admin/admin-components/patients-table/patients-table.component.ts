@@ -77,8 +77,9 @@ import { PatientService } from '../../../services/patient/patient.service';
     </div>
     <div class="popup" *ngIf="showEditPatientsPopup">
       <app-edit-patient-form
-        [patientData]="selectedPatient"
+        [formData]="selectedPatient"
         (cancel)="onCancelEdit()"
+        (save)="onSaveEdit()"
       ></app-edit-patient-form>
     </div>
   `,
@@ -122,8 +123,14 @@ export class PatientsTableComponent {
    * @param patient The patient to edit.
    */
   onEdit(patient: any): void {
-    this.selectedPatient = patient;
+    this.selectedPatient = { ...patient }; // Create a shallow copy of the patient object
     this.showEditPatientsPopup = true;
+  }
+
+  onSaveEdit(): void {
+    // Save changes to the patient data and update the list
+    this.showEditPatientsPopup = false;
+    this.reloadPatients();
   }
 
   /**
