@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ConfirmLogoutPopupComponent } from '../confirm-logout-popup/confirm-logout-popup.component';
+import { ConfirmLogoutPopupComponent } from '../../../../components/popups/confirm-logout-popup/confirm-logout-popup.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

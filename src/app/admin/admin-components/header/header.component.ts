@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AdminBadgeComponent } from '../admin-badge/admin-badge.component';
-import { AddNewPatientPopupComponent } from '../popups/add-new-patient-popup/add-new-patient-popup.component';
 import { CommonModule } from '@angular/common';
 import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-form.component';
 

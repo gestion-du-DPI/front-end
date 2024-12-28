@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmDeleteWorkerPopupComponent } from '../popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
-import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-form.component';
+import { ConfirmDeleteWorkerPopupComponent } from '../../admin/admin-components/popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
+import { EditWorkerFormComponent } from '../../admin/admin-components/forms/edit-worker-form/edit-worker-form.component';
 @Component({
   selector: 'app-workers-table',
   imports: [

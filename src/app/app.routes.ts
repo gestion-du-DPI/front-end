@@ -1,15 +1,10 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { PatientsComponent } from './admin/patients/patients.component';
-import { WorkersComponent } from './admin/workers/workers.component';
-import { EditProfileComponent } from './admin/edit-profile/edit-profile.component';
-
 import { RoleGuard } from './services/auth/role.guard';
 import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 import { UserRole } from './models/user-role';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-
+import * as Admin from '../app/admin/admin.component';
 export const appRoutes: Routes = [
   {
     // Inside this guard we will check his role and redirect him to the correct page and if not auth nb3thou ll login page
@@ -19,20 +14,29 @@ export const appRoutes: Routes = [
   },
   {
     path: 'admin',
-    component: DashboardComponent,
+    component: Admin.Main,
     canActivate: [RoleGuard],
     data: { role: UserRole.Admin },
     // This comment is from the documentation
-    // children: [
-    //   {
-    //     path: 'child-a', // child route path
-    //     component: ChildAComponent, // child route component that the router renders
-    //   },
-    //   {
-    //     path: 'child-b',
-    //     component: ChildBComponent, // another child route component that the router renders
-    //   },
-    // ],
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
+      {
+        path: 'staff', // child route path
+        component: Admin.WorkersComponent, // child route component that the router renders
+      },
+      {
+        path: 'home', // child route path
+        component: Admin.DashboardComponent, // child route component that the router renders
+      },
+      {
+        path: 'patients',
+        component: Admin.PatientsComponent, // another child route component that the router renders
+      },
+      {
+        path: 'edit-profile',
+        component: Admin.EditProfileComponent, // another child route component that the router renders
+      },
+    ],
   },
   {
     path: 'doctor',
@@ -76,9 +80,4 @@ export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
 
-  // To be added to routes of the admin component by Amel
-  { path: 'home', component: DashboardComponent },
-  { path: 'patients', component: PatientsComponent },
-  { path: 'staff', component: WorkersComponent },
-  { path: 'editprofile', component: EditProfileComponent },
 ];

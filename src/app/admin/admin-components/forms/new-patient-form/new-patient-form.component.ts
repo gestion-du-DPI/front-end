@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/patient/patient.service';
+import { Patient } from '../../../../models/patient';
+import { PatientService } from '../../../../services/patient/patient.service';
 
 @Component({
   selector: 'app-new-patient-form',

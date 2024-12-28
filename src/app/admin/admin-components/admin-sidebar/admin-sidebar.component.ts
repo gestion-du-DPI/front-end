@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ConfirmLogoutPopupComponent } from '../popups/confirm-logout-popup/confirm-logout-popup.component';
-import { AuthService } from '../../services/auth/auth.service';
+import { ConfirmLogoutPopupComponent } from '../../../components/popups/confirm-logout-popup/confirm-logout-popup.component';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-admin-sidebar',
   imports: [CommonModule, RouterLink, ConfirmLogoutPopupComponent],
   template: `
     <div
@@ -36,7 +36,7 @@ import { AuthService } from '../../services/auth/auth.service';
         <li
           class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"
           (click)="$event.stopPropagation()"
-          routerLink="/home"
+          routerLink="/admin/home"
         >
           <img src="sidebar-home.svg" class="h-6 w-6" />
           <span *ngIf="showText" class="mt-[1px] font-bold align-text-bottom"
@@ -46,7 +46,7 @@ import { AuthService } from '../../services/auth/auth.service';
         <li
           class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"
           (click)="$event.stopPropagation()"
-          routerLink="/patients"
+          routerLink="/admin/patients"
         >
           <img src="sidebar-patient.svg" class="h-6 w-6" />
           <span *ngIf="showText" class="mt-1 font-bold">Patients</span>
@@ -54,7 +54,7 @@ import { AuthService } from '../../services/auth/auth.service';
         <li
           class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"
           (click)="$event.stopPropagation()"
-          routerLink="/staff"
+          routerLink="/admin/staff"
         >
           <img src="sidebar-doctor.svg" class="h-6 w-6" />
           <span *ngIf="showText" class="mt-1 font-bold">Staff</span>
@@ -69,7 +69,7 @@ import { AuthService } from '../../services/auth/auth.service';
         <div
           class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"
           (click)="$event.stopPropagation()"
-          routerLink="/editprofile"
+          routerLink="/admin/edit-profile"
         >
           <img src="sidebar-edit.svg" class="h-6" />
           <span *ngIf="showText" class="font-bold">Edit Profile</span>
@@ -93,7 +93,7 @@ import { AuthService } from '../../services/auth/auth.service';
   `,
   styles: [],
 })
-export class SidebarComponent {
+export class AdminSidebarComponent {
   isSidebarCollapsed = true;
   showText = false;
   showLogoutPopup = false;

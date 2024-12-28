@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PatientsTableComponent } from '../../components/patients-table/patients-table.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { NewPatientFormComponent } from '../../components/forms/new-patient-form/new-patient-form.component';
-import { Patient } from '../../models/patient';
-import { PatientService } from '../../services/patient/patient.service';
+import { PatientsTableComponent } from '../../admin-components/patients-table/patients-table.component';
+import { HeaderComponent } from '../../admin-components/header/header.component';
+import { NewPatientFormComponent } from '../../admin-components/forms/new-patient-form/new-patient-form.component';
+import { Patient } from '../../../models/patient';
+import { PatientService } from '../../../services/patient/patient.service';
 
 
 @Component({
