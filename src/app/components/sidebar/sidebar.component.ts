@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ConfirmLogoutPopupComponent } from '../popups/confirm-logout-popup/confirm-logout-popup.component';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -85,6 +86,7 @@ import { ConfirmLogoutPopupComponent } from '../popups/confirm-logout-popup/conf
       <div class="popup" *ngIf="showLogoutPopup">
         <app-confirm-logout-popup
           (cancel)="onCancelLogout()"
+          (confirm)="onConfirmLogout()"
         ></app-confirm-logout-popup>
       </div>
     </div>
@@ -96,13 +98,20 @@ export class SidebarComponent {
   showText = false;
   showLogoutPopup = false;
 
+  constructor(private authService: AuthService) {}
+
   onLogout() {
-    console.log('Add new patient');
     this.showLogoutPopup = true;
     this.hideSideBar();
   }
 
   onCancelLogout() {
+    this.showLogoutPopup = false;
+    this.hideSideBar();
+  }
+
+  onConfirmLogout() {
+    this.authService.logout();
     this.showLogoutPopup = false;
     this.hideSideBar();
   }
