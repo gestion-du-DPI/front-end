@@ -17,7 +17,6 @@ export const appRoutes: Routes = [
     component: Admin.Main,
     canActivate: [RoleGuard],
     data: { role: UserRole.Admin },
-    // This comment is from the documentation
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
       {

@@ -11,6 +11,7 @@ import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-f
       <button
         class=" w-60 bg-main flex flex-row gap-3 items-center justify-center py-4 rounded-md"
         (click)="onAddPatient()"
+        id="selenium_add_patient_button"
       >
         <img src="add-icon-white.svg" class="" alt="" /><span
           class="text-white font-bold text-base"
@@ -23,6 +24,7 @@ import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-f
     <div class="popup" *ngIf="showNewPatientForm">
       <app-new-patient-form
         (cancel)="onCancelPatientForm()"
+        (confirm)="onConfirmPatientForm()"
       ></app-new-patient-form>
     </div>
   `,
@@ -36,6 +38,10 @@ export class HeaderComponent {
   }
 
   onCancelPatientForm() {
+    this.showNewPatientForm = false;
+  }
+
+  onConfirmPatientForm() {
     this.showNewPatientForm = false;
   }
 }

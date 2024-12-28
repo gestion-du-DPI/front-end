@@ -7,10 +7,17 @@ import { PatientService } from '../../../../services/patient/patient.service';
   selector: 'app-new-patient-form',
   imports: [FormsModule],
   template: `
-    <div class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[90vh]">
+    <div
+      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[90vh]"
+    >
       <div class="flex flex-row justify-between px-7 pb-3">
         <h1 class="font-extrabold text-2xl text-main">New Patient</h1>
-        <img src="cancel-icon.svg" class="w-7 cursor-pointer" alt="" (click)="onCancel()" />
+        <img
+          src="cancel-icon.svg"
+          class="w-7 cursor-pointer"
+          alt=""
+          (click)="onCancel()"
+        />
       </div>
       <form class="flex flex-col gap-2 overflow-y-scroll px-7">
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>
@@ -56,9 +63,7 @@ import { PatientService } from '../../../../services/patient/patient.service';
           </div>
 
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Place of Birth
-            </label>
+            <label class="font-medium text-sm"> Place of Birth </label>
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
@@ -69,9 +74,7 @@ import { PatientService } from '../../../../services/patient/patient.service';
           </div>
 
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Address
-            </label>
+            <label class="font-medium text-sm"> Address </label>
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
@@ -82,9 +85,7 @@ import { PatientService } from '../../../../services/patient/patient.service';
           </div>
 
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Social Number
-            </label>
+            <label class="font-medium text-sm"> Social Number </label>
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
@@ -98,9 +99,7 @@ import { PatientService } from '../../../../services/patient/patient.service';
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Contact</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Phone Number
-            </label>
+            <label class="font-medium text-sm"> Phone Number </label>
             <input
               type="tel"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
@@ -124,12 +123,12 @@ import { PatientService } from '../../../../services/patient/patient.service';
           </div>
         </div>
 
-        <h4 class="text-lg font-semibold text-[#18181B] mt-2">Emergency Contact</h4>
+        <h4 class="text-lg font-semibold text-[#18181B] mt-2">
+          Emergency Contact
+        </h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Emergency Contact Name
-            </label>
+            <label class="font-medium text-sm"> Emergency Contact Name </label>
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
@@ -140,9 +139,7 @@ import { PatientService } from '../../../../services/patient/patient.service';
           </div>
 
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Emergency Contact Phone
-            </label>
+            <label class="font-medium text-sm"> Emergency Contact Phone </label>
             <input
               type="tel"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
@@ -156,15 +153,14 @@ import { PatientService } from '../../../../services/patient/patient.service';
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Consultations</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
           <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Number of Consultations
-            </label>
+            <label class="font-medium text-sm"> Number of Consultations </label>
             <input
               type="number"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. 0"
               [(ngModel)]="formData.consultations"
               name="consultations"
+              id="selenium_consultations_input"
             />
           </div>
         </div>
@@ -181,6 +177,7 @@ import { PatientService } from '../../../../services/patient/patient.service';
             type="button"
             class="bg-main text-white font-semibold p-2 w-32 rounded-md mt-4"
             (click)="submitForm()"
+            id="selenium_save_patient_button"
           >
             Save
           </button>
@@ -199,10 +196,9 @@ import { PatientService } from '../../../../services/patient/patient.service';
     `,
   ],
 })
-
-
 export class NewPatientFormComponent {
   @Output() cancel = new EventEmitter<void>();
+  @Output() confirm = new EventEmitter<void>();
 
   formData: Patient = {
     id: '',
@@ -238,6 +234,7 @@ export class NewPatientFormComponent {
         // Handle error, possibly showing an error message to the user
       },
     });
+    this.confirm.emit();
   }
 
   onCancel() {
