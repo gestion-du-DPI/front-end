@@ -6,6 +6,7 @@ import { UserRole } from './models/user-role';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import * as Admin from '../app/admin/admin.component';
 import * as Radiologist from '../app/radiologist/radiologist.component';
+import * as LabTechnician from '../app/lab-technician/lab-technician.component'
 
 export const appRoutes: Routes = [
   {
@@ -82,13 +83,31 @@ export const appRoutes: Routes = [
     ],
   },
   {
-    path: 'labTechnician',
-    loadComponent: () =>
-      import('./lab-technician/lab-technician.component').then(
-        (m) => m.LabTechnicianComponent
-      ),
+    path: 'lab-technician',
+    component: LabTechnician.Main,
     canActivate: [RoleGuard],
     data: { role: UserRole.LabTechnician },
+    // This comment is from the documentation
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default admin route
+      {
+        path: 'home', // child route path
+        component: LabTechnician.WorkspaceComponent,
+      },
+      {
+        path: 'patients',
+        component: LabTechnician.PatientsComponent, // another child route component that the router renders
+      },
+      {
+        path: 'tickets-history',
+        component: LabTechnician.TicketsHistoryComponent, // another child route component that the router renders
+      },
+      
+      {
+        path: 'edit-profile',
+        component: LabTechnician.EditProfileComponent, // another child route component that the router renders
+      },
+    ],
   },
   {
     path: 'patient',
