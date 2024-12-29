@@ -1,0 +1,43 @@
+import { Worker } from "../models/worker";
+
+export const WORKERS: Worker[] = [
+  {
+    id: '1',
+    name: 'Alice Johnson',
+    role: 'Manager',
+    email: 'alice@example.com',
+    phone: '123-456-7890',
+    socialNumber: '123-45-6789',
+    address: '123 Main St, City',
+    dateOfHire: '2020-01-15',
+    consultations: 10,
+    tag: '@manager',
+    profilePicture: 'admin.jpg',
+  },
+  {
+    id: '2',
+    name: 'Bob Smith',
+    role: 'Developer',
+    email: 'bob@example.com',
+    phone: '234-567-8901',
+    socialNumber: '234-56-7890',
+    address: '456 Elm St, City',
+    dateOfHire: '2021-03-22',
+    consultations: 5,
+    tag: '@developer',
+    profilePicture: 'admin.jpg',
+  },
+  {
+    id: '3',
+    name: 'Charlie Brown',
+    role: 'Designer',
+    email: 'charlie@example.com',
+    phone: '345-678-9012',
+    socialNumber: '345-67-8901',
+    address: '789 Oak St, City',
+    dateOfHire: '2019-07-10',
+    consultations: 8,
+    tag: '@designer',
+    profilePicture: 'admin.jpg',
+  },
+];

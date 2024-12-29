@@ -28,10 +28,6 @@
 }
 
 
-.sidebar {
-  z-index: 40; /* Make sure it's below the popup but above the graph */
-}
-
 .graph-container {
   position: relative; 
   z-index: 1; /* Lower value ensures it's behind popups and sidebars */
