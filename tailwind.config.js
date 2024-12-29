@@ -4,18 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-<<<<<<< HEAD
-        'main': '#373C9E',
-        'second': '#90E5EE',
-        'off-white': '#FBFBFB',
-        'warning-red': '#E2211C',
-        'off-black' : '#18181B', 
-=======
         main: "#373C9E",
         second: "#90E5EE",
         "off-white": "#FBFBFB",
         "warning-red": "#E2211C",
->>>>>>> data-handling
       },
       fontFamily: {
         poppins: ['"Poppins"', "sans-serif"],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../components/header/header.component';
+import { HeaderComponent } from '../admin/admin-components/header/header.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -70,7 +70,7 @@ import { CommonModule } from '@angular/common';
             </div>
             <div class="relative">
               <img
-                src="edit-adress.svg"
+                src="address.svg"
                 alt="Address Icon"
                 class="absolute mt-2 top-2 left-3 w-6 h-6"
               />
