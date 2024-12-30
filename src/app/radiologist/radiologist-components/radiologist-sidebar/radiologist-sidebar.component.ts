@@ -38,7 +38,7 @@ import { AuthService } from '../../../services/auth/auth.service';
           (click)="$event.stopPropagation()"
           routerLink="/radiologist/home"
         >
-          <img src="radiologist-home.svg" class="h-6 w-6" />
+          <img src="home-icon.svg" class="h-6 w-6" />
           <span *ngIf="showText" class="mt-[1px] font-bold align-text-bottom"
             >Workspace</span
           >
@@ -56,7 +56,7 @@ import { AuthService } from '../../../services/auth/auth.service';
           (click)="$event.stopPropagation()"
           routerLink="/radiologist/tickets-history"
         >
-          <img src="radiologist-history.svg" class="h-6 w-6" />
+          <img src="history-icon.svg" class="h-6 w-6" />
           <span *ngIf="showText" class="mt-1 font-bold">Tickets</span>
         </li>
       </ul>

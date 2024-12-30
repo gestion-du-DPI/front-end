@@ -25,8 +25,8 @@ import { CommonModule } from '@angular/common';
         <tr *ngFor="let patient of patients" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
-              [src]="patient.profilePicture"
-              class="w-10 h-10 rounded-full"
+              [src]="patient.profilePicture || 'no-pfp.png'"
+              class="w-10 h-10 object-cover rounded-full"
               alt="Profile Picture"
             />
             <div class="flex flex-col">

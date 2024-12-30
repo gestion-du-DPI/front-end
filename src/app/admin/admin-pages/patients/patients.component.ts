@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PatientsTableComponent } from '../../admin-components/patients-table/patients-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
-import { NewPatientFormComponent } from '../../admin-components/forms/new-patient-form/new-patient-form.component';
 import { Patient } from '../../../models/patient';
 import { PatientService } from '../../../services/patient/patient.service';
 
@@ -13,7 +12,6 @@ import { PatientService } from '../../../services/patient/patient.service';
   imports: [
     PatientsTableComponent,
     HeaderComponent,
-    NewPatientFormComponent,
     CommonModule,
     FormsModule,
   ],
@@ -29,7 +27,7 @@ import { PatientService } from '../../../services/patient/patient.service';
             >{{ patientsNumber }} patients</span
           >
           <div class="md:ml-auto">
-            <app-header></app-header>
+            <app-header (reload)="reloadPatients()"></app-header>
           </div>
         </div>
         <div class="flex flex-row gap-3">
@@ -50,27 +48,12 @@ import { PatientService } from '../../../services/patient/patient.service';
           >
             <img src="qr-icon.svg" alt="" />
           </button>
-          <button
-            class="ml-auto px-5 border-[1.5px] border-main flex flex-row justify-center items-center gap-2 rounded-md sm:mr-5 md:mr-10"
-            (click)="onAddPatient()"
-          >
-            <img src="add-icon.svg" alt="" /><span
-              class="text-main hidden sm:block text-sm font-semibold"
-              >New patient</span
-            >
-          </button>
+
         </div>
       </div>
       <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
       <div *ngIf="!loading">
         <app-patients-table [patients]="filteredPatients" />
-      </div>
-
-      <div class="popup" *ngIf="showNewPatientForm">
-        <app-new-patient-form
-          (cancel)="onCancelPatientForm()"
-          (save)="reloadPatients()"
-        ></app-new-patient-form>
       </div>
     </div>
   `,
@@ -82,7 +65,6 @@ import { PatientService } from '../../../services/patient/patient.service';
 })
 export class PatientsComponent implements OnInit {
   patientsNumber = 0; // Dynamically update based on the number of patients
-  showNewPatientForm = false;
   searchQuery = ''; // Tracks the input query
   loading: boolean = false;
 
@@ -107,7 +89,6 @@ export class PatientsComponent implements OnInit {
   }
 
   reloadPatients(): void {
-    this.showNewPatientForm = false;
     this.loading = true; // Show loading spinner
     this.patientService.getPatients().subscribe({
       next: (patients) => {
@@ -130,12 +111,4 @@ export class PatientsComponent implements OnInit {
     );
   }
 
-  onAddPatient(): void {
-    console.log('Add new patient');
-    this.showNewPatientForm = true;
-  }
-
-  onCancelPatientForm(): void {
-    this.showNewPatientForm = false;
-  }
 }

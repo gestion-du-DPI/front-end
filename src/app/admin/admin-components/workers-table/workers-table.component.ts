@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ConfirmDeleteWorkerPopupComponent } from '../popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
 import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-form.component';
+import { WorkerService } from '../../../services/worker/worker.service';
 @Component({
   selector: 'app-workers-table',
   imports: [
@@ -20,15 +21,14 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
           <th class="hidden lg:table-cell">Social Number</th>
           <th class="hidden lg:table-cell">Address</th>
           <th class="hidden lg:table-cell">Date of Hire</th>
-          <th class="hidden lg:table-cell">Consultations</th>
         </tr>
       </thead>
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
         <tr *ngFor="let worker of workers" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
-              [src]="worker.profilePicture || 'default-profile.png'"
-              class="w-10 h-10 rounded-full cursor-pointer"
+              [src]="worker.profilePicture || 'no-pfp.png'"
+              class="w-10 object-cover h-10 rounded-full cursor-pointer"
               alt="Profile Picture"
               (click)="onProfilePictureClick(fileInput)"
             />
@@ -51,9 +51,6 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
           <td class="hidden lg:table-cell">{{ worker.socialNumber }}</td>
           <td class="hidden lg:table-cell">{{ worker.address }}</td>
           <td class="hidden lg:table-cell">{{ worker.dateOfHire }}</td>
-          <td class="conslt hidden lg:table-cell">
-            {{ worker.consultations }}
-          </td>
           <td class="icon cursor-pointer px-0" (click)="onEdit(worker)">
             <img
               src="edit-icon.svg"
@@ -65,7 +62,7 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
             <img
               src="delete-icon.svg"
               class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
-              (click)="onDeleteWorker()"
+              (click)="onDeleteWorker(worker)"
               alt="delete"
             />
           </td>
@@ -80,8 +77,9 @@ import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-f
     </div>
     <div class="popup" *ngIf="showEditWorkersPopup">
       <app-edit-worker-form
-        [workerData]="selectedWorker"
+        [formData]="selectedWorker"
         (cancel)="onCancelEdit()"
+        (save)="onSaveEdit()"
       ></app-edit-worker-form>
     </div>
   `,
@@ -119,18 +117,24 @@ export class WorkersTableComponent {
   showEditWorkersPopup = false;
 
   selectedWorker: any = null; // Stores the worker data to pass to the edit form
+  workerToDelete: any = null; // Stores the worker we wanna delete from the table
 
+  constructor(private workerService: WorkerService) {}
+  
   onEdit(worker: any): void {
-    this.selectedWorker = worker; // Pass the worker data to the popup
+    this.selectedWorker = {...worker}; // Pass the worker data to the popup
     this.showEditWorkersPopup = true;
   }
 
-  onDelete(name: string): void {
-    console.log(`Delete clicked for ${name}`);
+  onDeleteWorker(worker: any): void {
+    this.workerToDelete = worker;
+    this.showConfirmDeletePopup = true;
   }
 
-  onDeleteWorker() {
-    this.showConfirmDeletePopup = true;
+  onSaveEdit(): void {
+    // Save changes to the patient data and update the list
+    this.showEditWorkersPopup = false;
+    this.reloadWorkers();
   }
 
   onCancelEdit() {
@@ -138,27 +142,60 @@ export class WorkersTableComponent {
     this.selectedWorker = null; // Clear the selected worker
   }
 
-  onConfirmDelete() {
-    this.showConfirmDeletePopup = false;
-    console.log('Worker deleted');
+ /**
+   * Confirms and deletes the selected patient, then reloads the patient list.
+   */
+ onConfirmDelete(): void {
+  if (this.workerToDelete) {
+    this.workerService.deleteWorker(this.workerToDelete.id).subscribe({
+      next: () => {
+        console.log('Patient deleted successfully');
+        this.showConfirmDeletePopup = false;
+        this.reloadWorkers();
+      },
+      error: (err) => console.error('Error deleting patient:', err),
+      complete: () => (this.workerToDelete = null),
+    });
   }
+}
 
   onCancelDelete() {
     this.showConfirmDeletePopup = false;
   }
 
   onProfilePictureClick(fileInput: HTMLInputElement): void {
-    fileInput.click(); // Trigger the file input's click programmatically
+    fileInput.click();
   }
 
-  onImageUpload(event: Event, worker: any): void {
+  /**
+   * Handles image upload for updating a patient's profile picture.
+   * @param event The file input change event.
+   * @param patient The patient whose profile picture is being updated.
+   */
+  onImageUpload(event: Event, patient: any): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
+      const file = input.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        worker.profilePicture = e.target.result; // Update the worker's profile picture
+        const updatedProfilePicture = e.target.result;
+        patient.profilePicture = updatedProfilePicture;
+
+        this.workerService
+          .editWorker({ ...patient, profilePicture: updatedProfilePicture })
+          .subscribe({
+            next: () => console.log('Profile picture updated successfully'),
+            error: (err) => console.error('Error updating profile picture:', err),
+          });
       };
-      reader.readAsDataURL(input.files[0]); // Read the selected image file
+      reader.readAsDataURL(file);
     }
+  }
+
+  reloadWorkers(): void {
+    this.workerService.getWorkers().subscribe({
+      next: (workers) => (this.workers = workers),
+      error: (err) => console.error('Error fetching patients:', err),
+    });
   }
 }
