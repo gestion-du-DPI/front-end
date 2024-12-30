@@ -1,14 +1,22 @@
 import { Routes } from '@angular/router';
+import * as Admin from '../app/admin/admin.component';
+
+// Importing models
+import { UserRole } from './models/user-role';
+
+// Importing guards
 import { RoleGuard } from './services/auth/role.guard';
 import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
-import { UserRole } from './models/user-role';
-import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+
+// Importing pages
+import { LoadingPageComponent } from './components/loading-page/loading-page.component';
+import { IsLoggedGuard } from './services/auth/isLogged.guard';
+
 
 export const appRoutes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./login/login.component').then((m) => m.LoginComponent),
+    component: LoadingPageComponent,
     canActivate: [FirstLoadingGuard],
   },
   {
@@ -152,6 +160,7 @@ export const appRoutes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./login/login.component').then((m) => m.LoginComponent),
+    canActivate: [IsLoggedGuard],
   },
   {
     path: 'unauthorized',
@@ -160,4 +169,12 @@ export const appRoutes: Routes = [
         (m) => m.UnauthorizedComponent
       ),
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+  },
+
 ];

@@ -27,10 +27,7 @@
     
 }
 
-
 .graph-container {
   position: relative; 
   z-index: 1; /* Lower value ensures it's behind popups and sidebars */
 }
-
-
