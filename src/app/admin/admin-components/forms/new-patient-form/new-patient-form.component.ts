@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
       <form
         #patientForm="ngForm"
         class="flex flex-col gap-2 overflow-y-scroll px-7"
-        (ngSubmit)="submitForm(patientForm)"
+        (ngSubmit)="submitForm()"
       >
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
@@ -386,38 +386,35 @@ export class NewPatientFormComponent {
     });
     this.confirm.emit();
 
-  // @Output() save = new EventEmitter<void>();
-//   formData: Patient = {} as Patient;
+    // @Output() save = new EventEmitter<void>();
+    //   formData: Patient = {} as Patient;
 
-//   constructor(private patientService: PatientService) {}
+    //   constructor(private patientService: PatientService) {}
 
-//   submitForm(form: NgForm) {
-//     if (form.valid) {
-//       console.log('Form Data:', this.formData);
+    //   submitForm(form: NgForm) {
+    //     if (form.valid) {
+    //       console.log('Form Data:', this.formData);
 
-//       // Calling the PatientsService to submit the form data
-//       this.patientService.addPatient(this.formData).subscribe({
-//         next: (response) => {
-//           console.log('Patient added successfully:', response);
-//           // You can handle any success action here, like closing the form
-//         },
-//         error: (error) => {
-//           console.error('Error adding patient:', error);
-//           // Handle error, possibly showing an error message to the user
-//         },
-//       });
-//       this.onSave();
-//     } else {
-//       // Mark all controls as touched to show error messages
-//       Object.values(form.controls).forEach((control) => {
-//         control.markAsTouched();
-//       });
-//     }
+    //       // Calling the PatientsService to submit the form data
+    //       this.patientService.addPatient(this.formData).subscribe({
+    //         next: (response) => {
+    //           console.log('Patient added successfully:', response);
+    //           // You can handle any success action here, like closing the form
+    //         },
+    //         error: (error) => {
+    //           console.error('Error adding patient:', error);
+    //           // Handle error, possibly showing an error message to the user
+    //         },
+    //       });
+    //       this.onSave();
+    //     } else {
+    //       // Mark all controls as touched to show error messages
+    //       Object.values(form.controls).forEach((control) => {
+    //         control.markAsTouched();
+    //       });
+    //     }
   }
 
-  onSave(){
-    this.save.emit();
-  }
   onCancel() {
     this.cancel.emit();
   }

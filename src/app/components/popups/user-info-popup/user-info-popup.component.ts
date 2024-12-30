@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ConfirmLogoutPopupComponent } from '../confirm-logout-popup/confirm-logout-popup.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-info-popup',
-  imports: [RouterLink, ConfirmLogoutPopupComponent, CommonModule],
+  imports: [ConfirmLogoutPopupComponent, CommonModule],
   template: `
     <div
       class="bg-white flex-col flex justify-center p-4 rounded-xl lg:w-[630px] mx-5"
