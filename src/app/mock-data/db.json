@@ -1,0 +1,143 @@
+{
+  "patients": [
+    {
+      "id": "b5de",
+      "name": "mo",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-09",
+      "placeOfBirth": "k",
+      "address": "123 Main St, City",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "ma_sadoun@esi.dz",
+      "emergencyContact": "Jane Doe",
+      "emergencyPhone": "1234567891",
+      "consultations": 2
+    },
+    {
+      "id": "704b",
+      "name": "beyouna",
+      "gender": "Female",
+      "dateOfBirth": "2024-12-04",
+      "address": "123 Elm St, City",
+      "placeOfBirth": "City",
+      "socialNumber": "099909090",
+      "phone": "0791172962",
+      "email": "jane.doe@example.com",
+      "emergencyContact": "Jane Doe",
+      "emergencyPhone": "0553881218",
+      "consultations": 3
+    },
+    {
+      "id": "bc88",
+      "name": "amel",
+      "gender": "Female",
+      "dateOfBirth": "2024-12-04",
+      "placeOfBirth": "City",
+      "address": "123 Main St, City",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "jane.doe@example.com",
+      "emergencyContact": "David Smith",
+      "emergencyPhone": "0553881218",
+      "consultations": 3
+    },
+    {
+      "id": "d784",
+      "name": "galk wahed",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-02",
+      "placeOfBirth": "City",
+      "address": "123 Main St, City",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "mary.smith@example.com",
+      "emergencyContact": "David Smith",
+      "emergencyPhone": "0553881218",
+      "consultations": 4
+    },
+    {
+      "id": "7364",
+      "name": "dddd",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-05",
+      "placeOfBirth": "ff",
+      "address": "ff",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "ma_sadoun@esi.dz",
+      "emergencyContact": "David Smith",
+      "emergencyPhone": "0553881218",
+      "consultations": 5
+    },
+    {
+      "id": "bc91",
+      "name": "Yen Griffin",
+      "dateOfBirth": "2001-03-07",
+      "placeOfBirth": "A autem dolorem sunt",
+      "address": "Rerum quia molestias",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "xelelere@mailinator.com",
+      "emergencyContact": "Fuga Nam ipsum id ",
+      "emergencyPhone": "0553881218",
+      "consultations": 99,
+      "gender": "Female"
+    },
+    {
+      "id": "8f60",
+      "name": "Yen Griffin",
+      "dateOfBirth": "2001-03-07",
+      "placeOfBirth": "A autem dolorem sunt",
+      "address": "Rerum quia molestias",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "xelelere@mailinator.com",
+      "emergencyContact": "Fuga Nam ipsum id ",
+      "emergencyPhone": "0553881218",
+      "consultations": 99,
+      "gender": "Female"
+    }
+  ],
+  "workers": [
+    {
+      "id": "1",
+      "name": "Alice Johnson",
+      "role": "Manager",
+      "email": "alice@example.com",
+      "phone": "123-456-7890",
+      "socialNumber": "123-45-6789",
+      "address": "123 Main St, City",
+      "dateOfHire": "2020-01-15",
+      "consultations": 10,
+      "tag": "@manager",
+      "profilePicture": "admin.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Bob Smith",
+      "role": "Developer",
+      "email": "bob@example.com",
+      "phone": "234-567-8901",
+      "socialNumber": "234-56-7890",
+      "address": "456 Elm St, City",
+      "dateOfHire": "2021-03-22",
+      "consultations": 5,
+      "tag": "@developer",
+      "profilePicture": "admin.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Charlie Brown",
+      "role": "Designer",
+      "email": "charlie@example.com",
+      "phone": "345-678-9012",
+      "socialNumber": "345-67-8901",
+      "address": "789 Oak St, City",
+      "dateOfHire": "2019-07-10",
+      "consultations": 8,
+      "tag": "@designer",
+      "profilePicture": "admin.jpg"
+    }
+  ]
+}

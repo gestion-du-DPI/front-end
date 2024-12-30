@@ -34,9 +34,6 @@ import { AuthService } from '../services/auth/auth.service';
             <div class="flex flex-row items-center">
               <input id="selenium_remeber_me_box" type="checkbox" [(ngModel)]="rememberMe" />
               <span class="ml-2">Remember me</span>
-              <a href="" class="ml-auto underline text-[#717171]"
-                >Forgot password?</a
-              >
             </div>
             <button
               (click)="signIn()"

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminInfoPopupComponent } from './admin-info-popup.component';
+import { AdminBadgeComponent } from './user-badge.component';
 
-describe('AdminInfoPopupComponent', () => {
-  let component: AdminInfoPopupComponent;
-  let fixture: ComponentFixture<AdminInfoPopupComponent>;
+describe('AdminBadgeComponent', () => {
+  let component: AdminBadgeComponent;
+  let fixture: ComponentFixture<AdminBadgeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminInfoPopupComponent]
+      imports: [AdminBadgeComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminInfoPopupComponent);
+    fixture = TestBed.createComponent(AdminBadgeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

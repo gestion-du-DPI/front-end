@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkersTableComponent } from '../../../components/workers-table/workers-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
 import { NewWorkerFormComponent } from '../../admin-components/forms/new-worker-form/new-worker-form.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Worker } from '../../../models/worker';
 import { WorkerService } from '../../../services/worker/worker.service';
+import { WorkersTableComponent } from '../../admin-components/workers-table/workers-table.component';
 
 @Component({
   selector: 'app-workers',
@@ -62,7 +62,10 @@ import { WorkerService } from '../../../services/worker/worker.service';
           </button>
         </div>
       </div>
-      <app-workers-table [workers]="filteredWorkers"></app-workers-table>
+      <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
+      <div *ngIf="!loading">
+        <app-workers-table [workers]="filteredWorkers" />
+      </div>
 
       <div class="popup" *ngIf="showNewWorkerForm">
         <app-new-worker-form
@@ -77,14 +80,16 @@ import { WorkerService } from '../../../services/worker/worker.service';
     }
   `,
 })
-export class WorkersComponent implements OnInit {
-  workers: Worker[] = []; // Holds all workers
-  filteredWorkers: Worker[] = []; // Holds filtered workers
-  workersNumber = 0; // Total number of workers
-  showNewWorkerForm = false; // Controls visibility of the "new worker" form
 
+export class WorkersComponent implements OnInit {
+  workersNumber = 0; // Dynamically update based on the number of workers
+  showNewWorkerForm = false;
+  searchQuery = ''; // Tracks the input query
   searchByName = true; // Toggles search filter between name and role
-  searchQuery = ''; // Tracks the search query
+  loading: boolean = false;
+
+  workers: Worker[] = [];
+  filteredWorkers: Worker[] = []; // Tracks the filtered workers
 
   constructor(private workerService: WorkerService) {}
 
@@ -93,10 +98,36 @@ export class WorkersComponent implements OnInit {
   }
 
   loadWorkers(): void {
-    this.workerService.getWorkers().subscribe((data) => {
-      this.workers = data;
-      this.filteredWorkers = data; // Initialize filteredWorkers with all workers
-      this.workersNumber = data.length; // Update the worker count
+    this.loading = true; // Show loading spinner
+    this.workerService.getWorkers().subscribe({
+      next: (data) => {
+        console.log(data); // Log the data to check if the workers are fetched
+        this.workers = data;
+        this.filteredWorkers = data; // Update filteredWorkers here
+        this.workersNumber = data.length; // Update the workers count
+        this.loading = false; // Hide loading spinner
+      },
+      error: (err) => {
+        console.error('Error fetching workers:', err);
+        this.loading = false; // Hide loading spinner
+      },
+    });
+  }
+
+  reloadWorkers(): void {
+    this.showNewWorkerForm = false;
+    this.loading = true; // Show loading spinner
+    this.workerService.getWorkers().subscribe({
+      next: (workers) => {
+        this.workers = workers;
+        this.filteredWorkers = workers; // Ensure filteredWorkers is also updated
+        this.workersNumber = workers.length; // Update the worker count
+        this.loading = false; // Hide loading spinner
+      },
+      error: (err) => {
+        console.error('Error fetching workers:', err);
+        this.loading = false; // Hide loading spinner
+      },
     });
   }
 
@@ -109,8 +140,8 @@ export class WorkersComponent implements OnInit {
     const query = this.searchQuery.toLowerCase();
     this.filteredWorkers = this.workers.filter((worker) =>
       this.searchByName
-        ? worker.name.toLowerCase().includes(query)
-        : worker.role.toLowerCase().includes(query)
+        ? worker.name.toLowerCase().includes(query) // Filter by name
+        : worker.role.toLowerCase().includes(query) // Filter by role
     );
   }
 

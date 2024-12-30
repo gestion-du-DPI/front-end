@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ConfirmLogoutPopupComponent } from '../../../../components/popups/confirm-logout-popup/confirm-logout-popup.component';
+import { ConfirmLogoutPopupComponent } from '../confirm-logout-popup/confirm-logout-popup.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-admin-info-popup',
+  selector: 'app-user-info-popup',
   imports: [RouterLink, ConfirmLogoutPopupComponent, CommonModule],
   template: `
     <div
@@ -24,16 +24,9 @@ import { CommonModule } from '@angular/common';
           />
           <h2 class=" font-semibold text-main text-xl">Dr. Sadoun</h2>
           <img
-            src="edit-profile-icon.svg"
-            (click)="closePopup.emit()"
-            routerLink="/editprofile"
-            class=" ml-auto w-13 cursor-pointer hover:bg-slate-100 p-3 rounded-2xl"
-            alt=""
-          />
-          <img
             src="logout-icon.svg"
             (click)="onLogout()"
-            class="w-13 cursor-pointer hover:bg-slate-100 p-3 rounded-2xl"
+            class="ml-auto w-13 cursor-pointer hover:bg-slate-100 p-3 rounded-2xl"
             alt=""
           />
         </div>
@@ -75,12 +68,11 @@ import { CommonModule } from '@angular/common';
   `,
   styles: ``,
 })
-export class AdminInfoPopupComponent {
+export class UserInfoPopupComponent {
   @Output() closePopup = new EventEmitter<void>();
   showLogoutPopup = false;
 
   onLogout() {
-    console.log('Add new patient');
     this.showLogoutPopup = true;
   }
 

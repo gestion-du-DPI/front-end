@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminInfoPopupComponent } from '../popups/admin-info-popup/admin-info-popup.component';
+import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popup.component';
 
 @Component({
-  selector: 'app-admin-badge',
+  selector: 'app-user-badge',
   standalone: true,
-  imports: [CommonModule, AdminInfoPopupComponent],
+  imports: [CommonModule, UserInfoPopupComponent],
   template: `
     <div
       class="flex flex-row items-center gap-2 cursor-pointer hover:bg-slate-100 p-3 rounded-lg"
@@ -20,13 +20,13 @@ import { AdminInfoPopupComponent } from '../popups/admin-info-popup/admin-info-p
     </div>
 
     <div class="popup" *ngIf="showPopup">
-      <app-admin-info-popup (closePopup)="closePopup()"></app-admin-info-popup>
+      <app-user-info-popup (closePopup)="closePopup()"></app-user-info-popup>
     </div>
   `,
   styles:``,
 })
 
-export class AdminBadgeComponent {
+export class UserBadgeComponent {
   name: string = 'Dr. Sadoun';
   showPopup: boolean = false;
 

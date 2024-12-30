@@ -17,11 +17,4 @@ import { AdminSidebarComponent } from './admin-components/admin-sidebar/admin-si
   `,
 })
 export class Main {
-  title = 'projet-igl';
 }
-
-//gathered up the expprts all in one place so the routing can be cleaner
-export { DashboardComponent } from './admin-pages/dashboard/dashboard.component';
-export { PatientsComponent } from './admin-pages/patients/patients.component';
-export { EditProfileComponent } from './admin-pages/edit-profile/edit-profile.component';
-export { WorkersComponent } from './admin-pages/workers/workers.component';
