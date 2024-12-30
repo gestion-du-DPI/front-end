@@ -11,7 +11,7 @@ import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 // Importing pages
 import { LoadingPageComponent } from './components/loading-page/loading-page.component';
 import { IsLoggedGuard } from './services/auth/isLogged.guard';
-import { MedicalCardsContainerComponent } from './radiologist/radiologist-components/medical-cards-container/medical-cards-container.component';
+import { MedicalCardsContainerComponent } from './nurse/nurse-components/medical-cards-container/medical-cards-container.component';
 
 export const appRoutes: Routes = [
   {
