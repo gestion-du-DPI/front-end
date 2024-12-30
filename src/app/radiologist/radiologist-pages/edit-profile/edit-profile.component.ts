@@ -14,202 +14,83 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <div class="flex flex-col items-center">
-  <div
-    class="w-[1000px] h-[800px] bg-white py-12 px-20 mt-[20px] border-2 rounded-[24px] border-[#F4F2F2]"
-  >
-    <div class="w-[800px] h-[500px]">
-      <h2 class="text-main text-[25px] font-semibold">
-        Change Your Information
-      </h2>
-      <div class="grid grid-cols-12 gap-8 w-full max-w-4xl">
-        <!-- Left Side Form -->
-        <div class="col-span-7">
-          <!-- Edit Profile Section -->
-          <h2 class="text-lg font-semibold text-main mb-2 pt-4">
-            Edit Profile
-          </h2>
-          <div class="grid gap-4">
-            <div class="relative">
-              <img
-                src="edit-name.svg"
-                alt="User Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Full Name"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-hospital.svg"
-                alt="Hospital Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Hospital Name"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-socialNumber.svg"
-                alt="Social Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Social Number"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-adress.svg"
-                alt="Address Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Address"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-phoneNumber.svg"
-                alt="Phone Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Phone Number"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-          </div>
+      <div class="flex flex-grow items-center justify-center">
+        <div class="w-full max-w-4xl bg-white py-8 px-6 border-2 rounded-2xl border-[#F4F2F2] shadow-lg">
+          <h2 class="text-xl lg:text-2xl text-main font-semibold mb-6">Change Your Information</h2>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left Side Form -->
+            <div class="lg:col-span-7 space-y-4">
+              <h2 class="text-lg font-semibold text-main">Edit Profile</h2>
+              <div class="space-y-4">
+                <div class="relative">
+                  <img src="name-radio.svg" alt="User Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                  <input type="text" placeholder="Full Name" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                </div>
+                <div class="relative">
+                  <img src="gender.svg" alt="Gender Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                  <input type="text" placeholder="Gender" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                </div>
+                <div class="relative">
+                  <img src="edit-socialNumber.svg" alt="Social Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                  <input type="text" placeholder="Social Number" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                </div>
+                <div class="relative">
+                  <img src="address.svg" alt="Address Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                  <input type="text" placeholder="Address" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                </div>
+                <div class="relative">
+                  <img src="edit-phoneNumber.svg" alt="Phone Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                  <input type="text" placeholder="Phone Number" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                </div>
+              </div>
 
-          <h2 class="text-lg font-semibold text-main mt-8 mb-4">Security</h2>
-
-          <div class="grid grid-cols-2 gap-4">
-            <!-- Email Fields -->
-             <div class="flex flex-between items-center gap-10">
-              <div class="mr-[50px]">
-            <div class="relative">
-              <div class="mb-[10px]">
-              <img
-                src="edit-email.svg"
-                alt="Email Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="email"
-                placeholder="Enter New Email Address"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
+              <h2 class="text-lg font-semibold text-main mt-8">Security</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-4">
+                  <div class="relative">
+                    <img src="edit-email.svg" alt="Email Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                    <input type="email" placeholder="Enter New Email Address" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                  </div>
+                  <div class="relative">
+                    <img src="edit-email.svg" alt="Email Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                    <input type="email" placeholder="Confirm Email Address" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div class="relative">
+                    <img src="edit-password.svg" alt="Password Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                    <input type="password" placeholder="Enter New Password" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                  </div>
+                  <div class="relative">
+                    <img src="edit-password.svg" alt="Password Icon" class="absolute left-3 top-2.5 w-6 h-6" />
+                    <input type="password" placeholder="Confirm Password" class="pl-12 w-full border border-gray-300 py-3 rounded-md" />
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="relative">
-              <img
-                src="edit-email.svg"
-                alt="Email Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="email"
-                placeholder="Confirm Email Address"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            </div>
-            <div class="ml-[30px]">
-            <!-- Password Fields -->
-            <div class="relative">
-              <div class="mb-[10px]">
-              <img
-                src="edit-password.svg"
-                alt="Password Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="password"
-                placeholder="Enter New Password"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
+
+            <!-- Right Side Profile -->
+            <div class="lg:col-span-5 flex flex-col items-center mt-10 lg:mt-12">
+              <div class="w-40 h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-main">
+                <img [src]="profileImage" alt="Profile" class="object-cover w-full h-full" />
               </div>
-            </div>
-            <div class="relative">
-              <img
-                src="edit-password.svg"
-                alt="Password Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
+              <label   class="mt-4 px-4 py-1 w-48 bg-main text-white rounded shadow hover:cursor-pointer flex items-center justify-center"
+              >
+                Upload Image
+                <img src="edit-upload.svg" alt="Upload Icon" class="w-5 h-5 ml-2" />
+                <input type="file" accept="image/*" (change)="onImageUpload($event)" class="hidden" />
+              </label>
             </div>
           </div>
-        </div>
-        </div>
-        </div>
 
-        <!-- Right Side Profile -->
-         
-        <div class="col-span-5 flex flex-col items-center mt-10 ml-2 ">
-         
-          <div
-            class="w-36 h-36 rounded-full overflow-hidden border-2 border-main mb-4"
-          >
-            <img
-              [src]="profileImage"
-              alt="Profile"
-              class="object-cover w-full h-full"
-            />
+          <!-- Buttons -->
+          <div class="flex justify-end mt-8 space-x-4">
+            <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button>
+            <button class="px-4 py-2 bg-main text-white rounded-md shadow hover:bg-main-darker">Save Changes</button>
           </div>
-          <label
-                  class="px-4 py-2 bg-main text-white rounded shadow hover:cursor-pointer flex items-center"
-                >
-                  Upload Image
-                  <img
-                    src="edit-upload.svg"
-                    alt="Upload Icon"
-                    class="w-5 h-5 ml-2"
-                  />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    (change)="onImageUpload($event)"
-                    class="hidden"
-                  />
-                </label>
-      </div>
-      </div>
-
-      <!-- Buttons -->
-      <div class="flex justify-end w-full max-w-4xl mt-8 ">
-        <button
-          class="px-6 py-2 bg-[#F5F6FA] text-gray-800 rounded-[8px] mr-4 hover:bg-gray-300"
-          style="font-weight: 400px;"
-        >
-          Cancel
-        </button>
-        <button
-          class="px-6 py-2 bg-main text-white  rounded-[8px] shadow hover:bg-main"
-          style="font-weight: 500px;"
-        >
-          Save Changes
-        </button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-</div>
 
   `,
   styles: ``,
