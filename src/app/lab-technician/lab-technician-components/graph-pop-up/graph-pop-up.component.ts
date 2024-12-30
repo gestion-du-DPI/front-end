@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
   selector: 'app-graph-pop-up',
@@ -152,7 +153,6 @@ export class GraphPopUpComponent {
   rowColors: string[] = ['#000000']; // Default row colors
   activeColorPickerIndex: number | null = null; // Track active color picker
 
-
   // Trigger adding a new header
   startAddingHeader(): void {
     this.isAddingHeader = true;
@@ -178,6 +178,7 @@ export class GraphPopUpComponent {
     const newRow = this.headers.map(() => 0); // Initialize a row with 0 values
     this.rows.push(newRow);
   }
+
   // Toggle the color picker for a specific row
   toggleColorPicker(index: number): void {
     this.activeColorPickerIndex = index;
@@ -194,13 +195,14 @@ export class GraphPopUpComponent {
     this.activeColorPickerIndex = null;
   }
 
-    // Placeholder function for Preview button
-    previewGraph(): void {
-      console.log('Preview the graph');
-    }
-  
-    // Placeholder function for Create button
-    createGraph(): void {
-      console.log('Create the graph');
-    }
+  // Placeholder function for Preview button
+  previewGraph(): void {
+    console.log('Preview the graph');
+  }
+
+  // Placeholder function for Create button
+  createGraph(): void {
+    console.log('Create the graph');
+  }
 }
+
