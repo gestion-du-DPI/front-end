@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'authToken'; // LocalStorage key for the JWT
+  private tokenKey = 'authToken';
 
   constructor(private http: HttpClient, private router: Router) {}
 

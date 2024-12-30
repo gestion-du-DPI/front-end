@@ -27,10 +27,14 @@
     
 }
 
-
 .graph-container {
   position: relative; 
   z-index: 1; /* Lower value ensures it's behind popups and sidebars */
 }
 
-
+/* Ask Mounir before touching this */
+.bg_404_page {
+  background-image: url('./assets/404.png');
+  background-size:contain ;
+  background-position: center;
+}

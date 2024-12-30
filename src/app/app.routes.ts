@@ -1,15 +1,21 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import * as Admin from '../app/admin/admin.component';
+
+// Importing models
+import { UserRole } from './models/user-role';
+
+// Importing guards
 import { RoleGuard } from './services/auth/role.guard';
 import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
-import { UserRole } from './models/user-role';
-import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import * as Admin from '../app/admin/admin.component';
+
+// Importing pages
+import { LoadingPageComponent } from './components/loading-page/loading-page.component';
+
 export const appRoutes: Routes = [
   {
     // Inside this guard we will check his role and redirect him to the correct page and if not auth nb3thou ll login page
     path: '',
-    component: LoginComponent,
+    component: LoadingPageComponent,
     canActivate: [FirstLoadingGuard],
   },
   {
@@ -76,7 +82,23 @@ export const appRoutes: Routes = [
     canActivate: [RoleGuard],
     data: { role: UserRole.Patient },
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'unauthorized',
+    loadComponent: () =>
+      import('./components/unauthorized/unauthorized.component').then(
+        (m) => m.UnauthorizedComponent
+      ),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+  },
 ];
