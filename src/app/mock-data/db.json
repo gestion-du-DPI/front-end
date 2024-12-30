@@ -1,19 +1,39 @@
 {
-  "patients": [
+  "tickets": [
     {
-      "id": "b5de",
-      "name": "mo",
-      "gender": "Male",
-      "dateOfBirth": "2024-12-09",
-      "placeOfBirth": "k",
-      "address": "123 Main St, City",
-      "socialNumber": "123456789",
-      "phone": "0553881217",
-      "email": "ma_sadoun@esi.dz",
-      "emergencyContact": "Jane Doe",
-      "emergencyPhone": "1234567891",
-      "consultations": 2
+      "ticketId": "TICKET002",
+      "title": "Incorrect Patient Information",
+      "priority": "medium",
+      "radiologist": "Dr. Michael Smith",
+      "doctor": "Dr. William Carter",
+      "client": "Jane Smith",
+      "consultId": "CONSULT456",
+      "ticketDate": "2024-12-28T14:30:00Z"
     },
+    {
+      "ticketId": "TICKET001",
+      "title": "Delayed Radiology Report",
+      "priority": "critical",
+      "radiologist": "Dr. Sarah Johnson",
+      "doctor": "Dr. Emily Brown",
+      "client": "John Doe",
+      "consultId": "CONSULT123",
+      "ticketDate": "2024-12-29T09:00:00Z"
+    },
+
+    {
+      "ticketId": "TICKET003",
+      "title": "Image Upload Failure",
+      "priority": "low",
+      "radiologist": "Dr. Laura Wilson",
+      "doctor": "Dr. James Taylor",
+      "client": "Robert Brown",
+      "consultId": "CONSULT789",
+      "ticketDate": "2024-12-27T11:15:00Z"
+    }
+  ],
+
+  "patients": [
     {
       "id": "bc88",
       "name": "amel",

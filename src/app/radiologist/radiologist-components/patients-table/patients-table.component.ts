@@ -13,10 +13,10 @@ import { CommonModule } from '@angular/common';
           <th>Name</th>
           <th>Email Address</th>
           <th>Phone Number</th>
-          <th class="hidden lg:table-cell">NSS</th>
+          <th class="hidden md:table-cell">NSS</th>
           <th class="hidden lg:table-cell">Address</th>
           <th class="hidden lg:table-cell">E^ Contact</th>
-          <th class="hidden lg:table-cell">E^ Phone</th>
+          <th class="hidden sm:table-cell">E^ Phone</th>
           <th class="hidden lg:table-cell">Consultations</th>
           <th class="hidden lg:table-cell">DPI</th>
         </tr>
@@ -25,8 +25,8 @@ import { CommonModule } from '@angular/common';
         <tr *ngFor="let patient of patients" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
-              [src]="patient.profilePicture"
-              class="w-10 h-10 rounded-full"
+              [src]="patient.profilePicture || 'no-pfp.png'"
+              class="w-10 h-10 object-cover rounded-full"
               alt="Profile Picture"
             />
             <div class="flex flex-col">
@@ -37,10 +37,10 @@ import { CommonModule } from '@angular/common';
           </td>
           <td>{{ patient.email }}</td>
           <td>{{ patient.phone }}</td>
-          <td class="hidden lg:table-cell">{{ patient.socialNumber }}</td>
+          <td class="hidden md:table-cell">{{ patient.socialNumber }}</td>
           <td class="hidden lg:table-cell">{{ patient.address }}</td>
           <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergencyPhone }}</td>
+          <td class="hidden sm:table-cell">{{ patient.emergencyPhone }}</td>
           <td class="hidden lg:table-cell">{{ patient.consultations }}</td>
           <td class="icon cursor-pointer px-0" (click)="onDPI(patient)">
             <img
