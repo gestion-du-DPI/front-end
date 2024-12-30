@@ -55,6 +55,37 @@ export const appRoutes: Routes = [
       import('./doctor/doctor.component').then((m) => m.DoctorComponent),
     canActivate: [RoleGuard],
     data: { role: UserRole.Doctor },
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./doctor/doctor-pages/workspace/workspace.component').then(
+            (m) => m.WorkspaceComponent
+          ),
+      },
+      {
+        path: 'patients',
+        loadComponent: () =>
+          import('./doctor/doctor-pages/patients/patients.component').then(
+            (m) => m.PatientsComponent
+          ),
+      },
+      {
+        path: 'tickets-history',
+        loadComponent: () =>
+          import('./doctor/doctor-pages/history/history.component').then(
+            (m) => m.HistoryComponent
+          ),
+      },
+      {
+        path: 'edit-profile',
+        loadComponent: () =>
+          import('./doctor/doctor-pages/edit-profile/edit-profile.component').then(
+            (m) => m.EditProfileComponent
+          ),
+      },
+    ],
   },
   {
     path: 'nurse',
