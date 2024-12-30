@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { Ticket } from '../../../models/ticket';
 import { TicketsTableComponent } from '../../radiologist-components/tickets-table/tickets-table.component';
-import { TicketService } from '../../../services/ticket.service';
+import { RadiologistTicketService } from '../../../services/tickets/radiologist-ticket/radiologist-ticket.service';
 
 @Component({
   selector: 'app-tickets',
@@ -63,7 +63,7 @@ export class TicketsHistoryComponent implements OnInit {
 
   isPriorityAscending = false; // Track the sorting order
 
-  constructor(private ticketService: TicketService) {}
+  constructor(private ticketService: RadiologistTicketService) {}
 
   ngOnInit(): void {
     this.loadTickets();

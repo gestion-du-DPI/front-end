@@ -43,11 +43,6 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
               (input)="onSearch()"
             />
           </div>
-          <button
-            class="bg-white border-[1.5px] w-10 flex justify-center items-center rounded-lg"
-          >
-            <img src="qr-icon.svg" alt="" />
-          </button>
         </div>
       </div>
       <app-patients-table [patients]="filteredPatients" />
@@ -83,9 +78,10 @@ export class PatientsComponent implements OnInit {
   onSearch(): void {
     const query = this.searchQuery.replace(/-/g, '').toLowerCase(); // Remove '-' from query and convert to lowercase
     this.filteredPatients = this.patients.filter((patient) => {
-      const nssWithoutDash = patient.socialNumber.replace(/-/g, '').toLowerCase(); // Remove '-' from NSS and convert to lowercase
+      const nssWithoutDash = patient.socialNumber
+        .replace(/-/g, '')
+        .toLowerCase(); // Remove '-' from NSS and convert to lowercase
       return nssWithoutDash.includes(query);
     });
   }
-  
 }
