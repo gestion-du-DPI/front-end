@@ -14,27 +14,30 @@ import { AuthService } from '../services/auth/auth.service';
       >
         <img src="admin.jpg" class="flex lg:max-w-[50%] self-center" alt="" />
         <div class="flex justify-center items-center">
-          <div class="flex flex-col gap-5 h-auto">
+          <div class="flex flex-col gap-5 h-auto" id="login_form">
             <h1 class="font-semibold text-3xl">Welcome User!</h1>
             <h3 class="font-normal text-xl">Let's get you logged in</h3>
             <input
               [(ngModel)]="username"
               placeholder="Username"
-              class="border-[1px] p-2 border-black border-opacity-20 rounded-md w-96 h-12"
+              id="selenium_username_login"
+              class="border-[1px] border-black border-opacity-20 rounded-md w-96 h-12"
               type="text"
             />
             <input
               [(ngModel)]="password"
               placeholder="Password"
-              class="border-[1px] p-2 border-black border-opacity-20 rounded-md w-96 h-12"
+              id="selenium_password_login"
+              class="border-[1px] border-black border-opacity-20 rounded-md w-96 h-12"
               type="password"
             />
             <div class="flex flex-row items-center">
-              <input type="checkbox" [(ngModel)]="rememberMe" />
+              <input id="selenium_remeber_me_box" type="checkbox" [(ngModel)]="rememberMe" />
               <span class="ml-2">Remember me</span>
             </div>
             <button
               (click)="signIn()"
+              id="selenium_login_button"
               class="flex flex-row justify-center align-middle h-12 w-96 bg-main gap-4 items-center text-white rounded-md"
             >
               Sign in <img src="forward-icon.svg" alt="" />

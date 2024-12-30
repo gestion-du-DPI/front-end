@@ -11,6 +11,7 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
       <button
         class=" w-60 bg-main flex flex-row gap-3 items-center justify-center py-4 rounded-md"
         (click)="onAddPatient()"
+        id="selenium_add_patient_button"
       >
         <img src="add-icon-white.svg" class="" alt="" /><span
           class="text-white font-bold text-base"
@@ -23,7 +24,7 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
     <div class="popup" *ngIf="showNewPatientForm">
         <app-new-patient-form
           (cancel)="onCancelPatientForm()"
-          (save)="reloadPatients()"
+          (confirm)="reloadPatients()"
         ></app-new-patient-form>
       </div>
   `,

@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
       <form
         #patientForm="ngForm"
         class="flex flex-col gap-2 overflow-y-scroll px-7"
-        (ngSubmit)="submitForm(patientForm)"
+        (ngSubmit)="submitForm()"
       >
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
@@ -263,7 +263,7 @@ import { CommonModule } from '@angular/common';
           <!-- Emergency Contact Phone -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
-              E^ Contact Phone <span class="text-red-600">*</span>
+              Emergency Contact Phone <span class="text-red-600">*</span>
             </label>
             <input
               type="tel"
@@ -300,6 +300,7 @@ import { CommonModule } from '@angular/common';
               #consultations="ngModel"
               [(ngModel)]="formData.consultations"
               name="consultations"
+              id="selenium_consultations_input"
               [ngClass]="{
                 'border-red-600':
                   consultations?.invalid && consultations?.touched
@@ -325,6 +326,8 @@ import { CommonModule } from '@angular/common';
           <button
             type="submit"
             class="bg-main text-white font-semibold p-2 w-32 rounded-md mt-4"
+            (click)="submitForm()"
+            id="selenium_save_patient_button"
           >
             Save
           </button>
@@ -345,38 +348,73 @@ import { CommonModule } from '@angular/common';
 })
 export class NewPatientFormComponent {
   @Output() cancel = new EventEmitter<void>();
-  @Output() save = new EventEmitter<void>();
-  formData: Patient = {} as Patient;
+  @Output() confirm = new EventEmitter<void>();
 
-  constructor(private patientService: PatientService) {}
+  formData: Patient = {
+    id: '',
+    name: '',
+    gender: '',
+    dateOfBirth: '',
+    placeOfBirth: '',
+    address: '',
+    socialNumber: '',
+    phone: '',
+    email: '',
+    emergencyContact: '',
+    emergencyPhone: '',
+    consultations: 0,
+    profilePicture: '',
+  };
 
-  submitForm(form: NgForm) {
-    if (form.valid) {
-      console.log('Form Data:', this.formData);
+  // Injecting PatientsService into the constructor
+  constructor(private patientsService: PatientService) {}
 
-      // Calling the PatientsService to submit the form data
-      this.patientService.addPatient(this.formData).subscribe({
-        next: (response) => {
-          console.log('Patient added successfully:', response);
-          // You can handle any success action here, like closing the form
-        },
-        error: (error) => {
-          console.error('Error adding patient:', error);
-          // Handle error, possibly showing an error message to the user
-        },
-      });
-      this.onSave();
-    } else {
-      // Mark all controls as touched to show error messages
-      Object.values(form.controls).forEach((control) => {
-        control.markAsTouched();
-      });
-    }
+  submitForm() {
+    console.log('Form Data:', this.formData);
+
+    // Calling the PatientsService to submit the form data
+    this.patientsService.addPatient(this.formData).subscribe({
+      next: (response) => {
+        console.log('Patient added successfully:', response);
+        // You can handle any success action here, like closing the form
+        this.onCancel();
+      },
+      error: (error) => {
+        console.error('Error adding patient:', error);
+        // Handle error, possibly showing an error message to the user
+      },
+    });
+    this.confirm.emit();
+
+    // @Output() save = new EventEmitter<void>();
+    //   formData: Patient = {} as Patient;
+
+    //   constructor(private patientService: PatientService) {}
+
+    //   submitForm(form: NgForm) {
+    //     if (form.valid) {
+    //       console.log('Form Data:', this.formData);
+
+    //       // Calling the PatientsService to submit the form data
+    //       this.patientService.addPatient(this.formData).subscribe({
+    //         next: (response) => {
+    //           console.log('Patient added successfully:', response);
+    //           // You can handle any success action here, like closing the form
+    //         },
+    //         error: (error) => {
+    //           console.error('Error adding patient:', error);
+    //           // Handle error, possibly showing an error message to the user
+    //         },
+    //       });
+    //       this.onSave();
+    //     } else {
+    //       // Mark all controls as touched to show error messages
+    //       Object.values(form.controls).forEach((control) => {
+    //         control.markAsTouched();
+    //       });
+    //     }
   }
 
-  onSave(){
-    this.save.emit();
-  }
   onCancel() {
     this.cancel.emit();
   }
