@@ -6,6 +6,7 @@ import { PatientsTableComponent } from '../../admin-components/patients-table/pa
 import { HeaderComponent } from '../../admin-components/header/header.component';
 import { Patient } from '../../../models/patient';
 import { PatientService } from '../../../services/patient/patient.service';
+import { QrScannerComponent } from '../../admin-components/popups/qr-scanner/qr-scanner.component';
 
 @Component({
   selector: 'app-patients',
@@ -14,6 +15,7 @@ import { PatientService } from '../../../services/patient/patient.service';
     HeaderComponent,
     CommonModule,
     FormsModule,
+    QrScannerComponent,
   ],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
@@ -45,15 +47,23 @@ import { PatientService } from '../../../services/patient/patient.service';
           </div>
           <button
             class="bg-white border-[1.5px] w-10 flex justify-center items-center rounded-lg"
+            (click)="onShowQRscan()"
           >
             <img src="qr-icon.svg" alt="" />
           </button>
-
         </div>
       </div>
-      <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
+      <div *ngIf="loading" class="self-center mt-10">
+        <img src="logo.png" class=" animate-spin" alt="" />
+      </div>
       <div *ngIf="!loading">
         <app-patients-table [patients]="filteredPatients" />
+      </div>
+      <div class="popup" *ngIf="showscanQRpopup">
+        <app-qr-scanner
+          (closePopup)="onHideQRscan()"
+          (nssValidated)="onNSSValidated($event)"
+        />
       </div>
     </div>
   `,
@@ -67,6 +77,7 @@ export class PatientsComponent implements OnInit {
   patientsNumber = 0; // Dynamically update based on the number of patients
   searchQuery = ''; // Tracks the input query
   loading: boolean = false;
+  showscanQRpopup = false;
 
   patients: Patient[] = [];
   filteredPatients: Patient[] = []; // Tracks the filtered patients
@@ -111,4 +122,24 @@ export class PatientsComponent implements OnInit {
     );
   }
 
+  onShowQRscan(): void {
+    this.showscanQRpopup = true;
+  }
+
+  onHideQRscan(): void {
+    this.showscanQRpopup = false;
+  }
+
+  onNSSValidated(nss: string): void {
+    const filteredPatient = this.patients.find(
+      (patient) => patient.socialNumber === nss
+    );
+
+    if (filteredPatient) {
+      this.filteredPatients = [filteredPatient]; // Display the patient in the table
+      this.showscanQRpopup = false; // Close the popup
+    } else {
+      alert('No patient found with the provided NSS.');
+    }
+  }
 }
