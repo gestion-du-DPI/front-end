@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="bg-white flex-col flex justify-center p-4 rounded-xl mx-5 lg:w-full">
+    <div class="bg-white flex-col flex justify-between p-4 rounded-xl mx-5 lg:w-full h-full">
       <div class="flex flex-row items-center justify-start gap-5 pb-5">
         <h1 class="text-main font-semibold text-2xl">Create Graph</h1>
         <img src="graphtype1.svg" alt="type1" class="w-10" />
@@ -45,86 +45,100 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <table class="border-collapse justify-self-center table-auto w-full">
-  <thead>
-    <tr>
-      <th class="hidden lg:table-cell text-left px-4 py-2">Color</th>
-      <th class="hidden lg:table-cell text-left px-4 py-2">Test Title</th>
-      <th *ngFor="let header of headers" class="text-left px-4 py-2">
-        {{ header }}
-      </th>
-      <th class="text-left px-4 py-2 flex items-center gap-2">
-        <!-- Input for adding a new column (appears inline) -->
-        <input
-          *ngIf="isAddingHeader"
-          type="text"
-          class="border border-gray-300 rounded-lg p-2 w-28"
-          placeholder="Enter column name"
-          (keyup.enter)="finishAddingHeader($event)"
-          (blur)="cancelAddingHeader()"
-        />
+        <thead>
+          <tr>
+            <th class="hidden lg:table-cell text-left px-4 py-2">Color</th>
+            <th class="hidden lg:table-cell text-left px-4 py-2">Test Title</th>
+            <th *ngFor="let header of headers" class="text-left px-4 py-2">
+              {{ header }}
+            </th>
+            <th class="text-left px-4 py-2 flex items-center gap-2">
+              <!-- Input for adding a new column (appears inline) -->
+              <input
+                *ngIf="isAddingHeader"
+                type="text"
+                class="border border-gray-300 rounded-lg p-2 w-28"
+                placeholder="Enter column name"
+                (keyup.enter)="finishAddingHeader($event)"
+                (blur)="cancelAddingHeader()"
+              />
 
-        <!-- Plus button -->
+              <!-- Plus button -->
+              <button
+                (click)="startAddingHeader()"
+                class="p-1 rounded bg-gray-200 hover:bg-gray-300"
+              >
+                <img src="plus.svg" alt="+" />
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows -->
+          <tr *ngFor="let row of rows; let rowIndex = index">
+            <td class="hidden lg:table-cell px-4 py-2 relative">
+              <div
+                class="bg-main w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded cursor-pointer"
+                [style.background-color]="rowColors[rowIndex]"
+                (click)="toggleColorPicker(rowIndex)"
+              ></div>
+              <input
+                *ngIf="activeColorPickerIndex === rowIndex"
+                type="color"
+                class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                (change)="updateRowColor(rowIndex, $event)"
+                (blur)="closeColorPicker()"
+              />
+            </td>
+            <td class="hidden lg:table-cell px-4 py-2">
+              <input
+                type="text"
+                name="testTitle"
+                required
+                placeholder="eg. Normal Person"
+                class="border border-gray-300 rounded-lg p-2 text-sm w-full"
+              />
+            </td>
+            <td *ngFor="let cell of row" class="px-4 py-2">
+              <input
+                type="number"
+                [value]="cell"
+                class="border border-gray-300 rounded-lg p-2 w-16"
+              />
+            </td>
+          </tr>
+
+          <!-- Row for adding a new row -->
+          <tr>
+            <td class="hidden lg:table-cell text-center px-4 py-2">
+              <!-- Plus button directly under the Color square -->
+              <button
+                (click)="addRow()"
+                class="p-2 rounded bg-gray-200 hover:bg-gray-300 flex items-center gap-2"
+              >
+                <img src="plus.svg" alt="+" />
+              </button>
+            </td>
+            <td colspan="100%"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Buttons for Preview and Create, placed just outside the table -->
+      <div class="flex justify-end gap-4 mt-4">
         <button
-          (click)="startAddingHeader()"
-          class="p-1 rounded bg-gray-200 hover:bg-gray-300"
+          class="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+          (click)="previewGraph()"
         >
-          <img src="plus.svg" alt="+" />
+          Preview
         </button>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Rows -->
-    <tr *ngFor="let row of rows; let rowIndex = index">
-      <td class="hidden lg:table-cell px-4 py-2 relative">
-        <div
-          class="bg-main w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded cursor-pointer"
-          [style.background-color]="rowColors[rowIndex]"
-          (click)="toggleColorPicker(rowIndex)"
-        ></div>
-        <input
-          *ngIf="activeColorPickerIndex === rowIndex"
-          type="color"
-          class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-          (change)="updateRowColor(rowIndex, $event)"
-          (blur)="closeColorPicker()"
-        />
-      </td>
-      <td class="hidden lg:table-cell px-4 py-2">
-        <input
-          type="text"
-          name="testTitle"
-          required
-          placeholder="eg. Normal Person"
-          class="border border-gray-300 rounded-lg p-2 text-sm w-full"
-        />
-      </td>
-      <td *ngFor="let cell of row" class="px-4 py-2">
-        <input
-          type="number"
-          [value]="cell"
-          class="border border-gray-300 rounded-lg p-2 w-16"
-        />
-      </td>
-    </tr>
-
-    <!-- Row for adding a new row -->
-    <tr>
-      <td class="hidden lg:table-cell text-center px-4 py-2">
-        <!-- Plus button directly under the Color square -->
         <button
-          (click)="addRow()"
-          class="p-2 rounded bg-gray-200 hover:bg-gray-300 flex items-center gap-2"
+          class="px-6 py-2 bg-main text-white rounded-lg hover:bg-main-dark"
+          (click)="createGraph()"
         >
-          <img src="plus.svg" alt="+" />
+          Create
         </button>
-      </td>
-      <td colspan="100%"></td>
-    </tr>
-  </tbody>
-</table>
-
-
+      </div>
     </div>
   `,
   styles: [],
@@ -179,4 +193,14 @@ export class GraphPopUpComponent {
   closeColorPicker(): void {
     this.activeColorPickerIndex = null;
   }
+
+    // Placeholder function for Preview button
+    previewGraph(): void {
+      console.log('Preview the graph');
+    }
+  
+    // Placeholder function for Create button
+    createGraph(): void {
+      console.log('Create the graph');
+    }
 }
