@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MedicalTest } from '../../../models/medical-card-radiologist';
+import { MedicalTest } from '../../../models/medical-card';
 
 @Component({
   selector: 'app-medical-card',

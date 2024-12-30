@@ -8,7 +8,7 @@ export interface Patient {
 
 export interface MedicalTest {
   id: string;
-  type: 'COVID-19 PCR Test' | 'Iron Studies' | 'Lipid Profile';
+  type: string;
   priority: Priority;
   doctor: string;
   patient: Patient;

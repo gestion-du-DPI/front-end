@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MedicalTest } from '../../../models/medical-card-radiologist';
+import { MedicalTest } from '../../../models/medical-card';
 import { MedicalCardComponent } from '../medical-card/medical-card.component';
 
 @Component({

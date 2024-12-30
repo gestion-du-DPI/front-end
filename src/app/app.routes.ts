@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import * as Admin from '../app/admin/admin.component';
 
 // Importing models
 import { UserRole } from './models/user-role';
@@ -11,13 +10,12 @@ import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 // Importing pages
 import { LoadingPageComponent } from './components/loading-page/loading-page.component';
 import { IsLoggedGuard } from './services/auth/isLogged.guard';
-import { MedicalCardsContainerComponent } from './nurse/nurse-components/medical-cards-container/medical-cards-container.component';
+import { MedicalCardsContainerComponent } from './lab-technician/lab-technician-components/medical-cards-container/medical-cards-container.component';
 
 export const appRoutes: Routes = [
   {
     path: '',
     component: MedicalCardsContainerComponent,
-    // component: LoadingPageComponent,
     // canActivate: [FirstLoadingGuard],
   },
   {
