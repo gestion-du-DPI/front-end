@@ -10,6 +10,7 @@ import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 
 // Importing pages
 import { LoadingPageComponent } from './components/loading-page/loading-page.component';
+import { IsLoggedGuard } from './services/auth/isLogged.guard';
 
 export const appRoutes: Routes = [
   {
@@ -86,6 +87,7 @@ export const appRoutes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./login/login.component').then((m) => m.LoginComponent),
+    canActivate: [IsLoggedGuard],
   },
   {
     path: 'unauthorized',

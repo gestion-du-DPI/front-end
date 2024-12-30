@@ -22,9 +22,7 @@ export class AuthService {
       .post<{ token: string }>('http://127.0.0.1:8000/login', loginData)
       .subscribe(
         (response) => {
-          console.log('hello', response);
           const token = response.token;
-          console.log('Token:', token);
           rememberMe
             ? localStorage.setItem(this.tokenKey, token) // Store token in localStorage
             : sessionStorage.setItem(this.tokenKey, token); // Store token in sessionStorage
