@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-radiologist-info',
-  standalone: true,
+  imports: [
+    CommonModule,
+  ],
   template: `
     <div class="bg-white rounded-lg shadow p-5 flex flex-col gap-4">
       <!-- Patient Info Section -->
@@ -10,18 +14,18 @@ import { Component } from '@angular/core';
         <!-- Profile Picture and Basic Info -->
         <div class="flex flex-row items-center gap-4">
           <img
-            src="radiologist-avatar.svg"
+            [src]="avatarUrl"
             alt="Profile Picture"
             class="w-16 h-16 rounded-full"
           />
           <div class="flex flex-col">
             <div class="flex flex-row items-center">
               <img src="worker-name.svg" alt="name" class="w-6 h-6 mr-2" />
-              <h2 class="font-semibold text-lg">Lewis Hamilton</h2>
+              <h2 class="font-semibold text-lg">{{ name }}</h2>
             </div>
             <div class="text-gray-500 text-sm flex flex-row items-center mt-2">
               <img src="consulId.svg" alt="Consult ID" class="w-10 h-10 mr-2" />
-              <span>123456</span>
+              <span>{{ consultId }}</span>
             </div>
           </div>
         </div>
@@ -32,15 +36,15 @@ import { Component } from '@angular/core';
           <div class="flex flex-row items-center gap-4">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="birthday.svg" alt="Calendar" class="w-4 h-4" />
-              <span>24/06/2004</span>
+              <span>{{ birthday }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="socialNumber.svg" alt="ID Card" class="w-4 h-4" />
-              <span>0001823838</span>
+              <span>{{ socialNumber }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker-phoneNumber.svg" alt="Phone" class="w-4 h-4" />
-              <span>0558235011</span>
+              <span>{{ phoneNumber }}</span>
             </div>
           </div>
 
@@ -48,15 +52,15 @@ import { Component } from '@angular/core';
           <div class="flex flex-row items-center gap-4">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="phone.svg" alt="Phone" class="w-4 h-4" />
-              <span>0558235011</span>
+              <span>{{ phoneNumber }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="email.svg" alt="Email" class="w-4 h-4" />
-              <span>a.denai&#64;esi.dz</span>
+              <span>{{ email }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker.svg" alt="User" class="w-4 h-4" />
-              <span>Mehdi</span>
+              <span>{{ assignedDoctor }}</span>
             </div>
           </div>
         </div>
@@ -65,15 +69,15 @@ import { Component } from '@angular/core';
       <!-- Requested Test and Doctor Info -->
       <div class="flex flex-row items-center mt-4 justify-between w-full">
         <!-- Requested Test -->
-        <h3 class="font-semibold text-lg mr-10">Requested Test: Head Radio</h3>
+        <h3 class="font-semibold text-lg mr-10">Requested Test: {{ requestedTest }}</h3>
 
         <!-- Doctor Info -->
         <div class="flex items-center gap-4 text-gray-700 ml-10">
           <div class="flex items-center gap-2">
             <img src="worker-doc.svg" alt="Doctor" class="w-4 h-4" />
-            <span>Dr. Mostefai</span>
+            <span>Dr. {{ assignedDoctor }}</span>
           </div>
-          <div class="text-sm">123456</div>
+          <div class="text-sm">{{ doctorId }}</div>
           <div>
             <img
               src="worker-docId.svg"
@@ -83,23 +87,30 @@ import { Component } from '@angular/core';
           </div>
         </div>
       </div>
+
       <div class="text-black text-sm mt-2 font-medium">
-          <ul class="list-disc ml-5">
-            <li>
-              Skull X-Rays: Lateral (Side) View And AP (Anteroposterior) View To
-              Evaluate Fractures, Lesions, Or Bone Deformities.
-            </li>
-            <li>
-              If Necessary, Include Towne’s View (To Assess Occipital Bone And
-              Posterior Cranial Fossa).
-            </li>
-            <li>
-              If Necessary, Include Towne’s View (To Assess Occipital Bone And
-              Posterior Cranial Fossa).
-            </li>
-          </ul>
-        </div>
+        <ul class="list-disc ml-5">
+          <li *ngFor="let task of tasks">{{ task }}</li>
+        </ul>
+      </div>
     </div>
   `,
 })
-export class RadiologistInfoComponent {}
+export class RadiologistInfoComponent {
+  // Dynamic data directly inside the component
+  name = 'Lewis Hamilton';
+  avatarUrl = 'radiologist-avatar.svg';
+  consultId = '123456';
+  birthday = '24/06/2004';
+  socialNumber = '0001823838';
+  phoneNumber = '0558235011';
+  email = 'a.denai@esi.dz';
+  assignedDoctor = 'Mostefai';
+  requestedTest = 'Head Radio';
+  doctorId = '123456';
+  tasks = [
+    'Skull X-Rays: Lateral (Side) View And AP (Anteroposterior) View To Evaluate Fractures, Lesions, Or Bone Deformities.',
+    'If Necessary, Include Towne’s View (To Assess Occipital Bone And Posterior Cranial Fossa).',
+    'If Necessary, Include Towne’s View (To Assess Occipital Bone And Posterior Cranial Fossa).'
+  ];
+}
