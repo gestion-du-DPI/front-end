@@ -5,7 +5,7 @@ import { DoctorSidebarComponent } from './doctor-components/doctor-sidebar/docto
 
 @Component({
   selector: 'app-radiologist',
-  imports: [CommonModule, RouterOutlet, DoctorSidebarComponent],
+  imports: [CommonModule, RouterOutlet, DoctorSidebarComponent, ],
   template: `
     <div>
       <app-doctor-sidebar></app-doctor-sidebar>

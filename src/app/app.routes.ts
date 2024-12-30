@@ -10,13 +10,12 @@ import { FirstLoadingGuard } from './services/auth/firstLoading.guard';
 // Importing pages
 import { LoadingPageComponent } from './components/loading-page/loading-page.component';
 import { IsLoggedGuard } from './services/auth/isLogged.guard';
-import { MedicalCardsContainerComponent } from './lab-technician/lab-technician-components/medical-cards-container/medical-cards-container.component';
 
 export const appRoutes: Routes = [
   {
     path: '',
-    component: MedicalCardsContainerComponent,
-    // canActivate: [FirstLoadingGuard],
+    component: LoadingPageComponent,
+    canActivate: [FirstLoadingGuard],
   },
   {
     path: 'admin',
@@ -87,9 +86,9 @@ export const appRoutes: Routes = [
       {
         path: 'edit-profile',
         loadComponent: () =>
-          import('./doctor/doctor-pages/edit-profile/edit-profile.component').then(
-            (m) => m.EditProfileComponent
-          ),
+          import(
+            './doctor/doctor-pages/edit-profile/edit-profile.component'
+          ).then((m) => m.EditProfileComponent),
       },
     ],
   },
@@ -118,16 +117,16 @@ export const appRoutes: Routes = [
       {
         path: 'tickets-history',
         loadComponent: () =>
-          import('./nurse/nurse-pages/tickets-history/tickets-history.component').then(
-            (m) => m.TicketsHistoryComponent
-          ),
+          import(
+            './nurse/nurse-pages/tickets-history/tickets-history.component'
+          ).then((m) => m.TicketsHistoryComponent),
       },
       {
         path: 'edit-profile',
         loadComponent: () =>
-          import('./nurse/nurse-pages/edit-profile/edit-profile.component').then(
-            (m) => m.EditProfileComponent
-          ),
+          import(
+            './nurse/nurse-pages/edit-profile/edit-profile.component'
+          ).then((m) => m.EditProfileComponent),
       },
     ],
   },
