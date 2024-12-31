@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { Ticket } from '../../../models/ticket';
 import { TicketsTableComponent } from '../../nurse-components/tickets-table/tickets-table.component';
-import { NurseTicketService } from '../../../services/tickets/nurse-ticket/nurse-ticket.service';
+import { NurseTicketService } from '../../../services/admin/tickets/nurse-ticket/nurse-ticket.service';
 
 @Component({
   selector: 'app-tickets',
@@ -42,10 +42,12 @@ import { NurseTicketService } from '../../../services/tickets/nurse-ticket/nurse
               (input)="onSearch()"
             />
           </div>
-      
         </div>
       </div>
-      <app-tickets-table [tickets]="filteredTickets" (sortByPrio)="sortByPriority()"></app-tickets-table>
+      <app-tickets-table
+        [tickets]="filteredTickets"
+        (sortByPrio)="sortByPriority()"
+      ></app-tickets-table>
     </div>
   `,
   styles: `
@@ -84,7 +86,6 @@ export class TicketsHistoryComponent implements OnInit {
     );
   }
 
-
   sortByPriority(): void {
     const priorityOrder = ['critical', 'medium', 'low'];
     this.filteredTickets.sort((a, b) => {
@@ -95,7 +96,7 @@ export class TicketsHistoryComponent implements OnInit {
         ? priorityA - priorityB // Ascending order
         : priorityB - priorityA; // Descending order
     });
-    console.table(this.filteredTickets)
+    console.table(this.filteredTickets);
     // Toggle sorting order for the next click
     this.isPriorityAscending = !this.isPriorityAscending;
   }

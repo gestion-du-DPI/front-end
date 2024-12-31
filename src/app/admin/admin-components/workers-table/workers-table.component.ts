@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ConfirmDeleteWorkerPopupComponent } from '../popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
 import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-form.component';
-import { WorkerService } from '../../../services/worker/worker.service';
+import { WorkerService } from '../../../services/admin/worker/worker.service';
 @Component({
   selector: 'app-workers-table',
   imports: [
@@ -120,9 +120,9 @@ export class WorkersTableComponent {
   workerToDelete: any = null; // Stores the worker we wanna delete from the table
 
   constructor(private workerService: WorkerService) {}
-  
+
   onEdit(worker: any): void {
-    this.selectedWorker = {...worker}; // Pass the worker data to the popup
+    this.selectedWorker = { ...worker }; // Pass the worker data to the popup
     this.showEditWorkersPopup = true;
   }
 
@@ -142,22 +142,22 @@ export class WorkersTableComponent {
     this.selectedWorker = null; // Clear the selected worker
   }
 
- /**
+  /**
    * Confirms and deletes the selected patient, then reloads the patient list.
    */
- onConfirmDelete(): void {
-  if (this.workerToDelete) {
-    this.workerService.deleteWorker(this.workerToDelete.id).subscribe({
-      next: () => {
-        console.log('Patient deleted successfully');
-        this.showConfirmDeletePopup = false;
-        this.reloadWorkers();
-      },
-      error: (err) => console.error('Error deleting patient:', err),
-      complete: () => (this.workerToDelete = null),
-    });
+  onConfirmDelete(): void {
+    if (this.workerToDelete) {
+      this.workerService.deleteWorker(this.workerToDelete.id).subscribe({
+        next: () => {
+          console.log('Patient deleted successfully');
+          this.showConfirmDeletePopup = false;
+          this.reloadWorkers();
+        },
+        error: (err) => console.error('Error deleting patient:', err),
+        complete: () => (this.workerToDelete = null),
+      });
+    }
   }
-}
 
   onCancelDelete() {
     this.showConfirmDeletePopup = false;
@@ -185,7 +185,8 @@ export class WorkersTableComponent {
           .editWorker({ ...patient, profilePicture: updatedProfilePicture })
           .subscribe({
             next: () => console.log('Profile picture updated successfully'),
-            error: (err) => console.error('Error updating profile picture:', err),
+            error: (err) =>
+              console.error('Error updating profile picture:', err),
           });
       };
       reader.readAsDataURL(file);

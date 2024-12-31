@@ -4,7 +4,7 @@ import { NewWorkerFormComponent } from '../../admin-components/forms/new-worker-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Worker } from '../../../models/worker';
-import { WorkerService } from '../../../services/worker/worker.service';
+import { WorkerService } from '../../../services/admin/worker/worker.service';
 import { WorkersTableComponent } from '../../admin-components/workers-table/workers-table.component';
 
 @Component({

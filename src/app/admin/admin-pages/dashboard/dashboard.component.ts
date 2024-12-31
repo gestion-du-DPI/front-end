@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { DashboardService } from '../../../services/admin/dashboard/dashboard.service';
+
+// components
 import { HeaderComponent } from '../../admin-components/header/header.component';
 import { StatisticsGraphComponent } from '../../admin-components/statistics-graph/statistics-graph.component';
 import { CardComponent } from '../../admin-components/dashboard-card/dashboard-card.component';
-import { RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,11 +28,11 @@ import { HttpClient } from '@angular/common/http';
           <div class="p-4">
             <h1 class="text-xl" style="color: black; font-weight:400">
               Welcome in
-              <span class="text-main font-semibold">Hope Springs Healing</span>
+              <span class="text-main font-semibold"> {{ hospitalName }} </span>
             </h1>
             <h2 class="text-2xl font-semibold text-main">{{ name }}</h2>
           </div>
-          <app-header></app-header>
+          <app-header [title]="adminInfo"></app-header>
         </div>
       </div>
 
@@ -45,7 +49,6 @@ import { HttpClient } from '@angular/common/http';
         <app-card
           [title]="'Total Patients'"
           [count]="totalPatients"
-          [percentage]="calculatePercentage(totalPatients, previousPatients)"
           [color]="'bg-main'"
           [icon]="'dashboard-patient.svg'"
         ></app-card>
@@ -53,7 +56,6 @@ import { HttpClient } from '@angular/common/http';
         <app-card
           [title]="'Total Doctors'"
           [count]="totalDoctors"
-          [percentage]="calculatePercentage(totalDoctors, previousDoctors)"
           [color]="'bg-secondary'"
           [icon]="'dashboard-doctor.svg'"
         ></app-card>
@@ -61,7 +63,6 @@ import { HttpClient } from '@angular/common/http';
         <app-card
           [title]="'Total Nurses'"
           [count]="totalNurses"
-          [percentage]="calculatePercentage(totalNurses, previousNurses)"
           [color]="'bg-tertiary'"
           [icon]="'dashboard-nurse.svg'"
         ></app-card>
@@ -69,9 +70,6 @@ import { HttpClient } from '@angular/common/http';
         <app-card
           [title]="'Lab/Radiologists'"
           [count]="totalRadiologists"
-          [percentage]="
-            calculatePercentage(totalRadiologists, previousRadiologists)
-          "
           [color]="'bg-quaternary'"
           [icon]="'dashboard-add.svg'"
         ></app-card>
@@ -79,9 +77,6 @@ import { HttpClient } from '@angular/common/http';
         <app-card
           [title]="'Total Consultations'"
           [count]="totalConsultations"
-          [percentage]="
-            calculatePercentage(totalConsultations, previousConsultations)
-          "
           [color]="'bg-fifth'"
           [icon]="'dashboard-cons.svg'"
         ></app-card>
@@ -249,145 +244,92 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class DashboardComponent {
-  name: string = 'Dr. Sadoun';
-  recentPatients = [
-    {
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-01',
-    },
-    {
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-02',
-    },
-    {
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-03',
-    },
-    {
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-04',
-    },
-  ];
+  private baseUrl = environment.apiUrl;
 
-  topMedicalStaff = [
-    {
-      name: 'Jenny Wilson',
-      role: 'Doctor@Generalist',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jenny Wilson',
-      role: 'Doctor@Cardiologist',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jenny Wilson',
-      role: 'Radiologist@X-ray',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jenny Wilson',
-      role: 'Radiologist@X-ray',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jenny Wilson',
-      role: 'Radiologist@X-ray',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jenny Wilson',
-      role: 'Radiologist@X-ray',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jenny Wilson',
-      role: 'Radiologist@X-ray',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Devon Lane',
-      role: 'Doctor@generalist',
-      profilePicture: 'doctor-avatar.svg',
-    },
-    {
-      name: 'Jane Cooper',
-      role: 'Doctor@generalist',
-      profilePicture: 'doctor-avatar.svg',
-    },
-  ];
+  constructor(
+    private dashboardService: DashboardService,
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+  ) {}
 
-  // Current data
-  totalPatients: number = 911;
-  totalDoctors: number = 200;
-  totalNurses: number = 150;
-  totalRadiologists: number = 30;
-  totalConsultations: number = 5000;
+  adminInfo: { id: number; name: string } = { id: 0, name: '' };
+  hospitalName: string = '';
+  name: string = '';
+  recentPatients: {
+    name: string;
+    phone: string;
+    socialNumber: string;
+    email: string;
+    address: string;
+    emergencyContact: string;
+    emergencyPhone: string;
+    profilePicture: string;
+    qrCode: string;
+    date: string;
+  }[] = [];
 
-  // Previous data for percentage calculations
-  previousPatients: number = 890;
-  previousDoctors: number = 190;
-  previousNurses: number = 140;
-  previousRadiologists: number = 25;
-  previousConsultations: number = 4800;
+  topMedicalStaff: { name: string; role: string; profilePicture: string }[] =
+    [];
 
-  // I want to test the protected endpoint the endpoint is http://localhost:8000/protected
-  constructor(private http: HttpClient) {}
+  totalPatients: number = 0;
+  totalDoctors: number = 0;
+  totalNurses: number = 0;
+  totalRadiologists: number = 0;
+  totalConsultations: number = 0;
+
+  graphInfo: {
+    patients: number;
+    consultations: number;
+  }[] = [];
 
   ngOnInit() {
-    this.testProtectedEndpoint();
+    console.log('Dashboard component initialized');
+    this.getData();
   }
 
-  testProtectedEndpoint() {
-    this.http.get('http://localhost:8000/protected').subscribe(
-      response => {
-        console.log('Protected endpoint response:', response);
+  getData() {
+    this.dashboardService.getDashboardData().subscribe(
+      (data) => {
+        console.log('Dashboard data fetched successfully');
+        console.log(data);
+
+        this.adminInfo = { id: data.admin_info.id, name: data.admin_info.name };
+        this.hospitalName = data.admin_info.hospital;
+        this.name = data.admin_info.name;
+
+        this.totalPatients = data.role_counts.patients;
+        this.totalDoctors = data.role_counts.doctors;
+        this.totalNurses = data.role_counts.nurses;
+        this.totalRadiologists =
+          data.role_counts.radiologists + data.role_counts.lab_technicians;
+        this.totalConsultations = data.role_counts.consultations;
+
+        this.recentPatients = data.recent_patients.map((patient: any) => ({
+          name: patient.name,
+          phone: patient.phone_number,
+          socialNumber: patient.nss,
+          email: patient.email,
+          address: patient.address,
+          emergencyContact: patient.emergency_contact_name,
+          emergencyPhone: patient.emergency_contact_phone,
+          profilePicture: 'patient-avatar.svg',
+          qrCode: 'QR.svg',
+          date: patient.date,
+        }));
+
+        this.topMedicalStaff = data.top_staff.map((staff: any) => ({
+          name: staff.name,
+          role: staff.role,
+          profilePicture: 'doctor-avatar.svg',
+        }));
+
+        this.graphInfo = data.stats;
+
+        this.cdr.detectChanges(); // Trigger change detection
       },
-      error => {
-        console.error('Error accessing protected endpoint:', error);
+      (error) => {
+        console.error('Failed to fetch dashboard data');
       }
     );
-  }
-
-  // Function to calculate percentage change
-  calculatePercentage(current: number, previous: number): string {
-    if (previous === 0) return '+0%'; // Avoid division by zero
-    const percentageChange = ((current - previous) / previous) * 100;
-    const formattedChange = percentageChange.toFixed(2);
-    return percentageChange >= 0
-      ? `+${formattedChange}%`
-      : `${formattedChange}%`;
   }
 }

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
-import { Ticket } from '../../../models/ticket';
+import { environment } from '../../../../../environments/environment';
+import { Ticket } from '../../../../models/ticket';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NurseTicketService {
-  private apiUrl = `${environment.apiUrl}/nurse-tickets`; // API URL for managing tickets
+export class RadiologistTicketService {
+  private apiUrl = `${environment.apiUrl}/radiologist-tickets`; // API URL for managing tickets
 
   constructor(private http: HttpClient) {}
 
@@ -35,12 +35,14 @@ export class NurseTicketService {
 
   // Edit an existing ticket
   editTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.put<Ticket>(`${this.apiUrl}/${ticket.ticketId}`, ticket).pipe(
-      catchError((error) => {
-        console.error('Error editing ticket:', error);
-        return throwError(() => new Error('Error editing ticket'));
-      })
-    );
+    return this.http
+      .put<Ticket>(`${this.apiUrl}/${ticket.ticketId}`, ticket)
+      .pipe(
+        catchError((error) => {
+          console.error('Error editing ticket:', error);
+          return throwError(() => new Error('Error editing ticket'));
+        })
+      );
   }
 
   // Delete a ticket by ID

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
@@ -14,6 +14,11 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
   `,
 })
 export class StatisticsGraphComponent {
+  @Input() graphInfo!: {
+    patients: number;
+    consultations: number;
+  }[];
+
   chartOptions = {
     animationEnabled: true,
     theme: 'light2',

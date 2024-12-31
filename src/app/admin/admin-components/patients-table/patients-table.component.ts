@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDeletePatientPopupComponent } from '../popups/confirm-delete-patient-popup/confirm-delete-patient-popup.component';
 import { EditPatientFormComponent } from '../forms/edit-patient-form/edit-patient-form.component';
-import { PatientService } from '../../../services/patient/patient.service';
+import { PatientService } from '../../../services/admin/patient/patient.service';
 
 @Component({
   selector: 'app-patients-table',
@@ -41,7 +41,9 @@ import { PatientService } from '../../../services/patient/patient.service';
               (change)="onImageUpload($event, patient)"
             />
             <div class="flex flex-col">
-              <span class="font-bold text-sm text-left">{{ patient.name }}</span>
+              <span class="font-bold text-sm text-left">{{
+                patient.name
+              }}</span>
             </div>
           </td>
           <td>{{ patient.email }}</td>
@@ -111,7 +113,6 @@ export class PatientsTableComponent {
   @Input() patients: any[] = []; // Input list of patients
   showConfirmDeletePopup = false; // Controls delete confirmation popup visibility
   showEditPatientsPopup = false; // Controls edit form popup visibility
-
 
   selectedPatient: any = null; // Holds the patient data for editing
   patientToDelete: any = null; // Holds the patient data for deletion
@@ -203,7 +204,8 @@ export class PatientsTableComponent {
           .editPatient({ ...patient, profilePicture: updatedProfilePicture })
           .subscribe({
             next: () => console.log('Profile picture updated successfully'),
-            error: (err) => console.error('Error updating profile picture:', err),
+            error: (err) =>
+              console.error('Error updating profile picture:', err),
           });
       };
       reader.readAsDataURL(file);

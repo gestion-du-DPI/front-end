@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm, Validators } from '@angular/forms';
 import { Worker } from '../../../../models/worker';
-import { WorkerService } from '../../../../services/worker/worker.service';
+import { WorkerService } from '../../../../services/admin/worker/worker.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -166,7 +166,7 @@ import { CommonModule } from '@angular/common';
               Social number must be 9 digits.
             </div>
           </div>
-          
+
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
               Date of Hire <span class="text-red-600">*</span>
@@ -186,7 +186,6 @@ import { CommonModule } from '@angular/common';
               Date of hire is required.
             </div>
           </div>
-
         </div>
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Contact</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">

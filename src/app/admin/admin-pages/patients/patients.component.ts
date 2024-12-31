@@ -5,16 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { PatientsTableComponent } from '../../admin-components/patients-table/patients-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
 import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/patient/patient.service';
+import { PatientService } from '../../../services/admin/patient/patient.service';
 
 @Component({
   selector: 'app-patients',
-  imports: [
-    PatientsTableComponent,
-    HeaderComponent,
-    CommonModule,
-    FormsModule,
-  ],
+  imports: [PatientsTableComponent, HeaderComponent, CommonModule, FormsModule],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
       <div class="flex flex-col gap-4 mx-3">
@@ -48,10 +43,11 @@ import { PatientService } from '../../../services/patient/patient.service';
           >
             <img src="qr-icon.svg" alt="" />
           </button>
-
         </div>
       </div>
-      <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
+      <div *ngIf="loading" class="self-center mt-10">
+        <img src="logo.png" class=" animate-spin" alt="" />
+      </div>
       <div *ngIf="!loading">
         <app-patients-table [patients]="filteredPatients" />
       </div>
@@ -110,5 +106,4 @@ export class PatientsComponent implements OnInit {
       patient.name.toLowerCase().includes(query)
     );
   }
-
 }

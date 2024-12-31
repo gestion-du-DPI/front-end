@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Patient } from '../../models/patient';
-import { environment } from '../../../environments/environment';
+import { Patient } from '../../../models/patient';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ export class PatientService {
   addPatient(patient: Patient): Observable<Patient> {
     return this.http.post<Patient>(this.apiUrl, patient);
   }
-  
+
   editPatient(patient: Patient): Observable<Patient> {
     return this.http.put<Patient>(`${this.apiUrl}/${patient.id}`, patient).pipe(
       catchError((error) => {
@@ -35,7 +35,7 @@ export class PatientService {
       })
     );
   }
-  
+
   deletePatient(patientId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${patientId}`).pipe(
       catchError((error) => {

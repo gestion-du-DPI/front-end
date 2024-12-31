@@ -19,9 +19,6 @@ import { CommonModule } from '@angular/common';
       </div>
       <div class="flex justify-between items-center">
         <p class="text-3xl font-bold font-plus-jakarta">{{ count }}</p>
-        <p class="text-sm font-light opacity-60 font-plus-jakarta">
-          {{ percentage }}
-        </p>
       </div>
     </div>
   `,
@@ -48,7 +45,6 @@ import { CommonModule } from '@angular/common';
 export class CardComponent {
   @Input() title: string = '';
   @Input() count: number = 0;
-  @Input() percentage: string = '';
   @Input() color: string = 'bg-main';
   @Input() icon: string = '';
 }

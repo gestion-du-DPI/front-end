@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popup.component';
 
@@ -23,12 +23,18 @@ import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popu
       <app-user-info-popup (closePopup)="closePopup()"></app-user-info-popup>
     </div>
   `,
-  styles:``,
+  styles: ``,
 })
-
 export class UserBadgeComponent {
-  name: string = 'Dr. Sadoun';
+  @Input() title!: { id: number; name: string };
+
+  name: string = '';
   showPopup: boolean = false;
+
+  ngOnInit() {
+    this.name = this.title.name;
+    console.log(this.title);
+  }
 
   togglePopup() {
     this.showPopup = !this.showPopup;
