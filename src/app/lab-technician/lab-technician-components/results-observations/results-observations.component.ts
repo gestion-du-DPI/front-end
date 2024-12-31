@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GraphPopUpComponent } from '../graph-pop-up/graph-pop-up.component';
+import { ResultsPopupComponent } from '../results-popup/results-popup.component';
 
 @Component({
   selector: 'app-results-observations',
-  imports: [CommonModule, GraphPopUpComponent],
+  imports: [CommonModule, GraphPopUpComponent, ResultsPopupComponent],
   template: `
+  <div class="popup" *ngIf="showResultsPopup">
+    <app-results-popup
+    
+      [showPopup]="showPopup"
+      [selectedResult]="selectedResult"
+      (closePopup)="closePopup()"
+    ></app-results-popup>
+    </div>
+
     <div class="popup" *ngIf="showPopup">
       <app-graph-pop-up
         (closePopup)="closePopup()"
@@ -148,7 +158,10 @@ import { GraphPopUpComponent } from '../graph-pop-up/graph-pop-up.component';
       <div class="bg-white p-5 border rounded-md shadow-md">
         <h3 class="font-semibold text-main">Consultation's Results</h3>
         <ul class="mt-4 space-y-4">
-          <li *ngFor="let result of uploadedResults">
+          <li
+            *ngFor="let result of uploadedResults"
+            (click)="openResultsPopup(result); $event.preventDefault()"
+          >
             <div class="flex items-center space-x-4">
               <!-- Image -->
               <img
@@ -184,6 +197,12 @@ import { GraphPopUpComponent } from '../graph-pop-up/graph-pop-up.component';
   styles: [``],
 })
 export class ResultsObservationsComponent {
+  showResultsPopup: boolean = false;
+  openResultsPopup(result: any) {
+    this.selectedResult = result; // Pass the file object
+    this.showResultsPopup = true;
+  }
+
   graphs: string[] = [];
   handleGraphCreation(imageData: string) {
     // Create a pseudo-File object for the graph
@@ -226,7 +245,9 @@ export class ResultsObservationsComponent {
     fileType: string;
     owner: string;
     date: string;
+    fileContent: File; // The actual file object
   }[] = [];
+  
 
   // Handle drag-over event
   onDragOver(event: DragEvent): void {
@@ -256,6 +277,7 @@ export class ResultsObservationsComponent {
     this.uploadProgress = 0;
     this.startFileUpload();
   }
+  
 
   startFileUpload(): void {
     if (this.currentFileIndex < this.uploadingFiles.length) {
@@ -283,10 +305,11 @@ export class ResultsObservationsComponent {
   submitResults(): void {
     this.uploadedFiles.forEach((file) => {
       this.uploadedResults.push({
-        fileName: file.name,
-        fileType: 'image',
-        owner: 'Mr. Bouboutani',
-        date: new Date().toLocaleString(),
+        fileName: file.name,              // File name
+        fileType: file.type,              // File type (image, document, etc.)
+        owner: 'Mr. Bouboutani',          // Owner information (replace if needed)
+        date: new Date().toLocaleString(), // Date of upload
+        fileContent: file,                // Store the actual file object
       });
     });
 
@@ -311,7 +334,15 @@ export class ResultsObservationsComponent {
     this.showPopup = !this.showPopup;
   }
 
+  selectedResult: { fileName: string; fileType: string; owner: string; date: string; fileContent: File | undefined } | null = null;
+
+  openPopup(result: any) {
+    this.selectedResult = result;
+    this.showPopup = true;
+  }
+
   closePopup() {
     this.showPopup = false;
+    this.selectedResult = null;
   }
 }
