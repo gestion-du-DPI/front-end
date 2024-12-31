@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GraphPopUpComponent } from '../graph-pop-up/graph-pop-up.component';
 import { ResultsPopupComponent } from '../results-popup/results-popup.component';
+import { FormsModule } from '@angular/forms';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-results-observations',
-  imports: [CommonModule, GraphPopUpComponent, ResultsPopupComponent],
+  imports: [
+    CommonModule,
+    GraphPopUpComponent,
+    ResultsPopupComponent,
+    FormsModule,
+  ],
   template: `
-  <div class="popup" *ngIf="showResultsPopup">
-    <app-results-popup
-    
-      [showPopup]="showPopup"
-      [selectedResult]="selectedResult"
-      (closePopup)="closePopup()"
-    ></app-results-popup>
+    <div class="popup" *ngIf="showResultsPopup">
+      <app-results-popup
+        [showPopup]="showPopup"
+        [selectedResult]="selectedResult"
+        (closePopup)="closePopup()"
+      ></app-results-popup>
     </div>
 
     <div class="popup" *ngIf="showPopup">
@@ -119,9 +125,21 @@ import { ResultsPopupComponent } from '../results-popup/results-popup.component'
             </button>
           </div>
         </div>
+        <!-- Hidden div for creating image -->
+        <div
+          #contentDiv
+          class="hidden p-5"
+          style="background-color: white; width: 100%; max-width: 600px;  font-size: 12px; font-weight:600 "
+        >
+          <h2>{{ title }}</h2>
+           
+          
+            <p>{{ notes }}</p>
+          
+        </div>
 
         <div *ngIf="!showUpload" class="mt-4">
-          <form>
+          <form (ngSubmit)="onSubmit()">
             <label
               for="title"
               class="block text-base text-[#3C3C3C] font-medium"
@@ -130,20 +148,26 @@ import { ResultsPopupComponent } from '../results-popup/results-popup.component'
             <input
               type="text"
               id="title"
+              [(ngModel)]="title"
+              name="title"
               class="w-full border px-3 py-2 rounded mb-2"
               placeholder="eg. Mr. Bouboutani Observations"
             />
             <label
               for="notes"
+              [(ngModel)]="notes"
+              name="notes"
               class="block text-base text-[#3C3C3C] font-medium"
               >Notes</label
             >
             <textarea
-              id="notes"
-              class="w-full border px-3 py-2 rounded mb-2"
-              rows="4"
-              placeholder="eg. Mild interstitial markings suggestive of early fibrosis. No acute pathology noted."
-            ></textarea>
+  id="notes"
+  [(ngModel)]="notes"  
+  name="notes"
+  class="w-full border px-3 py-2 rounded mb-2"
+  rows="4"
+  placeholder="Enter your notes here"
+></textarea>
             <button
               type="submit"
               class="bg-main text-white px-4 py-2 rounded w-full mt-3 font-semibold"
@@ -197,6 +221,71 @@ import { ResultsPopupComponent } from '../results-popup/results-popup.component'
   styles: [``],
 })
 export class ResultsObservationsComponent {
+  title: string = '';
+  notes: string = ''
+  @ViewChild('contentDiv', { static: false }) contentDiv!: ElementRef;
+  ngOnInit(): void {
+    this.showUpload = true;
+  }
+  onSubmit() {
+    console.log('Title:', this.title);  // Capture the title
+    console.log('Notes:', this.notes);  // Capture the latest notes
+  
+    // Now perform your logic
+    this.createImageFromDiv();  // Or whatever you need to do after submission
+    // Optionally reset the values
+  this.title = '';
+  this.notes = '';
+  }
+  
+
+  onNotesChange(value: string) {
+    console.log('Notes changed:', value); // Check if the notes are updating
+  }
+
+  createImageFromDiv() {
+    const contentDivElement = this.contentDiv.nativeElement;
+
+    // Temporarily show the content div to capture it as an image
+    contentDivElement.style.display = 'block';
+
+    html2canvas(contentDivElement).then((canvas) => {
+      const image = canvas.toDataURL('image/png');
+      this.uploadImage(image);
+
+      // Hide the content div again after capturing the image
+      contentDivElement.style.display = 'none';
+    });
+  }
+
+  uploadImage(image: string) {
+    console.log('Uploading image:', image);
+
+    // Convert the image data URI into a Blob
+    const blob = this.dataURItoBlob(image);
+
+    // Create a File object from the Blob
+    const file = new File([blob], 'Observation.png', {
+      type: 'image/png',
+      lastModified: Date.now(), // Add lastModified property
+    });
+
+    // Push the File object into the uploadedFiles array
+    this.uploadedFiles.push(file);
+
+    // Update progress and store results
+    this.uploadProgress = 100;
+
+    // Push the result with file content as a File object
+    this.uploadedResults.push({
+      fileName: file.name, // Use the name of the File object
+      fileType: file.type,
+      owner: 'User',
+      date: new Date().toLocaleString(),
+      fileContent: file,
+    });
+  }
+
   showResultsPopup: boolean = false;
   openResultsPopup(result: any) {
     this.selectedResult = result; // Pass the file object
@@ -205,19 +294,19 @@ export class ResultsObservationsComponent {
 
   graphs: string[] = [];
   handleGraphCreation(imageData: string) {
-    // Create a pseudo-File object for the graph
     const blob = this.dataURItoBlob(imageData);
+
+    // Ensure that you're creating a File object with the necessary properties
     const graphFile = new File([blob], `Graph-${Date.now()}.png`, {
       type: 'image/png',
+      lastModified: Date.now(), // Adding the lastModified property
     });
 
-    // Add the graph file to the uploadingFiles array
     this.uploadingFiles.push(graphFile);
     this.totalFiles++;
-    this.startFileUpload(); // Start uploading the new graph
+    this.startFileUpload();
   }
 
-  // Utility method to convert base64 string to Blob
   dataURItoBlob(dataURI: string): Blob {
     const byteString = atob(dataURI.split(',')[1]);
     const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -245,11 +334,9 @@ export class ResultsObservationsComponent {
     fileType: string;
     owner: string;
     date: string;
-    fileContent: File; // The actual file object
+    fileContent: File;
   }[] = [];
-  
 
-  // Handle drag-over event
   onDragOver(event: DragEvent): void {
     event.preventDefault();
     this.isDragging = true;
@@ -277,7 +364,6 @@ export class ResultsObservationsComponent {
     this.uploadProgress = 0;
     this.startFileUpload();
   }
-  
 
   startFileUpload(): void {
     if (this.currentFileIndex < this.uploadingFiles.length) {
@@ -302,14 +388,14 @@ export class ResultsObservationsComponent {
     }, 300);
   }
 
-  submitResults(): void {
+  submitResults() {
     this.uploadedFiles.forEach((file) => {
       this.uploadedResults.push({
-        fileName: file.name,              // File name
-        fileType: file.type,              // File type (image, document, etc.)
-        owner: 'Mr. Bouboutani',          // Owner information (replace if needed)
-        date: new Date().toLocaleString(), // Date of upload
-        fileContent: file,                // Store the actual file object
+        fileName: file.name,
+        fileType: file.type,
+        owner: 'User',
+        date: new Date().toLocaleString(),
+        fileContent: file,
       });
     });
 
@@ -318,7 +404,7 @@ export class ResultsObservationsComponent {
     this.resetUploadState();
   }
 
-  resetUploadState(): void {
+  resetUploadState() {
     this.uploadingFiles = [];
     this.currentUploadingFile = null;
     this.uploadProgress = 0;
@@ -334,7 +420,13 @@ export class ResultsObservationsComponent {
     this.showPopup = !this.showPopup;
   }
 
-  selectedResult: { fileName: string; fileType: string; owner: string; date: string; fileContent: File | undefined } | null = null;
+  selectedResult: {
+    fileName: string;
+    fileType: string;
+    owner: string;
+    date: string;
+    fileContent: File | undefined;
+  } | null = null;
 
   openPopup(result: any) {
     this.selectedResult = result;
