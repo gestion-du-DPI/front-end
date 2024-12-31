@@ -32,7 +32,7 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
             </h1>
             <h2 class="text-2xl font-semibold text-main">{{ name }}</h2>
           </div>
-          <app-header></app-header>
+          <app-header (reload)="reloadPage()"></app-header>
         </div>
       </div>
 
@@ -319,5 +319,9 @@ export class DashboardComponent {
         console.error('Failed to fetch dashboard data');
       }
     );
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 }

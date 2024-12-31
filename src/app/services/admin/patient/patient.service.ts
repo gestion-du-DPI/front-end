@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class PatientService {
-  private apiUrl = environment.apiUrl + '/patients'; // API URL for fetching patients
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -24,11 +24,15 @@ export class PatientService {
   }
 
   addPatient(patient: Patient): Observable<Patient> {
-    return this.http.post<Patient>(this.apiUrl, patient);
+    console.log('Adding patient:', patient);
+    return this.http.post<Patient>(
+      `${this.apiUrl}/admin/create/patient`,
+      patient
+    );
   }
 
   editPatient(patient: Patient): Observable<Patient> {
-    return this.http.put<Patient>(`${this.apiUrl}/${patient.id}`, patient).pipe(
+    return this.http.put<Patient>(`${this.apiUrl}`, patient).pipe(
       catchError((error) => {
         console.error('Error editing patient:', error);
         return throwError(() => new Error('Error editing patient'));

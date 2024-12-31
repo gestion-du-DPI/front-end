@@ -102,8 +102,10 @@ export class PatientsComponent implements OnInit {
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredPatients = this.patients.filter((patient) =>
-      patient.name.toLowerCase().includes(query)
+    this.filteredPatients = this.patients.filter(
+      (patient) =>
+        patient.first_name.toLowerCase().includes(query) ||
+        patient.last_name.toLowerCase().includes(query)
     );
   }
 }

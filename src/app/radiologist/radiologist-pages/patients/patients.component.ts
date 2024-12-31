@@ -83,9 +83,7 @@ export class PatientsComponent implements OnInit {
   onSearch(): void {
     const query = this.searchQuery.replace(/-/g, '').toLowerCase(); // Remove '-' from query and convert to lowercase
     this.filteredPatients = this.patients.filter((patient) => {
-      const nssWithoutDash = patient.socialNumber
-        .replace(/-/g, '')
-        .toLowerCase(); // Remove '-' from NSS and convert to lowercase
+      const nssWithoutDash = patient.nss.replace(/-/g, '').toLowerCase(); // Remove '-' from NSS and convert to lowercase
       return nssWithoutDash.includes(query);
     });
   }
