@@ -77,6 +77,37 @@ export const appRoutes: Routes = [
           ),
       },
       {
+        path: 'patient-details/:id',
+        loadComponent: () =>
+          import(
+            './doctor/doctor-pages/patient-details/patient-details.component'
+          ).then((m) => m.PatientDetailsComponent),
+      },
+      {
+        path: 'consultation',
+        loadComponent: () =>
+          import(
+            './doctor/doctor-pages/consultation-details/consultation-details.component'
+          ).then((m) => m.ConsultationDetailsComponent),
+        children: [
+          { path: '', redirectTo: 'ticket', pathMatch: 'full' },
+          {
+            path: 'ticket',
+            loadComponent: () =>
+              import(
+                './doctor/doctor-pages/consultation-details/ticket/ticket.component'
+              ).then((m) => m.TicketComponent),
+          },
+          {
+            path: 'prescription',
+            loadComponent: () =>
+              import(
+                './doctor/doctor-pages/consultation-details/prescription/prescription.component'
+              ).then((m) => m.PrescriptionComponent),
+          },
+        ],
+      },
+      {
         path: 'tickets-history',
         loadComponent: () =>
           import('./doctor/doctor-pages/history/history.component').then(
