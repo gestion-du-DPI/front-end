@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { FormsModule } from '@angular/forms';
+import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-graph-pop-up',
@@ -134,13 +136,13 @@ import { FormsModule } from '@angular/forms';
         </button>
         <button
           class="px-6 py-2 bg-main text-white rounded-lg hover:bg-main-dark"
-          (click)="createGraph()"
+          (click)="generateGraphImageAndSend()"
         >
           Create
         </button>
       </div>
 
-      <div *ngIf="showGraph">
+      <div *ngIf="showGraph" id="graph-container">
         <canvasjs-chart [options]="chartOptions"></canvasjs-chart>
       </div>
     </div>
@@ -149,6 +151,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class GraphPopUpComponent {
   @Output() closePopup = new EventEmitter<void>();
+  @Output() createGraph = new EventEmitter<string>();
+
+  graphImage: string | null = null;
+
+  generateGraphImageAndSend() {
+    const graphElement = document.getElementById('graph-container');
+    if (graphElement) {
+      html2canvas(graphElement).then((canvas) => {
+        const imageData = canvas.toDataURL('image/png'); // Converts to image
+        this.createGraph.emit(imageData); // Emits the image
+        this.closePopup.emit(); // Close the popup
+
+      });
+    }
+  }
+
+
 
   headers: string[] = []; // Column headers
   rows: number[][] = [[]]; // Initial data
@@ -230,7 +249,5 @@ export class GraphPopUpComponent {
     console.log('Chart Options:', this.chartOptions);
   }
 
-  createGraph(): void {
-    console.log('Graph created');
-  }
+  
 }
