@@ -22,11 +22,6 @@ export interface TopStaff {
   role: string;
 }
 
-export interface MonthlyStats {
-  patients: number;
-  consultations: number;
-}
-
 export interface RecentPatient {
   user_id: number;
   name: string;
@@ -43,6 +38,8 @@ export interface AdminDashboard {
   admin_info: AdminInfo;
   role_counts: RoleCounts;
   top_staff: TopStaff[];
-  stats: MonthlyStats[];
+  stats: Array<{
+    [month: string]: { patients: number; consultations: number };
+  }>;
   recent_patients: RecentPatient[];
 }

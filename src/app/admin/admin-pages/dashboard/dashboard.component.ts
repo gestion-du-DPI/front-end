@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +32,7 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
             </h1>
             <h2 class="text-2xl font-semibold text-main">{{ name }}</h2>
           </div>
-          <app-header [title]="adminInfo"></app-header>
+          <app-header></app-header>
         </div>
       </div>
 
@@ -248,11 +248,9 @@ export class DashboardComponent {
 
   constructor(
     private dashboardService: DashboardService,
-    private http: HttpClient,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+    private http: HttpClient
   ) {}
 
-  adminInfo: { id: number; name: string } = { id: 0, name: '' };
   hospitalName: string = '';
   name: string = '';
   recentPatients: {
@@ -277,11 +275,6 @@ export class DashboardComponent {
   totalRadiologists: number = 0;
   totalConsultations: number = 0;
 
-  graphInfo: {
-    patients: number;
-    consultations: number;
-  }[] = [];
-
   ngOnInit() {
     console.log('Dashboard component initialized');
     this.getData();
@@ -291,9 +284,8 @@ export class DashboardComponent {
     this.dashboardService.getDashboardData().subscribe(
       (data) => {
         console.log('Dashboard data fetched successfully');
-        console.log(data);
+        this.dashboardService.updateCachedData(data);
 
-        this.adminInfo = { id: data.admin_info.id, name: data.admin_info.name };
         this.hospitalName = data.admin_info.hospital;
         this.name = data.admin_info.name;
 
@@ -322,10 +314,6 @@ export class DashboardComponent {
           role: staff.role,
           profilePicture: 'doctor-avatar.svg',
         }));
-
-        this.graphInfo = data.stats;
-
-        this.cdr.detectChanges(); // Trigger change detection
       },
       (error) => {
         console.error('Failed to fetch dashboard data');

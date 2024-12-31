@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popup.component';
+import { DashboardService } from '../../services/admin/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-user-badge',
@@ -16,7 +17,7 @@ import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popu
         class="w-12 h-12 object-cover rounded-full"
         alt="Admin Profile Picture"
       />
-      <p class="font-semibold text-base">{{ name }}</p>
+      <p class="font-semibold text-base">{{ title.name }}</p>
     </div>
 
     <div class="popup" *ngIf="showPopup">
@@ -26,13 +27,22 @@ import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popu
   styles: ``,
 })
 export class UserBadgeComponent {
-  @Input() title!: { id: number; name: string };
+  title: { id: number; name: string } = { id: 0, name: '' };
+  constructor(private dashboardService: DashboardService) {}
 
-  name: string = '';
   showPopup: boolean = false;
 
   ngOnInit() {
-    this.name = this.title.name;
+    let data = this.dashboardService.getcachedData();
+    if ('admin_info' in data) {
+      this.title.id = data.admin_info.id;
+      this.title.name = data.admin_info.name;
+    } else {
+      data.subscribe((dataCatched: any) => {
+        this.title.id = dataCatched.admin_info.id;
+        this.title.name = dataCatched.admin_info.name;
+      });
+    }
     console.log(this.title);
   }
 

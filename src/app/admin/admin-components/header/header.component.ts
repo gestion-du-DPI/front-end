@@ -18,7 +18,7 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
           >New Patient</span
         >
       </button>
-      <app-user-badge [title]="title"></app-user-badge>
+      <app-user-badge></app-user-badge>
     </div>
 
     <div class="popup" *ngIf="showNewPatientForm">
@@ -30,7 +30,6 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
   `,
 })
 export class HeaderComponent {
-  @Input() title!: { id: number; name: string };
   @Output() reload = new EventEmitter<void>();
   showNewPatientForm = false;
 
