@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-graph-pop-up',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CanvasJSAngularChartsModule, FormsModule],
   template: `
-    <div class="bg-white flex-col flex justify-between p-4 rounded-xl mx-5 lg:w-full h-full">
+    <div class="bg-white flex-col flex justify-between p-4 rounded-xl mx-5 lg:w-full h-full overflow-y-auto" style="max-height: 600px;">
       <div class="flex flex-row items-center justify-start gap-5 pb-5">
         <h1 class="text-main font-semibold text-2xl">Create Graph</h1>
         <img src="graphtype1.svg" alt="type1" class="w-10" />
@@ -18,6 +19,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
           <input
             type="text"
             name="title"
+            [(ngModel)]="graphTitle"
             required
             placeholder="eg. Full blood test"
             class="border border-gray-300 rounded-lg p-2 text-sm mr-10"
@@ -28,6 +30,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
           <input
             type="text"
             name="xaxis"
+            [(ngModel)]="xAxisTitle"
             required
             placeholder="samples"
             class="border border-gray-300 rounded-lg p-2 text-sm mr-10"
@@ -38,6 +41,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
           <input
             type="text"
             name="yaxis"
+            [(ngModel)]="yAxisTitle"
             required
             placeholder="mg"
             class="border border-gray-300 rounded-lg p-2 text-sm mr-10"
@@ -54,7 +58,6 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
               {{ header }}
             </th>
             <th class="text-left px-4 py-2 flex items-center gap-2">
-              <!-- Input for adding a new column (appears inline) -->
               <input
                 *ngIf="isAddingHeader"
                 type="text"
@@ -63,8 +66,6 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
                 (keyup.enter)="finishAddingHeader($event)"
                 (blur)="cancelAddingHeader()"
               />
-
-              <!-- Plus button -->
               <button
                 (click)="startAddingHeader()"
                 class="p-1 rounded bg-gray-200 hover:bg-gray-300"
@@ -75,11 +76,10 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
           </tr>
         </thead>
         <tbody>
-          <!-- Rows -->
           <tr *ngFor="let row of rows; let rowIndex = index">
             <td class="hidden lg:table-cell px-4 py-2 relative">
               <div
-                class="bg-main w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded cursor-pointer"
+                class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded cursor-pointer"
                 [style.background-color]="rowColors[rowIndex]"
                 (click)="toggleColorPicker(rowIndex)"
               ></div>
@@ -95,24 +95,24 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
               <input
                 type="text"
                 name="testTitle"
+                [(ngModel)]="rowTestTitles[rowIndex]"
                 required
                 placeholder="eg. Normal Person"
                 class="border border-gray-300 rounded-lg p-2 text-sm w-full"
               />
             </td>
-            <td *ngFor="let cell of row" class="px-4 py-2">
+            <!-- Numeric input with two-way binding -->
+            <td *ngFor="let cell of row; let colIndex = index" class="px-4 py-2">
               <input
                 type="number"
-                [value]="cell"
+                [(ngModel)]="rows[rowIndex][colIndex]"
                 class="border border-gray-300 rounded-lg p-2 w-16"
               />
             </td>
           </tr>
 
-          <!-- Row for adding a new row -->
           <tr>
             <td class="hidden lg:table-cell text-center px-4 py-2">
-              <!-- Plus button directly under the Color square -->
               <button
                 (click)="addRow()"
                 class="p-2 rounded bg-gray-200 hover:bg-gray-300 flex items-center gap-2"
@@ -125,7 +125,6 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
         </tbody>
       </table>
 
-      <!-- Buttons for Preview and Create, placed just outside the table -->
       <div class="flex justify-end gap-4 mt-4">
         <button
           class="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
@@ -140,6 +139,10 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
           Create
         </button>
       </div>
+
+      <div *ngIf="showGraph">
+        <canvasjs-chart [options]="chartOptions"></canvasjs-chart>
+      </div>
     </div>
   `,
   styles: [],
@@ -149,60 +152,85 @@ export class GraphPopUpComponent {
 
   headers: string[] = []; // Column headers
   rows: number[][] = [[]]; // Initial data
+  rowColors: string[] = ['#373C9E']; // Default row colors
+  rowTestTitles: string[] = ['']; // Titles for each row
+  activeColorPickerIndex: number | null = null;
   isAddingHeader = false;
-  rowColors: string[] = ['#000000']; // Default row colors
-  activeColorPickerIndex: number | null = null; // Track active color picker
+  showGraph = false; // Flag to control graph visibility
+  graphTitle: string = ''; // Title of the graph
+  xAxisTitle: string = ''; // X-axis title
+  yAxisTitle: string = ''; // Y-axis title
+  chartOptions: any = {}; // To hold the graph options
 
-  // Trigger adding a new header
   startAddingHeader(): void {
     this.isAddingHeader = true;
   }
 
-  // Finish adding a header (on Enter)
   finishAddingHeader(event: any): void {
     const newHeader = event.target.value.trim();
     if (newHeader) {
       this.headers.push(newHeader);
-      this.rows.forEach((row) => row.push(0)); // Add a new column for each row
+      this.rows.forEach((row) => row.push(0));
     }
     this.isAddingHeader = false;
   }
 
-  // Cancel adding header (on blur)
   cancelAddingHeader(): void {
     this.isAddingHeader = false;
   }
 
-  // Add a new row with the same structure as the existing rows
   addRow(): void {
     const newRow = this.headers.map(() => 0); // Initialize a row with 0 values
     this.rows.push(newRow);
+    this.rowTestTitles.push(''); // Add an empty test title for the new row
   }
 
-  // Toggle the color picker for a specific row
   toggleColorPicker(index: number): void {
     this.activeColorPickerIndex = index;
   }
 
-  // Update the color for a specific row
   updateRowColor(index: number, event: any): void {
-    this.rowColors[index] = event.target.value; // Set the selected color
-    this.activeColorPickerIndex = null; // Close the color picker
+    this.rowColors[index] = event.target.value;
+    this.activeColorPickerIndex = null;
   }
 
-  // Close the color picker on blur
   closeColorPicker(): void {
     this.activeColorPickerIndex = null;
   }
 
-  // Placeholder function for Preview button
   previewGraph(): void {
-    console.log('Preview the graph');
+    console.log('Updated Rows:', this.rows);
+  
+    this.showGraph = true;
+  
+    this.chartOptions = {
+      title: {
+        text: this.graphTitle || 'Graph from Table Data',
+      },
+      axisX: {
+        title: this.xAxisTitle,
+        categories: this.headers,
+      },
+      axisY: {
+        title: this.yAxisTitle,
+        includeZero: true,
+      },
+      data: this.rows.map((row, rowIndex) => ({
+        type: 'column',
+        name: this.rowTestTitles[rowIndex] || `Test ${rowIndex + 1}`, // Use the test title from input
+        color: this.rowColors[rowIndex],
+        showInLegend: true,
+        dataPoints: this.headers.map((header, headerIndex) => ({
+          label: header,
+          y: row[headerIndex],
+        })),
+      })),
+    };
+
+    console.log('Chart Options:', this.chartOptions);
   }
 
-  // Placeholder function for Create button
   createGraph(): void {
-    console.log('Create the graph');
+    console.log('Graph created');
   }
 }
-
