@@ -132,10 +132,8 @@ import html2canvas from 'html2canvas';
           style="background-color: white; width: 100%; max-width: 600px;  font-size: 12px; font-weight:600 "
         >
           <h2>{{ title }}</h2>
-           
-          
-            <p>{{ notes }}</p>
-          
+
+          <p>{{ notes }}</p>
         </div>
 
         <div *ngIf="!showUpload" class="mt-4">
@@ -161,13 +159,13 @@ import html2canvas from 'html2canvas';
               >Notes</label
             >
             <textarea
-  id="notes"
-  [(ngModel)]="notes"  
-  name="notes"
-  class="w-full border px-3 py-2 rounded mb-2"
-  rows="4"
-  placeholder="Enter your notes here"
-></textarea>
+              id="notes"
+              [(ngModel)]="notes"
+              name="notes"
+              class="w-full border px-3 py-2 rounded mb-2"
+              rows="4"
+              placeholder="Enter your notes here"
+            ></textarea>
             <button
               type="submit"
               class="bg-main text-white px-4 py-2 rounded w-full mt-3 font-semibold"
@@ -183,7 +181,7 @@ import html2canvas from 'html2canvas';
         <h3 class="font-semibold text-main">Consultation's Results</h3>
         <ul class="mt-4 space-y-4">
           <li
-            *ngFor="let result of uploadedResults"
+            *ngFor="let result of uploadedResults; let i = index"
             (click)="openResultsPopup(result); $event.preventDefault()"
           >
             <div class="flex items-center space-x-4">
@@ -211,6 +209,7 @@ import html2canvas from 'html2canvas';
                 src="delete.svg"
                 alt="Delete"
                 class="w-6 h-6 cursor-pointer ml-auto"
+                (click)="deleteFile(i); $event.preventDefault()"
               />
             </div>
           </li>
@@ -222,22 +221,21 @@ import html2canvas from 'html2canvas';
 })
 export class ResultsObservationsComponent {
   title: string = '';
-  notes: string = ''
+  notes: string = '';
   @ViewChild('contentDiv', { static: false }) contentDiv!: ElementRef;
   ngOnInit(): void {
     this.showUpload = true;
   }
   onSubmit() {
-    console.log('Title:', this.title);  // Capture the title
-    console.log('Notes:', this.notes);  // Capture the latest notes
-  
+    console.log('Title:', this.title); // Capture the title
+    console.log('Notes:', this.notes); // Capture the latest notes
+
     // Now perform your logic
-    this.createImageFromDiv();  // Or whatever you need to do after submission
+    this.createImageFromDiv(); // Or whatever you need to do after submission
     // Optionally reset the values
-  this.title = '';
-  this.notes = '';
+    this.title = '';
+    this.notes = '';
   }
-  
 
   onNotesChange(value: string) {
     console.log('Notes changed:', value); // Check if the notes are updating
@@ -418,6 +416,11 @@ export class ResultsObservationsComponent {
 
   togglePopup() {
     this.showPopup = !this.showPopup;
+  }
+
+  deleteFile(index: number) {
+    // Remove the file at the specified index from the uploadedResults array
+    this.uploadedResults.splice(index, 1);
   }
 
   selectedResult: {
