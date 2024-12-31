@@ -62,6 +62,18 @@ export const appRoutes: Routes = [
       import('./nurse/nurse.component').then((m) => m.NurseComponent),
     canActivate: [RoleGuard],
     data: { role: UserRole.Nurse },
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./nurse/nurse-pages/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
+      },
+      
+      
+    ],
   },
   {
     path: 'radiologist',
