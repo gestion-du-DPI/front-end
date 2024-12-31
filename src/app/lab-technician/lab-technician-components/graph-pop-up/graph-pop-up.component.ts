@@ -150,7 +150,7 @@ import html2canvas from 'html2canvas';
   styles: [],
 })
 export class GraphPopUpComponent {
-  @Output() closePopup = new EventEmitter<void>();
+  @Output() closeGraphPopup = new EventEmitter<void>();
   @Output() createGraph = new EventEmitter<string>();
 
   graphImage: string | null = null;
@@ -161,7 +161,7 @@ export class GraphPopUpComponent {
       html2canvas(graphElement).then((canvas) => {
         const imageData = canvas.toDataURL('image/png'); // Converts to image
         this.createGraph.emit(imageData); // Emits the image
-        this.closePopup.emit(); // Close the popup
+        this.closeGraphPopup.emit(); // Close the popup
 
       });
     }

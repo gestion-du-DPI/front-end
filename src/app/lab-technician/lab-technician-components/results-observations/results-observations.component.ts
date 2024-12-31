@@ -18,7 +18,7 @@ import { ResultsPopupComponent } from '../results-popup/results-popup.component'
 
     <div class="popup" *ngIf="showPopup">
       <app-graph-pop-up
-        (closePopup)="closePopup()"
+        (closeGraphPopup)="closeGraphPopup()"
         (createGraph)="handleGraphCreation($event)"
       >
       </app-graph-pop-up>
@@ -342,7 +342,11 @@ export class ResultsObservationsComponent {
   }
 
   closePopup() {
-    this.showPopup = false;
+    this.showResultsPopup = false;
     this.selectedResult = null;
+  }
+
+  closeGraphPopup() {
+    this.showPopup = false;
   }
 }

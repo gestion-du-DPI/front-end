@@ -5,23 +5,33 @@ import { CommonModule } from '@angular/common';
   selector: 'app-results-popup',
   imports: [CommonModule],
   template: `
-    <div class="bg-white rounded-xl w-[400px] p-6 flex flex-col items-center gap-5">
-      <h2>{{ selectedResult?.fileName }}</h2>
+    <div class="bg-white rounded-xl max-w-[600px] max-h-[90vh] p-6 flex flex-col items-center gap-5 overflow-hidden">
+      <h2 class="text-main font-semibold text-xl">{{ selectedResult?.fileName }}</h2>
+      <p class="font-normal text-[#71717A] text-sm">{{ selectedResult?.owner }} - {{ selectedResult?.date }}</p>
 
       <!-- Display image or download link based on file type -->
       <div *ngIf="selectedResult?.fileType?.startsWith('image/') && selectedResult?.fileContent">
-  <!-- Display Image Preview -->
-  <img [src]="getImageUrl(selectedResult?.fileContent)" alt="Uploaded Image" class="w-full h-auto">
-</div>
+        <!-- Display Image Preview with dynamic resizing -->
+        <img [src]="getImageUrl(selectedResult?.fileContent)" alt="Uploaded Image" class="w-full max-h-[400px] object-contain">
+      </div>
 
-<div *ngIf="!selectedResult?.fileType?.startsWith('image/') && selectedResult?.fileContent">
-  <!-- Display Download Link for Non-Image Files -->
-  <a [href]="getImageUrl(selectedResult?.fileContent)" download>Download {{ selectedResult?.fileName }}</a>
-</div>
+      <div *ngIf="!selectedResult?.fileType?.startsWith('image/') && selectedResult?.fileContent">
+        <!-- Display Download Link for Non-Image Files -->
+        <a [href]="getImageUrl(selectedResult?.fileContent)" download>Download {{ selectedResult?.fileName }}</a>
+      </div>
 
+      <div class="flex flex-col gap-4 items-center">
+        <button class="text-main bg-second rounded font-semibold p-4 w-full">
+          <div class="flex gap-2 items-center">
+            <img src="gmail.svg" alt="gmail" class="w-5 h-5">
+            Send it Via Email Address
+          </div>
+        </button>
 
-      <p>{{ selectedResult?.owner }} - {{ selectedResult?.date }}</p>
-      <button (click)="close()">Close</button>
+        <button (click)="close()" class="text-white bg-main rounded font-semibold p-2 w-full">
+          Close
+        </button>
+      </div>
     </div>
   `,
   styles: []
@@ -36,11 +46,6 @@ export class ResultsPopupComponent {
       return URL.createObjectURL(file);
     }
     return '';
-  }
-
-  ngOnInit() {
-    // Debugging: Check if selectedResult exists and if fileContent is defined
-    console.log('Selected result:', this.selectedResult);
   }
 
   close() {
