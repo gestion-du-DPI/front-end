@@ -67,7 +67,7 @@ import { CommonModule } from '@angular/common';
       <!-- Requested Test and Doctor Info -->
       <div class="flex flex-row items-center mt-4 justify-between w-full">
         <!-- Requested Test -->
-        <h3 class="font-semibold text-lg mr-10">Requested Test: {{ requestedTest }}</h3>
+        <h3 class="font-semibold text-lg mr-10">Assignment: {{ requestedTest }}</h3>
 
         <!-- Doctor Info -->
         <div class="flex items-center gap-4 text-gray-700 ml-10">
@@ -106,7 +106,7 @@ export class NurseInfoComponent {
    phoneNumber = '0558235011';
    email = 'a.denai@esi.dz';
    assignedDoctor = 'Mostefai';
-   requestedTest = 'Covid-19 PCR Test';
+   requestedTest = 'Covid-19 injection';
    doctorId = '123456';
    tasks = [
      'Ensure the sample is collected via nasopharyngeal swab and properly labeled with the patient’s details.',
