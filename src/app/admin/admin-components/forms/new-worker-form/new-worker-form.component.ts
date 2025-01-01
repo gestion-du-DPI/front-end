@@ -11,74 +11,105 @@ import { CommonModule } from '@angular/common';
     <div
       class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[90vh]"
     >
+      <!-- Header -->
       <div class="flex flex-row justify-between px-7 pb-3">
         <h1 class="font-semibold text-2xl text-main">New Worker</h1>
         <img
           src="cancel-icon.svg"
           class="w-7 cursor-pointer"
-          alt=""
+          alt="Cancel"
           (click)="onCancel()"
         />
       </div>
+
+      <!-- Form -->
       <form
         #workerForm="ngForm"
-        class="flex flex-col gap-2 overflow-y-scroll px-7"
+        class="flex flex-col gap-4 overflow-y-scroll px-7"
         (ngSubmit)="submitForm(workerForm)"
       >
+        <!-- Worker Info Section -->
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Worker Info</h4>
+
         <div class="flex flex-row justify-center flex-wrap gap-4">
+          <!-- First Name -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
-              Full Name <span class="text-red-600">*</span>
+              First Name <span class="text-red-600">*</span>
             </label>
             <input
               type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. Mostefai Mounir"
-              [(ngModel)]="formData.name"
-              name="fullName"
-              #fullName="ngModel"
+              class="border rounded-md w-96 p-2 text-sm"
+              placeholder="e.g. Mounir"
+              [(ngModel)]="formData.first_name"
+              name="firstName"
+              #firstName="ngModel"
               required
             />
             <div
-              *ngIf="fullName.invalid && fullName.touched"
+              *ngIf="firstName.invalid && firstName.touched"
               class="text-red-600 text-xs"
             >
-              Full Name is required.
+              First Name is required.
             </div>
           </div>
 
+          <!-- Last Name -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
-              Gender <span class="text-red-600">*</span>
+              Last Name <span class="text-red-600">*</span>
             </label>
-            <select
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.gender"
-              name="gender"
-              #gender="ngModel"
+            <input
+              type="text"
+              class="border rounded-md w-96 p-2 text-sm"
+              placeholder="e.g. Doe"
+              [(ngModel)]="formData.last_name"
+              name="lastName"
+              #lastName="ngModel"
               required
-            >
-              <option value="" disabled selected>Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
+            />
             <div
-              *ngIf="gender.invalid && gender.touched"
+              *ngIf="lastName.invalid && lastName.touched"
               class="text-red-600 text-xs"
             >
-              Gender is required.
+              Last Name is required.
             </div>
           </div>
+        </div>
 
+        <!-- Gender -->
+        <div class="flex flex-col gap-1">
+          <label class="font-medium text-sm">
+            Gender <span class="text-red-600">*</span>
+          </label>
+          <select
+            class="border rounded-md w-96 p-2 text-sm"
+            [(ngModel)]="formData.gender"
+            name="gender"
+            #gender="ngModel"
+            required
+          >
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <div
+            *ngIf="gender.invalid && gender.touched"
+            class="text-red-600 text-xs"
+          >
+            Gender is required.
+          </div>
+        </div>
+        <div class="flex flex-row justify-center flex-wrap gap-4">
+          <!-- Birthday -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
               Birthday <span class="text-red-600">*</span>
             </label>
             <input
               type="date"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.dateOfBirth"
+              class="border rounded-md w-96 p-2 text-sm"
+              [(ngModel)]="formData.date_of_birth"
               name="birthday"
               #birthday="ngModel"
               required
@@ -98,24 +129,23 @@ import { CommonModule } from '@angular/common';
             </label>
             <input
               type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. Algiers"
-              [(ngModel)]="formData.placeOfBirth"
+              [(ngModel)]="formData.place_of_birth"
               name="placeOfBirth"
-              required
               #placeOfBirth="ngModel"
-              [ngClass]="{
-                'border-red-600': placeOfBirth?.invalid && placeOfBirth?.touched
-              }"
+              required
             />
             <div
-              *ngIf="placeOfBirth?.invalid && placeOfBirth?.touched"
+              *ngIf="placeOfBirth.invalid && placeOfBirth.touched"
               class="text-red-600 text-xs"
             >
-              Place of birth is required.
+              Place of Birth is required.
             </div>
           </div>
+        </div>
 
+        <div class="flex flex-row justify-center flex-wrap gap-4">
           <!-- Address -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
@@ -123,18 +153,15 @@ import { CommonModule } from '@angular/common';
             </label>
             <input
               type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. 123 Street, City"
               [(ngModel)]="formData.address"
               name="address"
-              required
               #address="ngModel"
-              [ngClass]="{
-                'border-red-600': address?.invalid && address?.touched
-              }"
+              required
             />
             <div
-              *ngIf="address?.invalid && address?.touched"
+              *ngIf="address.invalid && address.touched"
               class="text-red-600 text-xs"
             >
               Address is required.
@@ -148,46 +175,26 @@ import { CommonModule } from '@angular/common';
             </label>
             <input
               type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. 123456789"
-              [(ngModel)]="formData.socialNumber"
+              [(ngModel)]="formData.nss"
               name="socialNumber"
-              required
               pattern="^[0-9]{9}$"
               #socialNumber="ngModel"
-              [ngClass]="{
-                'border-red-600': socialNumber?.invalid && socialNumber?.touched
-              }"
+              required
             />
             <div
-              *ngIf="socialNumber?.invalid && socialNumber?.touched"
+              *ngIf="socialNumber.invalid && socialNumber.touched"
               class="text-red-600 text-xs"
             >
               Social number must be 9 digits.
             </div>
           </div>
-
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Date of Hire <span class="text-red-600">*</span>
-            </label>
-            <input
-              type="date"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.dateOfHire"
-              name="dateofhire"
-              #dateofhire="ngModel"
-              required
-            />
-            <div
-              *ngIf="dateofhire.invalid && dateofhire.touched"
-              class="text-red-600 text-xs"
-            >
-              Date of hire is required.
-            </div>
-          </div>
         </div>
+
+        <!-- Contact Section -->
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Contact</h4>
+
         <div class="flex flex-row justify-center flex-wrap gap-4">
           <!-- Phone -->
           <div class="flex flex-col gap-1">
@@ -196,17 +203,16 @@ import { CommonModule } from '@angular/common';
             </label>
             <input
               type="tel"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. +1234567890"
-              [(ngModel)]="formData.phone"
+              [(ngModel)]="formData.phone_number"
               name="phone"
-              required
               pattern="^[0-9]{10}$"
               #phone="ngModel"
-              [ngClass]="{ 'border-red-600': phone?.invalid && phone?.touched }"
+              required
             />
             <div
-              *ngIf="phone?.invalid && phone?.touched"
+              *ngIf="phone.invalid && phone.touched"
               class="text-red-600 text-xs"
             >
               Phone number must be exactly 10 digits.
@@ -220,32 +226,34 @@ import { CommonModule } from '@angular/common';
             </label>
             <input
               type="email"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. example@example.com"
               [(ngModel)]="formData.email"
               name="email"
-              required
               #email="ngModel"
-              [ngClass]="{ 'border-red-600': email?.invalid && email?.touched }"
+              required
             />
             <div
-              *ngIf="email?.invalid && email?.touched"
+              *ngIf="email.invalid && email.touched"
               class="text-red-600 text-xs"
             >
               Please enter a valid email.
             </div>
           </div>
         </div>
+
+        <!-- Work Field Section -->
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Work Field</h4>
 
         <div class="flex flex-row justify-center flex-wrap gap-4">
+          <!-- Role -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
               Role <span class="text-red-600">*</span>
             </label>
             <input
               type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. Manager"
               [(ngModel)]="formData.role"
               name="role"
@@ -260,15 +268,16 @@ import { CommonModule } from '@angular/common';
             </div>
           </div>
 
+          <!-- Specialty -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
               Specialty <span class="text-red-600">*</span>
             </label>
             <input
               type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              class="border rounded-md w-96 p-2 text-sm"
               placeholder="e.g. IT Specialist"
-              [(ngModel)]="formData.specialty"
+              [(ngModel)]="formData.speciality"
               name="specialty"
               #specialty="ngModel"
               required
@@ -282,10 +291,11 @@ import { CommonModule } from '@angular/common';
           </div>
         </div>
 
+        <!-- Buttons -->
         <div class="flex flex-row justify-end gap-3">
           <button
             type="button"
-            class="text-main border-main font-semibold border-[2px] p-2 w-32 rounded-md mt-4"
+            class="text-main border-main font-semibold border-2 p-2 w-32 rounded-md mt-4"
             (click)="onCancel()"
           >
             Cancel

@@ -146,7 +146,8 @@ export class WorkersComponent implements OnInit {
     this.filteredWorkers = this.workers.filter(
       (worker) =>
         this.searchByName
-          ? worker.name.toLowerCase().includes(query) // Filter by name
+          ? worker.first_name.toLowerCase().includes(query) ||
+            worker.last_name.toLowerCase().includes(query) // Filter by name
           : worker.role.toLowerCase().includes(query) // Filter by role
     );
   }
