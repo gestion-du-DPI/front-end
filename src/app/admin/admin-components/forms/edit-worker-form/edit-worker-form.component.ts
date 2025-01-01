@@ -217,6 +217,7 @@ export class EditWorkerFormComponent {
         },
         error: (error) => {
           console.error('Error updating worker:', error);
+          window.alert('Error updating worker');
         },
       });
     } else {

@@ -164,7 +164,7 @@ export class WorkersTableComponent {
    */
   onConfirmDelete(): void {
     if (this.workerToDelete) {
-      this.workerService.deleteWorker(this.workerToDelete.id).subscribe({
+      this.workerService.deleteWorker(this.workerToDelete.user_id).subscribe({
         next: () => {
           console.log('Patient deleted successfully');
           this.showConfirmDeletePopup = false;

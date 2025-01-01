@@ -62,12 +62,14 @@ export class WorkerService {
       );
   }
 
-  deleteWorker(workerId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${workerId}`).pipe(
-      catchError((error) => {
-        console.error('Error deleting worker:', error);
-        return throwError(() => new Error('Error deleting worker'));
-      })
-    );
+  deleteWorker(workerId: number): Observable<void> {
+    return this.http
+      .delete<void>(`${this.apiUrl}/admin/deleteuser/${workerId.toString()}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error deleting worker:', error);
+          return throwError(() => new Error('Error deleting worker'));
+        })
+      );
   }
 }
