@@ -1,4 +1,5 @@
 export interface Consultation {
+  id: number; // Added id property
   date: string;
   doctor: string;
   createdOn: string;
@@ -11,6 +12,7 @@ export interface Consultation {
 
 export const consultations: Consultation[] = [
   {
+    id: 1,
     date: "Jun 12",
     doctor: "Dr. Mostefai",
     createdOn: "15:32",
@@ -21,6 +23,7 @@ export const consultations: Consultation[] = [
     briefing: "The patient was shot three times and is under observation."
   },
   {
+    id: 2,
     date: "Jun 12",
     doctor: "Dr. Mostefai",
     createdOn: "15:32",
@@ -31,6 +34,7 @@ export const consultations: Consultation[] = [
     briefing: "The patient's condition is improving, pending further tests."
   },
   {
+    id: 3,
     date: "Jun 12",
     doctor: "Dr. Mostefai",
     createdOn: "15:32",
@@ -41,6 +45,7 @@ export const consultations: Consultation[] = [
     briefing: "Awaiting doctor's review to finalize treatment plan."
   },
   {
+    id: 4,
     date: "Jun 12",
     doctor: "Dr. Mostefai",
     createdOn: "15:32",
@@ -51,6 +56,7 @@ export const consultations: Consultation[] = [
     briefing: "The patient has fully recovered after successful treatment."
   },
   {
+    id: 5,
     date: "Jun 12",
     doctor: "Dr. Mostefai",
     createdOn: "15:32",

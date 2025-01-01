@@ -84,7 +84,7 @@ export const appRoutes: Routes = [
           ).then((m) => m.PatientDetailsComponent),
       },
       {
-        path: 'consultation',
+        path: 'consultation-details/:id',
         loadComponent: () =>
           import(
             './doctor/doctor-pages/consultation-details/consultation-details.component'
