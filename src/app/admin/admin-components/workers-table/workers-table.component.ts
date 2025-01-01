@@ -32,10 +32,10 @@ import { WorkerService } from '../../../services/admin/worker/worker.service';
                 [src]="worker.profile_image || 'no-pfp.png'"
                 class="w-full h-full object-cover rounded-full"
                 alt="Profile Picture"
-                (click)="onProfilePictureClick(fileInput)"
               />
               <div
                 class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100"
+                (click)="onProfilePictureClick(fileInput)"
               >
                 <img
                   src="edit-pfp-worker-fi-admin.png"
@@ -48,6 +48,7 @@ import { WorkerService } from '../../../services/admin/worker/worker.service';
               type="file"
               #fileInput
               class="hidden"
+              accept="image/*"
               (change)="onImageUpload($event, worker)"
             />
             <div class="flex flex-col">
@@ -190,23 +191,30 @@ export class WorkersTableComponent {
    * @param patient The patient whose profile picture is being updated.
    */
   onImageUpload(event: Event, patient: any): void {
-    const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement; // Access the file input
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const updatedProfilePicture = e.target.result;
-        patient.profilePicture = updatedProfilePicture;
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp']; // Add allowed extensions
+      const fileExtension = file.name.split('.').pop()?.toLowerCase(); // Extract the file extension
 
-        this.workerService
-          .editWorker({ ...patient, profilePicture: updatedProfilePicture })
-          .subscribe({
-            next: () => console.log('Profile picture updated successfully'),
-            error: (err) =>
-              console.error('Error updating profile picture:', err),
-          });
-      };
-      reader.readAsDataURL(file);
+      // Validate file extension
+      if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+        console.error('Selected file does not have a valid image extension.');
+        return;
+      }
+      // Create FormData and append the file and any additional fields
+      const formData = new FormData();
+      formData.append('image', file); // Append the image with the key 'image'
+      console.log(formData);
+      // Call the service method to send the request
+      this.workerService.editpfpWorker(formData, patient.user_id).subscribe({
+        next: () => {
+          console.log('Profile picture updated successfully');
+          this.reloadWorkers();
+        },
+        error: (err: any) =>
+          console.error('Error updating profile picture:', err),
+      });
     }
   }
 

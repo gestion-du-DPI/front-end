@@ -62,6 +62,17 @@ export class WorkerService {
       );
   }
 
+  editpfpWorker(formData: FormData, userId:number): Observable<any> {
+    return this.http
+      .patch(`${this.apiUrl}/admin/modifyuser/${userId.toString()}`, formData) // Send the FormData to the backend
+      .pipe(
+        catchError((error) => {
+          console.error('Error editing worker:', error);
+          return throwError(() => new Error('Error editing worker'));
+        })
+      );
+  }
+
   deleteWorker(workerId: number): Observable<void> {
     return this.http
       .delete<void>(`${this.apiUrl}/admin/deleteuser/${workerId.toString()}`)

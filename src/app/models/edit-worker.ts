@@ -21,3 +21,4 @@ export interface WorkerToSend {
   phone_number: string;
   email: string;
 }
+
