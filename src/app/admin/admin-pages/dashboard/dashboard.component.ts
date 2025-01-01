@@ -208,7 +208,7 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
               href="#"
               class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
               style="letter-spacing: 1px;"
-              routerLink="/staff"
+              routerLink="/admin/staff"
               >SEE ALL WORKERS</a
             >
             <img src="dashboard-seeall.svg" alt="" />

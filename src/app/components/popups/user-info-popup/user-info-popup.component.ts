@@ -19,7 +19,7 @@ import { DashboardService } from '../../../services/admin/dashboard/dashboard.se
       <div>
         <div class="flex flex-row items-center gap-5 mx-3">
           <img
-            src="admin-pfp.jpg"
+            src=[src]="title.pfp || 'admin-pfp.jpg'"
             class="w-16 h-16 object-cover rounded-full"
             alt="profile"
           />
@@ -81,6 +81,7 @@ export class UserInfoPopupComponent {
   doctorEmail = '';
   staffNumber = '';
   patientsNumber = '';
+  pfp = '';
 
   constructor(
     private dashboardService: DashboardService,
@@ -98,6 +99,7 @@ export class UserInfoPopupComponent {
       this.doctorEmail = cachedData.admin_info.email;
       this.staffNumber = cachedData.role_counts.doctors.toString();
       this.patientsNumber = cachedData.role_counts.patients.toString();
+      this.pfp = cachedData.admin_info.profile_image;
     } else {
       cachedData.subscribe((dataFetched: any) => {
         if ('admin_info' in dataFetched && 'role_counts' in dataFetched) {
@@ -108,6 +110,7 @@ export class UserInfoPopupComponent {
           this.doctorEmail = dataFetched.admin_info.email;
           this.staffNumber = dataFetched.role_counts.doctors.toString();
           this.patientsNumber = dataFetched.role_counts.patients.toString();
+          this.pfp = dataFetched.admin_info.profile_image;
         }
       });
     }

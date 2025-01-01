@@ -208,6 +208,7 @@ export class WorkersTableComponent {
       // Call the service method to send the request
       this.workerService.editpfpWorker(formData, patient.user_id).subscribe({
         next: () => {
+          window.location.reload();
           console.log('Profile picture updated successfully');
         },
         error: (err: any) =>

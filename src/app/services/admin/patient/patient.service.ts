@@ -57,6 +57,17 @@ export class PatientService {
       );
   }
 
+  editpfpPatient(formData: FormData, userId: number): Observable<any> {
+    return this.http
+      .patch(`${this.apiUrl}/admin/modifyworker/${userId.toString()}`, formData) // Send the FormData to the backend
+      .pipe(
+        catchError((error) => {
+          console.error('Error editing worker:', error);
+          return throwError(() => new Error('Error editing worker'));
+        })
+      );
+  }
+
   deletePatient(patientId: number): Observable<void> {
     return this.http
       .delete<void>(`${this.apiUrl}/admin/deleteuser/${patientId.toString()}`)

@@ -13,7 +13,7 @@ import { DashboardService } from '../../services/admin/dashboard/dashboard.servi
       (click)="togglePopup()"
     >
       <img
-        src="admin-pfp.jpg"
+        [src]="title.pfp || 'admin-pfp.jpg'"
         class="w-12 h-12 object-cover rounded-full"
         alt="Admin Profile Picture"
       />
@@ -27,7 +27,11 @@ import { DashboardService } from '../../services/admin/dashboard/dashboard.servi
   styles: ``,
 })
 export class UserBadgeComponent {
-  title: { id: number; name: string } = { id: 0, name: '' };
+  title: { id: number; name: string; pfp: string } = {
+    id: 0,
+    name: '',
+    pfp: '',
+  };
   constructor(private dashboardService: DashboardService) {}
 
   showPopup: boolean = false;
@@ -37,10 +41,12 @@ export class UserBadgeComponent {
     if ('admin_info' in data) {
       this.title.id = data.admin_info.id;
       this.title.name = data.admin_info.name;
+      this.title.pfp = data.admin_info.profile_image;
     } else {
       data.subscribe((dataCatched: any) => {
         this.title.id = dataCatched.admin_info.id;
         this.title.name = dataCatched.admin_info.name;
+        this.title.pfp = dataCatched.admin_info.profile_image;
       });
     }
     console.log(this.title);

@@ -5,6 +5,7 @@ export interface AdminInfo {
   address: string;
   phone_number: string;
   email: string;
+  profile_image: string;
 }
 
 export interface RoleCounts {

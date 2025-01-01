@@ -204,23 +204,30 @@ export class PatientsTableComponent {
    * @param patient The patient whose profile picture is being updated.
    */
   onImageUpload(event: Event, patient: any): void {
-    const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement; // Access the file input
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const updatedProfilePicture = e.target.result;
-        patient.profilePicture = updatedProfilePicture;
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp']; // Add allowed extensions
+      const fileExtension = file.name.split('.').pop()?.toLowerCase(); // Extract the file extension
 
-        this.patientService
-          .editPatient({ ...patient, profilePicture: updatedProfilePicture })
-          .subscribe({
-            next: () => console.log('Profile picture updated successfully'),
-            error: (err) =>
-              console.error('Error updating profile picture:', err),
-          });
-      };
-      reader.readAsDataURL(file);
+      // Validate file extension
+      if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+        console.error('Selected file does not have a valid image extension.');
+        return;
+      }
+      // Create FormData and append the file and any additional fields
+      const formData = new FormData();
+      formData.append('image', file); // Append the image with the key 'image'
+      console.log(formData);
+      // Call the service method to send the request
+      this.patientService.editpfpPatient(formData, patient.user_id).subscribe({
+        next: () => {
+          window.location.reload();
+          console.log('Profile picture updated successfully');
+        },
+        error: (err: any) =>
+          console.error('Error updating profile picture:', err),
+      });
     }
   }
 
