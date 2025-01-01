@@ -6,6 +6,8 @@ export interface AdminInfo {
   phone_number: string;
   email: string;
   profile_image: string;
+  patients_count: number;
+  workers_count: number;
 }
 
 export interface RoleCounts {

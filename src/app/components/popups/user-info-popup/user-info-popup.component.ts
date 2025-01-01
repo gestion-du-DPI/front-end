@@ -19,7 +19,7 @@ import { DashboardService } from '../../../services/admin/dashboard/dashboard.se
       <div>
         <div class="flex flex-row items-center gap-5 mx-3">
           <img
-            src=[src]="title.pfp || 'admin-pfp.jpg'"
+            [src]="pfp || 'admin-pfp.jpg'"
             class="w-16 h-16 object-cover rounded-full"
             alt="profile"
           />
@@ -91,18 +91,18 @@ export class UserInfoPopupComponent {
   ngOnInit() {
     const cachedData = this.dashboardService.getcachedData();
 
-    if ('admin_info' in cachedData && 'role_counts' in cachedData) {
+    if ('admin_info' in cachedData) {
       this.doctorName = cachedData.admin_info.name;
       this.doctorHospital = cachedData.admin_info.hospital;
       this.doctorAddress = cachedData.admin_info.address;
       this.doctorPhoneNumber = cachedData.admin_info.phone_number;
       this.doctorEmail = cachedData.admin_info.email;
-      this.staffNumber = cachedData.role_counts.doctors.toString();
-      this.patientsNumber = cachedData.role_counts.patients.toString();
+      this.staffNumber = cachedData.admin_info.workers_count.toString();
+      this.patientsNumber = cachedData.admin_info.patients_count.toString();
       this.pfp = cachedData.admin_info.profile_image;
     } else {
       cachedData.subscribe((dataFetched: any) => {
-        if ('admin_info' in dataFetched && 'role_counts' in dataFetched) {
+        if ('admin_info' in dataFetched) {
           this.doctorName = dataFetched.admin_info.name;
           this.doctorHospital = dataFetched.admin_info.hospital;
           this.doctorAddress = dataFetched.admin_info.address;

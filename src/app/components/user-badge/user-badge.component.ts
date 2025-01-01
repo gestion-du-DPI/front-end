@@ -53,6 +53,7 @@ export class UserBadgeComponent {
   }
 
   togglePopup() {
+    console.log('toggle');
     this.showPopup = !this.showPopup;
   }
 
