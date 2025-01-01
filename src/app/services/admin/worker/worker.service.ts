@@ -14,14 +14,14 @@ export class WorkerService {
   constructor(private http: HttpClient) {}
 
   getWorkers(): Observable<Worker[]> {
-    return of([]); // Returning static workers data as fallback
-    // return this.http.get<Worker[]>(this.apiUrl).pipe(
-    //   catchError((error) => {
-    //     console.error('Error fetching workers:', error);
-    //     // Return a fallback value in case of an error
-    //     return of([]); // Returning static workers data as fallback
-    //   })
-    // );
+    // return of([]); // Returning static workers data as fallback
+    return this.http.get<Worker[]>(`${this.apiUrl}/admin/workers`).pipe(
+      catchError((error) => {
+        console.error('Error fetching workers:', error);
+        // Return a fallback value in case of an error
+        return of([]); // Returning static workers data as fallback
+      })
+    );
   }
 
   addWorker(worker: Worker): Observable<Worker> {

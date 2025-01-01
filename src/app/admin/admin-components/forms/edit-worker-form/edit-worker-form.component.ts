@@ -35,7 +35,7 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. Mostefai Mounir"
-              [(ngModel)]="formData.name"
+              [(ngModel)]="formData.first_name"
               name="fullName"
               #fullName="ngModel"
               required
@@ -78,7 +78,7 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
             <input
               type="date"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.dateOfBirth"
+              [(ngModel)]="formData.date_of_birth"
               name="birthday"
               #birthday="ngModel"
               required
@@ -100,7 +100,7 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. Algiers"
-              [(ngModel)]="formData.placeOfBirth"
+              [(ngModel)]="formData.place_of_birth"
               name="placeOfBirth"
               required
               #placeOfBirth="ngModel"
@@ -150,7 +150,7 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. 123456789"
-              [(ngModel)]="formData.socialNumber"
+              [(ngModel)]="formData.nss"
               name="socialNumber"
               required
               pattern="^[0-9]{9}$"
@@ -166,26 +166,6 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
               Social number must be 9 digits.
             </div>
           </div>
-
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Date of Hire <span class="text-red-600">*</span>
-            </label>
-            <input
-              type="date"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.dateOfHire"
-              name="dateofhire"
-              #dateofhire="ngModel"
-              required
-            />
-            <div
-              *ngIf="dateofhire.invalid && dateofhire.touched"
-              class="text-red-600 text-xs"
-            >
-              Date of hire is required.
-            </div>
-          </div>
         </div>
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Contact</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
@@ -198,7 +178,7 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
               type="tel"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. +1234567890"
-              [(ngModel)]="formData.phone"
+              [(ngModel)]="formData.phone_number"
               name="phone"
               required
               pattern="^[0-9]{10}$"
@@ -268,7 +248,7 @@ import { WorkerService } from '../../../../services/admin/worker/worker.service'
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. IT Specialist"
-              [(ngModel)]="formData.specialty"
+              [(ngModel)]="formData.speciality"
               name="specialty"
               #specialty="ngModel"
               required

@@ -3,18 +3,18 @@ import { HeaderComponent } from '../../admin-components/header/header.component'
 import { NewWorkerFormComponent } from '../../admin-components/forms/new-worker-form/new-worker-form.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Worker } from '../../../models/worker';
 import { WorkerService } from '../../../services/admin/worker/worker.service';
 import { WorkersTableComponent } from '../../admin-components/workers-table/workers-table.component';
 
 @Component({
   selector: 'app-workers',
+  standalone: true,
   imports: [
-    WorkersTableComponent,
-    HeaderComponent,
-    NewWorkerFormComponent,
     CommonModule,
     FormsModule,
+    HeaderComponent,
+    NewWorkerFormComponent,
+    WorkersTableComponent,
   ],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
@@ -66,12 +66,11 @@ import { WorkersTableComponent } from '../../admin-components/workers-table/work
         </div>
       </div>
       <div *ngIf="loading" class="self-center mt-10">
-        <img src="logo.png" class=" animate-spin" alt="" />
+        <img src="logo.png" class="animate-spin" alt="Loading..." />
       </div>
       <div *ngIf="!loading">
-        <app-workers-table [workers]="filteredWorkers" />
+        <app-workers-table [workers]="filteredWorkers"></app-workers-table>
       </div>
-
       <div class="popup" *ngIf="showNewWorkerForm">
         <app-new-worker-form
           (cancel)="onCancelWorkerForm()"
@@ -80,21 +79,23 @@ import { WorkersTableComponent } from '../../admin-components/workers-table/work
       </div>
     </div>
   `,
-  styles: `
-    span {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-  `,
+  styles: [
+    `
+      span {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+    `,
+  ],
 })
 export class WorkersComponent implements OnInit {
-  workersNumber = 0; // Dynamically update based on the number of workers
+  workersNumber = 0;
   showNewWorkerForm = false;
-  searchQuery = ''; // Tracks the input query
-  searchByName = true; // Toggles search filter between name and role
-  loading: boolean = false;
+  searchQuery = '';
+  searchByName = true;
+  loading = false;
 
-  workers: Worker[] = [];
-  filteredWorkers: Worker[] = []; // Tracks the filtered workers
+  workers: any[] = [];
+  filteredWorkers: any[] = [];
 
   constructor(private workerService: WorkerService) {}
 
@@ -103,57 +104,58 @@ export class WorkersComponent implements OnInit {
   }
 
   loadWorkers(): void {
-    this.loading = true; // Show loading spinner
+    this.loading = true;
     this.workerService.getWorkers().subscribe({
-      next: (data) => {
-        console.log(data); // Log the data to check if the workers are fetched
-        this.workers = data;
-        this.filteredWorkers = data; // Update filteredWorkers here
-        this.workersNumber = data.length; // Update the workers count
-        this.loading = false; // Hide loading spinner
+      next: (response: any) => {
+        this.workers = response.workers.map(
+          (worker: {
+            user_id: number;
+            name: string;
+            role: string;
+            speciality: string;
+            email: string;
+            phone_number: string;
+            nss: string;
+            address: string;
+            created_at: string;
+          }) => ({
+            ...worker,
+            first_name: worker.name.split(' ')[0],
+            last_name: worker.name.split(' ').slice(1).join(' '),
+          })
+        );
+        this.filteredWorkers = [...this.workers];
+        this.workersNumber = this.workers.length;
+        this.loading = false;
+        console.log('Workers loaded:', this.filteredWorkers);
       },
       error: (err) => {
         console.error('Error fetching workers:', err);
-        this.loading = false; // Hide loading spinner
+        this.loading = false;
       },
     });
   }
 
   reloadWorkers(): void {
     this.showNewWorkerForm = false;
-    this.loading = true; // Show loading spinner
-    this.workerService.getWorkers().subscribe({
-      next: (workers) => {
-        this.workers = workers;
-        this.filteredWorkers = workers; // Ensure filteredWorkers is also updated
-        this.workersNumber = workers.length; // Update the worker count
-        this.loading = false; // Hide loading spinner
-      },
-      error: (err) => {
-        console.error('Error fetching workers:', err);
-        this.loading = false; // Hide loading spinner
-      },
-    });
+    this.loadWorkers();
   }
 
   toggleSearchFilter(): void {
-    this.searchByName = !this.searchByName; // Toggle between name and role search
-    this.onSearch(); // Apply the current query to the new filter
+    this.searchByName = !this.searchByName;
+    this.onSearch();
   }
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredWorkers = this.workers.filter(
-      (worker) =>
-        this.searchByName
-          ? worker.first_name.toLowerCase().includes(query) ||
-            worker.last_name.toLowerCase().includes(query) // Filter by name
-          : worker.role.toLowerCase().includes(query) // Filter by role
+    this.filteredWorkers = this.workers.filter((worker) =>
+      this.searchByName
+        ? worker.name.toLowerCase().includes(query)
+        : worker.role.toLowerCase().includes(query)
     );
   }
 
   onAddWorker(): void {
-    console.log('Add new worker');
     this.showNewWorkerForm = true;
   }
 

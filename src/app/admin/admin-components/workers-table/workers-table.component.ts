@@ -26,12 +26,23 @@ import { WorkerService } from '../../../services/admin/worker/worker.service';
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
         <tr *ngFor="let worker of workers" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
-            <img
-              [src]="worker.profilePicture || 'no-pfp.png'"
-              class="w-10 object-cover h-10 rounded-full cursor-pointer"
-              alt="Profile Picture"
-              (click)="onProfilePictureClick(fileInput)"
-            />
+            <div class="relative w-10 h-10 rounded-full cursor-pointer group">
+              <img
+                [src]="worker.profile_image || 'no-pfp.png'"
+                class="w-full h-full object-cover rounded-full"
+                alt="Profile Picture"
+                (click)="onProfilePictureClick(fileInput)"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100"
+              >
+                <img
+                  src="edit-pfp-worker-fi-admin.png"
+                  class="rounded-xl w-7 h-7"
+                  alt="edit"
+                />
+              </div>
+            </div>
             <input
               type="file"
               #fileInput
@@ -45,12 +56,15 @@ import { WorkerService } from '../../../services/admin/worker/worker.service';
               </span>
             </div>
           </td>
+
           <td>{{ worker.role }}</td>
           <td class="hidden md:table-cell">{{ worker.email }}</td>
-          <td>{{ worker.phone }}</td>
-          <td class="hidden lg:table-cell">{{ worker.socialNumber }}</td>
+          <td>{{ worker.phone_number }}</td>
+          <td class="hidden lg:table-cell">{{ worker.nss }}</td>
           <td class="hidden lg:table-cell">{{ worker.address }}</td>
-          <td class="hidden lg:table-cell">{{ worker.dateOfHire }}</td>
+          <td class="hidden lg:table-cell">
+            {{ worker.created_at | date : 'yyyy-MM-dd' }}
+          </td>
           <td class="icon cursor-pointer px-0" (click)="onEdit(worker)">
             <img
               src="edit-icon.svg"
