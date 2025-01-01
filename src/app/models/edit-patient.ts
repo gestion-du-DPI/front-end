@@ -1,6 +1,7 @@
 export interface EditPatient {
   user_id: number;
-  name: string;
+  first_name: string;
+  last_name: string;
   created_at: string;
   nss: string;
   email: string;
@@ -13,7 +14,8 @@ export interface EditPatient {
 }
 
 export interface PatientToSend {
-  name: string;
+  first_name: string;
+  last_name: string;
   nss: string;
   email: string;
   address: string;
@@ -21,4 +23,3 @@ export interface PatientToSend {
   emergency_contact_name: string;
   emergency_contact_phone: string;
 }
-

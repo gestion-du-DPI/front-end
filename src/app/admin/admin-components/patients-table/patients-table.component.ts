@@ -172,15 +172,18 @@ export class PatientsTableComponent {
    */
   onConfirmDelete(): void {
     if (this.patientToDelete) {
-      this.patientService.deletePatient(this.patientToDelete.id).subscribe({
-        next: () => {
-          console.log('Patient deleted successfully');
-          this.showConfirmDeletePopup = false;
-          this.reloadPatients();
-        },
-        error: (err) => console.error('Error deleting patient:', err),
-        complete: () => (this.patientToDelete = null),
-      });
+      console.log('Deleting patient:', this.patientToDelete);
+      this.patientService
+        .deletePatient(this.patientToDelete.user_id)
+        .subscribe({
+          next: () => {
+            console.log('Patient deleted successfully');
+            this.showConfirmDeletePopup = false;
+            this.reloadPatients();
+          },
+          error: (err) => console.error('Error deleting patient:', err),
+          complete: () => (this.patientToDelete = null),
+        });
     }
   }
 
@@ -188,10 +191,7 @@ export class PatientsTableComponent {
    * Reloads the list of patients from the server.
    */
   reloadPatients(): void {
-    this.patientService.getPatients().subscribe({
-      next: (patients) => (this.patients = patients),
-      error: (err) => console.error('Error fetching patients:', err),
-    });
+    window.location.reload();
   }
 
   onProfilePictureClick(fileInput: HTMLInputElement): void {

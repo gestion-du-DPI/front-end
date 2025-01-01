@@ -263,10 +263,10 @@ export class EditPatientFormComponent {
   constructor(private patientService: PatientService) {}
 
   submitForm(form: NgForm) {
-    console.log('Rani hna', this.formData);
     const patientToSend: EditPatient = {
       user_id: this.formData.user_id,
-      name: this.formData.first_name + ' ' + this.formData.last_name,
+      first_name: this.formData.first_name,
+      last_name: this.formData.last_name,
       nss: this.formData.nss,
       address: this.formData.address,
       phone_number: this.formData.phone_number,

@@ -34,7 +34,8 @@ export class PatientService {
 
   editPatient(patient: EditPatient): Observable<PatientToSend> {
     const patientToSend: PatientToSend = {
-      name: patient.name,
+      first_name: patient.first_name,
+      last_name: patient.last_name,
       nss: patient.nss,
       address: patient.address,
       phone_number: patient.phone_number,
@@ -56,12 +57,14 @@ export class PatientService {
       );
   }
 
-  deletePatient(patientId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${patientId}`).pipe(
-      catchError((error) => {
-        console.error('Error deleting patient:', error);
-        return throwError(() => new Error('Error deleting patient'));
-      })
-    );
+  deletePatient(patientId: number): Observable<void> {
+    return this.http
+      .delete<void>(`${this.apiUrl}/admin/deleteuser/${patientId.toString()}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error deleting patient:', error);
+          return throwError(() => new Error('Error deleting patient'));
+        })
+      );
   }
 }
