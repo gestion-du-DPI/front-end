@@ -51,7 +51,7 @@ export class WorkerService {
     };
     return this.http
       .patch<WorkerToSend>(
-        `${this.apiUrl}/admin/modifyuser/${worker.user_id}`,
+        `${this.apiUrl}/admin/modifyworker/${worker.user_id}`,
         workerToSend
       )
       .pipe(
@@ -62,9 +62,9 @@ export class WorkerService {
       );
   }
 
-  editpfpWorker(formData: FormData, userId:number): Observable<any> {
+  editpfpWorker(formData: FormData, userId: number): Observable<any> {
     return this.http
-      .patch(`${this.apiUrl}/admin/modifyuser/${userId.toString()}`, formData) // Send the FormData to the backend
+      .patch(`${this.apiUrl}/admin/modifyworker/${userId.toString()}`, formData) // Send the FormData to the backend
       .pipe(
         catchError((error) => {
           console.error('Error editing worker:', error);

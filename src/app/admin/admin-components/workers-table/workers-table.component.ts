@@ -129,7 +129,6 @@ import { WorkerService } from '../../../services/admin/worker/worker.service';
 })
 export class WorkersTableComponent {
   @Input() workers: any[] = []; // Accept filtered workers list as input
-
   showConfirmDeletePopup = false;
   showEditWorkersPopup = false;
 
@@ -210,7 +209,6 @@ export class WorkersTableComponent {
       this.workerService.editpfpWorker(formData, patient.user_id).subscribe({
         next: () => {
           console.log('Profile picture updated successfully');
-          this.reloadWorkers();
         },
         error: (err: any) =>
           console.error('Error updating profile picture:', err),

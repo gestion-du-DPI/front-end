@@ -3,6 +3,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Patient } from '../../../../models/patient';
 import { PatientService } from '../../../../services/admin/patient/patient.service';
 import { CommonModule } from '@angular/common';
+import { EditPatient } from '../../../../models/edit-patient';
 
 @Component({
   selector: 'app-edit-patient-form',
@@ -74,82 +75,6 @@ import { CommonModule } from '@angular/common';
               class="text-red-600 text-xs"
             >
               Last name is required.
-            </div>
-          </div>
-
-          <!-- Gender -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Gender <span class="text-red-600">*</span>
-            </label>
-            <select
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.gender"
-              name="gender"
-              required
-              #gender="ngModel"
-              [ngClass]="{
-                'border-red-600': gender?.invalid && gender?.touched
-              }"
-            >
-              <option value="" disabled selected>Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <div
-              *ngIf="gender?.invalid && gender?.touched"
-              class="text-red-600 text-xs"
-            >
-              Gender is required.
-            </div>
-          </div>
-
-          <!-- Date of Birth -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Date of Birth <span class="text-red-600">*</span>
-            </label>
-            <input
-              type="date"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.date_of_birth"
-              name="date_of_birth"
-              required
-              #dateOfBirth="ngModel"
-              [ngClass]="{
-                'border-red-600': dateOfBirth?.invalid && dateOfBirth?.touched
-              }"
-            />
-            <div
-              *ngIf="dateOfBirth?.invalid && dateOfBirth?.touched"
-              class="text-red-600 text-xs"
-            >
-              Date of birth is required.
-            </div>
-          </div>
-
-          <!-- Place of Birth -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Place of Birth <span class="text-red-600">*</span>
-            </label>
-            <input
-              type="text"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. Algiers"
-              [(ngModel)]="formData.place_of_birth"
-              name="place_of_birth"
-              required
-              #placeOfBirth="ngModel"
-              [ngClass]="{
-                'border-red-600': placeOfBirth?.invalid && placeOfBirth?.touched
-              }"
-            />
-            <div
-              *ngIf="placeOfBirth?.invalid && placeOfBirth?.touched"
-              class="text-red-600 text-xs"
-            >
-              Place of birth is required.
             </div>
           </div>
 
@@ -308,31 +233,6 @@ import { CommonModule } from '@angular/common';
               Emergency contact phone is required.
             </div>
           </div>
-
-          <!-- Medical Condition -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Medical Condition <span class="text-red-600">*</span>
-            </label>
-            <textarea
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. Diabetes, Hypertension"
-              [(ngModel)]="formData.medical_condition"
-              name="medical_condition"
-              required
-              #medicalCondition="ngModel"
-              [ngClass]="{
-                'border-red-600':
-                  medicalCondition?.invalid && medicalCondition?.touched
-              }"
-            ></textarea>
-            <div
-              *ngIf="medicalCondition?.invalid && medicalCondition?.touched"
-              class="text-red-600 text-xs"
-            >
-              Medical condition is required.
-            </div>
-          </div>
         </div>
 
         <div class="flex flex-row justify-end gap-3">
@@ -356,15 +256,29 @@ import { CommonModule } from '@angular/common';
   `,
 })
 export class EditPatientFormComponent {
-  @Input() formData: Patient = {} as Patient;
+  @Input() formData!: any;
   @Output() cancel = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
 
   constructor(private patientService: PatientService) {}
 
   submitForm(form: NgForm) {
+    console.log('Rani hna', this.formData);
+    const patientToSend: EditPatient = {
+      user_id: this.formData.user_id,
+      name: this.formData.first_name + ' ' + this.formData.last_name,
+      nss: this.formData.nss,
+      address: this.formData.address,
+      phone_number: this.formData.phone_number,
+      email: this.formData.email,
+      emergency_contact_name: this.formData.emergency_contact_name,
+      emergency_contact_phone: this.formData.emergency_contact_phone,
+      created_at: this.formData.created_at || new Date().toISOString(),
+      consultation_count: this.formData.consultation_count || 0,
+      profile_image: this.formData.profile_image || '',
+    };
     if (form.valid) {
-      this.patientService.editPatient(this.formData).subscribe({
+      this.patientService.editPatient(patientToSend).subscribe({
         next: (response) => {
           console.log('Patient updated successfully:', response);
           this.onSave();

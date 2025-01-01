@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PatientsTableComponent } from '../../admin-components/patients-table/patients-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
-import { Patient } from '../../../models/patient';
 import { PatientService } from '../../../services/admin/patient/patient.service';
 
 @Component({
@@ -64,8 +62,8 @@ export class PatientsComponent implements OnInit {
   searchQuery = ''; // Tracks the input query
   loading: boolean = false;
 
-  patients: Patient[] = [];
-  filteredPatients: Patient[] = []; // Tracks the filtered patients
+  patients: any[] = [];
+  filteredPatients: any[] = []; // Tracks the filtered patients
 
   constructor(private patientService: PatientService) {}
 
@@ -75,29 +73,42 @@ export class PatientsComponent implements OnInit {
 
   loadPatients(): void {
     this.loading = true; // Show loading spinner
-    this.patientService.getPatients().subscribe((data) => {
-      console.log(data); // Log the data to check if the patients are fetched
-      this.patients = data;
-      this.filteredPatients = data; // Update filteredPatients here
-      this.patientsNumber = data.length; // Update the patients count
-      this.loading = false; // Hide loading spinner
+    this.patientService.getPatients().subscribe({
+      next: (response: any) => {
+        this.patients = response.patients.map(
+          (patient: {
+            user_id: number;
+            name: string;
+            created_at: string;
+            nss: string;
+            email: string;
+            address: string;
+            phone_number: string;
+            emergency_contact_name: string;
+            emergency_contact_phone: string;
+            consultation_count: number;
+            profile_image: string;
+          }) => ({
+            ...patient,
+            first_name: patient.name.split(' ')[0],
+            last_name: patient.name.split(' ')[1],
+          })
+        );
+        this.filteredPatients = [...this.patients]; // Ensure filteredPatients is also updated
+        this.patientsNumber = this.patients.length;
+        this.loading = false;
+        console.log('Patients:', this.patients);
+      },
+      error: (err: any) => {
+        console.error('Error fetching patients:', err);
+        this.loading = false; // Hide loading spinner
+      },
     });
   }
 
   reloadPatients(): void {
     this.loading = true; // Show loading spinner
-    this.patientService.getPatients().subscribe({
-      next: (patients) => {
-        this.patients = patients;
-        this.filteredPatients = patients; // Ensure filteredPatients is also updated
-        this.patientsNumber = patients.length; // Update the patient count
-        this.loading = false; // Hide loading spinner
-      },
-      error: (err) => {
-        console.error('Error fetching patients:', err);
-        this.loading = false; // Hide loading spinner
-      },
-    });
+    this.loadPatients();
   }
 
   onSearch(): void {

@@ -8,6 +8,6 @@ export interface Worker {
   nss: string;
   date_of_birth: string;
   place_of_birth: string;
-  role: string;
+  role: 'Doctor' | 'Nurse' | 'Pharmacist' | 'LabTechnician';
   speciality: string;
 }

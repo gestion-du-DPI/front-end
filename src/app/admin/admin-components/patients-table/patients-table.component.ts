@@ -28,12 +28,23 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
         <tr *ngFor="let patient of patients" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
-            <img
-              [src]="patient.profilePicture || 'no-pfp.png'"
-              class="w-10 h-10 rounded-full object-cover cursor-pointer"
-              alt="Profile Picture"
-              (click)="onProfilePictureClick(fileInput)"
-            />
+            <div class="relative w-10 h-10 rounded-full cursor-pointer group">
+              <img
+                [src]="patient.profile_image || 'no-pfp.png'"
+                class="w-full h-full object-cover rounded-full"
+                alt="Profile Picture"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100"
+                (click)="onProfilePictureClick(fileInput)"
+              >
+                <img
+                  src="edit-pfp-worker-fi-admin.png"
+                  class="rounded-xl w-7 h-7"
+                  alt="edit"
+                />
+              </div>
+            </div>
             <input
               type="file"
               #fileInput
@@ -47,12 +58,16 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
             </div>
           </td>
           <td>{{ patient.email }}</td>
-          <td>{{ patient.phone }}</td>
-          <td class="hidden lg:table-cell">{{ patient.socialNumber }}</td>
+          <td>{{ patient.phone_number }}</td>
+          <td class="hidden lg:table-cell">{{ patient.nss }}</td>
           <td class="hidden lg:table-cell">{{ patient.address }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergencyPhone }}</td>
-          <td class="hidden lg:table-cell">{{ patient.consultations }}</td>
+          <td class="hidden lg:table-cell">
+            {{ patient.emergency_contact_name }}
+          </td>
+          <td class="hidden lg:table-cell">
+            {{ patient.emergency_contact_phone }}
+          </td>
+          <td class="hidden lg:table-cell">{{ patient.consultation_count }}</td>
           <td class="icon cursor-pointer px-0" (click)="onEdit(patient)">
             <img
               src="edit-icon.svg"
@@ -125,6 +140,7 @@ export class PatientsTableComponent {
    */
   onEdit(patient: any): void {
     this.selectedPatient = { ...patient }; // Create a shallow copy of the patient object
+    console.log('Editing patient:', this.selectedPatient);
     this.showEditPatientsPopup = true;
   }
 
@@ -178,10 +194,6 @@ export class PatientsTableComponent {
     });
   }
 
-  /**
-   * Triggers the file input for selecting a new profile picture.
-   * @param fileInput The file input element.
-   */
   onProfilePictureClick(fileInput: HTMLInputElement): void {
     fileInput.click();
   }

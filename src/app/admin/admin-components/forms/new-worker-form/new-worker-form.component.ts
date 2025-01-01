@@ -251,15 +251,20 @@ import { CommonModule } from '@angular/common';
             <label class="font-medium text-sm">
               Role <span class="text-red-600">*</span>
             </label>
-            <input
-              type="text"
+            <select
               class="border rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. Manager"
               [(ngModel)]="formData.role"
               name="role"
               #role="ngModel"
               required
-            />
+              aria-placeholder="Select Role"
+            >
+              <option value="" disabled selected>Select Role</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Nurse">Nurse</option>
+              <option value="Pharmacist">Pharmacist</option>
+              <option value="LabTechnician">Lab Technician</option>
+            </select>
             <div
               *ngIf="role.invalid && role.touched"
               class="text-red-600 text-xs"
