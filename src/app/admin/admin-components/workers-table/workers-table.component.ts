@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { ConfirmDeleteWorkerPopupComponent } from '../popups/confirm-delete-worker-popup/confirm-delete-worker-popup.component';
 import { EditWorkerFormComponent } from '../forms/edit-worker-form/edit-worker-form.component';
 import { WorkerService } from '../../../services/admin/worker/worker.service';
+
 @Component({
   selector: 'app-workers-table',
   imports: [
@@ -85,6 +86,7 @@ import { WorkerService } from '../../../services/admin/worker/worker.service';
     </table>
     <div class="popup" *ngIf="showConfirmDeletePopup">
       <app-confirm-delete-worker-popup
+        [worker]="workerToDelete"
         (confirm)="onConfirmDelete()"
         (cancel)="onCancelDelete()"
       ></app-confirm-delete-worker-popup>
@@ -137,6 +139,7 @@ export class WorkersTableComponent {
 
   onEdit(worker: any): void {
     this.selectedWorker = { ...worker }; // Pass the worker data to the popup
+    console.log('Selected worker:', this.selectedWorker);
     this.showEditWorkersPopup = true;
   }
 
@@ -208,9 +211,6 @@ export class WorkersTableComponent {
   }
 
   reloadWorkers(): void {
-    this.workerService.getWorkers().subscribe({
-      next: (workers) => (this.workers = workers),
-      error: (err) => console.error('Error fetching patients:', err),
-    });
+    window.location.reload();
   }
 }

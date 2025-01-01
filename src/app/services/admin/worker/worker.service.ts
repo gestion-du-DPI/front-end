@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Worker } from '../../../models/worker';
+import { EditWorker } from '../../../models/edit-worker';
+import { WorkerToSend } from '../../../models/edit-worker';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -37,13 +39,27 @@ export class WorkerService {
       );
   }
 
-  editWorker(worker: Worker): Observable<Worker> {
-    return this.http.put<Worker>(`${this.apiUrl}`, worker).pipe(
-      catchError((error) => {
-        console.error('Error editing worker:', error);
-        return throwError(() => new Error('Error editing worker'));
-      })
-    );
+  editWorker(worker: EditWorker): Observable<WorkerToSend> {
+    console.log('Editing worker:', worker);
+    const workerToSend: WorkerToSend = {
+      first_name: worker.first_name,
+      last_name: worker.last_name,
+      nss: worker.nss,
+      address: worker.address,
+      phone_number: worker.phone_number,
+      email: worker.email,
+    };
+    return this.http
+      .patch<WorkerToSend>(
+        `${this.apiUrl}/admin/modifyuser/${worker.user_id}`,
+        workerToSend
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error editing worker:', error);
+          return throwError(() => new Error('Error editing worker'));
+        })
+      );
   }
 
   deleteWorker(workerId: string): Observable<void> {

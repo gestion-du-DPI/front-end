@@ -127,7 +127,8 @@ export class WorkersComponent implements OnInit {
         this.filteredWorkers = [...this.workers];
         this.workersNumber = this.workers.length;
         this.loading = false;
-        console.log('Workers loaded:', this.filteredWorkers);
+        console.log('Workers loaded:', this.workers);
+        console.log('Workers filtred loaded:', this.filteredWorkers);
       },
       error: (err) => {
         console.error('Error fetching workers:', err);

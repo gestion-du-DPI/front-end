@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-delete-worker-popup',
@@ -46,6 +46,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   ],
 })
 export class ConfirmDeleteWorkerPopupComponent {
+  @Input() worker!: Worker;
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 

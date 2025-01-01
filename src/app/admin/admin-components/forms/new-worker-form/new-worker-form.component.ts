@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule],
   template: `
     <div
-      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[90vh]"
+      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-auto"
     >
       <!-- Header -->
       <div class="flex flex-row justify-between px-7 pb-3">
