@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { RadiologistInfoComponent } from '../../radiologist-components/radiologist-info/radiologist-info.component';
 import { ResultsObservationsComponent } from '../../radiologist-components/results-observations/results-observations.component';
+import { MedicalCardsContainerComponent } from '../../radiologist-components/medical-cards-container/medical-cards-container.component';
 
 @Component({
   selector: 'app-workspace',
@@ -10,7 +11,8 @@ import { ResultsObservationsComponent } from '../../radiologist-components/resul
     UserBadgeComponent,
     RadiologistInfoComponent,
     ResultsObservationsComponent,
-  ],
+    MedicalCardsContainerComponent
+],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
       <!-- Top Section: Workspace Header -->
@@ -31,8 +33,8 @@ import { ResultsObservationsComponent } from '../../radiologist-components/resul
       <!-- Main Content -->
       <div class="flex flex-row gap-4">
         <!-- Left Section-->
-        <div class="w-1/4 bg-gray-100 p-4">
-          <!-- Placeholder for Requested Tasks-->
+        <div class="w-1/4">
+         <app-medical-cards-container/>
         </div>
 
         <!-- Right Section-->

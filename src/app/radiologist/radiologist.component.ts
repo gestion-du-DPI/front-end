@@ -9,7 +9,7 @@ import { RadiologistSidebarComponent } from './radiologist-components/radiologis
   template: `
     <div>
       <app-radiologist-sidebar></app-radiologist-sidebar>
-      <div class="sm:ml-24">
+      <div class="sm:ml-20">
         <router-outlet></router-outlet>
       </div>
     </div>

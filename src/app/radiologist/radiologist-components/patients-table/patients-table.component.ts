@@ -42,10 +42,10 @@ import { CommonModule } from '@angular/common';
           <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
           <td class="hidden sm:table-cell">{{ patient.emergencyPhone }}</td>
           <td class="hidden lg:table-cell">{{ patient.consultations }}</td>
-          <td class="icon cursor-pointer px-0" (click)="onDPI(patient)">
+          <td class="icon cursor-pointer px-0 w-10" (click)="onDPI(patient)">
             <img
               src="dpi-icon.svg"
-              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              class="hover:bg-slate-100 rounded-xl p-2"
               alt="edit"
             />
           </td>
