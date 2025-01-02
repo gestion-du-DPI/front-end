@@ -97,18 +97,20 @@ import { MedicalTest } from '../../../models/medical-card';
                 {{ test.priority }}
               </div>
             </div>
-            <img
-              [src]="test.patient.avatar"
-              alt="Patient Avatar"
-              class="w-8 h-8 rounded-full ml-auto"
-            />
-            <div
-              class="flex items-start flex-col gap-1 text-xs text-muted-foreground"
-            >
-              <span class="font-medium text-sm">{{ test.patient.name }}</span>
-              <div>
-                <span>ID:</span>
-                <span>{{ test.patient.id }}</span>
+            <div class="flex gap-2 items-center">
+              <img
+                [src]="test.patient.avatar"
+                alt="Patient Avatar"
+                class="w-8 h-8 rounded-full "
+              />
+              <div
+                class="flex items-start flex-col gap-1 text-xs text-muted-foreground"
+              >
+                <span class="font-medium text-sm">{{ test.patient.name }}</span>
+                <div>
+                  <span>ID:</span>
+                  <span>{{ test.patient.id }}</span>
+                </div>
               </div>
             </div>
           </div>

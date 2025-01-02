@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { NurseInfoComponent } from '../../nurse-components/nurse-info/nurse-info.component';
 import { NurseObservationsComponent } from '../../nurse-components/nurse-observations/nurse-observations.component';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
+import { MedicalCardsContainerComponent } from "../../../nurse/nurse-components/medical-cards-container/medical-cards-container.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NurseInfoComponent, NurseObservationsComponent , UserBadgeComponent],
+  imports: [NurseInfoComponent, NurseObservationsComponent, UserBadgeComponent, MedicalCardsContainerComponent],
   template: `
-  <div class="flex flex-col gap-5 my-5 lg:mx-10">
+  <div class="flex flex-col gap-5 my-5 lg:mx-10 pb-10">
     <!-- Top Section: Workspace Header -->
     <div
       class="flex flex-row items-center justify-center flex-wrap md:flex-nowrap gap-3 md:gap-12 mx-3"
@@ -26,8 +27,8 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
     <!-- Main Content -->
     <div class="flex flex-row gap-4">
       <!-- Left Section-->
-      <div class="w-1/4 bg-gray-100 p-4">
-        <!-- Placeholder for Requested Tasks-->
+      <div class="w-[30%]">
+        <app-medical-cards-container />
       </div>
 
       <!-- Right Section-->
