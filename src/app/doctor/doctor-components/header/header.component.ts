@@ -10,7 +10,7 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
     <div class="flex flex-row items-center gap-5">
       <button
         class=" w-60 bg-second flex flex-row gap-3 items-center justify-center py-4 rounded-md"
-        (click)="onAddPatient()"
+        (click)="onAddConsultation()"
       >
         <img src="new-cons.svg" class="" alt="" /><span
           class="text-main font-bold text-base"
@@ -30,7 +30,7 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
 export class HeaderComponent {
   showNewPatientForm = false;
 
-  onAddPatient() {
+  onAddConsultation() {
     console.log('Add new patient');
     this.showNewPatientForm = true;
   }
