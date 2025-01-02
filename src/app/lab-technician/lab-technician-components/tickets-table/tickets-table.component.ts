@@ -43,13 +43,6 @@ import { CommonModule } from '@angular/common';
           <td class="hidden md:table-cell">{{ ticket.client }}</td>
           <td class="hidden lg:table-cell">{{ ticket.consultId }}</td>
           <td class="hidden lg:table-cell">{{ ticket.ticketDate }}</td>
-          <td class="hidden lg:table-cell">
-            <img
-              class=" cursor-pointer hover:bg-slate-200 rounded-md p-2"
-              src="reload-icon.svg"
-              alt=""
-            />
-          </td>
         </tr>
       </tbody>
     </table>

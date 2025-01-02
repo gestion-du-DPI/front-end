@@ -28,7 +28,7 @@ export class IsLoggedGuard implements CanActivate {
           this.router.navigate(['/radiologist']);
           return false;
         case 'labtechnician':
-          this.router.navigate(['/labTechnician']);
+          this.router.navigate(['/lab-technician']);
           return false;
         case 'patient':
           this.router.navigate(['/patient']);

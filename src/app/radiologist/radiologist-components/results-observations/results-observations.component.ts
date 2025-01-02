@@ -82,7 +82,7 @@ import { CommonModule } from '@angular/common';
               <p class="font-medium">{{ currentUploadingFile.name }}</p>
               <div class="h-2 bg-gray-200 rounded mt-2">
                 <div
-                  class="h-full bg-main rounded"
+                  class="h-full  rounded bg-main"
                   [style.width.%]="uploadProgress"
                 ></div>
               </div>
