@@ -250,6 +250,31 @@ export const appRoutes: Routes = [
       import('./patient/patient.component').then((m) => m.PatientComponent),
     canActivate: [RoleGuard],
     data: { role: UserRole.Patient },
+    children: [
+      { path: '', redirectTo: 'consultation-details', pathMatch: 'full' },
+
+      {
+        path: 'consultation-details',
+        loadComponent: () =>
+          import(
+            './patient/patient-pages/consultation-details/consultation-details.component'
+          ).then((m) => m.ConsultationDetailsComponent),
+      },
+      {
+        path: 'archived-consultation/:id',
+        loadComponent: () =>
+          import(
+            './patient/patient-pages/archived-consultation/archived-consultation.component'
+          ).then((m) => m.ArchivedConsultationComponent),
+      },
+      {
+        path: 'edit-profile',
+        loadComponent: () =>
+          import(
+            './patient/patient-pages/edit-profile/edit-profile.component'
+          ).then((m) => m.EditProfileComponent),
+      },
+    ],
   },
   {
     path: 'login',
