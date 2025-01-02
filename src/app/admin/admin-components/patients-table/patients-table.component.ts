@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDeletePatientPopupComponent } from '../popups/confirm-delete-patient-popup/confirm-delete-patient-popup.component';
 import { EditPatientFormComponent } from '../forms/edit-patient-form/edit-patient-form.component';
-import { PatientService } from '../../../services/patient/patient.service';
+import { PatientService } from '../../../services/admin/patient/patient.service';
 
 @Component({
   selector: 'app-patients-table',
@@ -28,12 +28,23 @@ import { PatientService } from '../../../services/patient/patient.service';
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
         <tr *ngFor="let patient of patients" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
-            <img
-              [src]="patient.profilePicture || 'no-pfp.png'"
-              class="w-10 h-10 rounded-full object-cover cursor-pointer"
-              alt="Profile Picture"
-              (click)="onProfilePictureClick(fileInput)"
-            />
+            <div class="relative w-10 h-10 rounded-full cursor-pointer group">
+              <img
+                [src]="patient.profile_image || 'no-pfp.png'"
+                class="w-full h-full object-cover rounded-full"
+                alt="Profile Picture"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100"
+                (click)="onProfilePictureClick(fileInput)"
+              >
+                <img
+                  src="edit-pfp-worker-fi-admin.png"
+                  class="rounded-xl w-7 h-7"
+                  alt="edit"
+                />
+              </div>
+            </div>
             <input
               type="file"
               #fileInput
@@ -41,16 +52,22 @@ import { PatientService } from '../../../services/patient/patient.service';
               (change)="onImageUpload($event, patient)"
             />
             <div class="flex flex-col">
-              <span class="font-bold text-sm text-left">{{ patient.name }}</span>
+              <span class="font-bold text-sm text-left">{{
+                patient.name
+              }}</span>
             </div>
           </td>
           <td>{{ patient.email }}</td>
-          <td>{{ patient.phone }}</td>
-          <td class="hidden lg:table-cell">{{ patient.socialNumber }}</td>
+          <td>{{ patient.phone_number }}</td>
+          <td class="hidden lg:table-cell">{{ patient.nss }}</td>
           <td class="hidden lg:table-cell">{{ patient.address }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergencyPhone }}</td>
-          <td class="hidden lg:table-cell">{{ patient.consultations }}</td>
+          <td class="hidden lg:table-cell">
+            {{ patient.emergency_contact_name }}
+          </td>
+          <td class="hidden lg:table-cell">
+            {{ patient.emergency_contact_phone }}
+          </td>
+          <td class="hidden lg:table-cell">{{ patient.consultation_count }}</td>
           <td class="icon cursor-pointer px-0" (click)="onEdit(patient)">
             <img
               src="edit-icon.svg"
@@ -112,7 +129,6 @@ export class PatientsTableComponent {
   showConfirmDeletePopup = false; // Controls delete confirmation popup visibility
   showEditPatientsPopup = false; // Controls edit form popup visibility
 
-
   selectedPatient: any = null; // Holds the patient data for editing
   patientToDelete: any = null; // Holds the patient data for deletion
 
@@ -124,6 +140,7 @@ export class PatientsTableComponent {
    */
   onEdit(patient: any): void {
     this.selectedPatient = { ...patient }; // Create a shallow copy of the patient object
+    console.log('Editing patient:', this.selectedPatient);
     this.showEditPatientsPopup = true;
   }
 
@@ -155,15 +172,18 @@ export class PatientsTableComponent {
    */
   onConfirmDelete(): void {
     if (this.patientToDelete) {
-      this.patientService.deletePatient(this.patientToDelete.id).subscribe({
-        next: () => {
-          console.log('Patient deleted successfully');
-          this.showConfirmDeletePopup = false;
-          this.reloadPatients();
-        },
-        error: (err) => console.error('Error deleting patient:', err),
-        complete: () => (this.patientToDelete = null),
-      });
+      console.log('Deleting patient:', this.patientToDelete);
+      this.patientService
+        .deletePatient(this.patientToDelete.user_id)
+        .subscribe({
+          next: () => {
+            console.log('Patient deleted successfully');
+            this.showConfirmDeletePopup = false;
+            this.reloadPatients();
+          },
+          error: (err) => console.error('Error deleting patient:', err),
+          complete: () => (this.patientToDelete = null),
+        });
     }
   }
 
@@ -171,16 +191,9 @@ export class PatientsTableComponent {
    * Reloads the list of patients from the server.
    */
   reloadPatients(): void {
-    this.patientService.getPatients().subscribe({
-      next: (patients) => (this.patients = patients),
-      error: (err) => console.error('Error fetching patients:', err),
-    });
+    window.location.reload();
   }
 
-  /**
-   * Triggers the file input for selecting a new profile picture.
-   * @param fileInput The file input element.
-   */
   onProfilePictureClick(fileInput: HTMLInputElement): void {
     fileInput.click();
   }
@@ -191,22 +204,30 @@ export class PatientsTableComponent {
    * @param patient The patient whose profile picture is being updated.
    */
   onImageUpload(event: Event, patient: any): void {
-    const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement; // Access the file input
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const updatedProfilePicture = e.target.result;
-        patient.profilePicture = updatedProfilePicture;
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp']; // Add allowed extensions
+      const fileExtension = file.name.split('.').pop()?.toLowerCase(); // Extract the file extension
 
-        this.patientService
-          .editPatient({ ...patient, profilePicture: updatedProfilePicture })
-          .subscribe({
-            next: () => console.log('Profile picture updated successfully'),
-            error: (err) => console.error('Error updating profile picture:', err),
-          });
-      };
-      reader.readAsDataURL(file);
+      // Validate file extension
+      if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+        console.error('Selected file does not have a valid image extension.');
+        return;
+      }
+      // Create FormData and append the file and any additional fields
+      const formData = new FormData();
+      formData.append('image', file); // Append the image with the key 'image'
+      console.log(formData);
+      // Call the service method to send the request
+      this.patientService.editpfpPatient(formData, patient.user_id).subscribe({
+        next: () => {
+          window.location.reload();
+          console.log('Profile picture updated successfully');
+        },
+        error: (err: any) =>
+          console.error('Error updating profile picture:', err),
+      });
     }
   }
 

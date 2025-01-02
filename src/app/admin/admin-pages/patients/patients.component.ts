@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PatientsTableComponent } from '../../admin-components/patients-table/patients-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
-import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/patient/patient.service';
+import { PatientService } from '../../../services/admin/patient/patient.service';
 
 @Component({
   selector: 'app-patients',
-  imports: [
-    PatientsTableComponent,
-    HeaderComponent,
-    CommonModule,
-    FormsModule,
-  ],
+  imports: [PatientsTableComponent, HeaderComponent, CommonModule, FormsModule],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
       <div class="flex flex-col gap-4 mx-3">
@@ -34,24 +27,30 @@ import { PatientService } from '../../../services/patient/patient.service';
           <div
             class="flex flex-row overflow-hidden items-center bg-white rounded-lg border-[1.5px] p-2 w-96 gap-3"
           >
-            <img src="search-icon.svg" alt="" />
+            <img src="search-icon.svg" alt="Search icon" />
             <input
               type="text"
-              placeholder="Search Patient by Name here ..."
+              [placeholder]="
+                searchByName
+                  ? 'Search Worker by Name...'
+                  : 'Search Worker by Nss...'
+              "
               class="bg-transparent border-0 focus:outline-none flex-1"
               [(ngModel)]="searchQuery"
               (input)="onSearch()"
             />
           </div>
           <button
-            class="bg-white border-[1.5px] w-10 flex justify-center items-center rounded-lg"
+            class="bg-white hover:bg-slate-100 border-[1.5px] w-10 flex justify-center items-center rounded-lg"
+            (click)="toggleSearchFilter()"
           >
-            <img src="qr-icon.svg" alt="" />
+            <img src="filter-icon.svg" alt="Filter icon" />
           </button>
-
         </div>
       </div>
-      <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
+      <div *ngIf="loading" class="self-center mt-10">
+        <img src="logo.png" class=" animate-spin" alt="" />
+      </div>
       <div *ngIf="!loading">
         <app-patients-table [patients]="filteredPatients" />
       </div>
@@ -66,10 +65,11 @@ import { PatientService } from '../../../services/patient/patient.service';
 export class PatientsComponent implements OnInit {
   patientsNumber = 0; // Dynamically update based on the number of patients
   searchQuery = ''; // Tracks the input query
+  searchByName = true;
   loading: boolean = false;
 
-  patients: Patient[] = [];
-  filteredPatients: Patient[] = []; // Tracks the filtered patients
+  patients: any[] = [];
+  filteredPatients: any[] = []; // Tracks the filtered patients
 
   constructor(private patientService: PatientService) {}
 
@@ -79,36 +79,56 @@ export class PatientsComponent implements OnInit {
 
   loadPatients(): void {
     this.loading = true; // Show loading spinner
-    this.patientService.getPatients().subscribe((data) => {
-      console.log(data); // Log the data to check if the patients are fetched
-      this.patients = data;
-      this.filteredPatients = data; // Update filteredPatients here
-      this.patientsNumber = data.length; // Update the patients count
-      this.loading = false; // Hide loading spinner
-    });
-  }
-
-  reloadPatients(): void {
-    this.loading = true; // Show loading spinner
     this.patientService.getPatients().subscribe({
-      next: (patients) => {
-        this.patients = patients;
-        this.filteredPatients = patients; // Ensure filteredPatients is also updated
-        this.patientsNumber = patients.length; // Update the patient count
-        this.loading = false; // Hide loading spinner
+      next: (response: any) => {
+        this.patients = response.patients.map(
+          (patient: {
+            user_id: number;
+            name: string;
+            created_at: string;
+            nss: string;
+            email: string;
+            address: string;
+            phone_number: string;
+            emergency_contact_name: string;
+            emergency_contact_phone: string;
+            consultation_count: number;
+            profile_image: string;
+          }) => ({
+            ...patient,
+            first_name: patient.name.split(' ')[0],
+            last_name: patient.name.split(' ')[1],
+          })
+        );
+        this.filteredPatients = [...this.patients]; // Ensure filteredPatients is also updated
+        this.patientsNumber = this.patients.length;
+        this.loading = false;
+        console.log('Patients:', this.patients);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching patients:', err);
         this.loading = false; // Hide loading spinner
       },
     });
   }
 
+  toggleSearchFilter(): void {
+    this.searchByName = !this.searchByName;
+    this.onSearch();
+  }
+
+  reloadPatients(): void {
+    this.loading = true; // Show loading spinner
+    this.loadPatients();
+  }
+
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredPatients = this.patients.filter((patient) =>
-      patient.name.toLowerCase().includes(query)
+      this.searchByName
+        ? patient.first_name.toLowerCase().includes(query) ||
+          patient.last_name.toLowerCase().includes(query)
+        : patient.nss.toLowerCase().includes(query)
     );
   }
-
 }

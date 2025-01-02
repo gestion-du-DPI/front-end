@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Patient } from '../../../../models/patient';
-import { PatientService } from '../../../../services/patient/patient.service';
+import { PatientService } from '../../../../services/admin/patient/patient.service';
 import { CommonModule } from '@angular/common';
+import { EditPatient } from '../../../../models/edit-patient';
 
 @Component({
   selector: 'app-edit-patient-form',
@@ -27,103 +28,53 @@ import { CommonModule } from '@angular/common';
       >
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>
         <div class="flex flex-row justify-center flex-wrap gap-4">
-          <!-- Full Name -->
+          <!-- First Name -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
-              Full Name <span class="text-red-600">*</span>
+              First Name <span class="text-red-600">*</span>
             </label>
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. Mostefai Mounir"
-              [(ngModel)]="formData.name"
-              name="name"
+              placeholder="e.g. John"
+              [(ngModel)]="formData.first_name"
+              name="first_name"
               required
-              #name="ngModel"
-              [ngClass]="{ 'border-red-600': name?.invalid && name?.touched }"
-              pattern="[a-zA-Z ]+"
-            />
-            <div
-              *ngIf="name?.invalid && name?.touched"
-              class="text-red-600 text-xs"
-            >
-              Name is required and should contain only letters.
-            </div>
-          </div>
-
-          <!-- Gender -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Gender <span class="text-red-600">*</span>
-            </label>
-            <select
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.gender"
-              name="gender"
-              required
-              #gender="ngModel"
+              #firstName="ngModel"
               [ngClass]="{
-                'border-red-600': gender?.invalid && gender?.touched
-              }"
-            >
-              <option value="" disabled selected>Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <div
-              *ngIf="gender?.invalid && gender?.touched"
-              class="text-red-600 text-xs"
-            >
-              Gender is required.
-            </div>
-          </div>
-
-          <!-- Birthday -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Birthday <span class="text-red-600">*</span>
-            </label>
-            <input
-              type="date"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              [(ngModel)]="formData.dateOfBirth"
-              name="birthday"
-              required
-              #birthday="ngModel"
-              [ngClass]="{
-                'border-red-600': birthday?.invalid && birthday?.touched
+                'border-red-600': firstName?.invalid && firstName?.touched
               }"
             />
             <div
-              *ngIf="birthday?.invalid && birthday?.touched"
+              *ngIf="firstName?.invalid && firstName?.touched"
               class="text-red-600 text-xs"
             >
-              Birthday is required.
+              First name is required.
             </div>
           </div>
 
-          <!-- Place of Birth -->
+          <!-- Last Name -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
-              Place of Birth <span class="text-red-600">*</span>
+              Last Name <span class="text-red-600">*</span>
             </label>
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. Algiers"
-              [(ngModel)]="formData.placeOfBirth"
-              name="placeOfBirth"
+              placeholder="e.g. Doe"
+              [(ngModel)]="formData.last_name"
+              name="last_name"
               required
-              #placeOfBirth="ngModel"
+              #lastName="ngModel"
               [ngClass]="{
-                'border-red-600': placeOfBirth?.invalid && placeOfBirth?.touched
+                'border-red-600': lastName?.invalid && lastName?.touched
               }"
             />
             <div
-              *ngIf="placeOfBirth?.invalid && placeOfBirth?.touched"
+              *ngIf="lastName?.invalid && lastName?.touched"
               class="text-red-600 text-xs"
             >
-              Place of birth is required.
+              Last name is required.
             </div>
           </div>
 
@@ -135,7 +86,7 @@ import { CommonModule } from '@angular/common';
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. 123 Street, City"
+              placeholder="e.g. 123 Main Street"
               [(ngModel)]="formData.address"
               name="address"
               required
@@ -152,7 +103,7 @@ import { CommonModule } from '@angular/common';
             </div>
           </div>
 
-          <!-- Social Number -->
+          <!-- NSS -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
               Social Number (NSS) <span class="text-red-600">*</span>
@@ -161,47 +112,18 @@ import { CommonModule } from '@angular/common';
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
               placeholder="e.g. 123456789"
-              [(ngModel)]="formData.socialNumber"
-              name="socialNumber"
+              [(ngModel)]="formData.nss"
+              name="nss"
               required
               pattern="^[0-9]{9}$"
-              #socialNumber="ngModel"
-              [ngClass]="{
-                'border-red-600': socialNumber?.invalid && socialNumber?.touched
-              }"
+              #nss="ngModel"
+              [ngClass]="{ 'border-red-600': nss?.invalid && nss?.touched }"
             />
             <div
-              *ngIf="socialNumber?.invalid && socialNumber?.touched"
+              *ngIf="nss?.invalid && nss?.touched"
               class="text-red-600 text-xs"
             >
-              Social number must be 9 digits.
-            </div>
-          </div>
-        </div>
-
-        <h4 class="text-lg font-semibold text-[#18181B] mt-2">Contact</h4>
-        <div class="flex flex-row justify-center flex-wrap gap-4">
-          <!-- Phone -->
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">
-              Phone Number <span class="text-red-600">*</span>
-            </label>
-            <input
-              type="tel"
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. +1234567890"
-              [(ngModel)]="formData.phone"
-              name="phone"
-              required
-              pattern="^[0-9]{10}$"
-              #phone="ngModel"
-              [ngClass]="{ 'border-red-600': phone?.invalid && phone?.touched }"
-            />
-            <div
-              *ngIf="phone?.invalid && phone?.touched"
-              class="text-red-600 text-xs"
-            >
-              Phone number must be exactly 10 digits.
+              NSS must be 9 digits.
             </div>
           </div>
 
@@ -218,21 +140,43 @@ import { CommonModule } from '@angular/common';
               name="email"
               required
               #email="ngModel"
-              [ngClass]="{ 'border-red-600': email?.invalid && email?.touched }"
+              [ngClass]="{
+                'border-red-600': email?.invalid && email?.touched
+              }"
             />
             <div
               *ngIf="email?.invalid && email?.touched"
               class="text-red-600 text-xs"
             >
-              Please enter a valid email.
+              A valid email is required.
             </div>
           </div>
-        </div>
 
-        <h4 class="text-lg font-semibold text-[#18181B] mt-2">
-          Emergency Contact
-        </h4>
-        <div class="flex flex-row justify-center flex-wrap gap-4">
+          <!-- Phone Number -->
+          <div class="flex flex-col gap-1">
+            <label class="font-medium text-sm">
+              Phone Number <span class="text-red-600">*</span>
+            </label>
+            <input
+              type="tel"
+              class="border-[1px] rounded-md w-96 p-2 text-sm"
+              placeholder="e.g. +123456789"
+              [(ngModel)]="formData.phone_number"
+              name="phone_number"
+              required
+              #phoneNumber="ngModel"
+              [ngClass]="{
+                'border-red-600': phoneNumber?.invalid && phoneNumber?.touched
+              }"
+            />
+            <div
+              *ngIf="phoneNumber?.invalid && phoneNumber?.touched"
+              class="text-red-600 text-xs"
+            >
+              Phone number is required.
+            </div>
+          </div>
+
           <!-- Emergency Contact Name -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
@@ -241,75 +185,52 @@ import { CommonModule } from '@angular/common';
             <input
               type="text"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. John Doe"
-              [(ngModel)]="formData.emergencyContact"
-              name="emergencyContact"
+              placeholder="e.g. Jane Doe"
+              [(ngModel)]="formData.emergency_contact_name"
+              name="emergency_contact_name"
               required
-              pattern="[a-zA-Z ]+"
-              #emergencyContact="ngModel"
+              #emergencyContactName="ngModel"
               [ngClass]="{
                 'border-red-600':
-                  emergencyContact?.invalid && emergencyContact?.touched
+                  emergencyContactName?.invalid && emergencyContactName?.touched
               }"
             />
             <div
-              *ngIf="emergencyContact?.invalid && emergencyContact?.touched"
+              *ngIf="
+                emergencyContactName?.invalid && emergencyContactName?.touched
+              "
               class="text-red-600 text-xs"
             >
-              E^ contact name is required and should contain only letters.
+              Emergency contact name is required.
             </div>
           </div>
 
           <!-- Emergency Contact Phone -->
           <div class="flex flex-col gap-1">
             <label class="font-medium text-sm">
-              E^ Contact Phone <span class="text-red-600">*</span>
+              Emergency Contact Phone <span class="text-red-600">*</span>
             </label>
             <input
               type="tel"
               class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. +1234567890"
-              [(ngModel)]="formData.emergencyPhone"
-              name="emergencyPhone"
+              placeholder="e.g. +123456789"
+              [(ngModel)]="formData.emergency_contact_phone"
+              name="emergency_contact_phone"
               required
-              pattern="^[0-9]{10}$"
-              #emergencyPhone="ngModel"
+              #emergencyContactPhone="ngModel"
               [ngClass]="{
                 'border-red-600':
-                  emergencyPhone?.invalid && emergencyPhone?.touched
+                  emergencyContactPhone?.invalid &&
+                  emergencyContactPhone?.touched
               }"
             />
             <div
-              *ngIf="emergencyPhone?.invalid && emergencyPhone?.touched"
+              *ngIf="
+                emergencyContactPhone?.invalid && emergencyContactPhone?.touched
+              "
               class="text-red-600 text-xs"
             >
-              Emergency phone must be exactly 10 digits.
-            </div>
-          </div>
-        </div>
-
-        <h4 class="text-lg font-semibold text-[#18181B] mt-2">Consultations</h4>
-        <div class="flex flex-row justify-center flex-wrap gap-4">
-          <div class="flex flex-col gap-1">
-            <label class="font-medium text-sm">Number of Consultations</label>
-            <input
-              type="number"
-              required
-              class="border-[1px] rounded-md w-96 p-2 text-sm"
-              placeholder="e.g. 3"
-              #consultations="ngModel"
-              [(ngModel)]="formData.consultations"
-              name="consultations"
-              [ngClass]="{
-                'border-red-600':
-                  consultations?.invalid && consultations?.touched
-              }"
-            />
-            <div
-              *ngIf="consultations?.invalid && consultations?.touched"
-              class="text-red-600 text-xs"
-            >
-              Consultations number is required.
+              Emergency contact phone is required.
             </div>
           </div>
         </div>
@@ -325,6 +246,7 @@ import { CommonModule } from '@angular/common';
           <button
             type="submit"
             class="bg-main text-white font-semibold p-2 w-32 rounded-md mt-4"
+            id="selenium_save_patient_button"
           >
             Save
           </button>
@@ -334,15 +256,29 @@ import { CommonModule } from '@angular/common';
   `,
 })
 export class EditPatientFormComponent {
-  @Input() formData: Patient = {} as Patient;
+  @Input() formData!: any;
   @Output() cancel = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
 
   constructor(private patientService: PatientService) {}
 
   submitForm(form: NgForm) {
+    const patientToSend: EditPatient = {
+      user_id: this.formData.user_id,
+      first_name: this.formData.first_name,
+      last_name: this.formData.last_name,
+      nss: this.formData.nss,
+      address: this.formData.address,
+      phone_number: this.formData.phone_number,
+      email: this.formData.email,
+      emergency_contact_name: this.formData.emergency_contact_name,
+      emergency_contact_phone: this.formData.emergency_contact_phone,
+      created_at: this.formData.created_at || new Date().toISOString(),
+      consultation_count: this.formData.consultation_count || 0,
+      profile_image: this.formData.profile_image || '',
+    };
     if (form.valid) {
-      this.patientService.editPatient(this.formData).subscribe({
+      this.patientService.editPatient(patientToSend).subscribe({
         next: (response) => {
           console.log('Patient updated successfully:', response);
           this.onSave();

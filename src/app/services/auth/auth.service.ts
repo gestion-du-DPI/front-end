@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  private baseUrl = environment.apiUrl;
+
   // Login method
   login(email: string, password: string, rememberMe: boolean) {
     const loginData = {
@@ -19,17 +22,21 @@ export class AuthService {
     };
 
     return this.http
-      .post<{ token: string }>('http://127.0.0.1:8000/login', loginData)
+      .post<{ access: string }>(`${this.baseUrl}/api/token`, loginData)
       .subscribe(
         (response) => {
-          const token = response.token;
+          const token = response.access;
           rememberMe
             ? localStorage.setItem(this.tokenKey, token) // Store token in localStorage
             : sessionStorage.setItem(this.tokenKey, token); // Store token in sessionStorage
 
+          // Decryption of the token
+          let token_decrypted = jwtDecode(token);
+
           const userRole = this.getUserRole()?.toLowerCase();
           switch (userRole) {
             case 'admin':
+              console.log(token_decrypted);
               this.router.navigate(['/admin']);
               break;
             case 'doctor':
@@ -77,7 +84,7 @@ export class AuthService {
   // Get the user ID from the JWT
   getUserId(): string | null {
     const decoded = this.decodeToken();
-    return decoded ? decoded.id : null;
+    return decoded ? decoded.user_id : null;
   }
 
   // Retrieve the JWT from localStorage
@@ -110,5 +117,15 @@ export class AuthService {
     sessionStorage.removeItem(this.tokenKey);
     console.log('Logged out');
     this.router.navigate(['/login']);
+  }
+
+  // Check if the token is still uvalid
+  isTokenValid(): boolean {
+    const decoded = this.decodeToken();
+    if (!decoded || !decoded.exp) {
+      return false;
+    }
+    const currentTime = Math.floor(Date.now() / 1000);
+    return decoded.exp > currentTime;
   }
 }

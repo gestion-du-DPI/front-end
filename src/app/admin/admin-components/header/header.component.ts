@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-form.component';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
@@ -22,11 +22,11 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
     </div>
 
     <div class="popup" *ngIf="showNewPatientForm">
-        <app-new-patient-form
-          (cancel)="onCancelPatientForm()"
-          (confirm)="reloadPatients()"
-        ></app-new-patient-form>
-      </div>
+      <app-new-patient-form
+        (cancel)="onCancelPatientForm()"
+        (confirm)="reloadPatients()"
+      ></app-new-patient-form>
+    </div>
   `,
 })
 export class HeaderComponent {
@@ -42,8 +42,8 @@ export class HeaderComponent {
   }
 
   //to reload the patients table after adding a new one
-  reloadPatients(){
-  this.showNewPatientForm = false;
-  this.reload.emit();
+  reloadPatients() {
+    this.showNewPatientForm = false;
+    this.reload.emit();
   }
 }

@@ -1,179 +1,230 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EditProfileService } from '../../../services/admin/edit-profile/edit-profile.service';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../admin-components/header/header.component';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [HeaderComponent, CommonModule],
+  imports: [FormsModule, CommonModule, HeaderComponent],
   template: `
     <div class="flex flex-col bg-gray-50">
       <div class="flex flex-col gap-4 lg:mx-16 mx-3">
-        <div class="flex justify-between  items-center gap-12">
+        <div class="flex justify-between items-center gap-12">
           <div class="p-4">
-            <h1 class="text-[34px] text-main font-semibold ">Edit Profile</h1>
+            <h1 class="text-[34px] text-main font-semibold">Edit Profile</h1>
           </div>
           <app-header></app-header>
         </div>
       </div>
 
       <div class="flex flex-col items-center">
-  <div
-    class="w-[1000px] h-[800px] bg-white py-12 px-20 mt-[20px] border-2 rounded-[24px] border-[#F4F2F2]"
-  >
-    <div class="w-[800px] h-[500px]">
-      <h2 class="text-main text-[25px] font-semibold">
-        Change Your Information
-      </h2>
-      <div class="grid grid-cols-12 gap-8 w-full max-w-4xl">
-        <!-- Left Side Form -->
-        <div class="col-span-7">
-          <!-- Edit Profile Section -->
-          <h2 class="text-lg font-semibold text-main mb-2 pt-4">
-            Edit Profile
-          </h2>
-          <div class="grid gap-4">
-            <div class="relative">
-              <img
-                src="edit-name.svg"
-                alt="User Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Full Name"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-hospital.svg"
-                alt="Hospital Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Hospital Name"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-socialNumber.svg"
-                alt="Social Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Social Number"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-adress.svg"
-                alt="Address Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Address"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            <div class="relative">
-              <img
-                src="edit-phoneNumber.svg"
-                alt="Phone Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="text"
-                placeholder="Phone Number"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-          </div>
+        <div
+          class="w-[1000px] h-[850px] bg-white py-12 px-20 mt-[20px] border-2 rounded-[24px] border-[#F4F2F2]"
+        >
+          <div class="w-[800px] h-[500px]">
+            <h2 class="text-main text-[25px] font-semibold">
+              Change Your Information
+            </h2>
+            <form
+              (ngSubmit)="onSubmit()"
+              class="grid grid-cols-12 gap-8 w-full max-w-4xl"
+            >
+              <!-- Left Side Form -->
+              <div class="col-span-7">
+                <h2 class="text-lg font-semibold text-main mb-2 pt-4">
+                  Edit Profile
+                </h2>
+                <div class="grid gap-4">
+                  <!-- Full Name -->
+                  <div class="relative">
+                    <img
+                      src="edit-name.svg"
+                      alt="User Icon"
+                      class="absolute mt-2 top-2 left-3 w-6 h-6"
+                    />
+                    <input
+                      type="text"
+                      [(ngModel)]="firstName"
+                      name="firstName"
+                      placeholder="First Name"
+                      class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      required
+                    />
+                  </div>
+                  <div class="relative">
+                    <img
+                      src="edit-name.svg"
+                      alt="User Icon"
+                      class="absolute mt-2 top-2 left-3 w-6 h-6"
+                    />
+                    <input
+                      type="text"
+                      [(ngModel)]="lastName"
+                      name="lastName"
+                      placeholder="Last Name"
+                      class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      required
+                    />
+                  </div>
 
-          <h2 class="text-lg font-semibold text-main mt-8 mb-4">Security</h2>
+                  <!-- Hospital Name -->
+                  <div class="relative">
+                    <img
+                      src="edit-hospital.svg"
+                      alt="Hospital Icon"
+                      class="absolute mt-2 top-2 left-3 w-6 h-6"
+                    />
+                    <input
+                      type="text"
+                      [(ngModel)]="hospitalName"
+                      name="hospitalName"
+                      placeholder="Hospital Name"
+                      class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      required
+                    />
+                  </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            <!-- Email Fields -->
-             <div class="flex flex-between items-center gap-10">
-              <div class="mr-[50px]">
-            <div class="relative">
-              <div class="mb-[10px]">
-              <img
-                src="edit-email.svg"
-                alt="Email Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="email"
-                placeholder="Enter New Email Address"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
+                  <!-- Social Number -->
+                  <div class="relative">
+                    <img
+                      src="edit-socialNumber.svg"
+                      alt="Social Icon"
+                      class="absolute mt-2 top-2 left-3 w-6 h-6"
+                    />
+                    <input
+                      type="text"
+                      [(ngModel)]="nss"
+                      name="nss"
+                      placeholder="Social Number"
+                      class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      required
+                    />
+                  </div>
+
+                  <!-- Address -->
+                  <div class="relative">
+                    <img
+                      src="edit-adress.svg"
+                      alt="Address Icon"
+                      class="absolute mt-2 top-2 left-3 w-6 h-6"
+                    />
+                    <input
+                      type="text"
+                      [(ngModel)]="address"
+                      name="address"
+                      placeholder="Address"
+                      class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      required
+                    />
+                  </div>
+
+                  <!-- Phone Number -->
+                  <div class="relative">
+                    <img
+                      src="edit-phoneNumber.svg"
+                      alt="Phone Icon"
+                      class="absolute mt-2 top-2 left-3 w-6 h-6"
+                    />
+                    <input
+                      type="text"
+                      [(ngModel)]="phoneNumber"
+                      name="phoneNumber"
+                      placeholder="Phone Number"
+                      class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Security Section -->
+                <h2 class="text-lg font-semibold text-main mt-8 mb-4">
+                  Security
+                </h2>
+
+                <div class="flex flex-between items-center gap-10">
+                  <!-- Email Section -->
+                  <div class="mr-[50px]">
+                    <div class="relative">
+                      <div class="mb-[10px]">
+                        <img
+                          src="edit-email.svg"
+                          alt="Email Icon"
+                          class="absolute mt-2 top-2 left-3 w-6 h-6"
+                        />
+                        <input
+                          type="email"
+                          [(ngModel)]="email"
+                          name="email"
+                          placeholder="Enter New Email Address"
+                          class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                        />
+                      </div>
+                    </div>
+                    <div class="relative">
+                      <img
+                        src="edit-email.svg"
+                        alt="Email Icon"
+                        class="absolute mt-2 top-2 left-3 w-6 h-6"
+                      />
+                      <input
+                        type="email"
+                        [(ngModel)]="email"
+                        name="email"
+                        placeholder="Confirm Email Address"
+                        class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Password Section -->
+                  <div class="ml-[30px]">
+                    <div class="relative">
+                      <div class="mb-[10px]">
+                        <img
+                          src="edit-password.svg"
+                          alt="Password Icon"
+                          class="absolute mt-2 top-2 left-3 w-6 h-6"
+                        />
+                        <input
+                          type="password"
+                          [(ngModel)]="password"
+                          name="password"
+                          placeholder="Enter New Password"
+                          class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                        />
+                      </div>
+                    </div>
+                    <div class="relative">
+                      <img
+                        src="edit-password.svg"
+                        alt="Password Icon"
+                        class="absolute mt-2 top-2 left-3 w-6 h-6"
+                      />
+                      <input
+                        type="password"
+                        [(ngModel)]="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="relative">
-              <img
-                src="edit-email.svg"
-                alt="Email Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="email"
-                placeholder="Confirm Email Address"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-            </div>
-            <div class="ml-[30px]">
-            <!-- Password Fields -->
-            <div class="relative">
-              <div class="mb-[10px]">
-              <img
-                src="edit-password.svg"
-                alt="Password Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="password"
-                placeholder="Enter New Password"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-              </div>
-            </div>
-            <div class="relative">
-              <img
-                src="edit-password.svg"
-                alt="Password Icon"
-                class="absolute mt-2 top-2 left-3 w-6 h-6"
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                class="input-field pl-12 border-[1px] py-3 rounded-[4px] w-[350px]"
-              />
-            </div>
-          </div>
-        </div>
-        </div>
-        </div>
 
-        <!-- Right Side Profile -->
-         
-        <div class="col-span-5 flex flex-col items-center mt-10 ml-2 ">
-         
-          <div
-            class="w-36 h-36 rounded-full overflow-hidden border-2 border-main mb-4"
-          >
-            <img
-              [src]="profileImage"
-              alt="Profile"
-              class="object-cover w-full h-full"
-            />
-          </div>
-          <label
+              <!-- Right Side Profile -->
+              <div class="col-span-5 flex flex-col items-center mt-10 ml-2">
+                <div
+                  class="w-36 h-36 rounded-full overflow-hidden border-2 border-main mb-4"
+                >
+                  <img
+                    [src]="profileImage"
+                    alt="Profile"
+                    class="object-cover w-full h-full"
+                  />
+                </div>
+                <label
                   class="px-4 py-2 bg-main text-white rounded shadow hover:cursor-pointer flex items-center"
                 >
                   Upload Image
@@ -184,50 +235,167 @@ import { HeaderComponent } from '../../admin-components/header/header.component'
                   />
                   <input
                     type="file"
+                    #fileInput
+                    class="hidden"
                     accept="image/*"
                     (change)="onImageUpload($event)"
-                    class="hidden"
+                    (click)="onProfilePictureClick(fileInput)"
                   />
                 </label>
-      </div>
-      </div>
+              </div>
 
-      <!-- Buttons -->
-      <div class="flex justify-end w-full max-w-4xl mt-8 ">
-        <button
-          class="px-6 py-2 bg-[#F5F6FA] text-gray-800 rounded-[8px] mr-4 hover:bg-gray-300"
-          style="font-weight: 400px;"
-        >
-          Cancel
-        </button>
-        <button
-          class="px-6 py-2 bg-main text-white  rounded-[8px] shadow hover:bg-main"
-          style="font-weight: 500px;"
-        >
-          Save Changes
-        </button>
+              <!-- Buttons -->
+              <div class="flex justify-end w-full max-w-4xl mt-8 col-span-12">
+                <button
+                  type="button"
+                  class="px-6 py-2 bg-[#F5F6FA] text-gray-800 rounded-[8px] mr-4 hover:bg-gray-300"
+                  style="font-weight: 400"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="px-6 py-2 bg-main text-white rounded-[8px] shadow hover:bg-main"
+                  style="font-weight: 500"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-</div>
-
   `,
-  styles: ``,
+  styles: [],
 })
-export class EditProfileComponent {
-  name: string = 'Dr. Sadoun';
-  profileImage: string = 'admin-pfp.jpg'; // Default profile image
+export class EditProfileComponent implements OnInit {
+  profileImage: string = ''; // Default profile image URL
+  firstName: string = '';
+  lastName: string = '';
+  hospitalName: string = '';
+  nss: string = '';
+  address: string = '';
+  phoneNumber: string = '';
+  email: string = '';
+  confirmEmail: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  loading: boolean = false;
+
+  onProfilePictureClick(fileInput: HTMLInputElement): void {
+    fileInput.click();
+  }
+
+  constructor(private editProfileService: EditProfileService) {}
+
+  ngOnInit(): void {
+    this.fetchUserProfile();
+    console.log('Edit Profile Component initialized.');
+  }
+
+  private fetchUserProfile(): void {
+    this.loading = true;
+    this.editProfileService.getUserProfile().subscribe({
+      next: (profile) => {
+        this.profileImage = profile.profile_image;
+        this.firstName = profile.first_name;
+        this.lastName = profile.last_name;
+        this.hospitalName = profile.hospital;
+        this.nss = profile.nss;
+        this.address = profile.address;
+        this.phoneNumber = profile.phone_number;
+        this.email = profile.email;
+        this.loading = false;
+        console.log('User profile:', profile);
+      },
+      error: (err) => {
+        console.error('Error fetching user profile:', err);
+        this.loading = false;
+      },
+    });
+  }
 
   onImageUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+
+      if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+        console.error('Invalid file type.');
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.profileImage = e.target.result; // Update the profile image source
+        this.profileImage = e.target.result; // Update image preview
       };
-      reader.readAsDataURL(input.files[0]); // Read the selected image file
+      reader.readAsDataURL(file);
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      this.editProfileService.updateUserProfile(formData).subscribe({
+        next: (response) => {
+          console.log('Profile updated successfully:', response);
+          // window.location.reload();
+        },
+        error: (err) => {
+          console.error('Error updating profile:', err);
+        },
+      });
     }
+  }
+
+  onSubmit(): void {
+    if (
+      !this.firstName ||
+      !this.lastName ||
+      !this.hospitalName ||
+      !this.nss ||
+      !this.address ||
+      !this.phoneNumber
+    ) {
+      console.error('All required fields must be filled.');
+      return;
+    }
+
+    if (this.email && this.email !== this.confirmEmail) {
+      console.error('Emails do not match.');
+      return;
+    }
+
+    if (this.password && this.password !== this.confirmPassword) {
+      console.error('Passwords do not match.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('first_name', this.firstName);
+    formData.append('last_name', this.lastName);
+    formData.append('hospital_name', this.hospitalName);
+    formData.append('nss', this.nss);
+    formData.append('address', this.address);
+    formData.append('phone_number', this.phoneNumber);
+
+    if (this.email) {
+      formData.append('email', this.email);
+    }
+
+    if (this.password) {
+      formData.append('password', this.password);
+    }
+
+    this.editProfileService.updateUserProfile(formData).subscribe({
+      next: (response) => {
+        console.log('Profile updated successfully:', response);
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Error updating profile:', err);
+      },
+    });
   }
 }

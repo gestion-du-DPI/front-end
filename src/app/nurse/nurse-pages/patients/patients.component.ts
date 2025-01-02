@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/patient/patient.service';
+import { PatientService } from '../../../services/admin/patient/patient.service';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { PatientsTableComponent } from '../../nurse-components/patients-table/patients-table.component';
 
@@ -83,9 +83,10 @@ export class PatientsComponent implements OnInit {
   onSearch(): void {
     const query = this.searchQuery.replace(/-/g, '').toLowerCase(); // Remove '-' from query and convert to lowercase
     this.filteredPatients = this.patients.filter((patient) => {
-      const nssWithoutDash = patient.socialNumber.replace(/-/g, '').toLowerCase(); // Remove '-' from NSS and convert to lowercase
+      const nssWithoutDash = patient.nss
+        .replace(/-/g, '')
+        .toLowerCase(); // Remove '-' from NSS and convert to lowercase
       return nssWithoutDash.includes(query);
     });
   }
-  
 }

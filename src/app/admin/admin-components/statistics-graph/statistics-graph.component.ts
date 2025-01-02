@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { DashboardService } from '../../../services/admin/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-statistics-graph',
@@ -13,11 +14,10 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     </canvasjs-chart>
   `,
 })
-export class StatisticsGraphComponent {
-  chartOptions = {
+export class StatisticsGraphComponent implements OnInit {
+  chartOptions: any = {
     animationEnabled: true,
     theme: 'light2',
-
     axisX: {
       valueFormatString: 'MMM',
       title: 'Months',
@@ -42,46 +42,60 @@ export class StatisticsGraphComponent {
         e.chart.render();
       },
     },
-    data: [
+    data: [],
+  };
+
+  constructor(private dashboardService: DashboardService) {}
+
+  ngOnInit() {
+    const cachedData = this.dashboardService.getcachedData();
+
+    if ('stats' in cachedData) {
+      this.updateChartData(cachedData.stats);
+    } else {
+      cachedData.subscribe((dataFetched: any) => {
+        if ('stats' in dataFetched) {
+          this.updateChartData(dataFetched.stats);
+        }
+      });
+    }
+  }
+
+  updateChartData(
+    stats: Array<{
+      [month: string]: { patients: number; consultations: number };
+    }>
+  ) {
+    const patientsDataPoints: { x: Date; y: number }[] = [];
+    const consultationsDataPoints: { x: Date; y: number }[] = [];
+
+    stats.forEach((stat) => {
+      const [month, data] = Object.entries(stat)[0];
+      const monthDate = new Date(`${month} 1, ${new Date().getFullYear()}`); // Convert month to Date
+      patientsDataPoints.push({ x: monthDate, y: data.patients });
+      consultationsDataPoints.push({ x: monthDate, y: data.consultations });
+    });
+
+    this.chartOptions.data = [
       {
         type: 'line',
         showInLegend: true,
         name: 'Patients',
         xValueFormatString: 'MMM YYYY',
-        dataPoints: [
-          { x: new Date(2024, 0), y: 100 }, // Jan
-          { x: new Date(2024, 1), y: 120 }, // Feb
-          { x: new Date(2024, 2), y: 130 }, // Mar
-          { x: new Date(2024, 3), y: 140 }, // Apr
-          { x: new Date(2024, 4), y: 150 }, // May
-          { x: new Date(2024, 5), y: 160 }, // Jun
-          { x: new Date(2024, 6), y: 170 }, // Jul
-          { x: new Date(2024, 7), y: 180 }, // Aug
-          { x: new Date(2024, 8), y: 190 }, // Sep
-          { x: new Date(2024, 9), y: 200 }, // Oct
-          { x: new Date(2024, 10), y: 210 }, // Nov
-          { x: new Date(2024, 11), y: 220 }, // Dec
-        ],
+        dataPoints: patientsDataPoints,
       },
       {
         type: 'line',
         showInLegend: true,
         name: 'Consultations',
-        dataPoints: [
-          { x: new Date(2024, 0), y: 90 }, // Jan
-          { x: new Date(2024, 1), y: 110 }, // Feb
-          { x: new Date(2024, 2), y: 100 }, // Mar
-          { x: new Date(2024, 3), y: 130 }, // Apr
-          { x: new Date(2024, 4), y: 140 }, // May
-          { x: new Date(2024, 5), y: 150 }, // Jun
-          { x: new Date(2024, 6), y: 145 }, // Jul
-          { x: new Date(2024, 7), y: 170 }, // Aug
-          { x: new Date(2024, 8), y: 160 }, // Sep
-          { x: new Date(2024, 9), y: 180 }, // Oct
-          { x: new Date(2024, 10), y: 190 }, // Nov
-          { x: new Date(2024, 11), y: 195 }, // Dec
-        ],
+        xValueFormatString: 'MMM YYYY',
+        dataPoints: consultationsDataPoints,
       },
-    ],
-  };
+    ];
+
+    // Trigger change detection to rerender the chart
+    setTimeout(() => {
+      this.chartOptions = { ...this.chartOptions };
+    }, 0);
+  }
 }
