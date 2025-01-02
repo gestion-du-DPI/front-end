@@ -22,8 +22,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
           >
             <option value="">Select Option</option>
             <option value="IRM">IRM</option>
-            <option value="Support">Support</option>
-            <option value="Billing">Billing</option>
+            <!-- put options here -->
           </select>
           <div *ngIf="submitted && f['ticketTo'].errors?.['required']" class="text-sm text-red-500 mt-1">
             Ticket To is required.
