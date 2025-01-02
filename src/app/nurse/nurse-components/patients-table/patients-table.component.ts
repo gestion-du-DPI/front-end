@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
           <th class="hidden lg:table-cell">E^ Contact</th>
           <th class="hidden sm:table-cell">E^ Phone</th>
           <th class="hidden lg:table-cell">Consultations</th>
-          <th class="hidden lg:table-cell">DPI</th>
         </tr>
       </thead>
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
@@ -42,13 +41,7 @@ import { CommonModule } from '@angular/common';
           <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
           <td class="hidden sm:table-cell">{{ patient.emergencyPhone }}</td>
           <td class="hidden lg:table-cell">{{ patient.consultations }}</td>
-          <td class="icon cursor-pointer px-0" (click)="onDPI(patient)">
-            <img
-              src="dpi-icon.svg"
-              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
-              alt="edit"
-            />
-          </td>
+          
         </tr>
       </tbody>
     </table>
@@ -79,9 +72,6 @@ import { CommonModule } from '@angular/common';
 })
 export class PatientsTableComponent {
   @Input() patients: any[] = []; // Accept filtered workers list as input
-  selectedPatient: any = null; // Stores the patient data to pass to the edit form
 
-  onDPI(patient: any): void {
-    this.selectedPatient = patient; // Pass the patient data to the popup
-  }
+  
 }
