@@ -5,11 +5,11 @@ import { MedicalTest } from '../../../models/medical-card';
   selector: 'app-medical-card',
   template: `
     <div class="card transition-all duration-200">
-      <div class="card-content p-4">
+      <div class="card-content p-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div
-              class="flex justify-center items-center p-3 rounded-lg bg-blue-100"
+              class="flex justify-center items-center w-16 h-16 p-3 rounded-lg bg-blue-100"
               [class.bg-orange-100]="test.priority === 'Medium'"
               [class.bg-red-100]="test.priority === 'Critical'"
             >
@@ -30,11 +30,15 @@ import { MedicalTest } from '../../../models/medical-card';
               />
             </div>
             <div>
-              <h3 class="font-medium">{{ test.type }}</h3>
+              <h3 class="font-medium text-sm">{{ test.type }}</h3>
               <div
-                class="flex items-center gap-2 text-sm text-muted-foreground"
+                class="flex items-center gap-2 text-xs text-muted-foreground"
               >
-                <img src="technician-icons/user-icon.png" alt="icon" />
+                <img
+                  src="technician-icons/user-icon.png"
+                  class="w-3 h-3"
+                  alt="icon"
+                />
                 {{ test.doctor }}
               </div>
             </div>
@@ -77,11 +81,14 @@ import { MedicalTest } from '../../../models/medical-card';
         </div>
 
         <div [hidden]="!isExpanded" class=" mt-4 space-y-4">
-          <div class="flex justify-between items-center gap-2">
-            <div class="flex items-center gap-2">
-              <span class="text-sm text-muted-foreground">Priority</span>
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex flex-col gap-1">
+              <span
+                class="text-[10px] ml-1 text-[#ADADAD] font-semibold text-muted-foreground"
+                >Priority</span
+              >
               <div
-                class="inline-block px-3 py-1 rounded-full text-sm ml-2 bg-blue-100 text-blue-700"
+                class="inline-block px-3 py-1 rounded-full text-xs bg-blue-100 text-blue-700"
                 [class.bg-red-100]="test.priority === 'Critical'"
                 [class.text-red-700]="test.priority === 'Critical'"
                 [class.bg-orange-100]="test.priority === 'Medium'"
@@ -90,22 +97,18 @@ import { MedicalTest } from '../../../models/medical-card';
                 {{ test.priority }}
               </div>
             </div>
-            <div class="flex items-center gap-3">
-              <div class="flex items-center gap-2">
-                <img
-                  [src]="test.patient.avatar"
-                  alt="Patient Avatar"
-                  class="w-8 h-8 rounded-full"
-                />
-              </div>
-              <div
-                class="flex items-start flex-col gap-1 text-sm text-muted-foreground"
-              >
-                <span>{{ test.patient.name }}</span>
-                <div>
-                  <span>ID:</span>
-                  <span>{{ test.patient.id }}</span>
-                </div>
+            <img
+              [src]="test.patient.avatar"
+              alt="Patient Avatar"
+              class="w-8 h-8 rounded-full ml-auto"
+            />
+            <div
+              class="flex items-start flex-col gap-1 text-xs text-muted-foreground"
+            >
+              <span>{{ test.patient.name }}</span>
+              <div>
+                <span>ID:</span>
+                <span>{{ test.patient.id }}</span>
               </div>
             </div>
           </div>

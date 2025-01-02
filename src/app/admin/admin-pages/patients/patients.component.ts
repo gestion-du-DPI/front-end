@@ -51,8 +51,17 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
       <div *ngIf="loading" class="self-center mt-10">
         <img src="logo.png" class=" animate-spin" alt="" />
       </div>
+      <div *ngIf="loading" class="self-center mt-10">
+        <img src="logo.png" class=" animate-spin" alt="" />
+      </div>
       <div *ngIf="!loading">
         <app-patients-table [patients]="filteredPatients" />
+      </div>
+      <div class="popup" *ngIf="showscanQRpopup">
+        <app-qr-scanner
+          (closePopup)="onHideQRscan()"
+          (nssValidated)="onNSSValidated($event)"
+        />
       </div>
     </div>
   `,
@@ -67,6 +76,7 @@ export class PatientsComponent implements OnInit {
   searchQuery = ''; // Tracks the input query
   searchByName = true;
   loading: boolean = false;
+  showscanQRpopup = false;
 
   patients: any[] = [];
   filteredPatients: any[] = []; // Tracks the filtered patients

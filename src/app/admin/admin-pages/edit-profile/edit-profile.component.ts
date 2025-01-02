@@ -8,7 +8,7 @@ import { HeaderComponent } from '../../admin-components/header/header.component'
   selector: 'app-edit-profile',
   imports: [FormsModule, CommonModule, HeaderComponent],
   template: `
-    <div class="flex flex-col bg-gray-50">
+    <div class="flex flex-col min-h-screen bg-gray-50">
       <div class="flex flex-col gap-4 lg:mx-16 mx-3">
         <div class="flex justify-between items-center gap-12">
           <div class="p-4">
@@ -267,6 +267,7 @@ import { HeaderComponent } from '../../admin-components/header/header.component'
       </div>
     </div>
   `,
+  styles: [],
   styles: [],
 })
 export class EditProfileComponent implements OnInit {

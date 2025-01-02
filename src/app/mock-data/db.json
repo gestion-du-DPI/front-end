@@ -8,7 +8,8 @@
       "doctor": "Dr. William Carter",
       "client": "Jane Smith",
       "consultId": "CONSULT456",
-      "ticketDate": "2024-12-28T14:30:00Z"
+      "ticketDate": "2024-12-28T14:30:00Z",
+      "id": "ab44"
     },
     {
       "ticketId": "RICKET001",
@@ -18,7 +19,8 @@
       "doctor": "Dr. Emily Brown",
       "client": "John Doe",
       "consultId": "CONSULT123",
-      "ticketDate": "2024-12-29T09:00:00Z"
+      "ticketDate": "2024-12-29T09:00:00Z",
+      "id": "7f7c"
     },
     {
       "ticketId": "RICKET003",
@@ -28,10 +30,10 @@
       "doctor": "Dr. James Taylor",
       "client": "Robert Brown",
       "consultId": "CONSULT789",
-      "ticketDate": "2024-12-27T11:15:00Z"
+      "ticketDate": "2024-12-27T11:15:00Z",
+      "id": "66af"
     }
   ],
-
   "nurse-tickets": [
     {
       "ticketId": "NTICKET001",
@@ -41,7 +43,8 @@
       "doctor": "Dr. Brian Adams",
       "client": "Michael Williams",
       "consultId": "CONSULT112",
-      "ticketDate": "2024-12-30T10:00:00Z"
+      "ticketDate": "2024-12-30T10:00:00Z",
+      "id": "93d9"
     },
     {
       "ticketId": "NTICKET002",
@@ -51,10 +54,10 @@
       "doctor": "Dr. Thomas Lee",
       "client": "Linda White",
       "consultId": "CONSULT113",
-      "ticketDate": "2024-12-30T15:45:00Z"
+      "ticketDate": "2024-12-30T15:45:00Z",
+      "id": "5461"
     }
   ],
-
   "lab-technician-tickets": [
     {
       "ticketId": "LTICKET001",
@@ -64,7 +67,8 @@
       "doctor": "Dr. Olivia Wright",
       "client": "David Harris",
       "consultId": "CONSULT321",
-      "ticketDate": "2024-12-29T14:00:00Z"
+      "ticketDate": "2024-12-29T14:00:00Z",
+      "id": "233f"
     },
     {
       "ticketId": "LTICKET002",
@@ -74,24 +78,11 @@
       "doctor": "Dr. Helen Turner",
       "client": "Sophia Clark",
       "consultId": "CONSULT322",
-      "ticketDate": "2024-12-30T11:30:00Z"
+      "ticketDate": "2024-12-30T11:30:00Z",
+      "id": "07a8"
     }
   ],
   "patients": [
-    {
-      "id": "bc88",
-      "name": "amel",
-      "gender": "Female",
-      "dateOfBirth": "2024-12-04",
-      "placeOfBirth": "City",
-      "address": "123 Main St, City",
-      "socialNumber": "123456789",
-      "phone": "0553881217",
-      "email": "jane.doe@example.com",
-      "emergencyContact": "David Smith",
-      "emergencyPhone": "0553881218",
-      "consultations": 3
-    },
     {
       "id": "8f60",
       "name": "Yen Griffin",
