@@ -38,7 +38,11 @@ import { WorkersTableComponent } from '../../admin-components/workers-table/work
             <img src="search-icon.svg" alt="Search icon" />
             <input
               type="text"
-              [placeholder]="searchByName ? 'Search Worker by Name...' : 'Search Worker by Role...'"
+              [placeholder]="
+                searchByName
+                  ? 'Search Worker by Name...'
+                  : 'Search Worker by Role...'
+              "
               class="bg-transparent border-0 focus:outline-none flex-1"
               [(ngModel)]="searchQuery"
               (input)="onSearch()"
@@ -55,14 +59,15 @@ import { WorkersTableComponent } from '../../admin-components/workers-table/work
             (click)="onAddWorker()"
           >
             <img src="add-icon.svg" alt="Add icon" />
-            <span
-              class="text-main hidden sm:block text-sm font-semibold"
+            <span class="text-main hidden sm:block text-sm font-semibold"
               >New staff member</span
             >
           </button>
         </div>
       </div>
-      <div *ngIf="loading" class="self-center mt-10"><img src="logo.png" class=" animate-spin" alt=""></div>
+      <div *ngIf="loading" class="self-center mt-10">
+        <img src="logo.png" class=" animate-spin" alt="" />
+      </div>
       <div *ngIf="!loading">
         <app-workers-table [workers]="filteredWorkers" />
       </div>
@@ -70,6 +75,7 @@ import { WorkersTableComponent } from '../../admin-components/workers-table/work
       <div class="popup" *ngIf="showNewWorkerForm">
         <app-new-worker-form
           (cancel)="onCancelWorkerForm()"
+          (save)="reloadWorkers()"
         ></app-new-worker-form>
       </div>
     </div>
@@ -80,7 +86,6 @@ import { WorkersTableComponent } from '../../admin-components/workers-table/work
     }
   `,
 })
-
 export class WorkersComponent implements OnInit {
   workersNumber = 0; // Dynamically update based on the number of workers
   showNewWorkerForm = false;
@@ -138,10 +143,11 @@ export class WorkersComponent implements OnInit {
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredWorkers = this.workers.filter((worker) =>
-      this.searchByName
-        ? worker.name.toLowerCase().includes(query) // Filter by name
-        : worker.role.toLowerCase().includes(query) // Filter by role
+    this.filteredWorkers = this.workers.filter(
+      (worker) =>
+        this.searchByName
+          ? worker.name.toLowerCase().includes(query) // Filter by name
+          : worker.role.toLowerCase().includes(query) // Filter by role
     );
   }
 

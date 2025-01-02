@@ -1,8 +1,86 @@
 {
+  "radiologist-tickets": [
+    {
+      "ticketId": "RICKET002",
+      "title": "Incorrect Patient Information",
+      "priority": "medium",
+      "radiologist": "Dr. Michael Smith",
+      "doctor": "Dr. William Carter",
+      "client": "Jane Smith",
+      "consultId": "CONSULT456",
+      "ticketDate": "2024-12-28T14:30:00Z"
+    },
+    {
+      "ticketId": "RICKET001",
+      "title": "Delayed Radiology Report",
+      "priority": "critical",
+      "radiologist": "Dr. Sarah Johnson",
+      "doctor": "Dr. Emily Brown",
+      "client": "John Doe",
+      "consultId": "CONSULT123",
+      "ticketDate": "2024-12-29T09:00:00Z"
+    },
+    {
+      "ticketId": "RICKET003",
+      "title": "Image Upload Failure",
+      "priority": "low",
+      "radiologist": "Dr. Laura Wilson",
+      "doctor": "Dr. James Taylor",
+      "client": "Robert Brown",
+      "consultId": "CONSULT789",
+      "ticketDate": "2024-12-27T11:15:00Z"
+    }
+  ],
+
+  "nurse-tickets": [
+    {
+      "ticketId": "NTICKET001",
+      "title": "Patient Medication Error",
+      "priority": "critical",
+      "radiologist": "Nurse Alice Green",
+      "doctor": "Dr. Brian Adams",
+      "client": "Michael Williams",
+      "consultId": "CONSULT112",
+      "ticketDate": "2024-12-30T10:00:00Z"
+    },
+    {
+      "ticketId": "NTICKET002",
+      "title": "Inaccurate Vital Signs Record",
+      "priority": "medium",
+      "radiologist": "Nurse Emma Scott",
+      "doctor": "Dr. Thomas Lee",
+      "client": "Linda White",
+      "consultId": "CONSULT113",
+      "ticketDate": "2024-12-30T15:45:00Z"
+    }
+  ],
+
+  "lab-technician-tickets": [
+    {
+      "ticketId": "LTICKET001",
+      "title": "Incorrect Test Results",
+      "priority": "critical",
+      "radiologist": "Tech John Davis",
+      "doctor": "Dr. Olivia Wright",
+      "client": "David Harris",
+      "consultId": "CONSULT321",
+      "ticketDate": "2024-12-29T14:00:00Z"
+    },
+    {
+      "ticketId": "LTICKET002",
+      "title": "Failed Lab Equipment Calibration",
+      "priority": "medium",
+      "radiologist": "Tech Sarah Martinez",
+      "doctor": "Dr. Helen Turner",
+      "client": "Sophia Clark",
+      "consultId": "CONSULT322",
+      "ticketDate": "2024-12-30T11:30:00Z"
+    }
+  ],
   "patients": [
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai",
+      
       "id": "b5de",
       "name": "mo",
       "gender": "Male",
@@ -18,7 +96,7 @@
     },
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai",
+      
       "id": "704b",
       "name": "beyouna",
       "gender": "Female",
@@ -34,7 +112,7 @@
     },
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai", 
+       
       "id": "bc88",
       "name": "amel",
       "gender": "Female",
@@ -50,7 +128,7 @@
     },
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai", 
+       
       "id": "d784",
       "name": "galk wahed",
       "gender": "Male",
@@ -66,7 +144,7 @@
     },
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai", 
+       
       "id": "7364",
       "name": "dddd",
       "gender": "Male",
@@ -82,7 +160,7 @@
     },
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai",
+      
       "id": "bc91",
       "name": "Yen Griffin",
       "dateOfBirth": "2001-03-07",
@@ -98,7 +176,7 @@
     },
     {
       "profilePicture": "patient-info-avatar.svg" , 
-      "assignedDoctor": "Mostefai",
+      
       "id": "8f60",
       "name": "Yen Griffin",
       "dateOfBirth": "2001-03-07",
@@ -141,17 +219,46 @@
       "profilePicture": "admin.jpg"
     },
     {
-      "id": "3",
-      "name": "Charlie Brown",
-      "role": "Designer",
-      "email": "charlie@example.com",
-      "phone": "345-678-9012",
-      "socialNumber": "345-67-8901",
-      "address": "789 Oak St, City",
-      "dateOfHire": "2019-07-10",
-      "consultations": 8,
-      "tag": "@designer",
-      "profilePicture": "admin.jpg"
+      "id": "a02d",
+      "name": "Farrah Bailey",
+      "dateOfBirth": "1990-10-18",
+      "placeOfBirth": "Ea maxime obcaecati ",
+      "address": "Veniam rerum minim ",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "suqupux@mailinator.com",
+      "role": "Tenetur quis omnis p",
+      "specialty": "Molestiae eligendi p",
+      "gender": "Female",
+      "dateOfHire": "2024-12-13"
+    },
+    {
+      "id": "b572",
+      "name": "Jane Doe",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-19",
+      "placeOfBirth": "k",
+      "address": "456 Oak St, City",
+      "socialNumber": "123456789",
+      "phone": "0791172962",
+      "email": "jane.doe@example.com",
+      "role": "Manager",
+      "specialty": "it",
+      "dateOfHire": "2024-12-20"
+    },
+    {
+      "id": "0e1d",
+      "name": "Mechelle Byers",
+      "dateOfBirth": "2020-03-19",
+      "placeOfBirth": "Expedita impedit be",
+      "address": "Laboriosam aut in s",
+      "socialNumber": "211001927",
+      "phone": "3914048347",
+      "email": "weqeseg@mailinator.com",
+      "role": "Non ea quia sit unde",
+      "specialty": "Libero qui temporibu",
+      "gender": "Female",
+      "dateOfHire": "2024-12-10"
     }
   ]
 }

@@ -19,3 +19,4 @@ import { DoctorSidebarComponent } from './doctor-components/doctor-sidebar/docto
 
 //gathered up the expprts all in one place so the routing can be cleaner
 export class DoctorComponent{}
+

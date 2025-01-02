@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-form.component';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
@@ -11,6 +11,7 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
       <button
         class=" w-60 bg-main flex flex-row gap-3 items-center justify-center py-4 rounded-md"
         (click)="onAddPatient()"
+        id="selenium_add_patient_button"
       >
         <img src="add-icon-white.svg" class="" alt="" /><span
           class="text-white font-bold text-base"
@@ -21,21 +22,28 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
     </div>
 
     <div class="popup" *ngIf="showNewPatientForm">
-      <app-new-patient-form
-        (cancel)="onCancelPatientForm()"
-      ></app-new-patient-form>
-    </div>
+        <app-new-patient-form
+          (cancel)="onCancelPatientForm()"
+          (confirm)="reloadPatients()"
+        ></app-new-patient-form>
+      </div>
   `,
 })
 export class HeaderComponent {
+  @Output() reload = new EventEmitter<void>();
   showNewPatientForm = false;
 
   onAddPatient() {
-    console.log('Add new patient');
     this.showNewPatientForm = true;
   }
 
   onCancelPatientForm() {
     this.showNewPatientForm = false;
+  }
+
+  //to reload the patients table after adding a new one
+  reloadPatients(){
+  this.showNewPatientForm = false;
+  this.reload.emit();
   }
 }

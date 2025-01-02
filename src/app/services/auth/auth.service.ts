@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'authToken'; // LocalStorage key for the JWT
+  private tokenKey = 'authToken';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,9 +22,7 @@ export class AuthService {
       .post<{ token: string }>('http://127.0.0.1:8000/login', loginData)
       .subscribe(
         (response) => {
-          console.log('hello', response);
           const token = response.token;
-          console.log('Token:', token);
           rememberMe
             ? localStorage.setItem(this.tokenKey, token) // Store token in localStorage
             : sessionStorage.setItem(this.tokenKey, token); // Store token in sessionStorage

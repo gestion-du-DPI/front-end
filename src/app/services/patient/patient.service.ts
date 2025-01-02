@@ -23,10 +23,19 @@ export class PatientService {
     );
   }
 
+  getPatientById(patientId: string): Observable<Patient> {
+    return this.http.get<Patient>(`${this.apiUrl}/${patientId}`).pipe(
+      catchError((error) => {
+        console.error('Error fetching patient:', error);
+        return throwError(() => new Error('Error fetching patient'));
+      })
+    );
+  }
+
   addPatient(patient: Patient): Observable<Patient> {
     return this.http.post<Patient>(this.apiUrl, patient);
   }
-  
+
   editPatient(patient: Patient): Observable<Patient> {
     return this.http.put<Patient>(`${this.apiUrl}/${patient.id}`, patient).pipe(
       catchError((error) => {
@@ -35,7 +44,7 @@ export class PatientService {
       })
     );
   }
-  
+
   deletePatient(patientId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${patientId}`).pipe(
       catchError((error) => {

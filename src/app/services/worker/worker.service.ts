@@ -4,7 +4,6 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Worker } from '../../models/worker';
 import { environment } from '../../../environments/environment';
-import { WORKERS } from '../../mock-data/workers.temp';
 
 @Injectable({
   providedIn: 'root',
