@@ -27,19 +27,24 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
           <div
             class="flex flex-row overflow-hidden items-center bg-white rounded-lg border-[1.5px] p-2 w-96 gap-3"
           >
-            <img src="search-icon.svg" alt="" />
+            <img src="search-icon.svg" alt="Search icon" />
             <input
               type="text"
-              placeholder="Search Patient by Name here ..."
+              [placeholder]="
+                searchByName
+                  ? 'Search Worker by Name...'
+                  : 'Search Worker by Nss...'
+              "
               class="bg-transparent border-0 focus:outline-none flex-1"
               [(ngModel)]="searchQuery"
               (input)="onSearch()"
             />
           </div>
           <button
-            class="bg-white border-[1.5px] w-10 flex justify-center items-center rounded-lg"
+            class="bg-white hover:bg-slate-100 border-[1.5px] w-10 flex justify-center items-center rounded-lg"
+            (click)="toggleSearchFilter()"
           >
-            <img src="qr-icon.svg" alt="" />
+            <img src="filter-icon.svg" alt="Filter icon" />
           </button>
         </div>
       </div>
@@ -60,6 +65,7 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
 export class PatientsComponent implements OnInit {
   patientsNumber = 0; // Dynamically update based on the number of patients
   searchQuery = ''; // Tracks the input query
+  searchByName = true;
   loading: boolean = false;
 
   patients: any[] = [];
@@ -106,6 +112,11 @@ export class PatientsComponent implements OnInit {
     });
   }
 
+  toggleSearchFilter(): void {
+    this.searchByName = !this.searchByName;
+    this.onSearch();
+  }
+
   reloadPatients(): void {
     this.loading = true; // Show loading spinner
     this.loadPatients();
@@ -113,10 +124,11 @@ export class PatientsComponent implements OnInit {
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredPatients = this.patients.filter(
-      (patient) =>
-        patient.first_name.toLowerCase().includes(query) ||
-        patient.last_name.toLowerCase().includes(query)
+    this.filteredPatients = this.patients.filter((patient) =>
+      this.searchByName
+        ? patient.first_name.toLowerCase().includes(query) ||
+          patient.last_name.toLowerCase().includes(query)
+        : patient.nss.toLowerCase().includes(query)
     );
   }
 }

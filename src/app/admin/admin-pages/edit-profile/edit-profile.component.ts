@@ -388,14 +388,10 @@ export class EditProfileComponent implements OnInit {
       formData.append('password', this.password);
     }
 
-    if (this.profileImage) {
-      formData.append('image', this.profileImage);
-    }
-
     this.editProfileService.updateUserProfile(formData).subscribe({
       next: (response) => {
         console.log('Profile updated successfully:', response);
-        // window.location.reload();
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error updating profile:', err);
