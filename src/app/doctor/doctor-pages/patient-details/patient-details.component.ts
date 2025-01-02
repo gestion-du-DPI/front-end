@@ -15,10 +15,9 @@ import { PatientInfosComponent } from '../../doctor-components/patient-infos/pat
     MedicalRecordComponent,
     DoctorActionsComponent,
     HeaderComponent,
-    PatientInfosComponent
+    PatientInfosComponent,
   ],
   template: ` <div class="flex flex-col">
-    
       <div class="flex flex-col gap-4 lg:mx-12 mx-3">
         <div
           class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12"
@@ -26,21 +25,22 @@ import { PatientInfosComponent } from '../../doctor-components/patient-infos/pat
           <div class="p-4">
             <h1 class="text-4xl text-main font-semibold">Patient Details</h1>
           </div>
-          
+
           <app-header></app-header>
         </div>
       </div>
     </div>
 
     <div class="flex flex-row gap-5 p-5">
-    
-    <app-patient-infos></app-patient-infos>
-   
-    <app-doctor-actions></app-doctor-actions>
-    </div>
-    
+      <app-patient-infos></app-patient-infos>
 
-    <app-medical-record></app-medical-record>`,
+      <app-doctor-actions></app-doctor-actions>
+    </div>
+
+    <app-medical-record></app-medical-record>
+
+    
+    `,
   styles: `
 
 `,

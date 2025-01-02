@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
   imports: [CommonModule, RouterLink],
   template: `
         <div
-          class=" bg-white rounded-xl border-2 border-slate-100 flex flex-col w-80 gap-3 py-4"
+          class=" bg-white rounded-xl border-2 border-slate-100 flex flex-col w-80 gap-3 py-4 h-full"
         >
           <h2 class="text-main font-semibold text-xl ml-6 text-semibold">
             Doctor actions

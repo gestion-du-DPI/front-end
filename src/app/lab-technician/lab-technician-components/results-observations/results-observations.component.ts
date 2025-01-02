@@ -188,7 +188,7 @@ import html2canvas from 'html2canvas';
               <!-- Image -->
               <img
                 [src]="
-                  result.fileName.startsWith('data:image')
+                  result.fileName.startsWith('/image')
                     ? result.fileName
                     : getFileIcon(result.fileType)
                 "
@@ -209,7 +209,7 @@ import html2canvas from 'html2canvas';
                 src="delete.svg"
                 alt="Delete"
                 class="w-6 h-6 cursor-pointer ml-auto"
-                (click)="deleteFile(i); $event.preventDefault()"
+                (click)="deleteFile(i); $event.preventDefault(); $event.stopPropagation()"
               />
             </div>
           </li>
