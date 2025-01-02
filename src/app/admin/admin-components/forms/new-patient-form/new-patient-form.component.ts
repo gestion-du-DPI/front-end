@@ -374,7 +374,7 @@ export class NewPatientFormComponent {
     }
   }
 
-  onSave(){
+  onSave() {
     this.save.emit();
   }
   onCancel() {

@@ -1,4 +1,5 @@
 export interface Patient {
+
   id: string;
   name: string;
   gender: string;
@@ -12,4 +13,6 @@ export interface Patient {
   emergencyPhone: string;
   consultations: number;
   profilePicture: string;
+  
+
 }

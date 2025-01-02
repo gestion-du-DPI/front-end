@@ -58,7 +58,7 @@ import { CommonModule } from '@angular/common';
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker.svg" alt="User" class="w-4 h-4" />
-              <span>{{ assignedDoctor }}</span>
+              <span>{{ emergencyContact }}</span>
             </div>
           </div>
         </div>
@@ -105,6 +105,7 @@ export class NurseInfoComponent {
    socialNumber = '0001823838';
    phoneNumber = '0558235011';
    email = 'a.denai@esi.dz';
+   emergencyContact = 'Mehdi';
    assignedDoctor = 'Mostefai';
    requestedTest = 'Covid-19 injection';
    doctorId = '123456';

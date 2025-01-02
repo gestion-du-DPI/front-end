@@ -1,6 +1,8 @@
 {
   "patients": [
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai",
       "id": "b5de",
       "name": "mo",
       "gender": "Male",
@@ -15,6 +17,8 @@
       "consultations": 2
     },
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai",
       "id": "704b",
       "name": "beyouna",
       "gender": "Female",
@@ -29,6 +33,8 @@
       "consultations": 3
     },
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai", 
       "id": "bc88",
       "name": "amel",
       "gender": "Female",
@@ -43,6 +49,8 @@
       "consultations": 3
     },
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai", 
       "id": "d784",
       "name": "galk wahed",
       "gender": "Male",
@@ -57,6 +65,8 @@
       "consultations": 4
     },
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai", 
       "id": "7364",
       "name": "dddd",
       "gender": "Male",
@@ -71,6 +81,8 @@
       "consultations": 5
     },
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai",
       "id": "bc91",
       "name": "Yen Griffin",
       "dateOfBirth": "2001-03-07",
@@ -85,6 +97,8 @@
       "gender": "Female"
     },
     {
+      "profilePicture": "patient-info-avatar.svg" , 
+      "assignedDoctor": "Mostefai",
       "id": "8f60",
       "name": "Yen Griffin",
       "dateOfBirth": "2001-03-07",
