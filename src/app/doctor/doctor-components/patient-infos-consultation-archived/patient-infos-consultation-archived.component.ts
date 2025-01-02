@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-patient-infos',
+  selector: 'app-patient-infos-consultation-archived',
   imports: [CommonModule, FormsModule],
   template: `
     <div class="bg-white rounded-lg shadow p-5 flex flex-col gap-4">
@@ -20,6 +22,10 @@ import { FormsModule } from '@angular/forms';
             <div class="flex flex-row items-center">
               <img src="worker-name.svg" alt="name" class="w-6 h-6 mr-2" />
               <h2 class="font-semibold text-lg">{{ name }}</h2>
+            </div>
+            <div class="text-black text-sm flex flex-row items-center mt-2">
+              <img src="consulId.svg" alt="Consult ID" class="w-10 h-10 mr-2" />
+              <span>{{ consultId }}</span>
             </div>
           </div>
         </div>
@@ -58,11 +64,16 @@ import { FormsModule } from '@angular/forms';
             </div>
           </div>
         </div>
+        <div class="flex items-center gap-2 p-1">
+          <img src="archived.svg" class="w-4 h-4" alt="" />
+          <p class="text-[#667085] font-bold text-xs		">
+            This consultation is archived
+          </p>
+        </div>
       </div>
 
       <div class="flex flex-row items-center mt-4 w-full">
         <h3 class="font-semibold text-lg mr-10">Past Medical Condition</h3>
-        <img src="edit-cond.svg" alt="Edit" (click)="toggleEdit()" />
       </div>
 
       <div class="flex gap-2 flex-wrap items-center">
@@ -72,60 +83,41 @@ import { FormsModule } from '@angular/forms';
           class="bg-[#DBE4FF] text-black px-3 py-1 rounded flex items-center"
         >
           {{ tag }}
-          <!-- X mark only shows if editing -->
-          <button
-            *ngIf="isEditing"
-            class="ml-2 text-black"
-            (click)="deleteTag(tag)"
-          >
-            X
-          </button>
         </span>
       </div>
 
-      <div *ngIf="isEditing" class=" flex gap-2 items-center">
-        <!-- Input field and button next to each other -->
-        <input
-          [(ngModel)]="newTag"
-          class="border rounded-md px-2 py-1"
-          placeholder="Add a new condition"
-        />
+      <div class="flex flex-row justify-between items-start">
+        <div class="text-black text-sm font-medium">
+          <ul class="list-disc ml-5">
+            <li
+              *ngFor="let condition of conditions"
+              class="font-medium text-base"
+            >
+              {{ condition }}
+            </li>
+          </ul>
+        </div>
         <button
-          (click)="addTag()"
-          class="bg-main text-white px-4 py-1 rounded-md"
+          class="bg-[#F5F6FA] border border-[#F4F2F2] rounded flex items-center gap-2 px-4 py-2 text-main font-medium text-sm whitespace-nowrap h-auto"
+          routerLink="/doctor/prescription"
+          (click)="onPres()"
         >
-          Add
+          <img src="Forward.svg" alt="" class="w-4 h-4" />
+          Back To Previous Page
         </button>
-      </div>
-
-      <div class="text-black text-sm  font-medium">
-        <ul class="list-disc ml-5">
-          <li *ngFor="let condition of conditions" class="font-medium text-base	">{{ condition }}</li>
-        </ul>
       </div>
     </div>
   `,
   styles: ``,
 })
-export class PatientInfosComponent {
-  tags: string[] = ['Hypertension', 'Obesity', 'Anemia' , 'Depression']; 
-  newTag: string = '';
-  isEditing: boolean = false; 
+export class PatientInfosConsultationArchivedComponent {
+  constructor(private router: Router) {}
 
-  toggleEdit(): void {
-    this.isEditing = !this.isEditing; 
+  onPres(): void {
+    this.router.navigate(['/doctor/prescription']);
   }
+  tags: string[] = ['Hypertension', 'Obesity', 'Anemia', 'Depression'];
 
-  addTag(): void {
-    if (this.newTag.trim()) {
-      this.tags.push(this.newTag.trim()); 
-      this.newTag = ''; // Clear input field
-    }
-  }
-
-  deleteTag(tag: string): void {
-    this.tags = this.tags.filter((t) => t !== tag); // Remove tag from list
-  }
   name = 'Lewis Hamilton';
   avatarUrl = 'patient-info-avatar.svg';
   consultId = '123456';
