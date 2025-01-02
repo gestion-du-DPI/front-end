@@ -7,17 +7,21 @@ import { UserRole } from '../../models/user-role';
   providedIn: 'root',
 })
 export class RoleGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(route: any): boolean {
+  
+
+  async canActivate(route: any): Promise<boolean> {
     const expectedRole: UserRole = route.data.role;
-    const userRole: UserRole = this.authService.getUserRole() as UserRole;
+
+    // Wait for the role to be fully loaded
+    const userRole: UserRole = await this.authService.getUserRole() as UserRole;
+
 
     if (userRole === expectedRole) {
       return true;
     }
-
-    this.router.navigate(['/unauthorized']);
     return false;
+    this.router.navigate(['/unauthorized']); //removed for now
   }
 }

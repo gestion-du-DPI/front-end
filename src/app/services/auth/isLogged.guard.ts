@@ -6,38 +6,31 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class IsLoggedGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(): boolean {
+  async canActivate(): Promise<boolean> {
     const isLogged = this.authService.isAuthenticated();
-
     if (isLogged) {
-      const userRole = this.authService.getUserRole()?.toLowerCase();
+      const userRole = await this.authService.getUserRole();
+      const routes: Record<string, string> = {
+        admin: '/admin',
+        doctor: '/doctor',
+        nurse: '/nurse',
+        radiologist: '/radiologist',
+        labtechnician: '/labTechnician',
+        patient: '/patient',
+      };
 
-      switch (userRole) {
-        case 'admin':
-          this.router.navigate(['/admin']);
-          return false;
-        case 'doctor':
-          this.router.navigate(['/doctor']);
-          return false;
-        case 'nurse':
-          this.router.navigate(['/nurse']);
-          return false;
-        case 'radiologist':
-          this.router.navigate(['/radiologist']);
-          return false;
-        case 'labtechnician':
-          this.router.navigate(['/labTechnician']);
-          return false;
-        case 'patient':
-          this.router.navigate(['/patient']);
-          return false;
-        default:
-          return true;
+      const roleRoute = routes[userRole?.toLowerCase() ?? ''];
+
+      if (roleRoute) {
+        this.router.navigate([roleRoute]);
+        return false;  
+      } else {
+        this.router.navigate(['/unauthorized']); 
+        return false;
       }
-    } else {
-      return true;
     }
+    return true;
   }
 }

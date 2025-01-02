@@ -47,4 +47,4 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class LoadingPageComponent {}
+export class LoadingPageComponent { }

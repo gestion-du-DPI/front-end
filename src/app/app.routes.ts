@@ -227,10 +227,18 @@ export const appRoutes: Routes = [
       ),
   },
   {
+    path: 'loading',
+    loadComponent: () =>
+      import('./components/loading-page/loading-page.component').then(
+        (m) => m.LoadingPageComponent
+      ),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/not-found/not-found.component').then(
         (m) => m.NotFoundComponent
       ),
   },
+
 ];
