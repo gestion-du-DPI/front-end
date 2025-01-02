@@ -1,14 +1,21 @@
 import { Component } from '@angular/core';
 import { NewConsultationPopupComponent } from '../new-consultation-popup/new-consultation-popup.component';
+import { EmailPopupComponent } from '../email-popup/email-popup.component';
 import { CommonModule } from '@angular/common';
+import { float } from 'html2canvas/dist/types/css/property-descriptors/float';
 
 @Component({
   selector: 'app-doctor-actions',
-  imports: [NewConsultationPopupComponent , CommonModule],
+  imports: [NewConsultationPopupComponent , CommonModule , EmailPopupComponent],
   template: `
-  <div class="popup" *ngIf="showNewPatientForm">
+    <div class="popup" *ngIf="showEmailForm">
+      <app-email-popup
+        (cancel)="onCancelEmailForm()"
+      ></app-email-popup>
+    </div>
+  <div class="popup" *ngIf="showNewConsultationForm">
       <app-new-consultation-popup
-        (cancel)="onCancelPatientForm()"
+        (cancel)="onCancelConsultationForm()"
       ></app-new-consultation-popup>
     </div>
     <div
@@ -30,6 +37,7 @@ import { CommonModule } from '@angular/common';
       </button>
       <button
         class="flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold"
+        (click)="onAddEmail()"
       >
         <div
           class="flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2"
@@ -43,14 +51,22 @@ import { CommonModule } from '@angular/common';
   styles: ``,
 })
 export class DoctorActionsComponent {
-  showNewPatientForm = false;
+  showEmailForm = false; 
+  showNewConsultationForm = false;
 
-  onAddConsultation() {
-    console.log('Add new patient');
-    this.showNewPatientForm = true;
+  onAddEmail() {
+    this.showEmailForm = true; 
   }
 
-  onCancelPatientForm() {
-    this.showNewPatientForm = false;
+  onCancelEmailForm() {
+    this.showEmailForm = false;
+  }
+
+  onAddConsultation() {
+    this.showNewConsultationForm = true;
+  }
+
+  onCancelConsultationForm() {
+    this.showNewConsultationForm = false;
   }
 }

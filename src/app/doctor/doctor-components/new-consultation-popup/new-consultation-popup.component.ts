@@ -18,8 +18,6 @@ import { NewConsultationFormComponent } from '../new-consultation-form/new-consu
   template: `
     <div
       class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[90vh]"
-      
-      
     >
       <div class="flex flex-row justify-between px-7 pb-3">
         <h1 class="font-extrabold text-2xl text-main">New Consultation</h1>
@@ -54,13 +52,13 @@ import { NewConsultationFormComponent } from '../new-consultation-form/new-consu
           </button>
         </div>
         <div *ngIf="!loading">
-        <!-- Only pass the filtered patients to the consultation form -->
-        <app-new-consultation-form
-          [patients]="filteredPatients"
-          [searchPerformed]="searchPerformed"
-        />
-      </div>
-        <form *ngIf="filteredPatients.length > 0 ">
+          <!-- Only pass the filtered patients to the consultation form -->
+          <app-new-consultation-form
+            [patients]="filteredPatients"
+            [searchPerformed]="searchPerformed"
+          />
+        </div>
+        <form *ngIf="filteredPatients.length > 0">
           <h4 class="text-lg font-semibold text-[#18181B] mt-2">
             Patient condition
           </h4>
@@ -121,54 +119,52 @@ import { NewConsultationFormComponent } from '../new-consultation-form/new-consu
           </div>
           <div>
             <h4 class="text-lg font-semibold text-[#18181B] mt-2 pt-2">
-            Privacy Settings
+              Privacy Settings
             </h4>
             <p class="p-2">Who can have access to this consulation</p>
-            
-              <div class="border rounded p-2 flex flex-wrap gap-2 bg-white">
-                <div
-                  *ngFor="let tag of selectedTags"
-                  class="flex items-center gap-1 px-2 py-1 bg-[#DBE4FF] text-black rounded "
-                >
-                  {{ tag }}
-                  <button
-                    class="text-black hover:text-red-500"
-                    (click)="removeTag(tag)"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <input
-                  [(ngModel)]="inputValue"
-                  (keydown)="onKeyDown($event)"
-                  (input)="filterSuggestions()"
-                  placeholder="Start typing..."
-                  class="flex-grow focus:outline-none border-none"
-                />
-              </div>
-              <ul
-                *ngIf="filteredSuggestions.length > 0"
-                class="mt-1 border rounded bg-white shadow max-h-40 overflow-y-auto"
+
+            <div class="border rounded p-2 flex flex-wrap gap-2 bg-white">
+              <div
+                *ngFor="let tag of selectedTags"
+                class="flex items-center gap-1 px-2 py-1 bg-[#DBE4FF] text-black rounded "
               >
-                <li
-                  *ngFor="let suggestion of filteredSuggestions"
-                  (click)="selectSuggestion(suggestion)"
-                  class="p-2 hover:bg-blue-100 cursor-pointer"
+                {{ tag }}
+                <button
+                  class="text-black hover:text-red-500"
+                  (click)="removeTag(tag)"
                 >
-                  {{ suggestion }}
-                </li>
-              </ul>
-            
+                  ✕
+                </button>
+              </div>
+              <input
+                [(ngModel)]="inputValue"
+                (keydown)="onKeyDown($event)"
+                (input)="filterSuggestions()"
+                placeholder="Start typing..."
+                class="flex-grow focus:outline-none border-none"
+              />
+            </div>
+            <ul
+              *ngIf="filteredSuggestions.length > 0"
+              class="mt-1 border rounded bg-white shadow max-h-40 overflow-y-auto"
+            >
+              <li
+                *ngFor="let suggestion of filteredSuggestions"
+                (click)="selectSuggestion(suggestion)"
+                class="p-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {{ suggestion }}
+              </li>
+            </ul>
           </div>
 
           <div>
-          <h4 class="text-lg font-semibold text-[#18181B] mt-2 pt-2">
-          medical conditions
+            <h4 class="text-lg font-semibold text-[#18181B] mt-2 pt-2">
+              medical conditions
             </h4>
-           
+
             <textarea
               id="medicalConditions"
-             
               name="medicalConditions"
               class="w-full border px-3 py-2 rounded mb-2"
               rows="4"
@@ -176,28 +172,26 @@ import { NewConsultationFormComponent } from '../new-consultation-form/new-consu
             ></textarea>
           </div>
           <div class="flex flex-row justify-end gap-3">
-          <button
-            type="button"
-            class="text-main border-main font-semibold border-[2px] p-2 w-32 rounded-md mt-4"
-            (click)="onCancel()"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            class="bg-main text-white font-semibold p-2 w-32 rounded-md mt-4"
-          >
-            Create
-          </button>
-        </div>
+            <button
+              type="button"
+              class="text-main border-main font-semibold border-[2px] p-2 w-32 rounded-md mt-4"
+              (click)="onCancel()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-main text-white font-semibold p-2 w-32 rounded-md mt-4"
+            >
+              Create
+            </button>
+          </div>
         </form>
       </div>
 
       <div *ngIf="loading" class="self-center mt-10">
         <img src="logo.png" class="animate-spin" alt="" />
       </div>
-
-      
 
       <div class="popup" *ngIf="showscanQRpopup">
         <app-qr-scanner
