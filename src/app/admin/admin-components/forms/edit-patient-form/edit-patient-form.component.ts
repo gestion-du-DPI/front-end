@@ -10,10 +10,10 @@ import { EditPatient } from '../../../../models/edit-patient';
   imports: [FormsModule, CommonModule],
   template: `
     <div
-      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[90vh]"
+      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10"
     >
       <div class="flex flex-row justify-between px-7 pb-3">
-        <h1 class="font-extrabold text-2xl text-main">Edit Patient</h1>
+        <h1 class="font-bold text-2xl text-main">Edit Patient</h1>
         <img
           src="cancel-icon.svg"
           class="w-7 cursor-pointer"
@@ -23,7 +23,7 @@ import { EditPatient } from '../../../../models/edit-patient';
       </div>
       <form
         #patientForm="ngForm"
-        class="flex flex-col gap-2 overflow-y-scroll px-7"
+        class="flex flex-col gap-2 px-7"
         (ngSubmit)="submitForm(patientForm)"
       >
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>

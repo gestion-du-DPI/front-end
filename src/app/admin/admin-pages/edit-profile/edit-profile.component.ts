@@ -268,7 +268,6 @@ import { HeaderComponent } from '../../admin-components/header/header.component'
     </div>
   `,
   styles: [],
-  styles: [],
 })
 export class EditProfileComponent implements OnInit {
   profileImage: string = ''; // Default profile image URL

@@ -36,14 +36,14 @@ export class PatientService {
     return this.http.post<Patient>(this.apiUrl, patient);
   }
 
-  editPatient(patient: Patient): Observable<Patient> {
-    return this.http.put<Patient>(`${this.apiUrl}/${patient.id}`, patient).pipe(
-      catchError((error) => {
-        console.error('Error editing patient:', error);
-        return throwError(() => new Error('Error editing patient'));
-      })
-    );
-  }
+  // editPatient(patient: Patient): Observable<Patient> {
+  //   return this.http.put<Patient>(`${this.apiUrl}/${patient.id}`, patient).pipe(
+  //     catchError((error) => {
+  //       console.error('Error editing patient:', error);
+  //       return throwError(() => new Error('Error editing patient'));
+  //     })
+  //   );
+  // }
 
   deletePatient(patientId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${patientId}`).pipe(

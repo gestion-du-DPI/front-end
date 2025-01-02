@@ -4,10 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { PatientsTableComponent } from '../../admin-components/patients-table/patients-table.component';
 import { HeaderComponent } from '../../admin-components/header/header.component';
 import { PatientService } from '../../../services/admin/patient/patient.service';
+import { QrScannerComponent } from '../../admin-components/popups/qr-scanner/qr-scanner.component';
 
 @Component({
   selector: 'app-patients',
-  imports: [PatientsTableComponent, HeaderComponent, CommonModule, FormsModule],
+  imports: [
+    PatientsTableComponent,
+    HeaderComponent,
+    CommonModule,
+    FormsModule,
+    QrScannerComponent,
+  ],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
       <div class="flex flex-col gap-4 mx-3">
@@ -30,11 +37,7 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
             <img src="search-icon.svg" alt="Search icon" />
             <input
               type="text"
-              [placeholder]="
-                searchByName
-                  ? 'Search Worker by Name...'
-                  : 'Search Worker by Nss...'
-              "
+              placeholder="Search Patient by Name..."
               class="bg-transparent border-0 focus:outline-none flex-1"
               [(ngModel)]="searchQuery"
               (input)="onSearch()"
@@ -42,14 +45,11 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
           </div>
           <button
             class="bg-white hover:bg-slate-100 border-[1.5px] w-10 flex justify-center items-center rounded-lg"
-            (click)="toggleSearchFilter()"
+            (click)="onShowQRscan()"
           >
-            <img src="filter-icon.svg" alt="Filter icon" />
+            <img src="QR.svg" alt="QR icon" />
           </button>
         </div>
-      </div>
-      <div *ngIf="loading" class="self-center mt-10">
-        <img src="logo.png" class=" animate-spin" alt="" />
       </div>
       <div *ngIf="loading" class="self-center mt-10">
         <img src="logo.png" class=" animate-spin" alt="" />
@@ -57,6 +57,9 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
       <div *ngIf="!loading">
         <app-patients-table [patients]="filteredPatients" />
       </div>
+      <span *ngIf="patientNotFound" class="text-center font-semibold text-xl">
+        Ooops! it seems like the patient you're looking for isn't here...
+      </span>
       <div class="popup" *ngIf="showscanQRpopup">
         <app-qr-scanner
           (closePopup)="onHideQRscan()"
@@ -74,10 +77,9 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
 export class PatientsComponent implements OnInit {
   patientsNumber = 0; // Dynamically update based on the number of patients
   searchQuery = ''; // Tracks the input query
-  searchByName = true;
   loading: boolean = false;
   showscanQRpopup = false;
-
+  patientNotFound = false;
   patients: any[] = [];
   filteredPatients: any[] = []; // Tracks the filtered patients
 
@@ -122,10 +124,20 @@ export class PatientsComponent implements OnInit {
     });
   }
 
-  toggleSearchFilter(): void {
-    this.searchByName = !this.searchByName;
-    this.onSearch();
+  onShowQRscan() {
+    this.showscanQRpopup = true;
   }
+
+  onHideQRscan(): void {
+    this.showscanQRpopup = false;
+  }
+
+  onNSSValidated(nss: string): void {
+    const foundPatient = this.patients.find((patient) => patient.nss === nss);
+    this.filteredPatients = foundPatient ? [foundPatient] : [];
+    this.patientNotFound = this.filteredPatients.length == 0;
+  }
+  
 
   reloadPatients(): void {
     this.loading = true; // Show loading spinner
@@ -134,11 +146,11 @@ export class PatientsComponent implements OnInit {
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredPatients = this.patients.filter((patient) =>
-      this.searchByName
-        ? patient.first_name.toLowerCase().includes(query) ||
-          patient.last_name.toLowerCase().includes(query)
-        : patient.nss.toLowerCase().includes(query)
+    this.filteredPatients = this.patients.filter(
+      (patient) =>
+        patient.first_name.toLowerCase().includes(query) ||
+        patient.last_name.toLowerCase().includes(query)
     );
+    this.patientNotFound = this.filteredPatients.length == 0;
   }
 }

@@ -20,7 +20,7 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
     RouterLink,
   ],
   template: `
-    <div class="flex flex-col">
+    <div class="flex flex-col pb-10">
       <div class="flex flex-col gap-4 lg:mx-12 mx-3">
         <div
           class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12"
@@ -104,16 +104,16 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
           </div>
           <!-- RECENT PATIENTS -->
           <div
-            class="bg-white w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] p-6"
+            class="bg-white overflow-hidden w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] py-6 px-4"
           >
             <div class="flex justify-between items-center">
               <p class="text-main" style="font-weight: 600; font-size:20px;">
                 Recent Patients
               </p>
-              <div class="mt-4 text-right flex gap-5">
+              <div class="mt-4 text-right flex gap-5 pb-4">
                 <a
                   href="#"
-                  class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
+                  class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta "
                   style="letter-spacing: 1px;"
                   routerLink="/admin/patients"
                   >SEE ALL PATIENTS</a
@@ -123,11 +123,10 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
             </div>
             <!-- RECENT PATIENTS TABLE -->
             <div class="overflow-x-auto h-full">
-              <table class="min-w-full table-auto mt-6">
+              <table class="w-[100%] table-auto mt-6">
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Email Address</th>
                     <th>Phone Number</th>
                     <th>Social Number</th>
                     <th>Address</th>
@@ -155,19 +154,12 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
                         </span>
                       </div>
                     </td>
-                    <td>{{ patient.email }}</td>
                     <td>{{ patient.phone }}</td>
                     <td>{{ patient.socialNumber }}</td>
                     <td>{{ patient.address }}</td>
                     <td>{{ patient.emergencyContact }}</td>
                     <td>{{ patient.emergencyPhone }}</td>
-                    <td>
-                      <img
-                        [src]="patient.qrCode"
-                        alt="QR Code"
-                        class="w-10 h-10 pl-4"
-                      />
-                    </td>
+
                   </tr>
                 </tbody>
               </table>
@@ -220,15 +212,13 @@ import { CardComponent } from '../../admin-components/dashboard-card/dashboard-c
   styles: [
     `
       td {
-        width: 80px;
+        padding: 10px 3px;
         text-align: center;
         font-size: 12px;
         font-weight: 600;
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
       th {
-        width: 80px;
-        padding: 10px 0px;
         font-weight: 500;
         font-size: 12px;
         color: #667085;

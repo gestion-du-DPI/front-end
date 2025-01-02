@@ -22,7 +22,9 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
           <th class="hidden lg:table-cell">Address</th>
           <th class="hidden lg:table-cell">E^ Contact</th>
           <th class="hidden lg:table-cell">E^ Phone</th>
-          <th class="hidden lg:table-cell">Consultations</th>
+          <th class="hidden lg:table-cell">Consul</th>
+          <th class="hidden lg:table-cell w-10"></th>
+          <th class="hidden lg:table-cell w-10"></th>
         </tr>
       </thead>
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
@@ -71,14 +73,14 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
           <td class="icon cursor-pointer px-0" (click)="onEdit(patient)">
             <img
               src="edit-icon.svg"
-              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              class="hover:bg-slate-100 rounded-lg p-2"
               alt="edit"
             />
           </td>
           <td class="icon cursor-pointer px-0">
             <img
               src="delete-icon.svg"
-              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              class="hover:bg-slate-100 rounded-lg p-2"
               (click)="onDeletePatient(patient)"
               alt="delete"
             />
@@ -119,7 +121,7 @@ import { PatientService } from '../../../services/admin/patient/patient.service'
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
       .icon {
-        padding: 10px 3px;
+        padding: 0px;
       }
     `,
   ],
