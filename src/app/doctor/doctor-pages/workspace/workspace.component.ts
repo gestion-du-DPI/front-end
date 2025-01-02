@@ -73,10 +73,10 @@ import { HttpClient } from '@angular/common/http';
               </p>
               <div class="mt-4 text-right flex gap-5">
                 <a
-                  href="#"
+                  
                   class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
                   style="letter-spacing: 1px;"
-                  routerLink="/patients"
+                  [routerLink]="'/doctor/patients'"
                   >SEE ALL PATIENTS</a
                 >
                 <img src="dashboard-seeall.svg" alt="" />
@@ -124,9 +124,10 @@ import { HttpClient } from '@angular/common/http';
                     <td>{{ patient.emergencyPhone }}</td>
                     <td>
                       <img
-                        [src]="patient.qrCode"
-                        alt="QR Code"
+                        src="dpi.svg"
+                        alt="DPI ICON"
                         class="w-10 h-10 pl-4"
+                        [routerLink]="'/doctor/patient-details/' + patient.id"
                       />
                     </td>
                   </tr>
@@ -179,6 +180,7 @@ export class WorkspaceComponent {
   name: string = 'Dr. Sadoun';
   recentPatients = [
     {
+      id : 1 ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -191,6 +193,7 @@ export class WorkspaceComponent {
       date: '2024-12-01',
     },
     {
+      id : 2 ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -203,6 +206,7 @@ export class WorkspaceComponent {
       date: '2024-12-02',
     },
     {
+      id : 3 ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -215,6 +219,7 @@ export class WorkspaceComponent {
       date: '2024-12-03',
     },
     {
+      id : 4 ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',

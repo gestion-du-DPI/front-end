@@ -64,6 +64,20 @@ export const appRoutes: Routes = [
             (m) => m.WorkspaceComponent
           ),
       },
+      {
+        path: 'patients',
+        loadComponent: () =>
+          import('./doctor/doctor-pages/patients/patients.component').then(
+            (m) => m.PatientsComponent
+          ),
+      },
+      {
+        path: 'patient-details/:id',
+        loadComponent: () =>
+          import(
+            './doctor/doctor-pages/patient-details/patient-details.component'
+          ).then((m) => m.PatientDetailsComponent),
+      },
     ]
   },
   {
