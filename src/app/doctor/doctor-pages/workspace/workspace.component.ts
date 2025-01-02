@@ -180,7 +180,7 @@ export class WorkspaceComponent {
   name: string = 'Dr. Sadoun';
   recentPatients = [
     {
-      id : 1 ,
+      id : 'b5de' ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -193,7 +193,7 @@ export class WorkspaceComponent {
       date: '2024-12-01',
     },
     {
-      id : 2 ,
+      id : '704b' ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -206,7 +206,7 @@ export class WorkspaceComponent {
       date: '2024-12-02',
     },
     {
-      id : 3 ,
+      id : 'bc88' ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -219,7 +219,7 @@ export class WorkspaceComponent {
       date: '2024-12-03',
     },
     {
-      id : 4 ,
+      id : 'd784' ,
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',

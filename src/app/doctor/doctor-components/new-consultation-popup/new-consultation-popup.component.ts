@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../models/patient';
 import { PatientService } from '../../../services/patient/patient.service';
 import { NewConsultationFormComponent } from '../new-consultation-form/new-consultation-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-consultation-popup',
@@ -33,7 +34,7 @@ import { NewConsultationFormComponent } from '../new-consultation-form/new-consu
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>
 
         <!-- Search Bar Section -->
-        <div class="flex items-center gap-2 mt-4">
+        <div *ngIf="!isPatientDetailsPage" class="flex items-center gap-2 mt-4">
           <div class="flex items-center border rounded-md px-2 w-[300px]">
             <img src="search-icon.svg" class="w-5 h-5" alt="Search Icon" />
             <input
@@ -239,11 +240,32 @@ export class NewConsultationPopupComponent implements OnInit {
   loading: boolean = false;
   searchQuery: string = '';
   showscanQRpopup: boolean = false;
+  isPatientDetailsPage: boolean = false;
 
-  constructor(private patientService: PatientService) {}
+  constructor(
+    private patientService: PatientService,
+    private route: ActivatedRoute 
+  ) {}
 
   ngOnInit(): void {
     this.loadPatients(); // Load patients only once on initialization
+    
+  }
+
+   // Check if we are on the "doctor/patient-details/:id" route
+   checkRoute(): void {
+    const patientId = this.route.snapshot.paramMap.get('id');
+    if (patientId) {
+      this.isPatientDetailsPage = true;
+      // Ensure both ids are treated as strings for comparison
+      this.filteredPatients = this.patients.filter(
+        (patient) => patient.id.toString() === patientId
+      );
+      console.log(this.filteredPatients); 
+      console.log(patientId); 
+    } else {
+      this.isPatientDetailsPage = false;
+    }
   }
 
   // Load patients from the service
@@ -254,6 +276,7 @@ export class NewConsultationPopupComponent implements OnInit {
       this.patients = data;
       this.filteredPatients = []; // Start with an empty list of filtered patients
       this.loading = false;
+      this.checkRoute();
     });
   }
 
@@ -266,6 +289,7 @@ export class NewConsultationPopupComponent implements OnInit {
           patient.name.toLowerCase().includes(query) ||
           patient.socialNumber.includes(query)
       );
+      
     } else {
       this.filteredPatients = []; // If the search query is empty, show no results
     }
