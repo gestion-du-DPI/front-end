@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Worker } from '../../../../models/worker';
 import { WorkerService } from '../../../../services/admin/worker/worker.service';
 
 @Component({
