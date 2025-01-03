@@ -17,7 +17,11 @@ import { PatientInfosComponent } from '../../doctor-components/patient-infos/pat
     HeaderComponent,
     PatientInfosComponent,
   ],
-  template: ` <div class="flex flex-col">
+  template: `
+  
+  
+  
+  <div class="flex flex-col">
       <div class="flex flex-col gap-4 lg:mx-12 mx-3">
         <div
           class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12"
@@ -62,6 +66,5 @@ export class PatientDetailsComponent implements OnInit {
       });
     }
 
-    // Initialize dropdownStates with 'false' (closed) for each consultation
   }
 }

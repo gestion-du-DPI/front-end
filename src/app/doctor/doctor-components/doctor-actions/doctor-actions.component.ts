@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NewConsultationPopupComponent } from '../new-consultation-popup/new-consultation-popup.component';
 import { EmailPopupComponent } from '../email-popup/email-popup.component';
 import { CommonModule } from '@angular/common';
-import { float } from 'html2canvas/dist/types/css/property-descriptors/float';
 
 @Component({
   selector: 'app-doctor-actions',

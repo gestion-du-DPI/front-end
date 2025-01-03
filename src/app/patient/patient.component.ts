@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from './patient-components/header/header.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
-  imports: [],
+  imports: [HeaderComponent, RouterOutlet],
   template: `
-    <p>
-      patient works!
-    </p>
+    <app-header></app-header>
+    <router-outlet></router-outlet>
   `,
   styles: ``
 })

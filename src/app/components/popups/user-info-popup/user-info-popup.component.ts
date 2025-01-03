@@ -34,30 +34,30 @@ import { DashboardService } from '../../../services/admin/dashboard/dashboard.se
       </div>
       <div class="flex flex-row flex-wrap justify-center gap-5 mt-2 p-3 ">
         <div class="flex flex-col gap-1 min-w-[170px]">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">Hospital name</p>
-          <p class=" font-medium text-xs">{{ doctorHospital }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Social Number</p>
+          <p class=" font-medium text-xs">0001823838</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">Address</p>
-          <p class=" font-medium text-xs">{{ doctorAddress }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Birthday</p>
+          <p class=" font-medium text-xs">02/02/2002</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">E-mail address</p>
-          <p class=" font-medium text-xs">{{ doctorEmail }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Emergency Contact</p>
+          <p class=" font-medium text-xs">mounir</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
           <p class="text-[#ADADAD] text-[10px] font-semibold">Phone number</p>
-          <p class=" font-medium text-xs">{{ doctorPhoneNumber }}</p>
+          <p class=" font-medium text-xs">+(213)669696969</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">Staff number</p>
-          <p class=" font-medium text-xs">{{ staffNumber }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Address</p>
+          <p class=" font-medium text-xs">Bechar, Algeria</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
           <p class="text-[#ADADAD] text-[10px] font-semibold">
-            Patients number
+          Emergency Phone number
           </p>
-          <p class=" font-medium text-xs">{{ patientsNumber }}</p>
+          <p class=" font-medium text-xs">+(213)669696969</p>
         </div>
       </div>
       <div class="popup" *ngIf="showLogoutPopup">
