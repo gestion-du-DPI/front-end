@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
       <!-- Patient Info Section -->
       <div class="flex flex-row items-center justify-between w-full gap-5">
         <!-- Profile Picture and Basic Info -->
-        <div class="flex flex-row items-center gap-4">
+        <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
           <img
             [src]="avatarUrl"
             alt="Profile Picture"
@@ -27,7 +27,7 @@ import { FormsModule } from '@angular/forms';
         <!-- Additional Patient Details -->
         <div class="flex flex-col items-start gap-4">
           <!-- First Row -->
-          <div class="flex flex-row items-center gap-4">
+          <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="birthday.svg" alt="Calendar" class="w-4 h-4" />
               <span>{{ birthday }}</span>
@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
           </div>
 
           <!-- Second Row -->
-          <div class="flex flex-row items-center gap-4">
+          <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="phone.svg" alt="Phone" class="w-4 h-4" />
               <span>{{ phoneNumber }}</span>

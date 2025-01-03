@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     class="flex flex-col gap-4 p-4  rounded-lg shadow-md bg-gray-50"
   >
     <!-- Patient Info Section -->
-    <div class="flex flex-row items-center justify-between gap-5">
+    <div class="flex flex-row md:flex-nowrap flex-wrap  items-center justify-between gap-5">
       <!-- Profile Picture and Basic Info -->
       <div class="flex flex-row items-center gap-4">
         <img

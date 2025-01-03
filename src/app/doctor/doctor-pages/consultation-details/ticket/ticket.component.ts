@@ -11,12 +11,12 @@ import { AttachmentsComponent } from '../../../doctor-components/attachments/att
   template: `
 
 
-    <div class="flex flex-row gap-5 p-5">
+    <div class="flex flex-row flex-wrap lg:flex-nowrap gap-5 p-5">
       <app-patient-infos></app-patient-infos>
 
       <app-doctor-actions-consultation></app-doctor-actions-consultation>
     </div>
-    <div class="flex flex-row gap-5 p-5">
+    <div class="flex flex-row md:flex-nowrap flex-wrap gap-5 p-5">
     <app-open-ticket class="flex-grow"></app-open-ticket>
     <app-attachments class="flex-grow"></app-attachments>
 

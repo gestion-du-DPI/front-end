@@ -88,11 +88,11 @@ import { HttpClient } from '@angular/common/http';
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Email Address</th>
+                    <th class="hidden lg:table-cell">Email Address</th>
                     <th>Phone Number</th>
                     <th>Social Number</th>
                     <th>Address</th>
-                    <th>E^Contact</th>
+                    <th class="hidden lg:table-cell">E^Contact</th>
                     <th>E^Phone</th>
                     <th></th>
                   </tr>
@@ -116,11 +116,11 @@ import { HttpClient } from '@angular/common/http';
                         </span>
                       </div>
                     </td>
-                    <td>{{ patient.email }}</td>
+                    <td class="hidden lg:table-cell">{{ patient.email }}</td>
                     <td>{{ patient.phone }}</td>
                     <td>{{ patient.socialNumber }}</td>
                     <td>{{ patient.address }}</td>
-                    <td>{{ patient.emergencyContact }}</td>
+                    <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
                     <td>{{ patient.emergencyPhone }}</td>
                     <td>
                       <img
@@ -153,14 +153,12 @@ import { HttpClient } from '@angular/common/http';
   styles: [
     `
       td {
-        width: 80px;
         text-align: center;
         font-size: 12px;
         font-weight: 600;
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
       th {
-        width: 80px;
         padding: 10px 0px;
         font-weight: 500;
         font-size: 12px;

@@ -5,9 +5,7 @@ import { Patient } from '../../../models/patient';
 
 @Component({
   selector: 'app-patients-table',
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   template: `
     <table class="border-collapse justify-self-center table-auto w-full">
       <thead>
@@ -19,7 +17,7 @@ import { Patient } from '../../../models/patient';
           <th class="hidden lg:table-cell">Address</th>
           <th class="hidden lg:table-cell">E^ Contact</th>
           <th class="hidden sm:table-cell">E^ Phone</th>
-          <th class="hidden lg:table-cell">DPI</th>
+          <th class="min-w-14">DPI</th>
         </tr>
       </thead>
       <tbody class="border-[1px] bg-white rounded-lg overflow-hidden">
@@ -40,12 +38,16 @@ import { Patient } from '../../../models/patient';
           <td>{{ patient.phone_number }}</td>
           <td class="hidden md:table-cell">{{ patient.nss }}</td>
           <td class="hidden lg:table-cell">{{ patient.address }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergency_contact_name }}</td>
-          <td class="hidden sm:table-cell">{{ patient.emergency_contact_phone }}</td>
-          <td class="icon cursor-pointer px-0" (click)="onDPI(patient)">
+          <td class="hidden lg:table-cell">
+            {{ patient.emergency_contact_name }}
+          </td>
+          <td class="hidden sm:table-cell">
+            {{ patient.emergency_contact_phone }}
+          </td>
+          <td class="cursor-pointer px-0" (click)="onDPI(patient)">
             <img
               src="dpi-icon.svg"
-              class="hover:bg-slate-100 rounded-xl p-2 w-9 h-9"
+              class="hover:bg-slate-100 rounded-xl p-1 w-9 h-9"
               alt="dpi"
             />
           </td>
@@ -72,7 +74,7 @@ import { Patient } from '../../../models/patient';
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
       .icon {
-        padding: 10px 3px;
+        padding: 0px;
       }
     `,
   ],

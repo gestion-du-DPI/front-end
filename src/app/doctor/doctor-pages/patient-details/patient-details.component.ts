@@ -31,7 +31,7 @@ import { PatientInfosComponent } from '../../doctor-components/patient-infos/pat
       </div>
     </div>
 
-    <div class="flex flex-row gap-5 p-5">
+    <div class="flex flex-row lg:flex-nowrap flex-wrap gap-5 p-5">
       <app-patient-infos></app-patient-infos>
 
       <app-doctor-actions></app-doctor-actions>

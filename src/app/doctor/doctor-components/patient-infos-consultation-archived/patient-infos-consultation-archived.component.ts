@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-patient-infos-consultation-archived',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   template: `
     <div class="bg-white rounded-lg shadow p-5 flex flex-col gap-4">
       <!-- Patient Info Section -->
       <div class="flex flex-row items-center justify-between w-full gap-5">
         <!-- Profile Picture and Basic Info -->
-        <div class="flex flex-row items-center gap-4">
+        <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
           <img
             [src]="avatarUrl"
             alt="Profile Picture"
@@ -33,7 +33,7 @@ import { Router } from '@angular/router';
         <!-- Additional Patient Details -->
         <div class="flex flex-col items-start gap-4">
           <!-- First Row -->
-          <div class="flex flex-row items-center gap-4">
+          <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="birthday.svg" alt="Calendar" class="w-4 h-4" />
               <span>{{ birthday }}</span>
@@ -49,7 +49,7 @@ import { Router } from '@angular/router';
           </div>
 
           <!-- Second Row -->
-          <div class="flex flex-row items-center gap-4">
+          <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="phone.svg" alt="Phone" class="w-4 h-4" />
               <span>{{ phoneNumber }}</span>
@@ -99,9 +99,10 @@ import { Router } from '@angular/router';
         </div>
         <button
           class="bg-[#F5F6FA] border border-[#F4F2F2] rounded flex items-center gap-2 px-4 py-2 text-main font-medium text-sm whitespace-nowrap h-auto"
-          routerLink="/doctor/prescription"
-          (click)="onPres()"
+          routerLink="/doctor/patients"
         >
+                <!-- this button is supposed to take you to parient-details:id but id isn't ready -->
+
           <img src="Forward.svg" alt="" class="w-4 h-4" />
           Back To Previous Page
         </button>
@@ -113,9 +114,7 @@ import { Router } from '@angular/router';
 export class PatientInfosConsultationArchivedComponent {
   constructor(private router: Router) {}
 
-  onPres(): void {
-    this.router.navigate(['/doctor/prescription']);
-  }
+
   tags: string[] = ['Hypertension', 'Obesity', 'Anemia', 'Depression'];
 
   name = 'Lewis Hamilton';

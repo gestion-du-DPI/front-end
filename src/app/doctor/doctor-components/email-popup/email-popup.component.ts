@@ -5,7 +5,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   imports: [],
   template: `
     <div
-      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 h-[60vh] pt-10"
+      class="flex flex-col bg-white py-5 rounded-xl lg:w-[860px] m-10 pt-10"
     >
       <div class="flex flex-row justify-between px-7 pb-3">
         <h1 class="font-extrabold text-2xl text-main">

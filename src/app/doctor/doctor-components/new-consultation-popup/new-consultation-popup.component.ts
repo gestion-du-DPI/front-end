@@ -39,14 +39,14 @@ import { ActivatedRoute } from '@angular/router';
             <img src="search-icon.svg" class="w-5 h-5" alt="Search Icon" />
             <input
               type="text"
-              class="flex-grow px-2 py-1 outline-none"
+              class="flex-grow h-10 px-2 py-1 outline-none"
               placeholder="Search for a patient"
               [(ngModel)]="searchQuery"
               (input)="onSearch()"
             />
           </div>
           <button
-            class="bg-white border-[1.5px] w-10 flex justify-center items-center rounded-lg"
+            class="bg-white border-[1.5px] w-10 h-10 flex justify-center items-center rounded-lg"
             (click)="onShowQRscan()"
           >
             <img src="qr-icon.svg" alt="" />
