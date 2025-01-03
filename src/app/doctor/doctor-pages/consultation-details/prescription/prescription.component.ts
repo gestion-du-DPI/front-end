@@ -4,24 +4,29 @@ import { CreatePrescriptionComponent } from "../../../doctor-components/create-p
 import { MOCK_PRESCRIPTIONS } from '../../../../mock-data/mock-prescriptions';
 import { PrescriptionPopupComponent } from "../../../doctor-components/prescription-popup/prescription-popup.component";
 import { CommonModule } from '@angular/common';
+import { PatientInfosComponent } from '../../../doctor-components/patient-infos/patient-infos.component';
+import { AttachmentsComponent } from '../../../doctor-components/attachments/attachments.component';
 
 @Component({
   selector: 'app-prescription',
-  imports: [DoctorActionsConsultationComponent, CreatePrescriptionComponent, PrescriptionPopupComponent, CommonModule],
+  imports: [DoctorActionsConsultationComponent,PatientInfosComponent,AttachmentsComponent, CreatePrescriptionComponent, PrescriptionPopupComponent, CommonModule],
   template: `
-    <div class="flex flex-col gap-5 p-5">
-      <div class="flex flex-row">
-        <!-- space for info -->
-        <app-doctor-actions-consultation
-          class="ml-auto"
-        ></app-doctor-actions-consultation>
-      </div>
-      <div class="flex flex-row">
-        <app-create-prescription class="flex-1" (preview)="showPopup()"></app-create-prescription>
-        <!-- space for attachements -->
-      </div>
+
+
+
+
+
+<div class="flex flex-row gap-5 p-5">
+      <app-patient-infos ></app-patient-infos>
+
+      <app-doctor-actions-consultation></app-doctor-actions-consultation>
     </div>
-    <app-prescription-popup
+    <div class="flex flex-row gap-5 p-5">
+    <app-create-prescription class="flex-grow" (preview)="showPopup()"></app-create-prescription>
+    <app-attachments class="flex-grow"></app-attachments>
+
+    </div>
+     <app-prescription-popup
         *ngIf="isPrescriptionsPopupVisible"
         [prescription]="selectedPrescription"
         [prescriptions]="mockPrescriptions"

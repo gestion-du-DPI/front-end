@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Patient } from '../../../models/patient';
 
 @Component({
   selector: 'app-patients-table',
@@ -18,7 +19,6 @@ import { Router } from '@angular/router';
           <th class="hidden lg:table-cell">Address</th>
           <th class="hidden lg:table-cell">E^ Contact</th>
           <th class="hidden sm:table-cell">E^ Phone</th>
-          <th class="hidden lg:table-cell">Consultations</th>
           <th class="hidden lg:table-cell">DPI</th>
         </tr>
       </thead>
@@ -26,23 +26,22 @@ import { Router } from '@angular/router';
         <tr *ngFor="let patient of patients" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
-              [src]="patient.profilePicture || 'no-pfp.png'"
+              [src]="patient.profile_picture || 'no-pfp.png'"
               class="w-10 h-10 object-cover rounded-full"
               alt="Profile Picture"
             />
             <div class="flex flex-col">
               <span class="font-bold text-sm text-left">{{
-                patient.name
+                patient.first_name + ' ' + patient.last_name
               }}</span>
             </div>
           </td>
           <td>{{ patient.email }}</td>
-          <td>{{ patient.phone }}</td>
-          <td class="hidden md:table-cell">{{ patient.socialNumber }}</td>
+          <td>{{ patient.phone_number }}</td>
+          <td class="hidden md:table-cell">{{ patient.nss }}</td>
           <td class="hidden lg:table-cell">{{ patient.address }}</td>
-          <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
-          <td class="hidden sm:table-cell">{{ patient.emergencyPhone }}</td>
-          <td class="hidden lg:table-cell">{{ patient.consultations }}</td>
+          <td class="hidden lg:table-cell">{{ patient.emergency_contact_name }}</td>
+          <td class="hidden sm:table-cell">{{ patient.emergency_contact_phone }}</td>
           <td class="icon cursor-pointer px-0" (click)="onDPI(patient)">
             <img
               src="dpi-icon.svg"
@@ -79,7 +78,7 @@ import { Router } from '@angular/router';
   ],
 })
 export class PatientsTableComponent {
-  @Input() patients: any[] = []; // Accept filtered workers list as input
+  @Input() patients: Patient[] = []; // Accept filtered workers list as input
   selectedPatient: any = null; // Stores the patient data to pass to the edit form
 
   constructor(private router: Router) {}
