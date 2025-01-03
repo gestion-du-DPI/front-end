@@ -2,15 +2,21 @@ import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/patient/patient.service';
+import { Patient } from '../../../models/doc-patients';
+import { PatientService } from '../../../services/doctor/patients/patients.service';
 import { QrScannerComponent } from '../../doctor-components/qr-scanner/qr-scanner.component';
-import { UserBadgeComponent } from "../../../components/user-badge/user-badge.component";
+import { UserBadgeComponent } from '../../doctor-components/user-badge/user-badge.component';
 import { PatientsTableComponent } from '../../doctor-components/patients-table/patients-table.component';
 
 @Component({
   selector: 'app-patients',
-  imports: [CommonModule, FormsModule, QrScannerComponent, UserBadgeComponent, PatientsTableComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    QrScannerComponent,
+    UserBadgeComponent,
+    PatientsTableComponent,
+  ],
   template: `
     <div class="flex flex-col gap-5 my-5 lg:mx-10">
       <div class="flex flex-col gap-4 mx-3">
@@ -23,8 +29,8 @@ import { PatientsTableComponent } from '../../doctor-components/patients-table/p
             >{{ patientsNumber }} patients</span
           >
           <div class="md:ml-auto">
-<app-user-badge></app-user-badge>
-        </div>
+            <app-user-badge></app-user-badge>
+          </div>
         </div>
         <div class="flex flex-row gap-3">
           <div
@@ -84,35 +90,35 @@ export class PatientsComponent implements OnInit {
 
   loadPatients(): void {
     this.loading = true; // Show loading spinner
-    this.patientService.getPatients().subscribe((data) => {
-      console.log(data); // Log the data to check if the patients are fetched
-      this.patients = data;
-      this.filteredPatients = data; // Update filteredPatients here
-      this.patientsNumber = data.length; // Update the patients count
-      this.loading = false; // Hide loading spinner
-    });
-  }
-
-  reloadPatients(): void {
-    this.loading = true; // Show loading spinner
     this.patientService.getPatients().subscribe({
-      next: (patients) => {
-        this.patients = patients;
-        this.filteredPatients = patients; // Ensure filteredPatients is also updated
-        this.patientsNumber = patients.length; // Update the patient count
-        this.loading = false; // Hide loading spinner
+      next: (response: any) => {
+        this.patients = response.patients.map((patient: Patient) => ({
+          ...patient,
+          first_name: patient.name.split(' ')[0],
+          last_name: patient.name.split(' ')[1],
+        }));
+        this.filteredPatients = [...this.patients]; // Ensure filteredPatients is also updated
+        this.patientsNumber = this.patients.length;
+        this.loading = false;
+        console.log('fetching patients');
+        console.log('Patients:', this.patients);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching patients:', err);
         this.loading = false; // Hide loading spinner
       },
     });
   }
 
+  reloadPatients(): void {
+    this.loading = true; // Show loading spinner
+    this.loadPatients();
+  }
+
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredPatients = this.patients.filter((patient) =>
-      patient.first_name.toLowerCase().includes(query)
+      patient.name.toLowerCase().includes(query)
     );
   }
 
