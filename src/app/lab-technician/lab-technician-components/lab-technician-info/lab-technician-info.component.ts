@@ -58,7 +58,7 @@ import { CommonModule } from '@angular/common';
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker.svg" alt="User" class="w-4 h-4" />
-              <span>{{ assignedDoctor }}</span>
+              <span>{{ emergencyContact }}</span>
             </div>
           </div>
         </div>
@@ -97,7 +97,6 @@ import { CommonModule } from '@angular/common';
 })
 export class LabTechnicianInfoComponent {
 
-   // Dynamic data directly inside the component
    name = 'Lewis Hamilton';
    avatarUrl = 'radiologist-avatar.svg';
    consultId = '123456';
@@ -105,6 +104,7 @@ export class LabTechnicianInfoComponent {
    socialNumber = '0001823838';
    phoneNumber = '0558235011';
    email = 'a.denai@esi.dz';
+   emergencyContact = 'Mehdi'; 
    assignedDoctor = 'Mostefai';
    requestedTest = 'Covid-19 PCR Test';
    doctorId = '123456';

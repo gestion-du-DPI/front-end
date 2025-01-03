@@ -121,6 +121,13 @@ export const appRoutes: Routes = [
             './doctor/doctor-pages/edit-profile/edit-profile.component'
           ).then((m) => m.EditProfileComponent),
       },
+      {
+        path: 'consultation-archived',
+        loadComponent: () =>
+          import(
+            './doctor/doctor-pages/consultation-archived/consultation-archived.component'
+          ).then((m) => m.ConsultationArchivedComponent),
+      },
     ],
   },
   {

@@ -371,6 +371,7 @@ export class NewPatientFormComponent {
   @Output() confirm = new EventEmitter<void>();
 
   formData: Patient = {
+    id:'',
     email: '',
     first_name: '',
     last_name: '',
@@ -383,6 +384,7 @@ export class NewPatientFormComponent {
     emergency_contact_name: '',
     emergency_contact_phone: '',
     medical_condition: '',
+    profile_picture: '',
   };
 
   constructor(private patientService: PatientService) {}
@@ -406,6 +408,7 @@ export class NewPatientFormComponent {
     }
   }
 
+  
   onCancel() {
     this.cancel.emit();
   }
