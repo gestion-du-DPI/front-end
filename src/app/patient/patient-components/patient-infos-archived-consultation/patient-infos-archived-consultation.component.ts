@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   template: `
      <div class="bg-white rounded-lg shadow p-5 flex flex-col gap-4">
       <!-- Patient Info Section -->
-      <div class="flex flex-row items-center justify-between w-full gap-5">
+      <div class="flex flex-row lg:flex-nowrap flex-wrap  items-center justify-between w-full gap-5">
         <!-- Profile Picture and Basic Info -->
         <div class="flex flex-row items-center gap-4">
           <img
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
             class="w-16 h-16 rounded-full"
           />
           <div class="flex flex-col">
-            <div class="flex flex-row items-center">
+            <div class="flex flex-row items-center md:flex-nowrap flex-wrap ">
               <img src="worker-name.svg" alt="name" class="w-6 h-6 mr-2" />
               <h2 class="font-semibold text-lg">{{ name }}</h2>
             </div>
@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
         <!-- Additional Patient Details -->
         <div class="flex flex-col items-start gap-4">
           <!-- First Row -->
-          <div class="flex flex-row items-center gap-4">
+          <div class="flex flex-row items-center gap-4 md:flex-nowrap flex-wrap ">
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="birthday.svg" alt="Calendar" class="w-4 h-4" />
               <span>{{ birthday }}</span>
@@ -85,7 +85,7 @@ import { Router } from '@angular/router';
         </span>
       </div>
 
-      <div class="flex flex-row justify-between items-start">
+      <div class="flex flex-row justify-between items-start md:flex-nowrap flex-wrap gap-3 md:gap-0">
         <div class="text-black text-sm font-medium">
           <ul class="list-disc ml-5">
             <li

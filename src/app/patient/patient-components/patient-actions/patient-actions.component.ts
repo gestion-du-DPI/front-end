@@ -7,10 +7,10 @@ import { CommonModule } from '@angular/common';
   template: `
   
     <div
-      class=" bg-white rounded-xl border-2 border-slate-100 flex flex-col w-80 gap-3 py-4 h-full"
+      class=" bg-white rounded-xl border-2 border-slate-100 flex flex-col lg:w-80 gap-3 py-4 h-full"
     >
       <h2 class="text-main font-semibold text-xl ml-6 text-semibold">
-        Doctor actions
+        Patient actions
       </h2>
       <button
   class="flex hover:text-main items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold whitespace-nowrap"

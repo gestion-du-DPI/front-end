@@ -7,10 +7,10 @@ import { MedicalRecordComponent } from '../../patient-components/medical-record/
   selector: 'app-consultation-details',
   imports: [PatientInfosComponent, PatientActionsComponent, MedicalRecordComponent ],
   template: `
-    <div class="flex flex-row gap-5 p-5">
+    <div class="flex flex-row lg:flex-nowrap flex-wrap gap-5 p-5">
       <app-patient-infos></app-patient-infos>
 
-      <app-patient-actions></app-patient-actions>
+      <app-patient-actions class="flex-1"></app-patient-actions>
     </div>
 
     <app-medical-record></app-medical-record>
