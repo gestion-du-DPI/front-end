@@ -4,17 +4,18 @@ import { HeaderComponent } from '../../doctor-components/header/header.component
 import { StatisticsGraphComponent } from '../../../admin/admin-components/statistics-graph/statistics-graph.component';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
+import { MedicalCardsContainerComponent } from '../../doctor-components/medical-cards-container/medical-cards-container.component';
 
 @Component({
   selector: 'app-workspace',
-  imports: [ 
-      CommonModule,
-        HeaderComponent,
-        StatisticsGraphComponent,
-        RouterLink,
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    StatisticsGraphComponent,
+    RouterLink,
+    MedicalCardsContainerComponent
   ],
-  template:`
+  template: `
     <div class="flex flex-col">
       <div class="flex flex-col gap-4 lg:mx-12 mx-3">
         <div
@@ -40,8 +41,6 @@ import { HttpClient } from '@angular/common/http';
       </div>
 
       <!-- DASHBOARD OVERVIEW -->
-      
-
 
       <!-- DASHBOARD CONTENT -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-4 mx-3 lg:mx-12">
@@ -73,7 +72,6 @@ import { HttpClient } from '@angular/common/http';
               </p>
               <div class="mt-4 text-right flex gap-5">
                 <a
-                  
                   class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"
                   style="letter-spacing: 1px;"
                   [routerLink]="'/doctor/patients'"
@@ -120,7 +118,9 @@ import { HttpClient } from '@angular/common/http';
                     <td>{{ patient.phone }}</td>
                     <td>{{ patient.socialNumber }}</td>
                     <td>{{ patient.address }}</td>
-                    <td class="hidden lg:table-cell">{{ patient.emergencyContact }}</td>
+                    <td class="hidden lg:table-cell">
+                      {{ patient.emergencyContact }}
+                    </td>
                     <td>{{ patient.emergencyPhone }}</td>
                     <td>
                       <img
@@ -138,15 +138,8 @@ import { HttpClient } from '@angular/common/http';
         </div>
 
         <!-- Requested Tasks -->
-        <div
-          class="w-full h-auto lg:h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col"
-        >
-          <h3 class="text-[20px] font-semibold text-main mb-4">
-            Requested Tasks
-          </h3>
-          <!-- Placeholder for requested tasks -->
-          <div></div>
-        </div>
+        <app-medical-cards-container></app-medical-cards-container>
+
       </div>
     </div>
   `,
@@ -178,7 +171,7 @@ export class WorkspaceComponent {
   name: string = 'Dr. Sadoun';
   recentPatients = [
     {
-      id : 'b5de' ,
+      id: 'b5de',
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -191,7 +184,7 @@ export class WorkspaceComponent {
       date: '2024-12-01',
     },
     {
-      id : '704b' ,
+      id: '704b',
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -204,7 +197,7 @@ export class WorkspaceComponent {
       date: '2024-12-02',
     },
     {
-      id : 'bc88' ,
+      id: 'bc88',
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -217,7 +210,7 @@ export class WorkspaceComponent {
       date: '2024-12-03',
     },
     {
-      id : 'd784' ,
+      id: 'd784',
       name: 'Phoenix Baker',
       phone: '0661805577',
       socialNumber: '0001823838',
@@ -231,7 +224,6 @@ export class WorkspaceComponent {
     },
   ];
 
-
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -240,14 +232,12 @@ export class WorkspaceComponent {
 
   testProtectedEndpoint() {
     this.http.get('http://localhost:8000/protected').subscribe(
-      response => {
+      (response) => {
         console.log('Protected endpoint response:', response);
       },
-      error => {
+      (error) => {
         console.error('Error accessing protected endpoint:', error);
       }
     );
   }
-
-
 }
