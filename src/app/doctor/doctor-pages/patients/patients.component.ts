@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../models/patient';
 import { PatientService } from '../../../services/patient/patient.service';
 import { QrScannerComponent } from '../../doctor-components/qr-scanner/qr-scanner.component';
-import { UserBadgeComponent } from "../../../components/user-badge/user-badge.component";
+import { UserBadgeComponent } from "../../../admin/admin-components/user-badge/user-badge.component";
 import { PatientsTableComponent } from '../../doctor-components/patients-table/patients-table.component';
 
 @Component({

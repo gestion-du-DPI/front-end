@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { consultations } from '../../../mock-data/consultations';
 import { HeaderComponent } from '../../doctor-components/header/header.component';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
+import { UserBadgeComponent } from '../../../admin/admin-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-consultation-details',

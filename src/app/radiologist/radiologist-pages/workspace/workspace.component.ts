@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { RadiologistInfoComponent } from '../../radiologist-components/radiologist-info/radiologist-info.component';
 import { ResultsObservationsComponent } from '../../radiologist-components/results-observations/results-observations.component';
 import { MedicalCardsContainerComponent } from '../../radiologist-components/medical-cards-container/medical-cards-container.component';
+import { UserBadgeComponent } from '../../radiologist-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-workspace',

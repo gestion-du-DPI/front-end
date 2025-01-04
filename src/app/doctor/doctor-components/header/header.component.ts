@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewConsultationPopupComponent } from '../new-consultation-popup/new-consultation-popup.component';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
+import { UserBadgeComponent } from '../user-badge/user-badge.component';
 
 @Component({
   selector: 'app-header',
