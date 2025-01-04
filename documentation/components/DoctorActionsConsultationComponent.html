@@ -1,0 +1,423 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Projet IGL Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Projet IGL Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DoctorActionsConsultationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/doctor/doctor-components/doctor-actions-consultation/doctor-actions-consultation.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-doctor-actions-consultation</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterLink</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code></code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot; bg-white rounded-xl border-2 border-slate-100 flex flex-col w-80 gap-3 py-4 h-full&quot;
+&gt;
+  &lt;h2 class&#x3D;&quot;text-main font-semibold text-xl ml-6 text-semibold&quot;&gt;
+    Doctor actions
+  &lt;/h2&gt;
+  &lt;button
+    class&#x3D;&quot;flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold&quot;
+    routerLink&#x3D;&quot;/doctor/consultation-details/:id/ticket&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2&quot;
+    &gt;
+      &lt;img src&#x3D;&quot;ticket-icon.svg&quot; class&#x3D;&quot;w-5 h-5 object-cover&quot; alt&#x3D;&quot;&quot; /&gt;
+    &lt;/div&gt;
+    Open a ticket
+  &lt;/button&gt;
+  &lt;button
+    class&#x3D;&quot;flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold&quot;
+    routerLink&#x3D;&quot;/doctor/consultation-details/:id/prescription&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2&quot;
+    &gt;
+      &lt;img
+        src&#x3D;&quot;prescription-icon.svg&quot;
+        class&#x3D;&quot;w-4 h-4 object-cover&quot;
+        alt&#x3D;&quot;&quot;
+      /&gt;
+    &lt;/div&gt;
+    Prescription
+  &lt;/button&gt;
+  &lt;div class&#x3D;&quot;flex flex-row gap-3 justify-center items-center m-3 text-sm&quot;&gt;
+    &lt;button
+      class&#x3D;&quot;w-full rounded-lg text-main bg-second font-semibold text-center py-2&quot;
+      routerLink&#x3D;&quot;/doctor/consultation-archived&quot;
+    &gt;
+      Archive
+    &lt;/button&gt;
+    &lt;button
+      class&#x3D;&quot;w-full rounded-lg text-white bg-main font-semibold text-center py-2 &quot;
+    &gt;
+      Close
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component } from &#x27;@angular/core&#x27;;
+import { RouterLink } from &#x27;@angular/router&#x27;;
+
+@Component({
+  selector: &#x27;app-doctor-actions-consultation&#x27;,
+  imports: [CommonModule, RouterLink],
+  template: &#x60;
+    &lt;div
+      class&#x3D;&quot; bg-white rounded-xl border-2 border-slate-100 flex flex-col w-80 gap-3 py-4 h-full&quot;
+    &gt;
+      &lt;h2 class&#x3D;&quot;text-main font-semibold text-xl ml-6 text-semibold&quot;&gt;
+        Doctor actions
+      &lt;/h2&gt;
+      &lt;button
+        class&#x3D;&quot;flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold&quot;
+        routerLink&#x3D;&quot;/doctor/consultation-details/:id/ticket&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2&quot;
+        &gt;
+          &lt;img src&#x3D;&quot;ticket-icon.svg&quot; class&#x3D;&quot;w-5 h-5 object-cover&quot; alt&#x3D;&quot;&quot; /&gt;
+        &lt;/div&gt;
+        Open a ticket
+      &lt;/button&gt;
+      &lt;button
+        class&#x3D;&quot;flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold&quot;
+        routerLink&#x3D;&quot;/doctor/consultation-details/:id/prescription&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2&quot;
+        &gt;
+          &lt;img
+            src&#x3D;&quot;prescription-icon.svg&quot;
+            class&#x3D;&quot;w-4 h-4 object-cover&quot;
+            alt&#x3D;&quot;&quot;
+          /&gt;
+        &lt;/div&gt;
+        Prescription
+      &lt;/button&gt;
+      &lt;div class&#x3D;&quot;flex flex-row gap-3 justify-center items-center m-3 text-sm&quot;&gt;
+        &lt;button
+          class&#x3D;&quot;w-full rounded-lg text-main bg-second font-semibold text-center py-2&quot;
+          routerLink&#x3D;&quot;/doctor/consultation-archived&quot;
+        &gt;
+          Archive
+        &lt;/button&gt;
+        &lt;button
+          class&#x3D;&quot;w-full rounded-lg text-white bg-main font-semibold text-center py-2 &quot;
+        &gt;
+          Close
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: &#x60;&#x60;,
+})
+export class DoctorActionsConsultationComponent {}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class=" bg-white rounded-xl border-2 border-slate-100 flex flex-col w-80 gap-3 py-4 h-full">  <h2 class="text-main font-semibold text-xl ml-6 text-semibold">    Doctor actions  </h2>  <button    class="flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold"    routerLink="/doctor/consultation-details/:id/ticket"  >    <div      class="flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2"    >      <img src="ticket-icon.svg" class="w-5 h-5 object-cover" alt="" />    </div>    Open a ticket  </button>  <button    class="flex hover:text-main flex-row items-center gap-2 group w-full hover:bg-[#ECF1FF] px-4 py-2 font-semibold"    routerLink="/doctor/consultation-details/:id/prescription"  >    <div      class="flex justify-center group-hover:border-[#BBBCFF] w-10 h-10 align-middle items-center rounded-xl border-2 border-slate-200 p-2"    >      <img        src="prescription-icon.svg"        class="w-4 h-4 object-cover"        alt=""      />    </div>    Prescription  </button>  <div class="flex flex-row gap-3 justify-center items-center m-3 text-sm">    <button      class="w-full rounded-lg text-main bg-second font-semibold text-center py-2"      routerLink="/doctor/consultation-archived"    >      Archive    </button>    <button      class="w-full rounded-lg text-white bg-main font-semibold text-center py-2 "    >      Close    </button>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddNewPatientPopupComponent', 'selector': 'app-add-new-patient-popup'},{'name': 'AdminSidebarComponent', 'selector': 'app-admin-sidebar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchivedConsultationComponent', 'selector': 'app-archived-consultation'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'ConfirmDeletePatientPopupComponent', 'selector': 'app-confirm-delete-patient-popup'},{'name': 'ConfirmDeleteWorkerPopupComponent', 'selector': 'app-confirm-delete-worker-popup'},{'name': 'ConfirmLogoutPopupComponent', 'selector': 'app-confirm-logout-popup'},{'name': 'ConsultationArchivedComponent', 'selector': 'app-consultation-archived'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'CreatePrescriptionComponent', 'selector': 'app-create-prescription'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DoctorActionsComponent', 'selector': 'app-doctor-actions'},{'name': 'DoctorActionsConsultationComponent', 'selector': 'app-doctor-actions-consultation'},{'name': 'DoctorComponent', 'selector': 'app-radiologist'},{'name': 'DoctorSidebarComponent', 'selector': 'app-doctor-sidebar'},{'name': 'EditPatientFormComponent', 'selector': 'app-edit-patient-form'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditWorkerFormComponent', 'selector': 'app-edit-worker-form'},{'name': 'EmailPopupComponent', 'selector': 'app-email-popup'},{'name': 'GraphPopUpComponent', 'selector': 'app-graph-pop-up'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HistoryComponent', 'selector': 'app-history'},{'name': 'LabTechnicianInfoComponent', 'selector': 'app-lab-technician-info'},{'name': 'LabTechSidebarComponent', 'selector': 'app-lab-tech-sidebar'},{'name': 'LoadingPageComponent', 'selector': 'app-loading-page'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'Main', 'selector': 'app-admin'},{'name': 'Main', 'selector': 'app-lab-technician'},{'name': 'Main', 'selector': 'app-radiologist'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'NewConsultationFormComponent', 'selector': 'app-new-consultation-form'},{'name': 'NewConsultationPopupComponent', 'selector': 'app-new-consultation-popup'},{'name': 'NewPatientFormComponent', 'selector': 'app-new-patient-form'},{'name': 'NewWorkerFormComponent', 'selector': 'app-new-worker-form'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NurseComponent', 'selector': 'app-radiologist'},{'name': 'NurseInfoComponent', 'selector': 'app-nurse-info'},{'name': 'NurseObservationsComponent', 'selector': 'app-nurse-observations'},{'name': 'NurseSidebarComponent', 'selector': 'app-nurse-sidebar'},{'name': 'OpenTicketComponent', 'selector': 'app-open-ticket'},{'name': 'PatientActionsComponent', 'selector': 'app-patient-actions'},{'name': 'PatientBadgeComponent', 'selector': 'app-patient-badge'},{'name': 'PatientBadgeInfosComponent', 'selector': 'app-patient-badge-infos'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailsComponent', 'selector': 'app-patient-details'},{'name': 'PatientInfosArchivedConsultationComponent', 'selector': 'app-patient-infos-archived-consultation'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosConsultationArchivedComponent', 'selector': 'app-patient-infos-consultation-archived'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PrescriptionComponent', 'selector': 'app-prescription'},{'name': 'PrescriptionPopupComponent', 'selector': 'app-prescription-popup'},{'name': 'PreviewPopupComponent', 'selector': 'app-preview-popup'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologistInfoComponent', 'selector': 'app-radiologist-info'},{'name': 'RadiologistSidebarComponent', 'selector': 'app-radiologist-sidebar'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsPopupComponent', 'selector': 'app-results-popup'},{'name': 'StatisticsGraphComponent', 'selector': 'app-statistics-graph'},{'name': 'TicketComponent', 'selector': 'app-ticket'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UserBadgeComponent', 'selector': 'app-user-badge'},{'name': 'UserInfoPopupComponent', 'selector': 'app-user-info-popup'},{'name': 'WorkersComponent', 'selector': 'app-workers'},{'name': 'WorkersTableComponent', 'selector': 'app-workers-table'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DoctorActionsConsultationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DoctorActionsConsultationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
