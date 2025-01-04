@@ -201,6 +201,7 @@ export class WorkspaceComponent {
       address: '',
       phone_number: '',
       email: '',
+      nss: '',
       profile_image: '',
     },
     stats: [],

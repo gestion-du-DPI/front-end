@@ -51,7 +51,7 @@ import { DashboardService } from '../../../services/doctor/dashboard/dashboard.s
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
           <p class="text-[#ADADAD] text-[10px] font-semibold">Social number</p>
-          <p class=" font-medium text-xs">Needs to be added mn backend</p>
+          <p class=" font-medium text-xs">{{ nss }}</p>
         </div>
       </div>
       <div class="popup" *ngIf="showLogoutPopup">
@@ -73,6 +73,7 @@ export class UserInfoPopupComponent {
   doctorAddress = '';
   doctorPhoneNumber = '';
   doctorEmail = '';
+  nss = '';
   pfp = '';
 
   constructor(
@@ -89,6 +90,7 @@ export class UserInfoPopupComponent {
       this.doctorAddress = cachedData.doctor_info.address;
       this.doctorPhoneNumber = cachedData.doctor_info.phone_number;
       this.doctorEmail = cachedData.doctor_info.email;
+      this.nss = cachedData.doctor_info.nss;
       this.pfp = cachedData.doctor_info.profile_image;
     } else {
       cachedData.subscribe((dataFetched: any) => {
@@ -98,6 +100,7 @@ export class UserInfoPopupComponent {
           this.doctorAddress = dataFetched.doctor_info.address;
           this.doctorPhoneNumber = dataFetched.doctor_info.phone_number;
           this.doctorEmail = dataFetched.doctor_info.email;
+          this.nss = dataFetched.doctor_info.nss;
           this.pfp = dataFetched.doctor_info.profile_image;
         }
       });

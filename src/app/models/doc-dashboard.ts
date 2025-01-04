@@ -5,6 +5,7 @@ export interface DoctorInfo {
   address: string;
   phone_number: string;
   email: string;
+  nss: string;
   profile_image: string;
 }
 
