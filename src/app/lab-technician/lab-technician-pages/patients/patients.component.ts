@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Patient } from '../../../models/patient';
+import { Patient } from '../../../models/admin-patient';
 import { PatientService } from '../../../services/admin/patient/patient.service';
 import { PatientsTableComponent } from '../../lab-technician-components/patients-table/patients-table.component';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';

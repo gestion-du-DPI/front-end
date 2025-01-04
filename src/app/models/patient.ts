@@ -1,16 +1,13 @@
 export interface Patient {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone_number: string;
-  address: string;
-  gender: string;
+  user_id: number;
+  name: string;
+  created_at: string;
   nss: string;
-  date_of_birth: string;
-  place_of_birth: string;
+  email: string;
+  address: string;
+  phone_number: string;
   emergency_contact_name: string;
   emergency_contact_phone: string;
-  medical_condition: string;
-  profile_picture: string;
+  consultation_count: number;
+  profile_image: string;
 }

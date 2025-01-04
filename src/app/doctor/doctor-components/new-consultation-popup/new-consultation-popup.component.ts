@@ -1,12 +1,13 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { QrScannerComponent } from '../../../admin/admin-components/popups/qr-scanner/qr-scanner.component';
+import { QrScannerComponent } from '../qr-scanner/qr-scanner.component';
 import { Consultation } from '../../../models/consultation';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/patient/patient.service';
+import { Patient } from '../../../models/doc-patients';
+import { PatientService } from '../../../services/doctor/patients/patients.service';
 import { NewConsultationFormComponent } from '../new-consultation-form/new-consultation-form.component';
 import { ActivatedRoute } from '@angular/router';
+import { NewConsultationService } from '../../../services/doctor/newConsultation/new-consultation.service';
 
 @Component({
   selector: 'app-new-consultation-popup',
@@ -33,7 +34,6 @@ import { ActivatedRoute } from '@angular/router';
       <div class="flex flex-col gap-2 overflow-y-scroll px-7">
         <h4 class="text-lg font-semibold text-[#18181B] mt-2">Patient Info</h4>
 
-        <!-- Search Bar Section -->
         <div *ngIf="!isPatientDetailsPage" class="flex items-center gap-2 mt-4">
           <div class="flex items-center border rounded-md px-2 w-[300px]">
             <img src="search-icon.svg" class="w-5 h-5" alt="Search Icon" />
@@ -53,17 +53,17 @@ import { ActivatedRoute } from '@angular/router';
           </button>
         </div>
         <div *ngIf="!loading">
-          <!-- Only pass the filtered patients to the consultation form -->
           <app-new-consultation-form
             [patients]="filteredPatients"
             [searchPerformed]="searchPerformed"
+            (patientSelected)="onPatientSelected($event)"
           />
         </div>
         <form *ngIf="filteredPatients.length > 0">
           <h4 class="text-lg font-semibold text-[#18181B] mt-2">
             Patient condition
           </h4>
-          <!-- Reason -->
+
           <div class="flex flex-row justify-center flex-wrap gap-4">
             <div class="flex flex-col gap-1 pt-2">
               <label class="font-medium text-sm">
@@ -72,7 +72,7 @@ import { ActivatedRoute } from '@angular/router';
               <input
                 type="text"
                 class="border-[1px] rounded-md w-96 p-2 text-sm"
-                placeholder="eg. 0559 28 19 22"
+                placeholder="eg: Broken leg"
                 [(ngModel)]="formData.reason"
                 name="reason"
                 required
@@ -89,7 +89,6 @@ import { ActivatedRoute } from '@angular/router';
                 Reason is required and should contain only letters.
               </div>
             </div>
-            <!-- priority -->
 
             <div class="flex flex-col gap-1 pt-2">
               <label class="font-medium text-sm">
@@ -118,60 +117,7 @@ import { ActivatedRoute } from '@angular/router';
               </div>
             </div>
           </div>
-          <div>
-            <h4 class="text-lg font-semibold text-[#18181B] mt-2 pt-2">
-              Privacy Settings
-            </h4>
-            <p class="p-2">Who can have access to this consulation</p>
 
-            <div class="border rounded p-2 flex flex-wrap gap-2 bg-white">
-              <div
-                *ngFor="let tag of selectedTags"
-                class="flex items-center gap-1 px-2 py-1 bg-[#DBE4FF] text-black rounded "
-              >
-                {{ tag }}
-                <button
-                  class="text-black hover:text-red-500"
-                  (click)="removeTag(tag)"
-                >
-                  ✕
-                </button>
-              </div>
-              <input
-                [(ngModel)]="inputValue"
-                (keydown)="onKeyDown($event)"
-                (input)="filterSuggestions()"
-                placeholder="Start typing..."
-                class="flex-grow focus:outline-none border-none"
-              />
-            </div>
-            <ul
-              *ngIf="filteredSuggestions.length > 0"
-              class="mt-1 border rounded bg-white shadow max-h-40 overflow-y-auto"
-            >
-              <li
-                *ngFor="let suggestion of filteredSuggestions"
-                (click)="selectSuggestion(suggestion)"
-                class="p-2 hover:bg-blue-100 cursor-pointer"
-              >
-                {{ suggestion }}
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-lg font-semibold text-[#18181B] mt-2 pt-2">
-              medical conditions
-            </h4>
-
-            <textarea
-              id="medicalConditions"
-              name="medicalConditions"
-              class="w-full border px-3 py-2 rounded mb-2"
-              rows="4"
-              placeholder="eg. Hypertension (diagnosed in 2018),"
-            ></textarea>
-          </div>
           <div class="flex flex-row justify-end gap-3">
             <button
               type="button"
@@ -183,6 +129,7 @@ import { ActivatedRoute } from '@angular/router';
             <button
               type="submit"
               class="bg-main text-white font-semibold p-2 w-32 rounded-md mt-4"
+              (click)="onSubmit()"
             >
               Create
             </button>
@@ -205,6 +152,13 @@ import { ActivatedRoute } from '@angular/router';
   styles: ``,
 })
 export class NewConsultationPopupComponent implements OnInit {
+  selecltedPatient: Patient | null = null;
+
+  onPatientSelected(patient: Patient): void {
+    this.selecltedPatient = patient;
+    this.formData.patient_id = patient.user_id;
+  }
+
   dropdownOpen: boolean = false;
   selectedOption: { label: string; value: string; icon: string } | null = null;
 
@@ -244,7 +198,8 @@ export class NewConsultationPopupComponent implements OnInit {
 
   constructor(
     private patientService: PatientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private newConsultationService: NewConsultationService
   ) {}
 
   ngOnInit(): void {
@@ -258,7 +213,7 @@ export class NewConsultationPopupComponent implements OnInit {
       this.isPatientDetailsPage = true;
       // Ensure both ids are treated as strings for comparison
       this.filteredPatients = this.patients.filter(
-        (patient) => patient.id === patientId
+        (patient) => patient.user_id.toString() === patientId
       );
       console.log(this.filteredPatients);
       console.log(patientId);
@@ -271,12 +226,22 @@ export class NewConsultationPopupComponent implements OnInit {
   // Load patients from the service
   loadPatients(): void {
     this.loading = true;
-    this.patientService.getPatients().subscribe((data) => {
-      console.log(data);
-      this.patients = data;
-      this.filteredPatients = []; // Start with an empty list of filtered patients
-      this.loading = false;
-      this.checkRoute();
+    this.patientService.getPatients().subscribe({
+      next: (response: any) => {
+        this.patients = response.patients.map((patient: Patient) => ({
+          ...patient,
+          first_name: patient.name.split(' ')[0],
+          last_name: patient.name.split(' ')[1],
+        }));
+        console.log('Patients:', this.patients);
+        this.filteredPatients = []; // Start with an empty list of filtered patients
+        this.loading = false;
+        this.checkRoute();
+      },
+      error: (err: any) => {
+        console.error('Error fetching patients:', err);
+        this.loading = false; // Hide loading spinner
+      },
     });
   }
 
@@ -286,8 +251,7 @@ export class NewConsultationPopupComponent implements OnInit {
       const query = this.searchQuery.toLowerCase();
       this.filteredPatients = this.patients.filter(
         (patient) =>
-          patient.first_name.toLowerCase().includes(query) ||
-          patient.last_name.toLowerCase().includes(query) ||
+          patient.name.toLowerCase().includes(query) ||
           patient.nss.includes(query)
       );
     } else {
@@ -306,6 +270,20 @@ export class NewConsultationPopupComponent implements OnInit {
     this.cancel.emit();
   }
 
+  onSubmit(): void {
+    console.log('Form Data:', this.formData);
+    this.newConsultationService.createConsultation(this.formData).subscribe({
+      next: (response: any) => {
+        console.log('Consultation created:', response);
+        this.cancel.emit(); // Close the popup
+      },
+      error: (err: any) => {
+        console.error('Error creating consultation:', err);
+        alert('Error creating consultation. Please try again.');
+      },
+    });
+  }
+
   onHideQRscan(): void {
     this.showscanQRpopup = false;
   }
@@ -319,52 +297,6 @@ export class NewConsultationPopupComponent implements OnInit {
       this.showscanQRpopup = false; // Close the popup
     } else {
       alert('No patient found with the provided NSS.');
-    }
-  }
-
-  allowedWords = [
-    'only me',
-    'doctors',
-    'nurses',
-    'technicians',
-    'radiologists',
-  ];
-  selectedTags: string[] = [];
-  filteredSuggestions: string[] = [];
-  inputValue = '';
-
-  filterSuggestions() {
-    const query = this.inputValue.toLowerCase();
-    this.filteredSuggestions = this.allowedWords.filter(
-      (word) =>
-        word.toLowerCase().startsWith(query) &&
-        !this.selectedTags.includes(word)
-    );
-  }
-
-  selectSuggestion(suggestion: string) {
-    this.addTag(suggestion);
-  }
-
-  addTag(tag: string) {
-    if (!this.selectedTags.includes(tag)) {
-      this.selectedTags.push(tag);
-      this.inputValue = '';
-      this.filteredSuggestions = [];
-    }
-  }
-
-  removeTag(tag: string) {
-    this.selectedTags = this.selectedTags.filter((t) => t !== tag);
-  }
-
-  onKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === 'Tab') {
-      event.preventDefault();
-      const matchedSuggestion = this.filteredSuggestions[0];
-      if (matchedSuggestion) {
-        this.addTag(matchedSuggestion);
-      }
     }
   }
 }

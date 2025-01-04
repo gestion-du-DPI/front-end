@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Patient } from '../../../models/patient';
+import { Patient } from '../../../models/admin-patient';
 import { environment } from '../../../../environments/environment';
 import { EditPatient, PatientToSend } from '../../../models/edit-patient';
 
