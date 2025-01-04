@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router'; // Added Router
 import { consultations } from '../../../mock-data/consultations';
-import { HeaderComponent } from '../../doctor-components/header/header.component';
 import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-consultation-details',
-  imports: [RouterOutlet, UserBadgeComponent],
+  imports: [UserBadgeComponent, RouterOutlet],
   template: `
     <div class="flex flex-col">
       <div class="flex flex-col gap-4 lg:mx-12 mx-3">
@@ -22,7 +21,6 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
         </div>
       </div>
     </div>
-
     <router-outlet></router-outlet>
   `,
   styles: ``,
@@ -30,12 +28,16 @@ import { UserBadgeComponent } from '../../../components/user-badge/user-badge.co
 export class ConsultationDetailsComponent implements OnInit {
   consultation: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {} // Inject Router
 
   ngOnInit(): void {
     const constId = this.route.snapshot.paramMap.get('id');
     if (constId) {
       this.consultation = consultations.find((c) => c.id === +constId);
+      if (this.consultation?.archived) {
+        // Redirect to consultation-archived/:id if archived
+        this.router.navigate([`/consultation-archived/${constId}`]);
+      }
     }
   }
 }

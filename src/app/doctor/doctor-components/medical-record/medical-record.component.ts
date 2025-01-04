@@ -145,7 +145,7 @@ import { ActivatedRoute, Router } from '@angular/router';
           <div class="flex flex-row gap-1 text-xs text-[#667085] font-semibold">
             <img src="briefing-icon.svg" class="w-4 " alt="" />Resume
           </div>
-          {{ consultation.resume }}
+          {{ consultation.resume }} {{consultation.archived}}
         </div>
       </div>
     </div>
@@ -181,7 +181,12 @@ export class MedicalRecordComponent implements OnInit {
     this.dropdownStates[index] = !this.dropdownStates[index]; // Toggle the dropdown state for the clicked index
   }
 
-  onConsultation(consultation: any): void {
-    this.router.navigate(['/doctor/consultation-details', consultation.id]);
+  onConsultation(consultation: Consultation): void {
+    this.router.navigate([
+      consultation.archived
+        ? '/doctor/consultation-archived'
+        : '/doctor/consultation-details',
+      consultation.consultation_id,
+    ]);
   }
 }
