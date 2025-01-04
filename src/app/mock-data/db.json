@@ -1,0 +1,269 @@
+{
+  "radiologist-tickets": [
+    {
+      "ticketId": "RICKET002",
+      "title": "Incorrect Patient Information",
+      "priority": "medium",
+      "radiologist": "Dr. Michael Smith",
+      "doctor": "Dr. William Carter",
+      "client": "Jane Smith",
+      "consultId": "CONSULT456",
+      "ticketDate": "2024-12-28T14:30:00Z",
+      "id": "ab44"
+    },
+    {
+      "ticketId": "RICKET001",
+      "title": "Delayed Radiology Report",
+      "priority": "critical",
+      "radiologist": "Dr. Sarah Johnson",
+      "doctor": "Dr. Emily Brown",
+      "client": "John Doe",
+      "consultId": "CONSULT123",
+      "ticketDate": "2024-12-29T09:00:00Z",
+      "id": "7f7c"
+    },
+    {
+      "ticketId": "RICKET003",
+      "title": "Image Upload Failure",
+      "priority": "low",
+      "radiologist": "Dr. Laura Wilson",
+      "doctor": "Dr. James Taylor",
+      "client": "Robert Brown",
+      "consultId": "CONSULT789",
+      "ticketDate": "2024-12-27T11:15:00Z",
+      "id": "66af"
+    }
+  ],
+  "nurse-tickets": [
+    {
+      "ticketId": "NTICKET001",
+      "title": "Patient Medication Error",
+      "priority": "critical",
+      "radiologist": "Nurse Alice Green",
+      "doctor": "Dr. Brian Adams",
+      "client": "Michael Williams",
+      "consultId": "CONSULT112",
+      "ticketDate": "2024-12-30T10:00:00Z",
+      "id": "93d9"
+    },
+    {
+      "ticketId": "NTICKET002",
+      "title": "Inaccurate Vital Signs Record",
+      "priority": "medium",
+      "radiologist": "Nurse Emma Scott",
+      "doctor": "Dr. Thomas Lee",
+      "client": "Linda White",
+      "consultId": "CONSULT113",
+      "ticketDate": "2024-12-30T15:45:00Z",
+      "id": "5461"
+    }
+  ],
+  "lab-technician-tickets": [
+    {
+      "ticketId": "LTICKET001",
+      "title": "Incorrect Test Results",
+      "priority": "critical",
+      "radiologist": "Tech John Davis",
+      "doctor": "Dr. Olivia Wright",
+      "client": "David Harris",
+      "consultId": "CONSULT321",
+      "ticketDate": "2024-12-29T14:00:00Z",
+      "id": "233f"
+    },
+    {
+      "ticketId": "LTICKET002",
+      "title": "Failed Lab Equipment Calibration",
+      "priority": "medium",
+      "radiologist": "Tech Sarah Martinez",
+      "doctor": "Dr. Helen Turner",
+      "client": "Sophia Clark",
+      "consultId": "CONSULT322",
+      "ticketDate": "2024-12-30T11:30:00Z",
+      "id": "07a8"
+    }
+  ],
+  "patients": [
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+      
+      "id": "b5de",
+      "name": "mo",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-09",
+      "placeOfBirth": "k",
+      "address": "123 Main St, City",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "ma_sadoun@esi.dz",
+      "emergencyContact": "Jane Doe",
+      "emergencyPhone": "1234567891",
+      "consultations": 2
+    },
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+      
+      "id": "704b",
+      "name": "beyouna",
+      "gender": "Female",
+      "dateOfBirth": "2024-12-04",
+      "address": "123 Elm St, City",
+      "placeOfBirth": "City",
+      "socialNumber": "099909090",
+      "phone": "0791172962",
+      "email": "jane.doe@example.com",
+      "emergencyContact": "Jane Doe",
+      "emergencyPhone": "0553881218",
+      "consultations": 3
+    },
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+       
+      "id": "bc88",
+      "name": "amel",
+      "gender": "Female",
+      "dateOfBirth": "2024-12-04",
+      "placeOfBirth": "City",
+      "address": "123 Main St, City",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "jane.doe@example.com",
+      "emergencyContact": "David Smith",
+      "emergencyPhone": "0553881218",
+      "consultations": 3
+    },
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+       
+      "id": "d784",
+      "name": "galk wahed",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-02",
+      "placeOfBirth": "City",
+      "address": "123 Main St, City",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "mary.smith@example.com",
+      "emergencyContact": "David Smith",
+      "emergencyPhone": "0553881218",
+      "consultations": 4
+    },
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+       
+      "id": "7364",
+      "name": "dddd",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-05",
+      "placeOfBirth": "ff",
+      "address": "ff",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "ma_sadoun@esi.dz",
+      "emergencyContact": "David Smith",
+      "emergencyPhone": "0553881218",
+      "consultations": 5
+    },
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+      
+      "id": "bc91",
+      "name": "Yen Griffin",
+      "dateOfBirth": "2001-03-07",
+      "placeOfBirth": "A autem dolorem sunt",
+      "address": "Rerum quia molestias",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "xelelere@mailinator.com",
+      "emergencyContact": "Fuga Nam ipsum id ",
+      "emergencyPhone": "0553881218",
+      "consultations": 99,
+      "gender": "Female"
+    },
+    {
+      "profilePicture": "patient-info-avatar.svg" , 
+      
+      "id": "8f60",
+      "name": "Yen Griffin",
+      "dateOfBirth": "2001-03-07",
+      "placeOfBirth": "A autem dolorem sunt",
+      "address": "Rerum quia molestias",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "xelelere@mailinator.com",
+      "emergencyContact": "Fuga Nam ipsum id ",
+      "emergencyPhone": "0553881218",
+      "consultations": 99,
+      "gender": "Female"
+    }
+  ],
+  "workers": [
+    {
+      "id": "1",
+      "name": "Alice Johnson",
+      "role": "Manager",
+      "email": "alice@example.com",
+      "phone": "123-456-7890",
+      "socialNumber": "123-45-6789",
+      "address": "123 Main St, City",
+      "dateOfHire": "2020-01-15",
+      "consultations": 10,
+      "tag": "@manager",
+      "profilePicture": "admin.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Bob Smith",
+      "role": "Developer",
+      "email": "bob@example.com",
+      "phone": "234-567-8901",
+      "socialNumber": "234-56-7890",
+      "address": "456 Elm St, City",
+      "dateOfHire": "2021-03-22",
+      "consultations": 5,
+      "tag": "@developer",
+      "profilePicture": "admin.jpg"
+    },
+    {
+      "id": "a02d",
+      "name": "Farrah Bailey",
+      "dateOfBirth": "1990-10-18",
+      "placeOfBirth": "Ea maxime obcaecati ",
+      "address": "Veniam rerum minim ",
+      "socialNumber": "123456789",
+      "phone": "0553881217",
+      "email": "suqupux@mailinator.com",
+      "role": "Tenetur quis omnis p",
+      "specialty": "Molestiae eligendi p",
+      "gender": "Female",
+      "dateOfHire": "2024-12-13"
+    },
+    {
+      "id": "b572",
+      "name": "Jane Doe",
+      "gender": "Male",
+      "dateOfBirth": "2024-12-19",
+      "placeOfBirth": "k",
+      "address": "456 Oak St, City",
+      "socialNumber": "123456789",
+      "phone": "0791172962",
+      "email": "jane.doe@example.com",
+      "role": "Manager",
+      "specialty": "it",
+      "dateOfHire": "2024-12-20"
+    },
+    {
+      "id": "0e1d",
+      "name": "Mechelle Byers",
+      "dateOfBirth": "2020-03-19",
+      "placeOfBirth": "Expedita impedit be",
+      "address": "Laboriosam aut in s",
+      "socialNumber": "211001927",
+      "phone": "3914048347",
+      "email": "weqeseg@mailinator.com",
+      "role": "Non ea quia sit unde",
+      "specialty": "Libero qui temporibu",
+      "gender": "Female",
+      "dateOfHire": "2024-12-10"
+    }
+  ]
+}
