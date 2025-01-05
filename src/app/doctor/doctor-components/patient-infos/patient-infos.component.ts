@@ -107,14 +107,19 @@ export class PatientInfosComponent {
 
   ngOnInit(): void {
     let ConsultationId = '';
-    const fullPath = window.location.pathname;
 
-    // Extract the ID using a regex or split
-    const match = fullPath.match(/consultation-details\/(\d+)/);
-    if (match) {
-      ConsultationId = match[1]; // Capture group 1 contains the ID
-    } else {
-      console.error('Consultation ID not found in URL');
+    ConsultationId = this.route.snapshot.paramMap.get('id') || '';
+
+    if (ConsultationId === '') {
+      const fullPath = window.location.pathname;
+
+      // Extract the ID using a regex or split
+      const match = fullPath.match(/consultation-details\/(\d+)/);
+      if (match) {
+        ConsultationId = match[1]; // Capture group 1 contains the ID
+      } else {
+        console.error('Consultation ID not found in URL');
+      }
     }
 
     if (ConsultationId) {
