@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Patient } from '../../../models/patient';
-import { PatientService } from '../../../services/doctor/patient/patient.service';
 import { UserProfile } from '../../../models/doc-getDPI';
+import { GetConsultationService } from '../../../services/doctor/getConsultation/get-consultation.service';
+import { Consultation } from '../../../models/doc-getConsultation';
 
 @Component({
   selector: 'app-patient-infos',
@@ -18,14 +18,14 @@ import { UserProfile } from '../../../models/doc-getDPI';
         <!-- Profile Picture and Basic Info -->
         <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
           <img
-            [src]="avatarUrl || 'patient-info-avatar.svg'"
+            [src]="Consultation.profile_image || 'patient-info-avatar.svg'"
             alt="Profile Picture"
             class="w-16 h-16 rounded-full"
           />
           <div class="flex flex-col">
             <div class="flex flex-row items-center">
               <img src="worker-name.svg" alt="name" class="w-6 h-6 mr-2" />
-              <h2 class="font-semibold text-lg">{{ patient?.name }}</h2>
+              <h2 class="font-semibold text-lg">{{ Consultation.name }}</h2>
             </div>
           </div>
         </div>
@@ -38,15 +38,15 @@ import { UserProfile } from '../../../models/doc-getDPI';
           >
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="birthday.svg" alt="Calendar" class="w-4 h-4" />
-              <span>{{ birthday }}</span>
+              <span>{{ Consultation.date_of_birth }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="socialNumber.svg" alt="ID Card" class="w-4 h-4" />
-              <span>{{ socialNumber }}</span>
+              <span>{{ Consultation.consultation_id }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker-phoneNumber.svg" alt="Phone" class="w-4 h-4" />
-              <span>{{ phoneNumber }}</span>
+              <span>{{ Consultation.emergency_contact_phone }}</span>
             </div>
           </div>
 
@@ -56,15 +56,15 @@ import { UserProfile } from '../../../models/doc-getDPI';
           >
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="phone.svg" alt="Phone" class="w-4 h-4" />
-              <span>{{ phoneNumber }}</span>
+              <span>{{ Consultation.phone_number }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="email.svg" alt="Email" class="w-4 h-4" />
-              <span>{{ email }}</span>
+              <span>{{ Consultation.email }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker.svg" alt="User" class="w-4 h-4" />
-              <span>{{ emergencyContact }}</span>
+              <span>{{ Consultation.emergency_contact_name }}</span>
             </div>
           </div>
         </div>
@@ -85,34 +85,51 @@ import { UserProfile } from '../../../models/doc-getDPI';
   styles: ``,
 })
 export class PatientInfosComponent {
-  patient: UserProfile | null = null;
-
   constructor(
     private route: ActivatedRoute,
-    private patientService: PatientService
+    private getConsultationService: GetConsultationService
   ) {}
 
+  Consultation: Consultation = {
+    user_id: 0,
+    profile_image: '',
+    consultation_id: 0,
+    name: '',
+    date_of_birth: '',
+    nss: '',
+    email: '',
+    phone_number: '',
+    emergency_contact_name: '',
+    emergency_contact_phone: '',
+    resume: '',
+    archived: false,
+  };
+
   ngOnInit(): void {
-    const patientId = this.route.snapshot.paramMap.get('id');
-    console.log('Patient ID:', patientId);
-    if (patientId) {
-      this.patientService.getDPIById(patientId).subscribe({
-        next: (data) => {
-          this.patient = data;
-          console.log('Patient:', data);
-          this.name = data.name;
-          this.avatarUrl = data.profile_image;
-          this.birthday = data.date_of_birth;
-          this.socialNumber = data.nss;
-          this.phoneNumber = data.phone_number;
-          this.email = data.email;
-          this.emergencyContact = data.emergency_contact_name;
-          this.conditions = data.medical_condition.split('\n');
-        },
-        error: (err: any) => console.error('Error fetching patient:', err),
-      });
+    let ConsultationId = '';
+    const fullPath = window.location.pathname;
+
+    // Extract the ID using a regex or split
+    const match = fullPath.match(/consultation-details\/(\d+)/);
+    if (match) {
+      ConsultationId = match[1]; // Capture group 1 contains the ID
+    } else {
+      console.error('Consultation ID not found in URL');
+    }
+
+    if (ConsultationId) {
+      this.getConsultationService
+        .getConsultationByIdCashed(ConsultationId)
+        .subscribe({
+          next: (data) => {
+            this.Consultation = data;
+            console.log('Consultation:', data);
+          },
+          error: (err) => console.error(err),
+        });
     }
   }
+  patient: UserProfile | null = null;
 
   name = '';
   avatarUrl = '';

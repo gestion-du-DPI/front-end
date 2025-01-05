@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DocHome } from '../../../models/doc-dashboard';
 import { DashboardService } from '../../../services/doctor/dashboard/dashboard.service';
+import { MedicalCardsContainerComponent } from '../../../doctor/doctor-components/medical-cards-container/medical-cards-container.component';
 
 @Component({
   selector: 'app-workspace',
@@ -14,6 +15,7 @@ import { DashboardService } from '../../../services/doctor/dashboard/dashboard.s
     HeaderComponent,
     StatisticsGraphComponent,
     RouterLink,
+    MedicalCardsContainerComponent,
   ],
   template: `
     <div class="flex flex-col">
@@ -142,15 +144,7 @@ import { DashboardService } from '../../../services/doctor/dashboard/dashboard.s
         </div>
 
         <!-- Requested Tasks -->
-        <div
-          class="w-full h-auto lg:h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col"
-        >
-          <h3 class="text-[20px] font-semibold text-main mb-4">
-            Requested Tasks
-          </h3>
-          <!-- Placeholder for requested tasks -->
-          <div></div>
-        </div>
+        <app-medical-cards-container></app-medical-cards-container>
       </div>
     </div>
   `,

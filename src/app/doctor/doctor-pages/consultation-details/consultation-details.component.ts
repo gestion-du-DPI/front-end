@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router'; // Added Router
 import { consultations } from '../../../mock-data/consultations';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
+import { UserBadgeComponent } from '../../doctor-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-consultation-details',
