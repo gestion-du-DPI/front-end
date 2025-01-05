@@ -128,7 +128,6 @@ export class PatientInfosComponent {
         .subscribe({
           next: (data) => {
             this.Consultation = data;
-            console.log('Consultation:', data);
           },
           error: (err) => console.error(err),
         });

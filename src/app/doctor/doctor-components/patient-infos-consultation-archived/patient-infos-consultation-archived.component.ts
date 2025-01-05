@@ -118,9 +118,9 @@ export class PatientInfosConsultationArchivedComponent {
     archived: false,
   };
 
-  ngOnInit(): void {
-    const ConsultationId = this.route.snapshot.paramMap.get('id');
-    console.log(ConsultationId);
+    ngOnInit(): void {
+      const ConsultationId = this.route.snapshot.paramMap.get('id');
+      console.log(ConsultationId);
 
     if (ConsultationId) {
       this.getConsultationService
