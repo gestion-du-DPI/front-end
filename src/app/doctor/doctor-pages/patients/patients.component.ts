@@ -6,6 +6,7 @@ import { Patient } from '../../../models/doc-patients';
 import { PatientService } from '../../../services/doctor/patients/patients.service';
 import { QrScannerComponent } from '../../doctor-components/qr-scanner/qr-scanner.component';
 import { UserBadgeComponent } from '../../doctor-components/user-badge/user-badge.component';
+import { PatientsTableComponent } from '../../doctor-components/patients-table/patients-table.component';
 
 @Component({
   selector: 'app-patients',
