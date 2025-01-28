@@ -12,6 +12,10 @@ Make sure you have the following installed on your local machine:
 - Angular CLI (version 12 or higher)
 - Git
 
+### Documentation
+
+You can find the documentation under the folder Documentation or check this link: [link](https://tp-igl-front-documentation.netlify.app/)
+
 ### Installation
 
 1. Clone the repository to your local machine:
