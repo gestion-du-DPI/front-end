@@ -7,7 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:projet-igl": "node dist/projet-igl/server/server.mjs"
+    "serve:ssr:projet-igl": "node dist/projet-igl/server/server.mjs",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +25,7 @@
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.4",
     "@canvasjs/angular-charts": "^1.2.0",
+    "@compodoc/compodoc": "^1.1.26",
     "@fortawesome/angular-fontawesome": "^1.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
