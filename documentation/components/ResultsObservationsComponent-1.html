@@ -1,0 +1,1769 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Projet IGL Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Projet IGL Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ResultsObservationsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-results-observations</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-4&quot;&gt;
+  &lt;!-- Upload Results / Observations --&gt;
+  &lt;div class&#x3D;&quot;col-span-2 bg-white p-4 border rounded-md shadow-md&quot;&gt;
+    &lt;div class&#x3D;&quot;flex gap-4&quot;&gt;
+      &lt;button
+        class&#x3D;&quot;px-4 py-2 rounded font-semibold&quot;
+        [ngClass]&#x3D;&quot;{
+          &#x27;bg-none text-main&#x27;: !showUpload,
+          &#x27;bg-main text-white&#x27;: showUpload
+        }&quot;
+        (click)&#x3D;&quot;showUpload &#x3D; true&quot;
+      &gt;
+        Upload Results
+      &lt;/button&gt;
+      &lt;button
+        class&#x3D;&quot;px-4 py-2 rounded font-semibold&quot;
+        [ngClass]&#x3D;&quot;{
+          &#x27;bg-none text-main&#x27;: showUpload,
+          &#x27;bg-main text-white&#x27;: !showUpload
+        }&quot;
+        (click)&#x3D;&quot;showUpload &#x3D; false&quot;
+      &gt;
+        Observations
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div *ngIf&#x3D;&quot;showUpload&quot; class&#x3D;&quot;mt-4&quot;&gt;
+      &lt;!-- Drag &amp; Drop Zone --&gt;
+      &lt;div
+        class&#x3D;&quot;border border-dashed bg-[#F8F8FF] rounded-md p-8 flex flex-col items-center justify-center &quot;
+        [ngClass]&#x3D;&quot;{ &#x27;bg-blue-200&#x27;: isDragging }&quot;
+        (dragover)&#x3D;&quot;onDragOver($event)&quot;
+        (dragleave)&#x3D;&quot;onDragLeave($event)&quot;
+        (drop)&#x3D;&quot;onDrop($event)&quot;
+        style&#x3D;&quot;border-color: rgba(56, 78, 183, 0.3); cursor: default;&quot;
+      &gt;
+        &lt;img
+          src&#x3D;&quot;upload-results.svg&quot;
+          alt&#x3D;&quot;Upload Icon&quot;
+          class&#x3D;&quot;w-12 h-12 mb-2&quot;
+        /&gt;
+        &lt;p class&#x3D;&quot;text-black text-center&quot;&gt;
+          Drag &amp; drop files or
+          &lt;span
+            class&#x3D;&quot;font-semibold text-main underline cursor-pointer&quot;
+            (click)&#x3D;&quot;fileInput.click()&quot;
+          &gt;
+            Browse
+          &lt;/span&gt;
+        &lt;/p&gt;
+        &lt;p class&#x3D;&quot;font-normal text-[#676767] text-xs pt-5 &quot;&gt;
+          Supported formats: JPEG, JPG, PDF, PNG, DICOM, TIFF, NIfTI
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;input
+        #fileInput
+        type&#x3D;&quot;file&quot;
+        multiple
+        class&#x3D;&quot;hidden&quot;
+        (change)&#x3D;&quot;onFileSelect($event)&quot;
+      /&gt;
+
+      &lt;!-- Upload Progress Section --&gt;
+      &lt;div *ngIf&#x3D;&quot;uploadingFiles.length &gt; 0&quot; class&#x3D;&quot;mt-6&quot;&gt;
+        &lt;h4 class&#x3D;&quot;text-lg font-medium text-[#3C3C3C]&quot;&gt;
+          Uploading {{ currentFileIndex }}/{{ totalFiles }} files
+        &lt;/h4&gt;
+
+        &lt;div
+          *ngIf&#x3D;&quot;currentUploadingFile&quot;
+          class&#x3D;&quot;flex items-center border-2 border-main rounded-md p-4 mt-2&quot;
+        &gt;
+        &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+          &lt;p class&#x3D;&quot;font-medium&quot;&gt;{{ currentUploadingFile.name }}&lt;/p&gt;
+          &lt;div class&#x3D;&quot;h-2 bg-gray-200 rounded mt-2&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;h-full  rounded bg-main&quot;
+              [style.width.%]&#x3D;&quot;uploadProgress&quot;
+            &gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;h4 class&#x3D;&quot;text-lg font-medium text-[#3C3C3C] mt-6&quot;&gt;
+          Uploaded  {{ uploadedFiles.length }} files
+        &lt;/h4&gt;
+
+        &lt;div *ngFor&#x3D;&quot;let file of uploadedFiles&quot; class&#x3D;&quot;border-2 border-green-400 rounded-md p-4 mt-2&quot;&gt;
+          &lt;p class&#x3D;&quot;font-medium&quot;&gt;{{ file.name }}&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;button
+          class&#x3D;&quot;bg-main text-white px-4 py-2 rounded mt-4&quot;
+          (click)&#x3D;&quot;submitResults()&quot;
+        &gt;
+          UPLOAD RESULTS
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div *ngIf&#x3D;&quot;!showUpload&quot; class&#x3D;&quot;mt-4&quot;&gt;
+      &lt;form&gt;
+        &lt;label
+          for&#x3D;&quot;title&quot;
+          class&#x3D;&quot;block text-base text-[#3C3C3C] font-medium&quot;
+          &gt;Title&lt;/label
+        &gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          id&#x3D;&quot;title&quot;
+          class&#x3D;&quot;w-full border px-3 py-2 rounded mb-2&quot;
+          placeholder&#x3D;&quot;eg. Mr. Bouboutani Observations&quot;
+        /&gt;
+        &lt;label
+          for&#x3D;&quot;notes&quot;
+          class&#x3D;&quot;block text-base text-[#3C3C3C] font-medium&quot;
+          &gt;Notes&lt;/label
+        &gt;
+        &lt;textarea
+          id&#x3D;&quot;notes&quot;
+          class&#x3D;&quot;w-full border px-3 py-2 rounded mb-2&quot;
+          rows&#x3D;&quot;4&quot;
+          placeholder&#x3D;&quot;eg. Mild interstitial markings suggestive of early fibrosis. No acute pathology noted.&quot;
+        &gt;&lt;/textarea&gt;
+        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;bg-main text-white px-4 py-2 rounded&quot;&gt;
+          Submit
+        &lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Consultation Results --&gt;
+  &lt;div class&#x3D;&quot;bg-white p-5 border rounded-md shadow-md&quot;&gt;
+    &lt;h3 class&#x3D;&quot;font-semibold text-main&quot;&gt;Consultation&#x27;s Results&lt;/h3&gt;
+    &lt;ul class&#x3D;&quot;mt-4 space-y-4&quot;&gt;
+      &lt;li *ngFor&#x3D;&quot;let result of uploadedResults&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center space-x-4&quot;&gt;
+          &lt;!-- Image --&gt;
+          &lt;img
+            [src]&#x3D;&quot;getFileIcon(result.fileType)&quot;
+            alt&#x3D;&quot;uploaded&quot;
+            class&#x3D;&quot;w-10 h-10 object-cover rounded-md&quot;
+          /&gt;
+          &lt;!-- Text Info --&gt;
+          &lt;div class&#x3D;&quot;flex-1 overflow-hidden&quot;&gt;
+            &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;font-medium hover:underline truncate&quot;&gt;
+              {{ result.fileName }}
+            &lt;/a&gt;
+            &lt;p class&#x3D;&quot;text-sm text-gray-500&quot;&gt;
+              by {{ result.owner }} at {{ result.date }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;!-- Delete Image --&gt;
+          &lt;img
+            src&#x3D;&quot;delete.svg&quot;
+            alt&#x3D;&quot;Delete&quot;
+            class&#x3D;&quot;w-6 h-6 cursor-pointer ml-auto&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentFileIndex" >currentFileIndex</a>
+                            </li>
+                            <li>
+                                <a href="#currentUploadingFile" >currentUploadingFile</a>
+                            </li>
+                            <li>
+                                <a href="#isDragging" >isDragging</a>
+                            </li>
+                            <li>
+                                <a href="#mockResults" >mockResults</a>
+                            </li>
+                            <li>
+                                <a href="#showUpload" >showUpload</a>
+                            </li>
+                            <li>
+                                <a href="#totalFiles" >totalFiles</a>
+                            </li>
+                            <li>
+                                <a href="#uploadedFiles" >uploadedFiles</a>
+                            </li>
+                            <li>
+                                <a href="#uploadedResults" >uploadedResults</a>
+                            </li>
+                            <li>
+                                <a href="#uploadingFiles" >uploadingFiles</a>
+                            </li>
+                            <li>
+                                <a href="#uploadProgress" >uploadProgress</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getFileIcon" >getFileIcon</a>
+                            </li>
+                            <li>
+                                <a href="#handleFileUpload" >handleFileUpload</a>
+                            </li>
+                            <li>
+                                <a href="#onDragLeave" >onDragLeave</a>
+                            </li>
+                            <li>
+                                <a href="#onDragOver" >onDragOver</a>
+                            </li>
+                            <li>
+                                <a href="#onDrop" >onDrop</a>
+                            </li>
+                            <li>
+                                <a href="#onFileSelect" >onFileSelect</a>
+                            </li>
+                            <li>
+                                <a href="#resetUploadState" >resetUploadState</a>
+                            </li>
+                            <li>
+                                <a href="#simulateFileUpload" >simulateFileUpload</a>
+                            </li>
+                            <li>
+                                <a href="#startFileUpload" >startFileUpload</a>
+                            </li>
+                            <li>
+                                <a href="#submitResults" >submitResults</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFileIcon"></a>
+                    <span class="name">
+                        <span ><b>getFileIcon</b></span>
+                        <a href="#getFileIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFileIcon(fileType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fileType</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleFileUpload"></a>
+                    <span class="name">
+                        <span ><b>handleFileUpload</b></span>
+                        <a href="#handleFileUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleFileUpload(files: FileList)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:219</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>files</td>
+                                            <td>
+                                                        <code>FileList</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragLeave"></a>
+                    <span class="name">
+                        <span ><b>onDragLeave</b></span>
+                        <a href="#onDragLeave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragLeave(event: DragEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>DragEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragOver"></a>
+                    <span class="name">
+                        <span ><b>onDragOver</b></span>
+                        <a href="#onDragOver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragOver(event: DragEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>DragEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDrop"></a>
+                    <span class="name">
+                        <span ><b>onDrop</b></span>
+                        <a href="#onDrop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDrop(event: DragEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>DragEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileSelect"></a>
+                    <span class="name">
+                        <span ><b>onFileSelect</b></span>
+                        <a href="#onFileSelect"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileSelect(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetUploadState"></a>
+                    <span class="name">
+                        <span ><b>resetUploadState</b></span>
+                        <a href="#resetUploadState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetUploadState()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:281</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="simulateFileUpload"></a>
+                    <span class="name">
+                        <span ><b>simulateFileUpload</b></span>
+                        <a href="#simulateFileUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>simulateFileUpload()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:237</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startFileUpload"></a>
+                    <span class="name">
+                        <span ><b>startFileUpload</b></span>
+                        <a href="#startFileUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>startFileUpload()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="229"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:229</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitResults"></a>
+                    <span class="name">
+                        <span ><b>submitResults</b></span>
+                        <a href="#submitResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submitResults()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentFileIndex"></a>
+                    <span class="name">
+                        <span ><b>currentFileIndex</b></span>
+                        <a href="#currentFileIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUploadingFile"></a>
+                    <span class="name">
+                        <span ><b>currentUploadingFile</b></span>
+                        <a href="#currentUploadingFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:181</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDragging"></a>
+                    <span class="name">
+                        <span ><b>isDragging</b></span>
+                        <a href="#isDragging"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mockResults"></a>
+                    <span class="name">
+                        <span ><b>mockResults</b></span>
+                        <a href="#mockResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      fileName: &#x27;Leg radio.jpg&#x27;,
+      fileType: &#x27;image&#x27;, // file type (&#x27;image&#x27; or &#x27;document&#x27;)
+      owner: &#x27;Mr. Bouboutani&#x27;,
+      date: &#x27;2024-12-7 15:82&#x27;,
+    },
+    {
+      fileName: &#x27;Report.pdf&#x27;,
+      fileType: &#x27;document&#x27;,
+      owner: &#x27;Mr. Bouboutani&#x27;,
+      date: &#x27;2024-12-7 15:82&#x27;,
+    },
+    {
+      fileName: &#x27;Wrist radio.jpg&#x27;,
+      fileType: &#x27;image&#x27;,
+      owner: &#x27;Mr. Bouboutani&#x27;,
+      date: &#x27;2024-12-7 15:82&#x27;,
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="303" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:303</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showUpload"></a>
+                    <span class="name">
+                        <span ><b>showUpload</b></span>
+                        <a href="#showUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalFiles"></a>
+                    <span class="name">
+                        <span ><b>totalFiles</b></span>
+                        <a href="#totalFiles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadedFiles"></a>
+                    <span class="name">
+                        <span ><b>uploadedFiles</b></span>
+                        <a href="#uploadedFiles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadedResults"></a>
+                    <span class="name">
+                        <span ><b>uploadedResults</b></span>
+                        <a href="#uploadedResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:299</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadingFiles"></a>
+                    <span class="name">
+                        <span ><b>uploadingFiles</b></span>
+                        <a href="#uploadingFiles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadProgress"></a>
+                    <span class="name">
+                        <span ><b>uploadProgress</b></span>
+                        <a href="#uploadProgress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/app/radiologist/radiologist-components/results-observations/results-observations.component.ts:182</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+
+@Component({
+  selector: &#x27;app-results-observations&#x27;,
+  standalone: true,
+  imports: [CommonModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-4&quot;&gt;
+      &lt;!-- Upload Results / Observations --&gt;
+      &lt;div class&#x3D;&quot;col-span-2 bg-white p-4 border rounded-md shadow-md&quot;&gt;
+        &lt;div class&#x3D;&quot;flex gap-4&quot;&gt;
+          &lt;button
+            class&#x3D;&quot;px-4 py-2 rounded font-semibold&quot;
+            [ngClass]&#x3D;&quot;{
+              &#x27;bg-none text-main&#x27;: !showUpload,
+              &#x27;bg-main text-white&#x27;: showUpload
+            }&quot;
+            (click)&#x3D;&quot;showUpload &#x3D; true&quot;
+          &gt;
+            Upload Results
+          &lt;/button&gt;
+          &lt;button
+            class&#x3D;&quot;px-4 py-2 rounded font-semibold&quot;
+            [ngClass]&#x3D;&quot;{
+              &#x27;bg-none text-main&#x27;: showUpload,
+              &#x27;bg-main text-white&#x27;: !showUpload
+            }&quot;
+            (click)&#x3D;&quot;showUpload &#x3D; false&quot;
+          &gt;
+            Observations
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div *ngIf&#x3D;&quot;showUpload&quot; class&#x3D;&quot;mt-4&quot;&gt;
+          &lt;!-- Drag &amp; Drop Zone --&gt;
+          &lt;div
+            class&#x3D;&quot;border border-dashed bg-[#F8F8FF] rounded-md p-8 flex flex-col items-center justify-center &quot;
+            [ngClass]&#x3D;&quot;{ &#x27;bg-blue-200&#x27;: isDragging }&quot;
+            (dragover)&#x3D;&quot;onDragOver($event)&quot;
+            (dragleave)&#x3D;&quot;onDragLeave($event)&quot;
+            (drop)&#x3D;&quot;onDrop($event)&quot;
+            style&#x3D;&quot;border-color: rgba(56, 78, 183, 0.3); cursor: default;&quot;
+          &gt;
+            &lt;img
+              src&#x3D;&quot;upload-results.svg&quot;
+              alt&#x3D;&quot;Upload Icon&quot;
+              class&#x3D;&quot;w-12 h-12 mb-2&quot;
+            /&gt;
+            &lt;p class&#x3D;&quot;text-black text-center&quot;&gt;
+              Drag &amp; drop files or
+              &lt;span
+                class&#x3D;&quot;font-semibold text-main underline cursor-pointer&quot;
+                (click)&#x3D;&quot;fileInput.click()&quot;
+              &gt;
+                Browse
+              &lt;/span&gt;
+            &lt;/p&gt;
+            &lt;p class&#x3D;&quot;font-normal text-[#676767] text-xs pt-5 &quot;&gt;
+              Supported formats: JPEG, JPG, PDF, PNG, DICOM, TIFF, NIfTI
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;input
+            #fileInput
+            type&#x3D;&quot;file&quot;
+            multiple
+            class&#x3D;&quot;hidden&quot;
+            (change)&#x3D;&quot;onFileSelect($event)&quot;
+          /&gt;
+
+          &lt;!-- Upload Progress Section --&gt;
+          &lt;div *ngIf&#x3D;&quot;uploadingFiles.length &gt; 0&quot; class&#x3D;&quot;mt-6&quot;&gt;
+            &lt;h4 class&#x3D;&quot;text-lg font-medium text-[#3C3C3C]&quot;&gt;
+              Uploading {{ currentFileIndex }}/{{ totalFiles }} files
+            &lt;/h4&gt;
+
+            &lt;div
+              *ngIf&#x3D;&quot;currentUploadingFile&quot;
+              class&#x3D;&quot;flex items-center border-2 border-main rounded-md p-4 mt-2&quot;
+            &gt;
+            &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+              &lt;p class&#x3D;&quot;font-medium&quot;&gt;{{ currentUploadingFile.name }}&lt;/p&gt;
+              &lt;div class&#x3D;&quot;h-2 bg-gray-200 rounded mt-2&quot;&gt;
+                &lt;div
+                  class&#x3D;&quot;h-full  rounded bg-main&quot;
+                  [style.width.%]&#x3D;&quot;uploadProgress&quot;
+                &gt;&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;h4 class&#x3D;&quot;text-lg font-medium text-[#3C3C3C] mt-6&quot;&gt;
+              Uploaded  {{ uploadedFiles.length }} files
+            &lt;/h4&gt;
+
+            &lt;div *ngFor&#x3D;&quot;let file of uploadedFiles&quot; class&#x3D;&quot;border-2 border-green-400 rounded-md p-4 mt-2&quot;&gt;
+              &lt;p class&#x3D;&quot;font-medium&quot;&gt;{{ file.name }}&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;button
+              class&#x3D;&quot;bg-main text-white px-4 py-2 rounded mt-4&quot;
+              (click)&#x3D;&quot;submitResults()&quot;
+            &gt;
+              UPLOAD RESULTS
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div *ngIf&#x3D;&quot;!showUpload&quot; class&#x3D;&quot;mt-4&quot;&gt;
+          &lt;form&gt;
+            &lt;label
+              for&#x3D;&quot;title&quot;
+              class&#x3D;&quot;block text-base text-[#3C3C3C] font-medium&quot;
+              &gt;Title&lt;/label
+            &gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              id&#x3D;&quot;title&quot;
+              class&#x3D;&quot;w-full border px-3 py-2 rounded mb-2&quot;
+              placeholder&#x3D;&quot;eg. Mr. Bouboutani Observations&quot;
+            /&gt;
+            &lt;label
+              for&#x3D;&quot;notes&quot;
+              class&#x3D;&quot;block text-base text-[#3C3C3C] font-medium&quot;
+              &gt;Notes&lt;/label
+            &gt;
+            &lt;textarea
+              id&#x3D;&quot;notes&quot;
+              class&#x3D;&quot;w-full border px-3 py-2 rounded mb-2&quot;
+              rows&#x3D;&quot;4&quot;
+              placeholder&#x3D;&quot;eg. Mild interstitial markings suggestive of early fibrosis. No acute pathology noted.&quot;
+            &gt;&lt;/textarea&gt;
+            &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;bg-main text-white px-4 py-2 rounded&quot;&gt;
+              Submit
+            &lt;/button&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Consultation Results --&gt;
+      &lt;div class&#x3D;&quot;bg-white p-5 border rounded-md shadow-md&quot;&gt;
+        &lt;h3 class&#x3D;&quot;font-semibold text-main&quot;&gt;Consultation&#x27;s Results&lt;/h3&gt;
+        &lt;ul class&#x3D;&quot;mt-4 space-y-4&quot;&gt;
+          &lt;li *ngFor&#x3D;&quot;let result of uploadedResults&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center space-x-4&quot;&gt;
+              &lt;!-- Image --&gt;
+              &lt;img
+                [src]&#x3D;&quot;getFileIcon(result.fileType)&quot;
+                alt&#x3D;&quot;uploaded&quot;
+                class&#x3D;&quot;w-10 h-10 object-cover rounded-md&quot;
+              /&gt;
+              &lt;!-- Text Info --&gt;
+              &lt;div class&#x3D;&quot;flex-1 overflow-hidden&quot;&gt;
+                &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;font-medium hover:underline truncate&quot;&gt;
+                  {{ result.fileName }}
+                &lt;/a&gt;
+                &lt;p class&#x3D;&quot;text-sm text-gray-500&quot;&gt;
+                  by {{ result.owner }} at {{ result.date }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;!-- Delete Image --&gt;
+              &lt;img
+                src&#x3D;&quot;delete.svg&quot;
+                alt&#x3D;&quot;Delete&quot;
+                class&#x3D;&quot;w-6 h-6 cursor-pointer ml-auto&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [],
+})
+export class ResultsObservationsComponent {
+  showUpload &#x3D; true;
+  isDragging &#x3D; false;
+
+  uploadingFiles: File[] &#x3D; [];
+  uploadedFiles: File[] &#x3D; [];
+  currentUploadingFile: File | null &#x3D; null;
+  uploadProgress &#x3D; 0; // Progress in percentage (0-100)
+  currentFileIndex &#x3D; 0; // Index of the file being uploaded
+  totalFiles &#x3D; 0; // Total number of files
+
+  // Handle drag-over event
+  onDragOver(event: DragEvent): void {
+    event.preventDefault(); // Prevent default browser behavior
+    this.isDragging &#x3D; true;
+  }
+
+  // Handle drag-leave event
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault(); // Prevent default behavior when leaving drag area
+    this.isDragging &#x3D; false;
+  }
+
+  // Handle drop event
+  onDrop(event: DragEvent): void {
+    event.preventDefault(); // Prevent default behavior when dropping files
+    this.isDragging &#x3D; false;
+
+    if (event.dataTransfer &amp;&amp; event.dataTransfer.files.length &gt; 0) {
+      const files &#x3D; event.dataTransfer.files;
+      this.handleFileUpload(files); // Call the upload handler
+    }
+  }
+
+  // Handle file selection through the &quot;Browse&quot; button
+  onFileSelect(event: Event): void {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (input.files &amp;&amp; input.files.length &gt; 0) {
+      const files &#x3D; input.files;
+      this.handleFileUpload(files); // Call the upload handler
+    }
+  }
+
+  // Common file upload handler
+  handleFileUpload(files: FileList): void {
+    // Convert FileList to an array and update state
+    this.uploadingFiles &#x3D; Array.from(files);
+    this.totalFiles &#x3D; this.uploadingFiles.length;
+    this.currentFileIndex &#x3D; 0; // Reset index for new uploads
+    this.uploadProgress &#x3D; 0; // Reset progress for new upload
+    this.startFileUpload(); // Start uploading the first file
+  }
+
+  // Start uploading files one by one
+  startFileUpload(): void {
+    if (this.currentFileIndex &lt; this.uploadingFiles.length) {
+      this.currentUploadingFile &#x3D; this.uploadingFiles[this.currentFileIndex];
+      this.simulateFileUpload(); // Simulate the upload
+    }
+  }
+
+  // Simulate file upload process
+  simulateFileUpload(): void {
+    this.uploadProgress &#x3D; 0;
+
+    const interval &#x3D; setInterval(() &#x3D;&gt; {
+      if (this.uploadProgress &lt; 100) {
+        this.uploadProgress +&#x3D; 10; // Simulate upload progress
+      } else {
+        clearInterval(interval);
+
+        // Move file from uploading to uploaded list
+        if (this.currentUploadingFile) {
+          this.uploadedFiles.push(this.currentUploadingFile);
+        }
+
+        // Reset progress and move to the next file
+        this.currentFileIndex++;
+        this.startFileUpload();
+      }
+    }, 300); // Simulate progress every 300ms
+  }
+
+  // Submit results button handler
+  submitResults(): void {
+    console.log(&#x27;Uploaded files:&#x27;, this.uploadedFiles);
+    
+    // Add uploaded files to the uploadedResults array
+    this.uploadedFiles.forEach(file &#x3D;&gt; {
+      this.uploadedResults.push({
+        fileName: file.name,
+        fileType: file.type.includes(&#x27;image&#x27;) ? &#x27;image&#x27; : &#x27;document&#x27;,  // Add logic to determine file type
+        owner: &#x27;Mr. Bouboutani&#x27;,  // Static owner for now
+        date: new Date().toLocaleString() // Use the current date and time
+      });
+    });
+  
+    // Clear uploadedFiles after moving to uploadedResults
+    this.uploadedFiles &#x3D; [];
+  
+    alert(&#x27;Results uploaded successfully!&#x27;);
+    this.resetUploadState();
+  }
+  
+  
+  // Reset only the uploading files, not the uploaded ones
+  resetUploadState(): void {
+    this.uploadingFiles &#x3D; [];
+    this.currentUploadingFile &#x3D; null;
+    this.uploadProgress &#x3D; 0;
+    this.currentFileIndex &#x3D; 0;
+    this.totalFiles &#x3D; 0;
+  }
+
+  // Function to determine the icon based on file type
+  getFileIcon(fileType: string): string {
+    if (fileType &#x3D;&#x3D;&#x3D; &#x27;image&#x27;) {
+      return &#x27;uploaded-img.svg&#x27;; // Image icon
+    } else if (fileType &#x3D;&#x3D;&#x3D; &#x27;document&#x27;) {
+      return &#x27;uploaded-doc.svg&#x27;; // Document icon
+    }
+    return &#x27;unknown-file.svg&#x27;; // Default fallback icon
+  }
+
+  uploadedResults: { fileName: string, fileType: string, owner: string, date: string }[] &#x3D; [];
+
+
+  // Mock data for uploaded results
+  mockResults &#x3D; [
+    {
+      fileName: &#x27;Leg radio.jpg&#x27;,
+      fileType: &#x27;image&#x27;, // file type (&#x27;image&#x27; or &#x27;document&#x27;)
+      owner: &#x27;Mr. Bouboutani&#x27;,
+      date: &#x27;2024-12-7 15:82&#x27;,
+    },
+    {
+      fileName: &#x27;Report.pdf&#x27;,
+      fileType: &#x27;document&#x27;,
+      owner: &#x27;Mr. Bouboutani&#x27;,
+      date: &#x27;2024-12-7 15:82&#x27;,
+    },
+    {
+      fileName: &#x27;Wrist radio.jpg&#x27;,
+      fileType: &#x27;image&#x27;,
+      owner: &#x27;Mr. Bouboutani&#x27;,
+      date: &#x27;2024-12-7 15:82&#x27;,
+    },
+  ];
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="grid grid-cols-1 lg:grid-cols-3 gap-4">  <!-- Upload Results / Observations -->  <div class="col-span-2 bg-white p-4 border rounded-md shadow-md">    <div class="flex gap-4">      <button        class="px-4 py-2 rounded font-semibold"        [ngClass]="{          \'bg-none text-main\': !showUpload,          \'bg-main text-white\': showUpload        }"        (click)="showUpload = true"      >        Upload Results      </button>      <button        class="px-4 py-2 rounded font-semibold"        [ngClass]="{          \'bg-none text-main\': showUpload,          \'bg-main text-white\': !showUpload        }"        (click)="showUpload = false"      >        Observations      </button>    </div>    <div *ngIf="showUpload" class="mt-4">      <!-- Drag & Drop Zone -->      <div        class="border border-dashed bg-[#F8F8FF] rounded-md p-8 flex flex-col items-center justify-center "        [ngClass]="{ \'bg-blue-200\': isDragging }"        (dragover)="onDragOver($event)"        (dragleave)="onDragLeave($event)"        (drop)="onDrop($event)"        style="border-color: rgba(56, 78, 183, 0.3); cursor: default;"      >        <img          src="upload-results.svg"          alt="Upload Icon"          class="w-12 h-12 mb-2"        />        <p class="text-black text-center">          Drag & drop files or          <span            class="font-semibold text-main underline cursor-pointer"            (click)="fileInput.click()"          >            Browse          </span>        </p>        <p class="font-normal text-[#676767] text-xs pt-5 ">          Supported formats: JPEG, JPG, PDF, PNG, DICOM, TIFF, NIfTI        </p>      </div>      <input        #fileInput        type="file"        multiple        class="hidden"        (change)="onFileSelect($event)"      />      <!-- Upload Progress Section -->      <div *ngIf="uploadingFiles.length > 0" class="mt-6">        <h4 class="text-lg font-medium text-[#3C3C3C]">          Uploading {{ currentFileIndex }}/{{ totalFiles }} files        </h4>        <div          *ngIf="currentUploadingFile"          class="flex items-center border-2 border-main rounded-md p-4 mt-2"        >        <div class="flex-1">          <p class="font-medium">{{ currentUploadingFile.name }}</p>          <div class="h-2 bg-gray-200 rounded mt-2">            <div              class="h-full  rounded bg-main"              [style.width.%]="uploadProgress"            ></div>          </div>        </div>        </div>        <h4 class="text-lg font-medium text-[#3C3C3C] mt-6">          Uploaded  {{ uploadedFiles.length }} files        </h4>        <div *ngFor="let file of uploadedFiles" class="border-2 border-green-400 rounded-md p-4 mt-2">          <p class="font-medium">{{ file.name }}</p>        </div>        <button          class="bg-main text-white px-4 py-2 rounded mt-4"          (click)="submitResults()"        >          UPLOAD RESULTS        </button>      </div>    </div>    <div *ngIf="!showUpload" class="mt-4">      <form>        <label          for="title"          class="block text-base text-[#3C3C3C] font-medium"          >Title</label        >        <input          type="text"          id="title"          class="w-full border px-3 py-2 rounded mb-2"          placeholder="eg. Mr. Bouboutani Observations"        />        <label          for="notes"          class="block text-base text-[#3C3C3C] font-medium"          >Notes</label        >        <textarea          id="notes"          class="w-full border px-3 py-2 rounded mb-2"          rows="4"          placeholder="eg. Mild interstitial markings suggestive of early fibrosis. No acute pathology noted."        ></textarea>        <button type="submit" class="bg-main text-white px-4 py-2 rounded">          Submit        </button>      </form>    </div>  </div>  <!-- Consultation Results -->  <div class="bg-white p-5 border rounded-md shadow-md">    <h3 class="font-semibold text-main">Consultation\'s Results</h3>    <ul class="mt-4 space-y-4">      <li *ngFor="let result of uploadedResults">        <div class="flex items-center space-x-4">          <!-- Image -->          <img            [src]="getFileIcon(result.fileType)"            alt="uploaded"            class="w-10 h-10 object-cover rounded-md"          />          <!-- Text Info -->          <div class="flex-1 overflow-hidden">            <a href="#" class="font-medium hover:underline truncate">              {{ result.fileName }}            </a>            <p class="text-sm text-gray-500">              by {{ result.owner }} at {{ result.date }}            </p>          </div>          <!-- Delete Image -->          <img            src="delete.svg"            alt="Delete"            class="w-6 h-6 cursor-pointer ml-auto"          />        </div>      </li>    </ul>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddNewPatientPopupComponent', 'selector': 'app-add-new-patient-popup'},{'name': 'AdminSidebarComponent', 'selector': 'app-admin-sidebar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchivedConsultationComponent', 'selector': 'app-archived-consultation'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'ConfirmDeletePatientPopupComponent', 'selector': 'app-confirm-delete-patient-popup'},{'name': 'ConfirmDeleteWorkerPopupComponent', 'selector': 'app-confirm-delete-worker-popup'},{'name': 'ConfirmLogoutPopupComponent', 'selector': 'app-confirm-logout-popup'},{'name': 'ConsultationArchivedComponent', 'selector': 'app-consultation-archived'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'CreatePrescriptionComponent', 'selector': 'app-create-prescription'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DoctorActionsComponent', 'selector': 'app-doctor-actions'},{'name': 'DoctorActionsConsultationComponent', 'selector': 'app-doctor-actions-consultation'},{'name': 'DoctorComponent', 'selector': 'app-radiologist'},{'name': 'DoctorSidebarComponent', 'selector': 'app-doctor-sidebar'},{'name': 'EditPatientFormComponent', 'selector': 'app-edit-patient-form'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditWorkerFormComponent', 'selector': 'app-edit-worker-form'},{'name': 'EmailPopupComponent', 'selector': 'app-email-popup'},{'name': 'GraphPopUpComponent', 'selector': 'app-graph-pop-up'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HistoryComponent', 'selector': 'app-history'},{'name': 'LabTechnicianInfoComponent', 'selector': 'app-lab-technician-info'},{'name': 'LabTechSidebarComponent', 'selector': 'app-lab-tech-sidebar'},{'name': 'LoadingPageComponent', 'selector': 'app-loading-page'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'Main', 'selector': 'app-admin'},{'name': 'Main', 'selector': 'app-lab-technician'},{'name': 'Main', 'selector': 'app-radiologist'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'NewConsultationFormComponent', 'selector': 'app-new-consultation-form'},{'name': 'NewConsultationPopupComponent', 'selector': 'app-new-consultation-popup'},{'name': 'NewPatientFormComponent', 'selector': 'app-new-patient-form'},{'name': 'NewWorkerFormComponent', 'selector': 'app-new-worker-form'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NurseComponent', 'selector': 'app-radiologist'},{'name': 'NurseInfoComponent', 'selector': 'app-nurse-info'},{'name': 'NurseObservationsComponent', 'selector': 'app-nurse-observations'},{'name': 'NurseSidebarComponent', 'selector': 'app-nurse-sidebar'},{'name': 'OpenTicketComponent', 'selector': 'app-open-ticket'},{'name': 'PatientActionsComponent', 'selector': 'app-patient-actions'},{'name': 'PatientBadgeComponent', 'selector': 'app-patient-badge'},{'name': 'PatientBadgeInfosComponent', 'selector': 'app-patient-badge-infos'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailsComponent', 'selector': 'app-patient-details'},{'name': 'PatientInfosArchivedConsultationComponent', 'selector': 'app-patient-infos-archived-consultation'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosConsultationArchivedComponent', 'selector': 'app-patient-infos-consultation-archived'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PrescriptionComponent', 'selector': 'app-prescription'},{'name': 'PrescriptionPopupComponent', 'selector': 'app-prescription-popup'},{'name': 'PreviewPopupComponent', 'selector': 'app-preview-popup'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologistInfoComponent', 'selector': 'app-radiologist-info'},{'name': 'RadiologistSidebarComponent', 'selector': 'app-radiologist-sidebar'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsPopupComponent', 'selector': 'app-results-popup'},{'name': 'StatisticsGraphComponent', 'selector': 'app-statistics-graph'},{'name': 'TicketComponent', 'selector': 'app-ticket'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UserBadgeComponent', 'selector': 'app-user-badge'},{'name': 'UserInfoPopupComponent', 'selector': 'app-user-info-popup'},{'name': 'WorkersComponent', 'selector': 'app-workers'},{'name': 'WorkersTableComponent', 'selector': 'app-workers-table'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ResultsObservationsComponent-1'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ResultsObservationsComponent-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

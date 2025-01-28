@@ -1,0 +1,942 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Projet IGL Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Projet IGL Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DoctorSidebarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-doctor-sidebar</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterLink</code>
+                                <code><a href="../components/ConfirmLogoutPopupComponent.html" target="_self" >ConfirmLogoutPopupComponent</a></code>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;bg-main top-0 z-40 sm:rounded-none sm:m-0 text-white transition-all duration-300 sm:h-full flex flex-col justify-between fixed&quot;
+  [class.md:w-24]&#x3D;&quot;isSidebarCollapsed&quot;
+  [class.w-48]&#x3D;&quot;!isSidebarCollapsed&quot;
+  [class.h-full]&#x3D;&quot;!isSidebarCollapsed&quot;
+  [class.w-48]&#x3D;&quot;!isSidebarCollapsed&quot;
+  [class.rounded-br-xl]&#x3D;&quot;isSidebarCollapsed&quot;
+  (click)&#x3D;&quot;toggleSidebar()&quot;
+&gt;
+  &lt;!-- Logo Section --&gt;
+  &lt;div class&#x3D;&quot;flex items-center justify-center h-16 gap-2&quot;&gt;
+    &lt;img
+      src&#x3D;&quot;logo.png&quot;
+      alt&#x3D;&quot;Logo&quot;
+      class&#x3D;&quot;h-9 w-auto&quot;
+      [class.mx-5]&#x3D;&quot;isSidebarCollapsed&quot;
+    /&gt;
+    &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;font-bold&quot;&gt;Doctify&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Main Navigation --&gt;
+  &lt;ul
+    class&#x3D;&quot;list-none sm:flex p-0 m-0  flex-col items-start self-center gap-8&quot;
+    [class.hidden]&#x3D;&quot;isSidebarCollapsed&quot;
+  &gt;
+    &lt;li
+      class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+      (click)&#x3D;&quot;$event.stopPropagation()&quot;
+      routerLink&#x3D;&quot;/doctor/home&quot;
+    &gt;
+      &lt;img src&#x3D;&quot;home-icon.svg&quot; class&#x3D;&quot;h-6 w-6&quot; /&gt;
+      &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;mt-[1px] font-bold align-text-bottom&quot;
+        &gt;Workspace&lt;/span
+      &gt;
+    &lt;/li&gt;
+    &lt;li
+      class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+      (click)&#x3D;&quot;$event.stopPropagation()&quot;
+      routerLink&#x3D;&quot;/doctor/patients&quot;
+    &gt;
+      &lt;img src&#x3D;&quot;sidebar-patient.svg&quot; class&#x3D;&quot;h-6 w-6&quot; /&gt;
+      &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;mt-1 font-bold&quot;&gt;Patients&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li
+      class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+      (click)&#x3D;&quot;$event.stopPropagation()&quot;
+      routerLink&#x3D;&quot;/doctor/tickets-history&quot;
+    &gt;
+      &lt;img src&#x3D;&quot;history-icon.svg&quot; class&#x3D;&quot;h-6 w-6&quot; /&gt;
+      &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;mt-1 font-bold&quot;&gt;Tickets&lt;/span&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;!-- Footer Buttons --&gt;
+  &lt;div
+    class&#x3D;&quot;sm:flex flex-col items-start self-center gap-3 mb-4&quot;
+    [class.hidden]&#x3D;&quot;isSidebarCollapsed&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+      (click)&#x3D;&quot;$event.stopPropagation()&quot;
+      routerLink&#x3D;&quot;/doctor/edit-profile&quot;
+    &gt;
+      &lt;img src&#x3D;&quot;sidebar-edit.svg&quot; class&#x3D;&quot;h-6&quot; /&gt;
+      &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;font-bold&quot;&gt;Edit Profile&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div
+      class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+      (click)&#x3D;&quot;onLogout(); $event.stopPropagation()&quot;
+    &gt;
+      &lt;img src&#x3D;&quot;sidebar-logout.svg&quot; class&#x3D;&quot;h-6&quot; /&gt;
+      &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;font-bold&quot;&gt;Log out&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;popup&quot; *ngIf&#x3D;&quot;showLogoutPopup&quot;&gt;
+    &lt;app-confirm-logout-popup
+      (cancel)&#x3D;&quot;onCancelLogout()&quot;
+      (confirm)&#x3D;&quot;onConfirmLogout()&quot;
+    &gt;&lt;/app-confirm-logout-popup&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isSidebarCollapsed" >isSidebarCollapsed</a>
+                            </li>
+                            <li>
+                                <a href="#showLogoutPopup" >showLogoutPopup</a>
+                            </li>
+                            <li>
+                                <a href="#showText" >showText</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#hideSideBar" >hideSideBar</a>
+                            </li>
+                            <li>
+                                <a href="#onCancelLogout" >onCancelLogout</a>
+                            </li>
+                            <li>
+                                <a href="#onConfirmLogout" >onConfirmLogout</a>
+                            </li>
+                            <li>
+                                <a href="#onLogout" >onLogout</a>
+                            </li>
+                            <li>
+                                <a href="#showSidebar" >showSidebar</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSidebar" >toggleSidebar</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:99</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hideSideBar"></a>
+                    <span class="name">
+                        <span ><b>hideSideBar</b></span>
+                        <a href="#hideSideBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hideSideBar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCancelLogout"></a>
+                    <span class="name">
+                        <span ><b>onCancelLogout</b></span>
+                        <a href="#onCancelLogout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCancelLogout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onConfirmLogout"></a>
+                    <span class="name">
+                        <span ><b>onConfirmLogout</b></span>
+                        <a href="#onConfirmLogout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onConfirmLogout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onLogout"></a>
+                    <span class="name">
+                        <span ><b>onLogout</b></span>
+                        <a href="#onLogout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onLogout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showSidebar"></a>
+                    <span class="name">
+                        <span ><b>showSidebar</b></span>
+                        <a href="#showSidebar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showSidebar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSidebar"></a>
+                    <span class="name">
+                        <span ><b>toggleSidebar</b></span>
+                        <a href="#toggleSidebar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSidebar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSidebarCollapsed"></a>
+                    <span class="name">
+                        <span ><b>isSidebarCollapsed</b></span>
+                        <a href="#isSidebarCollapsed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showLogoutPopup"></a>
+                    <span class="name">
+                        <span ><b>showLogoutPopup</b></span>
+                        <a href="#showLogoutPopup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showText"></a>
+                    <span class="name">
+                        <span ><b>showText</b></span>
+                        <a href="#showText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/doctor/doctor-components/doctor-sidebar/doctor-sidebar.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterLink } from &#x27;@angular/router&#x27;;
+import { ConfirmLogoutPopupComponent } from &#x27;../../../components/popups/confirm-logout-popup/confirm-logout-popup.component&#x27;;
+import { AuthService } from &#x27;../../../services/auth/auth.service&#x27;;
+
+@Component({
+  selector: &#x27;app-doctor-sidebar&#x27;,
+  imports: [CommonModule, RouterLink, ConfirmLogoutPopupComponent],
+  template: &#x60;
+    &lt;div
+      class&#x3D;&quot;bg-main top-0 z-40 sm:rounded-none sm:m-0 text-white transition-all duration-300 sm:h-full flex flex-col justify-between fixed&quot;
+      [class.md:w-24]&#x3D;&quot;isSidebarCollapsed&quot;
+      [class.w-48]&#x3D;&quot;!isSidebarCollapsed&quot;
+      [class.h-full]&#x3D;&quot;!isSidebarCollapsed&quot;
+      [class.w-48]&#x3D;&quot;!isSidebarCollapsed&quot;
+      [class.rounded-br-xl]&#x3D;&quot;isSidebarCollapsed&quot;
+      (click)&#x3D;&quot;toggleSidebar()&quot;
+    &gt;
+      &lt;!-- Logo Section --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-center h-16 gap-2&quot;&gt;
+        &lt;img
+          src&#x3D;&quot;logo.png&quot;
+          alt&#x3D;&quot;Logo&quot;
+          class&#x3D;&quot;h-9 w-auto&quot;
+          [class.mx-5]&#x3D;&quot;isSidebarCollapsed&quot;
+        /&gt;
+        &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;font-bold&quot;&gt;Doctify&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Main Navigation --&gt;
+      &lt;ul
+        class&#x3D;&quot;list-none sm:flex p-0 m-0  flex-col items-start self-center gap-8&quot;
+        [class.hidden]&#x3D;&quot;isSidebarCollapsed&quot;
+      &gt;
+        &lt;li
+          class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+          (click)&#x3D;&quot;$event.stopPropagation()&quot;
+          routerLink&#x3D;&quot;/doctor/home&quot;
+        &gt;
+          &lt;img src&#x3D;&quot;home-icon.svg&quot; class&#x3D;&quot;h-6 w-6&quot; /&gt;
+          &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;mt-[1px] font-bold align-text-bottom&quot;
+            &gt;Workspace&lt;/span
+          &gt;
+        &lt;/li&gt;
+        &lt;li
+          class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+          (click)&#x3D;&quot;$event.stopPropagation()&quot;
+          routerLink&#x3D;&quot;/doctor/patients&quot;
+        &gt;
+          &lt;img src&#x3D;&quot;sidebar-patient.svg&quot; class&#x3D;&quot;h-6 w-6&quot; /&gt;
+          &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;mt-1 font-bold&quot;&gt;Patients&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li
+          class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+          (click)&#x3D;&quot;$event.stopPropagation()&quot;
+          routerLink&#x3D;&quot;/doctor/tickets-history&quot;
+        &gt;
+          &lt;img src&#x3D;&quot;history-icon.svg&quot; class&#x3D;&quot;h-6 w-6&quot; /&gt;
+          &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;mt-1 font-bold&quot;&gt;Tickets&lt;/span&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- Footer Buttons --&gt;
+      &lt;div
+        class&#x3D;&quot;sm:flex flex-col items-start self-center gap-3 mb-4&quot;
+        [class.hidden]&#x3D;&quot;isSidebarCollapsed&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+          (click)&#x3D;&quot;$event.stopPropagation()&quot;
+          routerLink&#x3D;&quot;/doctor/edit-profile&quot;
+        &gt;
+          &lt;img src&#x3D;&quot;sidebar-edit.svg&quot; class&#x3D;&quot;h-6&quot; /&gt;
+          &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;font-bold&quot;&gt;Edit Profile&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div
+          class&#x3D;&quot;flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4&quot;
+          (click)&#x3D;&quot;onLogout(); $event.stopPropagation()&quot;
+        &gt;
+          &lt;img src&#x3D;&quot;sidebar-logout.svg&quot; class&#x3D;&quot;h-6&quot; /&gt;
+          &lt;span *ngIf&#x3D;&quot;showText&quot; class&#x3D;&quot;font-bold&quot;&gt;Log out&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;popup&quot; *ngIf&#x3D;&quot;showLogoutPopup&quot;&gt;
+        &lt;app-confirm-logout-popup
+          (cancel)&#x3D;&quot;onCancelLogout()&quot;
+          (confirm)&#x3D;&quot;onConfirmLogout()&quot;
+        &gt;&lt;/app-confirm-logout-popup&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [],
+})
+export class DoctorSidebarComponent {
+  isSidebarCollapsed &#x3D; true;
+  showText &#x3D; false;
+  showLogoutPopup &#x3D; false;
+
+  constructor(private authService: AuthService) {}
+
+  onLogout() {
+    this.showLogoutPopup &#x3D; true;
+    this.hideSideBar();
+  }
+
+  onCancelLogout() {
+    this.showLogoutPopup &#x3D; false;
+    this.hideSideBar();
+  }
+
+  onConfirmLogout() {
+    this.authService.logout();
+    this.showLogoutPopup &#x3D; false;
+    this.hideSideBar();
+  }
+
+  toggleSidebar() {
+    this.isSidebarCollapsed ? this.showSidebar() : this.hideSideBar(); // Toggle sidebar visibility and show text accordingly
+  }
+
+  showSidebar() {
+    this.isSidebarCollapsed &#x3D; false; // Expand sidebar
+    setTimeout(() &#x3D;&gt; {
+      this.showText &#x3D; true; // Show text after delay
+    }, 200); // Delay for 300ms
+  }
+
+  hideSideBar() {
+    this.isSidebarCollapsed &#x3D; true;
+    this.showText &#x3D; false;
+  }
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class="bg-main top-0 z-40 sm:rounded-none sm:m-0 text-white transition-all duration-300 sm:h-full flex flex-col justify-between fixed"  [class.md:w-24]="isSidebarCollapsed"  [class.w-48]="!isSidebarCollapsed"  [class.h-full]="!isSidebarCollapsed"  [class.w-48]="!isSidebarCollapsed"  [class.rounded-br-xl]="isSidebarCollapsed"  (click)="toggleSidebar()">  <!-- Logo Section -->  <div class="flex items-center justify-center h-16 gap-2">    <img      src="logo.png"      alt="Logo"      class="h-9 w-auto"      [class.mx-5]="isSidebarCollapsed"    />    <span *ngIf="showText" class="font-bold">Doctify</span>  </div>  <!-- Main Navigation -->  <ul    class="list-none sm:flex p-0 m-0  flex-col items-start self-center gap-8"    [class.hidden]="isSidebarCollapsed"  >    <li      class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"      (click)="$event.stopPropagation()"      routerLink="/doctor/home"    >      <img src="home-icon.svg" class="h-6 w-6" />      <span *ngIf="showText" class="mt-[1px] font-bold align-text-bottom"        >Workspace</span      >    </li>    <li      class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"      (click)="$event.stopPropagation()"      routerLink="/doctor/patients"    >      <img src="sidebar-patient.svg" class="h-6 w-6" />      <span *ngIf="showText" class="mt-1 font-bold">Patients</span>    </li>    <li      class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"      (click)="$event.stopPropagation()"      routerLink="/doctor/tickets-history"    >      <img src="history-icon.svg" class="h-6 w-6" />      <span *ngIf="showText" class="mt-1 font-bold">Tickets</span>    </li>  </ul>  <!-- Footer Buttons -->  <div    class="sm:flex flex-col items-start self-center gap-3 mb-4"    [class.hidden]="isSidebarCollapsed"  >    <div      class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"      (click)="$event.stopPropagation()"      routerLink="/doctor/edit-profile"    >      <img src="sidebar-edit.svg" class="h-6" />      <span *ngIf="showText" class="font-bold">Edit Profile</span>    </div>    <div      class="flex gap-4 cursor-pointer hover:bg-black hover:bg-opacity-40 rounded-full p-4"      (click)="onLogout(); $event.stopPropagation()"    >      <img src="sidebar-logout.svg" class="h-6" />      <span *ngIf="showText" class="font-bold">Log out</span>    </div>  </div>  <div class="popup" *ngIf="showLogoutPopup">    <app-confirm-logout-popup      (cancel)="onCancelLogout()"      (confirm)="onConfirmLogout()"    ></app-confirm-logout-popup>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddNewPatientPopupComponent', 'selector': 'app-add-new-patient-popup'},{'name': 'AdminSidebarComponent', 'selector': 'app-admin-sidebar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchivedConsultationComponent', 'selector': 'app-archived-consultation'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'ConfirmDeletePatientPopupComponent', 'selector': 'app-confirm-delete-patient-popup'},{'name': 'ConfirmDeleteWorkerPopupComponent', 'selector': 'app-confirm-delete-worker-popup'},{'name': 'ConfirmLogoutPopupComponent', 'selector': 'app-confirm-logout-popup'},{'name': 'ConsultationArchivedComponent', 'selector': 'app-consultation-archived'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'CreatePrescriptionComponent', 'selector': 'app-create-prescription'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DoctorActionsComponent', 'selector': 'app-doctor-actions'},{'name': 'DoctorActionsConsultationComponent', 'selector': 'app-doctor-actions-consultation'},{'name': 'DoctorComponent', 'selector': 'app-radiologist'},{'name': 'DoctorSidebarComponent', 'selector': 'app-doctor-sidebar'},{'name': 'EditPatientFormComponent', 'selector': 'app-edit-patient-form'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditWorkerFormComponent', 'selector': 'app-edit-worker-form'},{'name': 'EmailPopupComponent', 'selector': 'app-email-popup'},{'name': 'GraphPopUpComponent', 'selector': 'app-graph-pop-up'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HistoryComponent', 'selector': 'app-history'},{'name': 'LabTechnicianInfoComponent', 'selector': 'app-lab-technician-info'},{'name': 'LabTechSidebarComponent', 'selector': 'app-lab-tech-sidebar'},{'name': 'LoadingPageComponent', 'selector': 'app-loading-page'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'Main', 'selector': 'app-admin'},{'name': 'Main', 'selector': 'app-lab-technician'},{'name': 'Main', 'selector': 'app-radiologist'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'NewConsultationFormComponent', 'selector': 'app-new-consultation-form'},{'name': 'NewConsultationPopupComponent', 'selector': 'app-new-consultation-popup'},{'name': 'NewPatientFormComponent', 'selector': 'app-new-patient-form'},{'name': 'NewWorkerFormComponent', 'selector': 'app-new-worker-form'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NurseComponent', 'selector': 'app-radiologist'},{'name': 'NurseInfoComponent', 'selector': 'app-nurse-info'},{'name': 'NurseObservationsComponent', 'selector': 'app-nurse-observations'},{'name': 'NurseSidebarComponent', 'selector': 'app-nurse-sidebar'},{'name': 'OpenTicketComponent', 'selector': 'app-open-ticket'},{'name': 'PatientActionsComponent', 'selector': 'app-patient-actions'},{'name': 'PatientBadgeComponent', 'selector': 'app-patient-badge'},{'name': 'PatientBadgeInfosComponent', 'selector': 'app-patient-badge-infos'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailsComponent', 'selector': 'app-patient-details'},{'name': 'PatientInfosArchivedConsultationComponent', 'selector': 'app-patient-infos-archived-consultation'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosConsultationArchivedComponent', 'selector': 'app-patient-infos-consultation-archived'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PrescriptionComponent', 'selector': 'app-prescription'},{'name': 'PrescriptionPopupComponent', 'selector': 'app-prescription-popup'},{'name': 'PreviewPopupComponent', 'selector': 'app-preview-popup'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologistInfoComponent', 'selector': 'app-radiologist-info'},{'name': 'RadiologistSidebarComponent', 'selector': 'app-radiologist-sidebar'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsPopupComponent', 'selector': 'app-results-popup'},{'name': 'StatisticsGraphComponent', 'selector': 'app-statistics-graph'},{'name': 'TicketComponent', 'selector': 'app-ticket'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UserBadgeComponent', 'selector': 'app-user-badge'},{'name': 'UserInfoPopupComponent', 'selector': 'app-user-info-popup'},{'name': 'WorkersComponent', 'selector': 'app-workers'},{'name': 'WorkersTableComponent', 'selector': 'app-workers-table'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DoctorSidebarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DoctorSidebarComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

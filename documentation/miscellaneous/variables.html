@@ -1,0 +1,914 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Projet IGL Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Projet IGL Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#angularApp" title="src/server.ts" ><b>angularApp</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#app" title="src/server.ts" ><b>app</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#appConfig" title="src/app/app.config.ts" ><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#bootstrap" title="src/main.server.ts" ><b>bootstrap</b>&nbsp;&nbsp;&nbsp;(src/.../main.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#browserDistFolder" title="src/server.ts" ><b>browserDistFolder</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#config" title="src/app/app.config.server.ts" ><b>config</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#consultations" title="src/app/mock-data/consultations.ts" ><b>consultations</b>&nbsp;&nbsp;&nbsp;(src/.../consultations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#mock_patients" title="src/app/mock-data/mock-patients.ts" ><b>mock_patients</b>&nbsp;&nbsp;&nbsp;(src/.../mock-patients.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MOCK_PRESCRIPTIONS" title="src/app/mock-data/mock-prescriptions.ts" ><b>MOCK_PRESCRIPTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../mock-prescriptions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reqHandler" title="src/server.ts" ><b>reqHandler</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#serverConfig" title="src/app/app.config.server.ts" ><b>serverConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#serverDistFolder" title="src/server.ts" ><b>serverDistFolder</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#serverRoutes" title="src/app/app.routes.server.ts" ><b>serverRoutes</b>&nbsp;&nbsp;&nbsp;(src/.../app.routes.server.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="angularApp"></a>
+                    <span class="name">
+                        <span ><b>angularApp</b></span>
+                        <a href="#angularApp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new AngularNodeAppEngine()</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="app"></a>
+                    <span class="name">
+                        <span ><b>app</b></span>
+                        <a href="#app"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>express()</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="browserDistFolder"></a>
+                    <span class="name">
+                        <span ><b>browserDistFolder</b></span>
+                        <a href="#browserDistFolder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>resolve(serverDistFolder, &#x27;../browser&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reqHandler"></a>
+                    <span class="name">
+                        <span ><b>reqHandler</b></span>
+                        <a href="#reqHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createNodeRequestHandler(app)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The request handler used by the Angular CLI (dev-server and during build).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverDistFolder"></a>
+                    <span class="name">
+                        <span ><b>serverDistFolder</b></span>
+                        <a href="#serverDistFolder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>dirname(fileURLToPath(import.meta.url))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appConfig"></a>
+                    <span class="name">
+                        <span ><b>appConfig</b></span>
+                        <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ApplicationConfig</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(appRoutes),
+    provideClientHydration(withEventReplay()),
+    provideHttpClient(withInterceptors([InterceptorFn]), withFetch()),
+  ],
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/main.server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bootstrap"></a>
+                    <span class="name">
+                        <span ><b>bootstrap</b></span>
+                        <a href="#bootstrap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; bootstrapApplication(AppComponent, config)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="config"></a>
+                    <span class="name">
+                        <span ><b>config</b></span>
+                        <a href="#config"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>mergeApplicationConfig(appConfig, serverConfig)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverConfig"></a>
+                    <span class="name">
+                        <span ><b>serverConfig</b></span>
+                        <a href="#serverConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ApplicationConfig</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    provideServerRendering(),
+    provideServerRoutesConfig(serverRoutes)
+  ]
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/mock-data/consultations.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="consultations"></a>
+                    <span class="name">
+                        <span ><b>consultations</b></span>
+                        <a href="#consultations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Consultation[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    id: 1,
+    date: &quot;Jun 12&quot;,
+    doctor: &quot;Dr. Mostefai&quot;,
+    createdOn: &quot;15:32&quot;,
+    lastedFor: &quot;----&quot;,
+    SGPH: &quot;Pending&quot;,
+    reason: &quot;a black man shot him three times&quot;,
+    status: &quot;pending&quot;,
+    briefing: &quot;The patient was shot three times and is under observation.&quot;
+  },
+  {
+    id: 2,
+    date: &quot;Jun 12&quot;,
+    doctor: &quot;Dr. Mostefai&quot;,
+    createdOn: &quot;15:32&quot;,
+    lastedFor: &quot;21 days&quot;,
+    SGPH: &quot;Pending&quot;,
+    reason: &quot;a black man shot him three times&quot;,
+    status: &quot;pending&quot;,
+    briefing: &quot;The patient&#x27;s condition is improving, pending further tests.&quot;
+  },
+  {
+    id: 3,
+    date: &quot;Jun 12&quot;,
+    doctor: &quot;Dr. Mostefai&quot;,
+    createdOn: &quot;15:32&quot;,
+    lastedFor: &quot;21 days&quot;,
+    SGPH: &quot;Pending&quot;,
+    reason: &quot;a black man shot him three times&quot;,
+    status: &quot;pending&quot;,
+    briefing: &quot;Awaiting doctor&#x27;s review to finalize treatment plan.&quot;
+  },
+  {
+    id: 4,
+    date: &quot;Jun 12&quot;,
+    doctor: &quot;Dr. Mostefai&quot;,
+    createdOn: &quot;15:32&quot;,
+    lastedFor: &quot;21 days&quot;,
+    SGPH: &quot;Completed&quot;,
+    reason: &quot;a black man shot him three times&quot;,
+    status: &quot;completed&quot;,
+    briefing: &quot;The patient has fully recovered after successful treatment.&quot;
+  },
+  {
+    id: 5,
+    date: &quot;Jun 12&quot;,
+    doctor: &quot;Dr. Mostefai&quot;,
+    createdOn: &quot;15:32&quot;,
+    lastedFor: &quot;21 days&quot;,
+    SGPH: &quot;Failed&quot;,
+    reason: &quot;a black man shot him three times&quot;,
+    status: &quot;failed&quot;,
+    briefing: &quot;Unfortunately, the treatment was unsuccessful.&quot;
+  }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  production: false,
+  apiUrl: &#x27;https://igl-backend.onrender.com&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/mock-data/mock-patients.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mock_patients"></a>
+                    <span class="name">
+                        <span ><b>mock_patients</b></span>
+                        <a href="#mock_patients"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Patient[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: &quot;b5de&quot;,
+      email: &quot;mo@example.com&quot;,
+      first_name: &quot;Mo&quot;,
+      last_name: &quot;Smith&quot;,
+      phone_number: &quot;0553881217&quot;,
+      address: &quot;123 Main St, City&quot;,
+      gender: &quot;Male&quot;,
+      nss: &quot;123456789&quot;,
+      date_of_birth: &quot;1990-12-09&quot;,
+      place_of_birth: &quot;City&quot;,
+      emergency_contact_name: &quot;Jane Doe&quot;,
+      emergency_contact_phone: &quot;1234567891&quot;,
+      medical_condition: &quot;None&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;704b&quot;,
+      email: &quot;beyouna@example.com&quot;,
+      first_name: &quot;Beyouna&quot;,
+      last_name: &quot;Alami&quot;,
+      phone_number: &quot;0791172962&quot;,
+      address: &quot;456 Elm St, City&quot;,
+      gender: &quot;Female&quot;,
+      nss: &quot;099909090&quot;,
+      date_of_birth: &quot;1985-12-04&quot;,
+      place_of_birth: &quot;City&quot;,
+      emergency_contact_name: &quot;John Doe&quot;,
+      emergency_contact_phone: &quot;0553881218&quot;,
+      medical_condition: &quot;Asthma&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;bc88&quot;,
+      email: &quot;amel@example.com&quot;,
+      first_name: &quot;Amel&quot;,
+      last_name: &quot;Sadoun&quot;,
+      phone_number: &quot;0553881217&quot;,
+      address: &quot;789 Pine St, City&quot;,
+      gender: &quot;Female&quot;,
+      nss: &quot;223344556&quot;,
+      date_of_birth: &quot;2002-04-12&quot;,
+      place_of_birth: &quot;City&quot;,
+      emergency_contact_name: &quot;David Smith&quot;,
+      emergency_contact_phone: &quot;0553881219&quot;,
+      medical_condition: &quot;Diabetes&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;d784&quot;,
+      email: &quot;galk.wahed@example.com&quot;,
+      first_name: &quot;Galk&quot;,
+      last_name: &quot;Wahed&quot;,
+      phone_number: &quot;0553881217&quot;,
+      address: &quot;321 Cedar Ave, City&quot;,
+      gender: &quot;Male&quot;,
+      nss: &quot;334455667&quot;,
+      date_of_birth: &quot;1998-11-02&quot;,
+      place_of_birth: &quot;Town&quot;,
+      emergency_contact_name: &quot;Sarah Wahed&quot;,
+      emergency_contact_phone: &quot;0777888999&quot;,
+      medical_condition: &quot;High Blood Pressure&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;7364&quot;,
+      email: &quot;dd@example.com&quot;,
+      first_name: &quot;Dddd&quot;,
+      last_name: &quot;Efgh&quot;,
+      phone_number: &quot;0777888999&quot;,
+      address: &quot;45 Oak Lane, Village&quot;,
+      gender: &quot;Male&quot;,
+      nss: &quot;556677889&quot;,
+      date_of_birth: &quot;1995-06-15&quot;,
+      place_of_birth: &quot;Village&quot;,
+      emergency_contact_name: &quot;Rami Efgh&quot;,
+      emergency_contact_phone: &quot;0666555444&quot;,
+      medical_condition: &quot;None&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;c123&quot;,
+      email: &quot;amina.toumi@example.com&quot;,
+      first_name: &quot;Amina&quot;,
+      last_name: &quot;Toumi&quot;,
+      phone_number: &quot;0667788990&quot;,
+      address: &quot;45 Rue Nationale, Algiers&quot;,
+      gender: &quot;Female&quot;,
+      nss: &quot;112233445&quot;,
+      date_of_birth: &quot;2000-01-15&quot;,
+      place_of_birth: &quot;Algiers&quot;,
+      emergency_contact_name: &quot;Karim Toumi&quot;,
+      emergency_contact_phone: &quot;0558899901&quot;,
+      medical_condition: &quot;None&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;d456&quot;,
+      email: &quot;said.karim@example.com&quot;,
+      first_name: &quot;Said&quot;,
+      last_name: &quot;Karim&quot;,
+      phone_number: &quot;0776655443&quot;,
+      address: &quot;12 Boulevard Oran, Oran&quot;,
+      gender: &quot;Male&quot;,
+      nss: &quot;778899112&quot;,
+      date_of_birth: &quot;1995-06-10&quot;,
+      place_of_birth: &quot;Oran&quot;,
+      emergency_contact_name: &quot;Layla Karim&quot;,
+      emergency_contact_phone: &quot;0776655444&quot;,
+      medical_condition: &quot;Heart Condition&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+    {
+      id: &quot;e789&quot;,
+      email: &quot;nour.benali@example.com&quot;,
+      first_name: &quot;Nour&quot;,
+      last_name: &quot;Benali&quot;,
+      phone_number: &quot;0677889922&quot;,
+      address: &quot;78 Avenue Constantine, Constantine&quot;,
+      gender: &quot;Female&quot;,
+      nss: &quot;990011223&quot;,
+      date_of_birth: &quot;1998-09-25&quot;,
+      place_of_birth: &quot;Constantine&quot;,
+      emergency_contact_name: &quot;Hassan Benali&quot;,
+      emergency_contact_phone: &quot;0677889933&quot;,
+      medical_condition: &quot;Allergies&quot;,
+      profile_picture: &quot;patient-info-avatar.svg&quot;,
+    },
+  ]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/mock-data/mock-prescriptions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MOCK_PRESCRIPTIONS"></a>
+                    <span class="name">
+                        <span ><b>MOCK_PRESCRIPTIONS</b></span>
+                        <a href="#MOCK_PRESCRIPTIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Prescription.html" target="_self" >Prescription[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    hospital: &#x27;Mustapha Bacha Hospital&#x27;,
+    doctor: &#x27;ATIR Zineb&#x27;,
+    specialty: &#x27;Children&#x27;,
+    date: &#x27;28/12/2024&#x27;,
+    patient: {
+      name: &#x27;SADOUN Amel&#x27;,
+      age: 20,
+      gender: &#x27;Female&#x27;,
+    },
+    medications: [
+      {
+        name: &#x27;Lisinopril 20mg&#x27;,
+        dosage: &#x27;One tablespoon&#x27;,
+        frequency: &#x27;5 days in the evening&#x27;,
+        duration: &#x27;5 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+      {
+        name: &#x27;Pregabalin 75mg&#x27;,
+        dosage: &#x27;One capsule&#x27;,
+        frequency: &#x27;3 days in the morning&#x27;,
+        duration: &#x27;3 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+      {
+        name: &#x27;Metformin 500mg&#x27;,
+        dosage: &#x27;One tablet twice&#x27;,
+        frequency: &#x27;10 days with meals&#x27;,
+        duration: &#x27;10 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+    ],
+    additionalNotes: [
+      &#x27;Take with food to reduce stomach upset.&#x27;,
+      &#x27;Avoid driving or operating heavy machinery after taking this medication as it may cause drowsiness.&#x27;,
+    ],
+    signature: &#x27;________________&#x27;,
+  },
+  {
+    hospital: &#x27;Mustapha Bacha Hospital&#x27;,
+    doctor: &#x27;Sadoun Amel&#x27;,
+    specialty: &#x27;Children&#x27;,
+    date: &#x27;28/12/2024&#x27;,
+    patient: {
+      name: &#x27;SADOUN Amel&#x27;,
+      age: 20,
+      gender: &#x27;Female&#x27;,
+    },
+    medications: [
+      {
+        name: &#x27;Lisinopril 20mg&#x27;,
+        dosage: &#x27;One tablespoon&#x27;,
+        frequency: &#x27;5 days in the evening&#x27;,
+        duration: &#x27;5 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+      {
+        name: &#x27;Pregabalin 75mg&#x27;,
+        dosage: &#x27;One capsule&#x27;,
+        frequency: &#x27;3 days in the morning&#x27;,
+        duration: &#x27;3 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+      {
+        name: &#x27;Metformin 500mg&#x27;,
+        dosage: &#x27;One tablet twice&#x27;,
+        frequency: &#x27;10 days with meals&#x27;,
+        duration: &#x27;10 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+    ],
+    additionalNotes: [
+      &#x27;Take with food to reduce stomach upset.&#x27;,
+      &#x27;Avoid driving or operating heavy machinery after taking this medication as it may cause drowsiness.&#x27;,
+    ],
+    signature: &#x27;________________&#x27;,
+  },
+  {
+    hospital: &#x27;Mustapha Bacha Hospital&#x27;,
+    doctor: &#x27;Mostefai Mounir Sofiane&#x27;,
+    specialty: &#x27;Children&#x27;,
+    date: &#x27;28/12/2024&#x27;,
+    patient: {
+      name: &#x27;SADOUN Amel&#x27;,
+      age: 20,
+      gender: &#x27;Female&#x27;,
+    },
+    medications: [
+      {
+        name: &#x27;Lisinopril 20mg&#x27;,
+        dosage: &#x27;One tablespoon&#x27;,
+        frequency: &#x27;5 days in the evening&#x27;,
+        duration: &#x27;5 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+      {
+        name: &#x27;Pregabalin 75mg&#x27;,
+        dosage: &#x27;One capsule&#x27;,
+        frequency: &#x27;3 days in the morning&#x27;,
+        duration: &#x27;3 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+      {
+        name: &#x27;Metformin 500mg&#x27;,
+        dosage: &#x27;One tablet twice&#x27;,
+        frequency: &#x27;10 days with meals&#x27;,
+        duration: &#x27;10 days&#x27;,
+        instructions: &#x27;&#x27;,
+      },
+    ],
+    additionalNotes: [
+      &#x27;Take with food to reduce stomach upset.&#x27;,
+      &#x27;Avoid driving or operating heavy machinery after taking this medication as it may cause drowsiness.&#x27;,
+    ],
+    signature: &#x27;________________&#x27;,
+  },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.routes.server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverRoutes"></a>
+                    <span class="name">
+                        <span ><b>serverRoutes</b></span>
+                        <a href="#serverRoutes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ServerRoute[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    path: &#x27;**&#x27;,
+    renderMode: RenderMode.Prerender
+  }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

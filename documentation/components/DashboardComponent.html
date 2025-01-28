@@ -1,0 +1,1429 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Projet IGL Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Projet IGL Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DashboardComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/admin/admin-pages/dashboard/dashboard.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dashboard</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                                <code><a href="../components/StatisticsGraphComponent.html" target="_self" >StatisticsGraphComponent</a></code>
+                                <code><a href="../components/CardComponent.html" target="_self" >CardComponent</a></code>
+                            <code>RouterLink</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+      td {
+        padding: 10px 3px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      th {
+        font-weight: 500;
+        font-size: 12px;
+        color: #667085;
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      span {
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      .icon {
+        padding: 10px 3px;
+      }
+    </code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex flex-col pb-10&quot;&gt;
+  &lt;div class&#x3D;&quot;flex flex-col gap-4 lg:mx-12 mx-3&quot;&gt;
+    &lt;div
+      class&#x3D;&quot;flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;p-4&quot;&gt;
+        &lt;h1 class&#x3D;&quot;text-xl&quot; style&#x3D;&quot;color: black; font-weight:400&quot;&gt;
+          Welcome in
+          &lt;span class&#x3D;&quot;text-main font-semibold&quot;&gt; {{ hospitalName }} &lt;/span&gt;
+        &lt;/h1&gt;
+        &lt;h2 class&#x3D;&quot;text-2xl font-semibold text-main&quot;&gt;{{ name }}&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;app-header (reload)&#x3D;&quot;reloadPage()&quot;&gt;&lt;/app-header&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Gray Separator Line --&gt;
+  &lt;div class&#x3D;&quot;border-b&quot; style&#x3D;&quot;color: #F0F0F0;&quot;&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;pl-4 lg:pl-16 pt-4&quot;&gt;
+    &lt;h2 class&#x3D;&quot;text-xl&quot; style&#x3D;&quot;font-weight:600; color: #373C9E;&quot;&gt;
+      DASHBOARD OVERVIEW
+    &lt;/h2&gt;
+  &lt;/div&gt;
+
+  &lt;!-- DASHBOARD OVERVIEW --&gt;
+  &lt;div class&#x3D;&quot;flex flex-wrap justify-between  pt-4 mx-3 lg:mx-12&quot;&gt;
+    &lt;app-card
+      [title]&#x3D;&quot;&#x27;Total Patients&#x27;&quot;
+      [count]&#x3D;&quot;totalPatients&quot;
+      [color]&#x3D;&quot;&#x27;bg-main&#x27;&quot;
+      [icon]&#x3D;&quot;&#x27;dashboard-patient.svg&#x27;&quot;
+    &gt;&lt;/app-card&gt;
+
+    &lt;app-card
+      [title]&#x3D;&quot;&#x27;Total Doctors&#x27;&quot;
+      [count]&#x3D;&quot;totalDoctors&quot;
+      [color]&#x3D;&quot;&#x27;bg-secondary&#x27;&quot;
+      [icon]&#x3D;&quot;&#x27;dashboard-doctor.svg&#x27;&quot;
+    &gt;&lt;/app-card&gt;
+
+    &lt;app-card
+      [title]&#x3D;&quot;&#x27;Total Nurses&#x27;&quot;
+      [count]&#x3D;&quot;totalNurses&quot;
+      [color]&#x3D;&quot;&#x27;bg-tertiary&#x27;&quot;
+      [icon]&#x3D;&quot;&#x27;dashboard-nurse.svg&#x27;&quot;
+    &gt;&lt;/app-card&gt;
+
+    &lt;app-card
+      [title]&#x3D;&quot;&#x27;Lab/Radiologists&#x27;&quot;
+      [count]&#x3D;&quot;totalRadiologists&quot;
+      [color]&#x3D;&quot;&#x27;bg-quaternary&#x27;&quot;
+      [icon]&#x3D;&quot;&#x27;dashboard-add.svg&#x27;&quot;
+    &gt;&lt;/app-card&gt;
+
+    &lt;app-card
+      [title]&#x3D;&quot;&#x27;Total Consultations&#x27;&quot;
+      [count]&#x3D;&quot;totalConsultations&quot;
+      [color]&#x3D;&quot;&#x27;bg-fifth&#x27;&quot;
+      [icon]&#x3D;&quot;&#x27;dashboard-cons.svg&#x27;&quot;
+    &gt;&lt;/app-card&gt;
+  &lt;/div&gt;
+
+  &lt;!-- DASHBOARD CONTENT --&gt;
+  &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-4 pt-4 mx-3 lg:mx-12&quot;&gt;
+    &lt;!-- STATISTICS AND RECENT PATIENTS --&gt;
+    &lt;div
+      class&#x3D;&quot;w-full lg:col-span-2 h-auto lg:h-[704px] flex flex-col justify-between&quot;
+    &gt;
+      &lt;!-- STATISTICS --&gt;
+      &lt;div
+        class&#x3D;&quot;bg-white w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] p-6 mb-4 lg:mb-0&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;flex justify-between items-center pb-4&quot;&gt;
+          &lt;p class&#x3D;&quot;text-main&quot; style&#x3D;&quot;font-weight: 600; font-size:20px;&quot;&gt;
+            Statistics
+          &lt;/p&gt;
+          &lt;img src&#x3D;&quot;dashboard-stat.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;graph-container w-full&quot;&gt;
+          &lt;app-statistics-graph&gt;&lt;/app-statistics-graph&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- RECENT PATIENTS --&gt;
+      &lt;div
+        class&#x3D;&quot;bg-white overflow-hidden w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] py-6 px-4&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;flex justify-between items-center&quot;&gt;
+          &lt;p class&#x3D;&quot;text-main&quot; style&#x3D;&quot;font-weight: 600; font-size:20px;&quot;&gt;
+            Recent Patients
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;mt-4 text-right flex gap-5 pb-4&quot;&gt;
+            &lt;a
+              href&#x3D;&quot;#&quot;
+              class&#x3D;&quot;text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta &quot;
+              style&#x3D;&quot;letter-spacing: 1px;&quot;
+              routerLink&#x3D;&quot;/admin/patients&quot;
+              &gt;SEE ALL PATIENTS&lt;/a
+            &gt;
+            &lt;img src&#x3D;&quot;dashboard-seeall.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- RECENT PATIENTS TABLE --&gt;
+        &lt;div class&#x3D;&quot;overflow-x-auto h-full&quot;&gt;
+          &lt;table class&#x3D;&quot;w-[100%] table-auto mt-6&quot;&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Phone Number&lt;/th&gt;
+                &lt;th&gt;Social Number&lt;/th&gt;
+                &lt;th&gt;Address&lt;/th&gt;
+                &lt;th&gt;E^Contact&lt;/th&gt;
+                &lt;th&gt;E^Phone&lt;/th&gt;
+                &lt;th&gt;&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody
+              class&#x3D;&quot;bg-white rounded-lg overflow-hidden h-[calc(100%-40px)]&quot;
+            &gt;
+              &lt;tr
+                *ngFor&#x3D;&quot;let patient of recentPatients&quot;
+                class&#x3D;&quot;hover:bg-slate-50&quot;
+              &gt;
+                &lt;td class&#x3D;&quot;flex flex-row gap-4 items-center&quot;&gt;
+                  &lt;img
+                    [src]&#x3D;&quot;patient.profilePicture&quot;
+                    class&#x3D;&quot;w-8 h-8 rounded-full cursor-pointer&quot;
+                    alt&#x3D;&quot;Profile Picture&quot;
+                  /&gt;
+                  &lt;div class&#x3D;&quot;flex flex-col&quot;&gt;
+                    &lt;span class&#x3D;&quot;font-semibold text-[12px] w-[8] text-left&quot;&gt;
+                      {{ patient.name }}
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/td&gt;
+                &lt;td&gt;{{ patient.phone }}&lt;/td&gt;
+                &lt;td&gt;{{ patient.socialNumber }}&lt;/td&gt;
+                &lt;td&gt;{{ patient.address }}&lt;/td&gt;
+                &lt;td&gt;{{ patient.emergencyContact }}&lt;/td&gt;
+                &lt;td&gt;{{ patient.emergencyPhone }}&lt;/td&gt;
+
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Top Medical Staff --&gt;
+    &lt;div
+      class&#x3D;&quot;w-full h-auto lg:h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col&quot;
+    &gt;
+      &lt;h3 class&#x3D;&quot;text-[20px] font-semibold text-main mb-4&quot;&gt;
+        Top Medical Staff
+      &lt;/h3&gt;
+
+      &lt;ul class&#x3D;&quot;space-y-6 overflow-y-auto max-h-[1000px] flex-grow&quot;&gt;
+        &lt;!-- Loop through the top medical staff data --&gt;
+        &lt;li *ngFor&#x3D;&quot;let staff of topMedicalStaff&quot; class&#x3D;&quot;flex flex-col&quot;&gt;
+          &lt;div class&#x3D;&quot;w-full lg:min-w-[210px] h-[47px] flex gap-x-6&quot;&gt;
+            &lt;img
+              [src]&#x3D;&quot;staff.profilePicture&quot;
+              alt&#x3D;&quot;Doctor Avatar&quot;
+              class&#x3D;&quot;w-10 h-10 rounded-full&quot;
+            /&gt;
+            &lt;div class&#x3D;&quot;pl-4&quot;&gt;
+              &lt;p class&#x3D;&quot;font-bold text-black text-[13px] text-left&quot;&gt;
+                {{ staff.name }}
+              &lt;/p&gt;
+              &lt;p class&#x3D;&quot;font-normal text-[#667085] text-[13px] text-left&quot;&gt;
+                {{ staff.role }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;div class&#x3D;&quot;mt-4 text-left flex gap-5&quot;&gt;
+        &lt;a
+          href&#x3D;&quot;#&quot;
+          class&#x3D;&quot;text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta&quot;
+          style&#x3D;&quot;letter-spacing: 1px;&quot;
+          routerLink&#x3D;&quot;/admin/staff&quot;
+          &gt;SEE ALL WORKERS&lt;/a
+        &gt;
+        &lt;img src&#x3D;&quot;dashboard-seeall.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#baseUrl" >baseUrl</a>
+                            </li>
+                            <li>
+                                <a href="#hospitalName" >hospitalName</a>
+                            </li>
+                            <li>
+                                <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                <a href="#recentPatients" >recentPatients</a>
+                            </li>
+                            <li>
+                                <a href="#topMedicalStaff" >topMedicalStaff</a>
+                            </li>
+                            <li>
+                                <a href="#totalConsultations" >totalConsultations</a>
+                            </li>
+                            <li>
+                                <a href="#totalDoctors" >totalDoctors</a>
+                            </li>
+                            <li>
+                                <a href="#totalNurses" >totalNurses</a>
+                            </li>
+                            <li>
+                                <a href="#totalPatients" >totalPatients</a>
+                            </li>
+                            <li>
+                                <a href="#totalRadiologists" >totalRadiologists</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getData" >getData</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#reloadPage" >reloadPage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(dashboardService: <a href="../injectables/DashboardService.html" target="_self">DashboardService</a>, http: HttpClient)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:237</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dashboardService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DashboardService.html" target="_self" >DashboardService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code>HttpClient</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getData"></a>
+                    <span class="name">
+                        <span ><b>getData</b></span>
+                        <a href="#getData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:273</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reloadPage"></a>
+                    <span class="name">
+                        <span ><b>reloadPage</b></span>
+                        <a href="#reloadPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reloadPage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="314"
+                                    class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:314</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="baseUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>baseUrl</b></span>
+                        <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.apiUrl</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:237</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hospitalName"></a>
+                    <span class="name">
+                        <span ><b>hospitalName</b></span>
+                        <a href="#hospitalName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="244" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:244</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recentPatients"></a>
+                    <span class="name">
+                        <span ><b>recentPatients</b></span>
+                        <a href="#recentPatients"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:246</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="topMedicalStaff"></a>
+                    <span class="name">
+                        <span ><b>topMedicalStaff</b></span>
+                        <a href="#topMedicalStaff"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalConsultations"></a>
+                    <span class="name">
+                        <span ><b>totalConsultations</b></span>
+                        <a href="#totalConsultations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="266" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:266</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalDoctors"></a>
+                    <span class="name">
+                        <span ><b>totalDoctors</b></span>
+                        <a href="#totalDoctors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalNurses"></a>
+                    <span class="name">
+                        <span ><b>totalNurses</b></span>
+                        <a href="#totalNurses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="264" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:264</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPatients"></a>
+                    <span class="name">
+                        <span ><b>totalPatients</b></span>
+                        <a href="#totalPatients"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="262" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:262</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalRadiologists"></a>
+                    <span class="name">
+                        <span ><b>totalRadiologists</b></span>
+                        <a href="#totalRadiologists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="265" class="link-to-prism">src/app/admin/admin-pages/dashboard/dashboard.component.ts:265</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterLink } from &#x27;@angular/router&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { environment } from &#x27;../../../../environments/environment&#x27;;
+import { DashboardService } from &#x27;../../../services/admin/dashboard/dashboard.service&#x27;;
+
+// components
+import { HeaderComponent } from &#x27;../../admin-components/header/header.component&#x27;;
+import { StatisticsGraphComponent } from &#x27;../../admin-components/statistics-graph/statistics-graph.component&#x27;;
+import { CardComponent } from &#x27;../../admin-components/dashboard-card/dashboard-card.component&#x27;;
+
+@Component({
+  selector: &#x27;app-dashboard&#x27;,
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    StatisticsGraphComponent,
+    CardComponent,
+    RouterLink,
+  ],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;flex flex-col pb-10&quot;&gt;
+      &lt;div class&#x3D;&quot;flex flex-col gap-4 lg:mx-12 mx-3&quot;&gt;
+        &lt;div
+          class&#x3D;&quot;flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;p-4&quot;&gt;
+            &lt;h1 class&#x3D;&quot;text-xl&quot; style&#x3D;&quot;color: black; font-weight:400&quot;&gt;
+              Welcome in
+              &lt;span class&#x3D;&quot;text-main font-semibold&quot;&gt; {{ hospitalName }} &lt;/span&gt;
+            &lt;/h1&gt;
+            &lt;h2 class&#x3D;&quot;text-2xl font-semibold text-main&quot;&gt;{{ name }}&lt;/h2&gt;
+          &lt;/div&gt;
+          &lt;app-header (reload)&#x3D;&quot;reloadPage()&quot;&gt;&lt;/app-header&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Gray Separator Line --&gt;
+      &lt;div class&#x3D;&quot;border-b&quot; style&#x3D;&quot;color: #F0F0F0;&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;pl-4 lg:pl-16 pt-4&quot;&gt;
+        &lt;h2 class&#x3D;&quot;text-xl&quot; style&#x3D;&quot;font-weight:600; color: #373C9E;&quot;&gt;
+          DASHBOARD OVERVIEW
+        &lt;/h2&gt;
+      &lt;/div&gt;
+
+      &lt;!-- DASHBOARD OVERVIEW --&gt;
+      &lt;div class&#x3D;&quot;flex flex-wrap justify-between  pt-4 mx-3 lg:mx-12&quot;&gt;
+        &lt;app-card
+          [title]&#x3D;&quot;&#x27;Total Patients&#x27;&quot;
+          [count]&#x3D;&quot;totalPatients&quot;
+          [color]&#x3D;&quot;&#x27;bg-main&#x27;&quot;
+          [icon]&#x3D;&quot;&#x27;dashboard-patient.svg&#x27;&quot;
+        &gt;&lt;/app-card&gt;
+
+        &lt;app-card
+          [title]&#x3D;&quot;&#x27;Total Doctors&#x27;&quot;
+          [count]&#x3D;&quot;totalDoctors&quot;
+          [color]&#x3D;&quot;&#x27;bg-secondary&#x27;&quot;
+          [icon]&#x3D;&quot;&#x27;dashboard-doctor.svg&#x27;&quot;
+        &gt;&lt;/app-card&gt;
+
+        &lt;app-card
+          [title]&#x3D;&quot;&#x27;Total Nurses&#x27;&quot;
+          [count]&#x3D;&quot;totalNurses&quot;
+          [color]&#x3D;&quot;&#x27;bg-tertiary&#x27;&quot;
+          [icon]&#x3D;&quot;&#x27;dashboard-nurse.svg&#x27;&quot;
+        &gt;&lt;/app-card&gt;
+
+        &lt;app-card
+          [title]&#x3D;&quot;&#x27;Lab/Radiologists&#x27;&quot;
+          [count]&#x3D;&quot;totalRadiologists&quot;
+          [color]&#x3D;&quot;&#x27;bg-quaternary&#x27;&quot;
+          [icon]&#x3D;&quot;&#x27;dashboard-add.svg&#x27;&quot;
+        &gt;&lt;/app-card&gt;
+
+        &lt;app-card
+          [title]&#x3D;&quot;&#x27;Total Consultations&#x27;&quot;
+          [count]&#x3D;&quot;totalConsultations&quot;
+          [color]&#x3D;&quot;&#x27;bg-fifth&#x27;&quot;
+          [icon]&#x3D;&quot;&#x27;dashboard-cons.svg&#x27;&quot;
+        &gt;&lt;/app-card&gt;
+      &lt;/div&gt;
+
+      &lt;!-- DASHBOARD CONTENT --&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-4 pt-4 mx-3 lg:mx-12&quot;&gt;
+        &lt;!-- STATISTICS AND RECENT PATIENTS --&gt;
+        &lt;div
+          class&#x3D;&quot;w-full lg:col-span-2 h-auto lg:h-[704px] flex flex-col justify-between&quot;
+        &gt;
+          &lt;!-- STATISTICS --&gt;
+          &lt;div
+            class&#x3D;&quot;bg-white w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] p-6 mb-4 lg:mb-0&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex justify-between items-center pb-4&quot;&gt;
+              &lt;p class&#x3D;&quot;text-main&quot; style&#x3D;&quot;font-weight: 600; font-size:20px;&quot;&gt;
+                Statistics
+              &lt;/p&gt;
+              &lt;img src&#x3D;&quot;dashboard-stat.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;graph-container w-full&quot;&gt;
+              &lt;app-statistics-graph&gt;&lt;/app-statistics-graph&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;!-- RECENT PATIENTS --&gt;
+          &lt;div
+            class&#x3D;&quot;bg-white overflow-hidden w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] py-6 px-4&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex justify-between items-center&quot;&gt;
+              &lt;p class&#x3D;&quot;text-main&quot; style&#x3D;&quot;font-weight: 600; font-size:20px;&quot;&gt;
+                Recent Patients
+              &lt;/p&gt;
+              &lt;div class&#x3D;&quot;mt-4 text-right flex gap-5 pb-4&quot;&gt;
+                &lt;a
+                  href&#x3D;&quot;#&quot;
+                  class&#x3D;&quot;text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta &quot;
+                  style&#x3D;&quot;letter-spacing: 1px;&quot;
+                  routerLink&#x3D;&quot;/admin/patients&quot;
+                  &gt;SEE ALL PATIENTS&lt;/a
+                &gt;
+                &lt;img src&#x3D;&quot;dashboard-seeall.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;!-- RECENT PATIENTS TABLE --&gt;
+            &lt;div class&#x3D;&quot;overflow-x-auto h-full&quot;&gt;
+              &lt;table class&#x3D;&quot;w-[100%] table-auto mt-6&quot;&gt;
+                &lt;thead&gt;
+                  &lt;tr&gt;
+                    &lt;th&gt;Name&lt;/th&gt;
+                    &lt;th&gt;Phone Number&lt;/th&gt;
+                    &lt;th&gt;Social Number&lt;/th&gt;
+                    &lt;th&gt;Address&lt;/th&gt;
+                    &lt;th&gt;E^Contact&lt;/th&gt;
+                    &lt;th&gt;E^Phone&lt;/th&gt;
+                    &lt;th&gt;&lt;/th&gt;
+                  &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody
+                  class&#x3D;&quot;bg-white rounded-lg overflow-hidden h-[calc(100%-40px)]&quot;
+                &gt;
+                  &lt;tr
+                    *ngFor&#x3D;&quot;let patient of recentPatients&quot;
+                    class&#x3D;&quot;hover:bg-slate-50&quot;
+                  &gt;
+                    &lt;td class&#x3D;&quot;flex flex-row gap-4 items-center&quot;&gt;
+                      &lt;img
+                        [src]&#x3D;&quot;patient.profilePicture&quot;
+                        class&#x3D;&quot;w-8 h-8 rounded-full cursor-pointer&quot;
+                        alt&#x3D;&quot;Profile Picture&quot;
+                      /&gt;
+                      &lt;div class&#x3D;&quot;flex flex-col&quot;&gt;
+                        &lt;span class&#x3D;&quot;font-semibold text-[12px] w-[8] text-left&quot;&gt;
+                          {{ patient.name }}
+                        &lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;{{ patient.phone }}&lt;/td&gt;
+                    &lt;td&gt;{{ patient.socialNumber }}&lt;/td&gt;
+                    &lt;td&gt;{{ patient.address }}&lt;/td&gt;
+                    &lt;td&gt;{{ patient.emergencyContact }}&lt;/td&gt;
+                    &lt;td&gt;{{ patient.emergencyPhone }}&lt;/td&gt;
+
+                  &lt;/tr&gt;
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Top Medical Staff --&gt;
+        &lt;div
+          class&#x3D;&quot;w-full h-auto lg:h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col&quot;
+        &gt;
+          &lt;h3 class&#x3D;&quot;text-[20px] font-semibold text-main mb-4&quot;&gt;
+            Top Medical Staff
+          &lt;/h3&gt;
+
+          &lt;ul class&#x3D;&quot;space-y-6 overflow-y-auto max-h-[1000px] flex-grow&quot;&gt;
+            &lt;!-- Loop through the top medical staff data --&gt;
+            &lt;li *ngFor&#x3D;&quot;let staff of topMedicalStaff&quot; class&#x3D;&quot;flex flex-col&quot;&gt;
+              &lt;div class&#x3D;&quot;w-full lg:min-w-[210px] h-[47px] flex gap-x-6&quot;&gt;
+                &lt;img
+                  [src]&#x3D;&quot;staff.profilePicture&quot;
+                  alt&#x3D;&quot;Doctor Avatar&quot;
+                  class&#x3D;&quot;w-10 h-10 rounded-full&quot;
+                /&gt;
+                &lt;div class&#x3D;&quot;pl-4&quot;&gt;
+                  &lt;p class&#x3D;&quot;font-bold text-black text-[13px] text-left&quot;&gt;
+                    {{ staff.name }}
+                  &lt;/p&gt;
+                  &lt;p class&#x3D;&quot;font-normal text-[#667085] text-[13px] text-left&quot;&gt;
+                    {{ staff.role }}
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;div class&#x3D;&quot;mt-4 text-left flex gap-5&quot;&gt;
+            &lt;a
+              href&#x3D;&quot;#&quot;
+              class&#x3D;&quot;text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta&quot;
+              style&#x3D;&quot;letter-spacing: 1px;&quot;
+              routerLink&#x3D;&quot;/admin/staff&quot;
+              &gt;SEE ALL WORKERS&lt;/a
+            &gt;
+            &lt;img src&#x3D;&quot;dashboard-seeall.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [
+    &#x60;
+      td {
+        padding: 10px 3px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      th {
+        font-weight: 500;
+        font-size: 12px;
+        color: #667085;
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      span {
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      .icon {
+        padding: 10px 3px;
+      }
+    &#x60;,
+  ],
+})
+export class DashboardComponent {
+  private baseUrl &#x3D; environment.apiUrl;
+
+  constructor(
+    private dashboardService: DashboardService,
+    private http: HttpClient
+  ) {}
+
+  hospitalName: string &#x3D; &#x27;&#x27;;
+  name: string &#x3D; &#x27;&#x27;;
+  recentPatients: {
+    name: string;
+    phone: string;
+    socialNumber: string;
+    email: string;
+    address: string;
+    emergencyContact: string;
+    emergencyPhone: string;
+    profilePicture: string;
+    qrCode: string;
+    date: string;
+  }[] &#x3D; [];
+
+  topMedicalStaff: { name: string; role: string; profilePicture: string }[] &#x3D;
+    [];
+
+  totalPatients: number &#x3D; 0;
+  totalDoctors: number &#x3D; 0;
+  totalNurses: number &#x3D; 0;
+  totalRadiologists: number &#x3D; 0;
+  totalConsultations: number &#x3D; 0;
+
+  ngOnInit() {
+    console.log(&#x27;Dashboard component initialized&#x27;);
+    this.getData();
+  }
+
+  getData() {
+    this.dashboardService.getDashboardData().subscribe(
+      (data) &#x3D;&gt; {
+        console.log(&#x27;Dashboard data fetched successfully&#x27;);
+        this.dashboardService.updateCachedData(data);
+
+        this.hospitalName &#x3D; data.admin_info.hospital;
+        this.name &#x3D; data.admin_info.name;
+
+        this.totalPatients &#x3D; data.role_counts.patients;
+        this.totalDoctors &#x3D; data.role_counts.doctors;
+        this.totalNurses &#x3D; data.role_counts.nurses;
+        this.totalRadiologists &#x3D;
+          data.role_counts.radiologists + data.role_counts.lab_technicians;
+        this.totalConsultations &#x3D; data.role_counts.consultations;
+
+        this.recentPatients &#x3D; data.recent_patients.map((patient: any) &#x3D;&gt; ({
+          name: patient.name,
+          phone: patient.phone_number,
+          socialNumber: patient.nss,
+          email: patient.email,
+          address: patient.address,
+          emergencyContact: patient.emergency_contact_name,
+          emergencyPhone: patient.emergency_contact_phone,
+          profilePicture: &#x27;patient-avatar.svg&#x27;,
+          qrCode: &#x27;QR.svg&#x27;,
+          date: patient.date,
+        }));
+
+        this.topMedicalStaff &#x3D; data.top_staff.map((staff: any) &#x3D;&gt; ({
+          name: staff.name,
+          role: staff.role,
+          profilePicture: &#x27;doctor-avatar.svg&#x27;,
+        }));
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Failed to fetch dashboard data&#x27;);
+      }
+    );
+  }
+
+  reloadPage() {
+    window.location.reload();
+  }
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+      td {
+        padding: 10px 3px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      th {
+        font-weight: 500;
+        font-size: 12px;
+        color: #667085;
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      span {
+        font-family: &#x27;Plus Jakarta Sans&#x27;, sans-serif;
+      }
+      .icon {
+        padding: 10px 3px;
+      }
+    
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex flex-col pb-10">  <div class="flex flex-col gap-4 lg:mx-12 mx-3">    <div      class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-12"    >      <div class="p-4">        <h1 class="text-xl" style="color: black; font-weight:400">          Welcome in          <span class="text-main font-semibold"> {{ hospitalName }} </span>        </h1>        <h2 class="text-2xl font-semibold text-main">{{ name }}</h2>      </div>      <app-header (reload)="reloadPage()"></app-header>    </div>  </div>  <!-- Gray Separator Line -->  <div class="border-b" style="color: #F0F0F0;"></div>  <div class="pl-4 lg:pl-16 pt-4">    <h2 class="text-xl" style="font-weight:600; color: #373C9E;">      DASHBOARD OVERVIEW    </h2>  </div>  <!-- DASHBOARD OVERVIEW -->  <div class="flex flex-wrap justify-between  pt-4 mx-3 lg:mx-12">    <app-card      [title]="\'Total Patients\'"      [count]="totalPatients"      [color]="\'bg-main\'"      [icon]="\'dashboard-patient.svg\'"    ></app-card>    <app-card      [title]="\'Total Doctors\'"      [count]="totalDoctors"      [color]="\'bg-secondary\'"      [icon]="\'dashboard-doctor.svg\'"    ></app-card>    <app-card      [title]="\'Total Nurses\'"      [count]="totalNurses"      [color]="\'bg-tertiary\'"      [icon]="\'dashboard-nurse.svg\'"    ></app-card>    <app-card      [title]="\'Lab/Radiologists\'"      [count]="totalRadiologists"      [color]="\'bg-quaternary\'"      [icon]="\'dashboard-add.svg\'"    ></app-card>    <app-card      [title]="\'Total Consultations\'"      [count]="totalConsultations"      [color]="\'bg-fifth\'"      [icon]="\'dashboard-cons.svg\'"    ></app-card>  </div>  <!-- DASHBOARD CONTENT -->  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-4 mx-3 lg:mx-12">    <!-- STATISTICS AND RECENT PATIENTS -->    <div      class="w-full lg:col-span-2 h-auto lg:h-[704px] flex flex-col justify-between"    >      <!-- STATISTICS -->      <div        class="bg-white w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] p-6 mb-4 lg:mb-0"      >        <div class="flex justify-between items-center pb-4">          <p class="text-main" style="font-weight: 600; font-size:20px;">            Statistics          </p>          <img src="dashboard-stat.svg" alt="" />        </div>        <div class="graph-container w-full">          <app-statistics-graph></app-statistics-graph>        </div>      </div>      <!-- RECENT PATIENTS -->      <div        class="bg-white overflow-hidden w-full lg:w-auto xl:w-auto h-auto lg:h-[338px] border-2 border-[#F4F2F2] rounded-[16px] py-6 px-4"      >        <div class="flex justify-between items-center">          <p class="text-main" style="font-weight: 600; font-size:20px;">            Recent Patients          </p>          <div class="mt-4 text-right flex gap-5 pb-4">            <a              href="#"              class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta "              style="letter-spacing: 1px;"              routerLink="/admin/patients"              >SEE ALL PATIENTS</a            >            <img src="dashboard-seeall.svg" alt="" />          </div>        </div>        <!-- RECENT PATIENTS TABLE -->        <div class="overflow-x-auto h-full">          <table class="w-[100%] table-auto mt-6">            <thead>              <tr>                <th>Name</th>                <th>Phone Number</th>                <th>Social Number</th>                <th>Address</th>                <th>E^Contact</th>                <th>E^Phone</th>                <th></th>              </tr>            </thead>            <tbody              class="bg-white rounded-lg overflow-hidden h-[calc(100%-40px)]"            >              <tr                *ngFor="let patient of recentPatients"                class="hover:bg-slate-50"              >                <td class="flex flex-row gap-4 items-center">                  <img                    [src]="patient.profilePicture"                    class="w-8 h-8 rounded-full cursor-pointer"                    alt="Profile Picture"                  />                  <div class="flex flex-col">                    <span class="font-semibold text-[12px] w-[8] text-left">                      {{ patient.name }}                    </span>                  </div>                </td>                <td>{{ patient.phone }}</td>                <td>{{ patient.socialNumber }}</td>                <td>{{ patient.address }}</td>                <td>{{ patient.emergencyContact }}</td>                <td>{{ patient.emergencyPhone }}</td>              </tr>            </tbody>          </table>        </div>      </div>    </div>    <!-- Top Medical Staff -->    <div      class="w-full h-auto lg:h-[704px] bg-white border-2 border-[#F4F2F2] rounded-[16px] p-6 flex flex-col"    >      <h3 class="text-[20px] font-semibold text-main mb-4">        Top Medical Staff      </h3>      <ul class="space-y-6 overflow-y-auto max-h-[1000px] flex-grow">        <!-- Loop through the top medical staff data -->        <li *ngFor="let staff of topMedicalStaff" class="flex flex-col">          <div class="w-full lg:min-w-[210px] h-[47px] flex gap-x-6">            <img              [src]="staff.profilePicture"              alt="Doctor Avatar"              class="w-10 h-10 rounded-full"            />            <div class="pl-4">              <p class="font-bold text-black text-[13px] text-left">                {{ staff.name }}              </p>              <p class="font-normal text-[#667085] text-[13px] text-left">                {{ staff.role }}              </p>            </div>          </div>        </li>      </ul>      <div class="mt-4 text-left flex gap-5">        <a          href="#"          class="text-[#667085] font-bold text-[10px] cursor-pointer hover:underline font-plus-jakarta"          style="letter-spacing: 1px;"          routerLink="/admin/staff"          >SEE ALL WORKERS</a        >        <img src="dashboard-seeall.svg" alt="" />      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddNewPatientPopupComponent', 'selector': 'app-add-new-patient-popup'},{'name': 'AdminSidebarComponent', 'selector': 'app-admin-sidebar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArchivedConsultationComponent', 'selector': 'app-archived-consultation'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'AttachmentsTableComponent', 'selector': 'app-attachments-table'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'ConfirmDeletePatientPopupComponent', 'selector': 'app-confirm-delete-patient-popup'},{'name': 'ConfirmDeleteWorkerPopupComponent', 'selector': 'app-confirm-delete-worker-popup'},{'name': 'ConfirmLogoutPopupComponent', 'selector': 'app-confirm-logout-popup'},{'name': 'ConsultationArchivedComponent', 'selector': 'app-consultation-archived'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'ConsultationDetailsComponent', 'selector': 'app-consultation-details'},{'name': 'CreatePrescriptionComponent', 'selector': 'app-create-prescription'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DoctorActionsComponent', 'selector': 'app-doctor-actions'},{'name': 'DoctorActionsConsultationComponent', 'selector': 'app-doctor-actions-consultation'},{'name': 'DoctorComponent', 'selector': 'app-radiologist'},{'name': 'DoctorSidebarComponent', 'selector': 'app-doctor-sidebar'},{'name': 'EditPatientFormComponent', 'selector': 'app-edit-patient-form'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EditWorkerFormComponent', 'selector': 'app-edit-worker-form'},{'name': 'EmailPopupComponent', 'selector': 'app-email-popup'},{'name': 'GraphPopUpComponent', 'selector': 'app-graph-pop-up'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HistoryComponent', 'selector': 'app-history'},{'name': 'LabTechnicianInfoComponent', 'selector': 'app-lab-technician-info'},{'name': 'LabTechSidebarComponent', 'selector': 'app-lab-tech-sidebar'},{'name': 'LoadingPageComponent', 'selector': 'app-loading-page'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'Main', 'selector': 'app-admin'},{'name': 'Main', 'selector': 'app-lab-technician'},{'name': 'Main', 'selector': 'app-radiologist'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardComponent', 'selector': 'app-medical-card'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalCardsContainerComponent', 'selector': 'app-medical-cards-container'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'MedicalRecordComponent', 'selector': 'app-medical-record'},{'name': 'NewConsultationFormComponent', 'selector': 'app-new-consultation-form'},{'name': 'NewConsultationPopupComponent', 'selector': 'app-new-consultation-popup'},{'name': 'NewPatientFormComponent', 'selector': 'app-new-patient-form'},{'name': 'NewWorkerFormComponent', 'selector': 'app-new-worker-form'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NurseComponent', 'selector': 'app-radiologist'},{'name': 'NurseInfoComponent', 'selector': 'app-nurse-info'},{'name': 'NurseObservationsComponent', 'selector': 'app-nurse-observations'},{'name': 'NurseSidebarComponent', 'selector': 'app-nurse-sidebar'},{'name': 'OpenTicketComponent', 'selector': 'app-open-ticket'},{'name': 'PatientActionsComponent', 'selector': 'app-patient-actions'},{'name': 'PatientBadgeComponent', 'selector': 'app-patient-badge'},{'name': 'PatientBadgeInfosComponent', 'selector': 'app-patient-badge-infos'},{'name': 'PatientComponent', 'selector': 'app-patient'},{'name': 'PatientDetailsComponent', 'selector': 'app-patient-details'},{'name': 'PatientInfosArchivedConsultationComponent', 'selector': 'app-patient-infos-archived-consultation'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosComponent', 'selector': 'app-patient-infos'},{'name': 'PatientInfosConsultationArchivedComponent', 'selector': 'app-patient-infos-consultation-archived'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsComponent', 'selector': 'app-patients'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PatientsTableComponent', 'selector': 'app-patients-table'},{'name': 'PrescriptionComponent', 'selector': 'app-prescription'},{'name': 'PrescriptionPopupComponent', 'selector': 'app-prescription-popup'},{'name': 'PreviewPopupComponent', 'selector': 'app-preview-popup'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologistInfoComponent', 'selector': 'app-radiologist-info'},{'name': 'RadiologistSidebarComponent', 'selector': 'app-radiologist-sidebar'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsObservationsComponent', 'selector': 'app-results-observations'},{'name': 'ResultsPopupComponent', 'selector': 'app-results-popup'},{'name': 'StatisticsGraphComponent', 'selector': 'app-statistics-graph'},{'name': 'TicketComponent', 'selector': 'app-ticket'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsHistoryComponent', 'selector': 'app-tickets'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'TicketsTableComponent', 'selector': 'app-tickets-table'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UserBadgeComponent', 'selector': 'app-user-badge'},{'name': 'UserInfoPopupComponent', 'selector': 'app-user-info-popup'},{'name': 'WorkersComponent', 'selector': 'app-workers'},{'name': 'WorkersTableComponent', 'selector': 'app-workers-table'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'},{'name': 'WorkspaceComponent', 'selector': 'app-workspace'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DashboardComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DashboardComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
