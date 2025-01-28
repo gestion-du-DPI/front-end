@@ -8,6 +8,7 @@ export interface Consultation {
   reason: string;
   status: "pending" | "completed" | "failed";
   briefing: string;
+  archived: boolean;
 }
 
 export const consultations: Consultation[] = [
@@ -20,6 +21,7 @@ export const consultations: Consultation[] = [
     SGPH: "Pending",
     reason: "a black man shot him three times",
     status: "pending",
+    archived: true,
     briefing: "The patient was shot three times and is under observation."
   },
   {
@@ -31,6 +33,7 @@ export const consultations: Consultation[] = [
     SGPH: "Pending",
     reason: "a black man shot him three times",
     status: "pending",
+    archived: false,
     briefing: "The patient's condition is improving, pending further tests."
   },
   {
@@ -39,6 +42,7 @@ export const consultations: Consultation[] = [
     doctor: "Dr. Mostefai",
     createdOn: "15:32",
     lastedFor: "21 days",
+    archived: false,
     SGPH: "Pending",
     reason: "a black man shot him three times",
     status: "pending",
@@ -50,6 +54,7 @@ export const consultations: Consultation[] = [
     doctor: "Dr. Mostefai",
     createdOn: "15:32",
     lastedFor: "21 days",
+    archived: false,
     SGPH: "Completed",
     reason: "a black man shot him three times",
     status: "completed",
@@ -59,6 +64,7 @@ export const consultations: Consultation[] = [
     id: 5,
     date: "Jun 12",
     doctor: "Dr. Mostefai",
+    archived: false,
     createdOn: "15:32",
     lastedFor: "21 days",
     SGPH: "Failed",

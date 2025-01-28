@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../doctor-components/header/header.component';
-import { StatisticsGraphComponent } from '../../../admin/admin-components/statistics-graph/statistics-graph.component';
+import { StatisticsGraphComponent } from '../../../doctor/doctor-components/statistics-graph/statistics-graph.component';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MedicalCardsContainerComponent } from '../../doctor-components/medical-cards-container/medical-cards-container.component';
+import { DocHome } from '../../../models/doc-dashboard';
+import { DashboardService } from '../../../services/doctor/dashboard/dashboard.service';
+import { MedicalCardsContainerComponent } from '../../../doctor/doctor-components/medical-cards-container/medical-cards-container.component';
 
 @Component({
   selector: 'app-workspace',
@@ -13,7 +15,7 @@ import { MedicalCardsContainerComponent } from '../../doctor-components/medical-
     HeaderComponent,
     StatisticsGraphComponent,
     RouterLink,
-    MedicalCardsContainerComponent
+    MedicalCardsContainerComponent,
   ],
   template: `
     <div class="flex flex-col">
@@ -24,11 +26,15 @@ import { MedicalCardsContainerComponent } from '../../doctor-components/medical-
           <div class="p-4">
             <h1 class="text-xl" style="color: black; font-weight:400">
               Welcome in
-              <span class="text-main font-semibold">Hope Springs Healing</span>
+              <span class="text-main font-semibold">{{
+                data.doctor_info.hospital
+              }}</span>
             </h1>
-            <h2 class="text-2xl font-semibold text-main">{{ name }}</h2>
+            <h2 class="text-2xl font-semibold text-main">
+              {{ data.doctor_info.name }}
+            </h2>
           </div>
-          <app-header></app-header>
+          <app-header (reload)="reloadPage()"></app-header>
         </div>
       </div>
 
@@ -139,7 +145,6 @@ import { MedicalCardsContainerComponent } from '../../doctor-components/medical-
 
         <!-- Requested Tasks -->
         <app-medical-cards-container></app-medical-cards-container>
-
       </div>
     </div>
   `,
@@ -168,76 +173,75 @@ import { MedicalCardsContainerComponent } from '../../doctor-components/medical-
   ],
 })
 export class WorkspaceComponent {
-  name: string = 'Dr. Sadoun';
-  recentPatients = [
-    {
-      id: 'b5de',
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-01',
-    },
-    {
-      id: '704b',
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-02',
-    },
-    {
-      id: 'bc88',
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-03',
-    },
-    {
-      id: 'd784',
-      name: 'Phoenix Baker',
-      phone: '0661805577',
-      socialNumber: '0001823838',
-      email: 'a.denai@esi.dz',
-      address: 'Bechar, Algeria',
-      emergencyContact: 'Father',
-      emergencyPhone: '0661805577',
-      profilePicture: 'patient-avatar.svg',
-      qrCode: 'QR.svg',
-      date: '2024-12-04',
-    },
-  ];
+  recentPatients: Array<{
+    id: number;
+    name: string;
+    phone: string;
+    socialNumber: string;
+    email: string;
+    address: string;
+    emergencyContact: string;
+    emergencyPhone: string;
+    profilePicture: string;
+    qrCode: string;
+    date: string;
+  }> = [];
 
-  constructor(private http: HttpClient) {}
+  data: DocHome = {
+    doctor_info: {
+      id: 0,
+      name: '',
+      hospital: '',
+      address: '',
+      phone_number: '',
+      email: '',
+      nss: '',
+      profile_image: '',
+    },
+    stats: [],
+    recent_patients: [],
+    requested_tests: [],
+  };
+
+  constructor(
+    private dashboardService: DashboardService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
-    this.testProtectedEndpoint();
+    this.getData();
   }
 
-  testProtectedEndpoint() {
-    this.http.get('http://localhost:8000/protected').subscribe(
-      (response) => {
-        console.log('Protected endpoint response:', response);
+  getData() {
+    this.dashboardService.getDashboardData().subscribe(
+      (data) => {
+        this.data = data;
+        this.data.recent_patients.map((patient) => {
+          const patientInfo = {
+            id: patient.user_id,
+            name: patient.name,
+            phone: patient.phone_number,
+            socialNumber: patient.nss,
+            email: patient.email,
+            address: patient.address,
+            emergencyContact: patient.emergency_contact_name,
+            emergencyPhone: patient.emergency_contact_phone,
+            profilePicture: 'patient-avatar.svg',
+            qrCode: 'QR.svg',
+            date: patient.created_at,
+          };
+          this.recentPatients.push(patientInfo);
+        });
+        console.log(this.data);
       },
-      (error) => {
-        console.error('Error accessing protected endpoint:', error);
+      (error: any) => {
+        console.log(error);
       }
     );
   }
+
+  reloadPage() {
+    window.location.reload();
+  }
+
 }

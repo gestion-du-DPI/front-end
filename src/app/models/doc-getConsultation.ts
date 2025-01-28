@@ -1,13 +1,14 @@
-export interface Patient {
+export interface Consultation {
   user_id: number;
+  profile_image: string;
+  consultation_id: number;
   name: string;
-  created_at: string;
+  date_of_birth: string;
   nss: string;
   email: string;
-  address: string;
   phone_number: string;
   emergency_contact_name: string;
   emergency_contact_phone: string;
-  consultation_count: number;
-  profile_image: string;
+  resume: string;
+  archived: boolean;
 }

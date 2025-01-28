@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Patient } from '../../../../models/patient';
+import { Patient } from '../../../../models/admin-patient';
 import { PatientService } from '../../../../services/admin/patient/patient.service';
 import { CommonModule } from '@angular/common';
 

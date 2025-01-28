@@ -1,25 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UserProfile } from '../../../models/doc-getDPI';
+import { GetConsultationService } from '../../../services/doctor/getConsultation/get-consultation.service';
+import { Consultation } from '../../../models/doc-getConsultation';
 
 @Component({
   selector: 'app-patient-infos',
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="bg-white rounded-lg shadow p-5 flex flex-col gap-4">
+    <div
+      class="bg-white rounded-lg shadow w-[100%] h-full flex-grow p-5 flex flex-col gap-4"
+    >
       <!-- Patient Info Section -->
       <div class="flex flex-row items-center justify-between w-full gap-5">
         <!-- Profile Picture and Basic Info -->
         <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
           <img
-            [src]="avatarUrl"
+            [src]="Consultation.profile_image || 'patient-info-avatar.svg'"
             alt="Profile Picture"
             class="w-16 h-16 rounded-full"
           />
           <div class="flex flex-col">
             <div class="flex flex-row items-center">
               <img src="worker-name.svg" alt="name" class="w-6 h-6 mr-2" />
-              <h2 class="font-semibold text-lg">{{ name }}</h2>
+              <h2 class="font-semibold text-lg">{{ Consultation.name }}</h2>
             </div>
           </div>
         </div>
@@ -27,80 +33,51 @@ import { FormsModule } from '@angular/forms';
         <!-- Additional Patient Details -->
         <div class="flex flex-col items-start gap-4">
           <!-- First Row -->
-          <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
+          <div
+            class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4"
+          >
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="birthday.svg" alt="Calendar" class="w-4 h-4" />
-              <span>{{ birthday }}</span>
+              <span>{{ Consultation.date_of_birth }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="socialNumber.svg" alt="ID Card" class="w-4 h-4" />
-              <span>{{ socialNumber }}</span>
+              <span>{{ Consultation.consultation_id }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker-phoneNumber.svg" alt="Phone" class="w-4 h-4" />
-              <span>{{ phoneNumber }}</span>
+              <span>{{ Consultation.emergency_contact_phone }}</span>
             </div>
           </div>
 
           <!-- Second Row -->
-          <div class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4">
+          <div
+            class="flex flex-row md:flex-nowrap flex-wrap  items-center gap-4"
+          >
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="phone.svg" alt="Phone" class="w-4 h-4" />
-              <span>{{ phoneNumber }}</span>
+              <span>{{ Consultation.phone_number }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="email.svg" alt="Email" class="w-4 h-4" />
-              <span>{{ email }}</span>
+              <span>{{ Consultation.email }}</span>
             </div>
             <div class="text-sm text-gray-700 flex items-center gap-2">
               <img src="worker.svg" alt="User" class="w-4 h-4" />
-              <span>{{ emergencyContact }}</span>
+              <span>{{ Consultation.emergency_contact_name }}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="flex flex-row items-center mt-4 w-full">
-        <h3 class="font-semibold text-lg mr-10">Past Medical Condition</h3>
-        <img src="edit-cond.svg" alt="Edit" (click)="toggleEdit()" />
-      </div>
-
-      <div class="flex gap-2 flex-wrap items-center">
-        <!-- Tags will stay visible, the X will only appear when editing -->
-        <span
-          *ngFor="let tag of tags"
-          class="bg-[#DBE4FF] text-black px-3 py-1 rounded flex items-center"
-        >
-          {{ tag }}
-          <!-- X mark only shows if editing -->
-          <button
-            *ngIf="isEditing"
-            class="ml-2 text-black"
-            (click)="deleteTag(tag)"
-          >
-            X
-          </button>
-        </span>
-      </div>
-
-      <div *ngIf="isEditing" class=" flex gap-2 items-center">
-        <!-- Input field and button next to each other -->
-        <input
-          [(ngModel)]="newTag"
-          class="border rounded-md px-2 py-1"
-          placeholder="Add a new condition"
-        />
-        <button
-          (click)="addTag()"
-          class="bg-main text-white px-4 py-1 rounded-md"
-        >
-          Add
-        </button>
-      </div>
-
       <div class="text-black text-sm  font-medium">
         <ul class="list-disc ml-5">
-          <li *ngFor="let condition of conditions" class="font-medium text-base	">{{ condition }}</li>
+          <li
+            *ngFor="let condition of conditions"
+            class="font-medium text-base	"
+          >
+            {{ condition }}
+          </li>
         </ul>
       </div>
     </div>
@@ -108,36 +85,64 @@ import { FormsModule } from '@angular/forms';
   styles: ``,
 })
 export class PatientInfosComponent {
-  tags: string[] = ['Hypertension', 'Obesity', 'Anemia' , 'Depression']; 
-  newTag: string = '';
-  isEditing: boolean = false; 
+  constructor(
+    private route: ActivatedRoute,
+    private getConsultationService: GetConsultationService
+  ) {}
 
-  toggleEdit(): void {
-    this.isEditing = !this.isEditing; 
-  }
+  Consultation: Consultation = {
+    user_id: 0,
+    profile_image: '',
+    consultation_id: 0,
+    name: '',
+    date_of_birth: '',
+    nss: '',
+    email: '',
+    phone_number: '',
+    emergency_contact_name: '',
+    emergency_contact_phone: '',
+    resume: '',
+    archived: false,
+  };
 
-  addTag(): void {
-    if (this.newTag.trim()) {
-      this.tags.push(this.newTag.trim()); 
-      this.newTag = ''; // Clear input field
+  ngOnInit(): void {
+    let ConsultationId = '';
+
+    ConsultationId = this.route.snapshot.paramMap.get('id') || '';
+
+    if (ConsultationId === '') {
+      const fullPath = window.location.pathname;
+
+      // Extract the ID using a regex or split
+      const match = fullPath.match(/consultation-details\/(\d+)/);
+      if (match) {
+        ConsultationId = match[1]; // Capture group 1 contains the ID
+      } else {
+        console.error('Consultation ID not found in URL');
+      }
+    }
+
+    if (ConsultationId) {
+      this.getConsultationService
+        .getConsultationByIdCashed(ConsultationId)
+        .subscribe({
+          next: (data) => {
+            this.Consultation = data;
+          },
+          error: (err) => console.error(err),
+        });
     }
   }
+  patient: UserProfile | null = null;
 
-  deleteTag(tag: string): void {
-    this.tags = this.tags.filter((t) => t !== tag); // Remove tag from list
-  }
-  name = 'Lewis Hamilton';
-  avatarUrl = 'patient-info-avatar.svg';
-  consultId = '123456';
-  birthday = '24/06/2004';
-  socialNumber = '0001823838';
-  phoneNumber = '0558235011';
-  email = 'a.denai@esi.dz';
-  emergencyContact = 'Mehdi';
-  assignedDoctor = 'Mostefai';
-  doctorId = '123456';
-  conditions = [
-    'Patient requires a follow-up in 4 weeks to assess blood pressure control and review lab results for renal function.',
-    'Initiated Metformin 500 mg daily for newly diagnosed Type 2 Diabetes Mellitus. Monitor for gastrointestinal side effects and reassess HbA1c in 3 months.',
-  ];
+  name = '';
+  avatarUrl = '';
+  consultId = '';
+  birthday = '';
+  socialNumber = '';
+  phoneNumber = '';
+  email = '';
+  emergencyContact = '';
+  doctorId = '';
+  conditions: string[] = [];
 }

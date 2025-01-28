@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Patient } from '../../../models/patient';
+import { Patient } from '../../../models/doc-patients';
 
 @Component({
   selector: 'app-patients-table',
@@ -24,13 +24,13 @@ import { Patient } from '../../../models/patient';
         <tr *ngFor="let patient of patients" class="hover:bg-slate-50">
           <td class="flex flex-row gap-4 items-center">
             <img
-              [src]="patient.profile_picture || 'no-pfp.png'"
+              [src]="patient.profile_image || 'no-pfp.png'"
               class="w-10 h-10 object-cover rounded-full"
               alt="Profile Picture"
             />
             <div class="flex flex-col">
               <span class="font-bold text-sm text-left">{{
-                patient.first_name + ' ' + patient.last_name
+                patient.name
               }}</span>
             </div>
           </td>
@@ -86,6 +86,6 @@ export class PatientsTableComponent {
   constructor(private router: Router) {}
 
   onDPI(patient: any): void {
-    this.router.navigate(['/doctor/patient-details', patient.id]);
+    this.router.navigate(['/doctor/patient-details', patient.user_id]);
   }
 }
