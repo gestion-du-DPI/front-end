@@ -7,7 +7,7 @@ import { MedicalCardComponent } from '../medical-card/medical-card.component';
   selector: 'app-medical-cards-container',
   template: `
     <div
-      class="bg-white border-[1.5px] border-slate-100 w-auto max-w-96 h-auto rounded-xl space-y-3 mx-auto py-4"
+      class="bg-white border-[1.5px] border-slate-100 w-auto max-w-96 h-full rounded-xl space-y-3 mx-auto py-4"
     >
       <h2 class="text-xl font-semibold text-[#373C9E] ml-3">Requested Tests</h2>
 

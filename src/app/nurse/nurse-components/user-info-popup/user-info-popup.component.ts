@@ -1,9 +1,8 @@
-
-import { AuthService } from './../../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ConfirmLogoutPopupComponent } from '../confirm-logout-popup/confirm-logout-popup.component';
+import { ConfirmLogoutPopupComponent } from '../../../components/popups/confirm-logout-popup/confirm-logout-popup.component';
 import { CommonModule } from '@angular/common';
-import { DashboardService } from '../../../services/doctor/dashboard/dashboard.service';
+import { DashboardService } from '../../../services/admin/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-user-info-popup',
@@ -35,24 +34,30 @@ import { DashboardService } from '../../../services/doctor/dashboard/dashboard.s
       </div>
       <div class="flex flex-row flex-wrap justify-center gap-5 mt-2 p-3 ">
         <div class="flex flex-col gap-1 min-w-[170px]">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">company Name</p>
-          <p class=" font-medium text-xs">{{ doctorHospital }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Social Number</p>
+          <p class=" font-medium text-xs">0001823838</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">Address</p>
-          <p class=" font-medium text-xs">{{ doctorAddress }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Birthday</p>
+          <p class=" font-medium text-xs">02/02/2002</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">Email-Address</p>
-          <p class=" font-medium text-xs">{{ doctorEmail }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Emergency Contact</p>
+          <p class=" font-medium text-xs">mounir</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
           <p class="text-[#ADADAD] text-[10px] font-semibold">Phone number</p>
-          <p class=" font-medium text-xs">{{ doctorPhoneNumber }}</p>
+          <p class=" font-medium text-xs">+(213)669696969</p>
         </div>
         <div class="flex flex-col  gap-1 w-[170px] ">
-          <p class="text-[#ADADAD] text-[10px] font-semibold">Social number</p>
-          <p class=" font-medium text-xs">{{ nss }}</p>
+          <p class="text-[#ADADAD] text-[10px] font-semibold">Address</p>
+          <p class=" font-medium text-xs">Bechar, Algeria</p>
+        </div>
+        <div class="flex flex-col  gap-1 w-[170px] ">
+          <p class="text-[#ADADAD] text-[10px] font-semibold">
+          Emergency Phone number
+          </p>
+          <p class=" font-medium text-xs">+(213)669696969</p>
         </div>
       </div>
       <div class="popup" *ngIf="showLogoutPopup">
@@ -74,8 +79,8 @@ export class UserInfoPopupComponent {
   doctorAddress = '';
   doctorPhoneNumber = '';
   doctorEmail = '';
-
-  nss = '';
+  staffNumber = '';
+  patientsNumber = '';
   pfp = '';
 
   constructor(
@@ -86,24 +91,26 @@ export class UserInfoPopupComponent {
   ngOnInit() {
     const cachedData = this.dashboardService.getcachedData();
 
-    if ('doctor_info' in cachedData) {
-      this.doctorName = cachedData.doctor_info.name;
-      this.doctorHospital = cachedData.doctor_info.hospital;
-      this.doctorAddress = cachedData.doctor_info.address;
-      this.doctorPhoneNumber = cachedData.doctor_info.phone_number;
-      this.doctorEmail = cachedData.doctor_info.email;
-      this.nss = cachedData.doctor_info.nss;
-      this.pfp = cachedData.doctor_info.profile_image;
+    if ('admin_info' in cachedData) {
+      this.doctorName = cachedData.admin_info.name;
+      this.doctorHospital = cachedData.admin_info.hospital;
+      this.doctorAddress = cachedData.admin_info.address;
+      this.doctorPhoneNumber = cachedData.admin_info.phone_number;
+      this.doctorEmail = cachedData.admin_info.email;
+      this.staffNumber = cachedData.admin_info.workers_count.toString();
+      this.patientsNumber = cachedData.admin_info.patients_count.toString();
+      this.pfp = cachedData.admin_info.profile_image;
     } else {
       cachedData.subscribe((dataFetched: any) => {
-        if ('doctor_info' in dataFetched) {
-          this.doctorName = dataFetched.doctor_info.name;
-          this.doctorHospital = dataFetched.doctor_info.hospital;
-          this.doctorAddress = dataFetched.doctor_info.address;
-          this.doctorPhoneNumber = dataFetched.doctor_info.phone_number;
-          this.doctorEmail = dataFetched.doctor_info.email;
-          this.nss = dataFetched.doctor_info.nss;
-          this.pfp = dataFetched.doctor_info.profile_image;
+        if ('admin_info' in dataFetched) {
+          this.doctorName = dataFetched.admin_info.name;
+          this.doctorHospital = dataFetched.admin_info.hospital;
+          this.doctorAddress = dataFetched.admin_info.address;
+          this.doctorPhoneNumber = dataFetched.admin_info.phone_number;
+          this.doctorEmail = dataFetched.admin_info.email;
+          this.staffNumber = dataFetched.role_counts.doctors.toString();
+          this.patientsNumber = dataFetched.role_counts.patients.toString();
+          this.pfp = dataFetched.admin_info.profile_image;
         }
       });
     }

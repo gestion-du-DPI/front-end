@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../models/admin-patient';
 import { PatientService } from '../../../services/admin/patient/patient.service';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { PatientsTableComponent } from '../../nurse-components/patients-table/patients-table.component';
 import { QrScannerComponent } from '../../nurse-components/qr-scanner/qr-scanner.component';
+import { UserBadgeComponent } from '../../nurse-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-patients',

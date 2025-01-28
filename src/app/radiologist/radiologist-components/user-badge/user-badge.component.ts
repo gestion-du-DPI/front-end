@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInfoPopupComponent } from '../user-info-popup/user-info-popup.component';
-
-import { DashboardService } from '../../../services/doctor/dashboard/dashboard.service';
+import { DashboardService } from '../../../services/admin/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-user-badge',
@@ -39,15 +38,15 @@ export class UserBadgeComponent {
 
   ngOnInit() {
     let data = this.dashboardService.getcachedData();
-    if ('doctor_info' in data) {
-      this.title.id = data.doctor_info.id;
-      this.title.name = data.doctor_info.name;
-      this.title.pfp = data.doctor_info.profile_image;
+    if ('admin_info' in data) {
+      this.title.id = data.admin_info.id;
+      this.title.name = data.admin_info.name;
+      this.title.pfp = data.admin_info.profile_image;
     } else {
       data.subscribe((dataCatched: any) => {
-        this.title.id = dataCatched.doctor_info.id;
-        this.title.name = dataCatched.doctor_info.name;
-        this.title.pfp = dataCatched.doctor_info.profile_image;
+        this.title.id = dataCatched.admin_info.id;
+        this.title.name = dataCatched.admin_info.name;
+        this.title.pfp = dataCatched.admin_info.profile_image;
       });
     }
     console.log(this.title);

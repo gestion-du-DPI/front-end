@@ -81,7 +81,7 @@ import { MedicalTest } from '../../../models/medical-card';
         </div>
 
         <div [hidden]="!isExpanded" class=" mt-4 space-y-4">
-          <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center justify-around gap-2">
             <div class="flex flex-col gap-1">
               <span
                 class="text-[10px] ml-1 text-[#ADADAD] font-semibold text-muted-foreground"
@@ -97,18 +97,20 @@ import { MedicalTest } from '../../../models/medical-card';
                 {{ test.priority }}
               </div>
             </div>
-            <img
-              [src]="test.patient.avatar"
-              alt="Patient Avatar"
-              class="w-8 h-8 rounded-full ml-auto"
-            />
-            <div
-              class="flex items-start flex-col gap-1 text-xs text-muted-foreground"
-            >
-              <span>{{ test.patient.name }}</span>
-              <div>
-                <span>ID:</span>
-                <span>{{ test.patient.id }}</span>
+            <div class="flex flex-row items-center gap-3">
+              <img
+                [src]="test.patient.avatar"
+                alt="Patient Avatar"
+                class="w-8 h-8 rounded-full"
+              />
+              <div
+                class="flex items-start flex-col gap-1 text-xs text-muted-foreground"
+              >
+                <span>{{ test.patient.name }}</span>
+                <div>
+                  <span>ID:</span>
+                  <span>{{ test.patient.id }}</span>
+                </div>
               </div>
             </div>
           </div>

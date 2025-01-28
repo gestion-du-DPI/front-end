@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserInfoPopupComponent } from '../popups/user-info-popup/user-info-popup.component';
-import { DashboardService } from '../../services/admin/dashboard/dashboard.service';
+import { UserInfoPopupComponent } from '../user-info-popup/user-info-popup.component';
+import { DashboardService } from '../../../services/admin/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-user-badge',

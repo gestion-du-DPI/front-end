@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../models/admin-patient';
 import { PatientService } from '../../../services/admin/patient/patient.service';
 import { PatientsTableComponent } from '../../lab-technician-components/patients-table/patients-table.component';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
+import { UserBadgeComponent } from '../../lab-technician-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-patients',

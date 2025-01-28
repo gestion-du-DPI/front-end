@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { Ticket } from '../../../models/ticket';
 import { TicketsTableComponent } from '../../nurse-components/tickets-table/tickets-table.component';
 import { NurseTicketService } from '../../../services/admin/tickets/nurse-ticket/nurse-ticket.service';
+import { UserBadgeComponent } from '../../nurse-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-tickets',

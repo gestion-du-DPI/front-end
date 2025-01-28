@@ -1,6 +1,6 @@
-import { AuthService } from './../../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ConfirmLogoutPopupComponent } from '../confirm-logout-popup/confirm-logout-popup.component';
+import { ConfirmLogoutPopupComponent } from '../../../components/popups/confirm-logout-popup/confirm-logout-popup.component';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../services/admin/dashboard/dashboard.service';
 

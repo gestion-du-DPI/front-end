@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NurseInfoComponent } from '../../nurse-components/nurse-info/nurse-info.component';
 import { NurseObservationsComponent } from '../../nurse-components/nurse-observations/nurse-observations.component';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
 import { MedicalCardsContainerComponent } from "../../../nurse/nurse-components/medical-cards-container/medical-cards-container.component";
+import { UserBadgeComponent } from '../../nurse-components/user-badge/user-badge.component';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewPatientFormComponent } from '../forms/new-patient-form/new-patient-form.component';
-import { UserBadgeComponent } from '../../../components/user-badge/user-badge.component';
+import { UserBadgeComponent } from '../user-badge/user-badge.component';
 
 @Component({
   selector: 'app-header',

@@ -243,4 +243,5 @@ export class WorkspaceComponent {
   reloadPage() {
     window.location.reload();
   }
+
 }
